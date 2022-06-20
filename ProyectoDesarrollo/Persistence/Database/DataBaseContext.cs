@@ -13,7 +13,7 @@ namespace ProyectoDesarrollo.Data
 
         //public DbSet<Class> Classes { get; set; }
         public DbSet<Cotizacion> Cotizaciones { get; set; }
-        public DbSet<Dueño> Dueños { get; set; }
+        public DbSet<Dueno> Duenos { get; set; }
         public DbSet<Factura> Facturas { get; set; }
         public DbSet<Incidente> Incidentes { get; set; }
         public DbSet<Marca> Marcas { get; set; }
@@ -31,7 +31,7 @@ namespace ProyectoDesarrollo.Data
         {
             //modelBuilder.Entity<Class>().ToTable("TableName");
             modelBuilder.Entity<Cotizacion>().ToTable("Cotizaciones");
-            modelBuilder.Entity<Dueño>().ToTable("Dueños");
+            modelBuilder.Entity<Dueno>().ToTable("Duenos");
             modelBuilder.Entity<Factura>().ToTable("Facturas");
             modelBuilder.Entity<Incidente>().ToTable("Incidentes");
             modelBuilder.Entity<Marca>().ToTable("Marcas");

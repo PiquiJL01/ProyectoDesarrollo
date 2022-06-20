@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace ProyectoDesarrollo.Models
 {
-    public class Dueño
+    public class Dueno
     {
         [Key] 
         public string CedulaRif { get; set; }
@@ -26,7 +26,7 @@ namespace ProyectoDesarrollo.Models
 
         public ICollection<Poliza> Polizas { get; set; }
 
-        public Dueño(string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
+        public Dueno(string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
             DateTime fechaNacimiento, string direccion, ICollection<Poliza> polizas)
         {
             CedulaRif = cedulaRif;

@@ -14,6 +14,6 @@ namespace ProyectoDesarrollo.Models
         [Required]
         public Tipo TipoPoliza { get; set; }
         [Required]
-        public Dueño Dueño { get; set; }
+        public Dueno Dueno { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace ProyectoDesarrollo.Models
         [Required]
         public int Año { get; set; }
         [Required]
-        public Dueño Dueño { get; set; }
+        public Dueno Dueno { get; set; }
         [Required]
         public int Peso { get; set; }
         [Required]
