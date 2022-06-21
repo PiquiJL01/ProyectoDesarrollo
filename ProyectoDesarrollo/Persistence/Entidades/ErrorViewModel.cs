@@ -1,6 +1,6 @@
 using System;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class ErrorViewModel
     {

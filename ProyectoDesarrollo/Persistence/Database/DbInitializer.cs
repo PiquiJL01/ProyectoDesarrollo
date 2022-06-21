@@ -1,8 +1,8 @@
-﻿using ProyectoDesarrollo.Models;
+﻿using ProyectoDesarrollo.Persistence.Entidades;
 using System;
 using System.Linq;
 
-namespace ProyectoDesarrollo.Data
+namespace ProyectoDesarrollo.Persistence.DataBase
 {
     public static class DbInitializer
     {

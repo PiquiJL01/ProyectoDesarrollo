@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System.ComponentModel.DataAnnotations;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Pieza
     {
@@ -12,12 +12,12 @@ namespace ProyectoDesarrollo.Models
         [Required]
         public Marca Marca { get; set; }
 
-        public Pieza(int iD, string name, string? description, Marca marca)
+        /*public Pieza(int iD, string name, string? description, Marca marca)
         {
             ID = iD;
             Name = name;
             Description = description;
             Marca = marca;
-        }
+        }*/
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ProyectoDesarrollo.Models
+﻿namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Factura
     {

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
 
     public enum RolName
@@ -25,7 +25,7 @@ namespace ProyectoDesarrollo.Models
         public Proveedor? Proveedor { get; set; }
         public Taller? Taller { get; set; }
 
-        public Usuario(int id, string nombre, string apellido, string telefono, string email, string direccion, 
+        /*public Usuario(int id, string nombre, string apellido, string telefono, string email, string direccion, 
             DateTime birthDate, RolName rol, Proveedor? proveedor, Taller? taller)
         {
             Id = id;
@@ -38,6 +38,6 @@ namespace ProyectoDesarrollo.Models
             Rol = rol;
             Proveedor = proveedor;
             Taller = taller;
-        }
+        }*/
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Principal;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Cotizacion
     {

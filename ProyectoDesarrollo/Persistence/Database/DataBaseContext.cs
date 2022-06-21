@@ -1,9 +1,9 @@
 ﻿using System.Security.Principal;
-using ProyectoDesarrollo.Models;
+using ProyectoDesarrollo.Persistence.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-namespace ProyectoDesarrollo.Data
+namespace ProyectoDesarrollo.Persistence.DataBase
 {
     public class DataBaseContext : DbContext
     {

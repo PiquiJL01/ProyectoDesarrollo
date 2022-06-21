@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Proveedor
     {

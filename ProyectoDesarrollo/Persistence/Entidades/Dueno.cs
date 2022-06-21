@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-namespace ProyectoDesarrollo.Models
+namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Dueno
     {
@@ -26,7 +26,7 @@ namespace ProyectoDesarrollo.Models
 
         public ICollection<Poliza> Polizas { get; set; }
 
-        public Dueno(string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
+        /*public Dueno(string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
             DateTime fechaNacimiento, string direccion, ICollection<Poliza> polizas)
         {
             CedulaRif = cedulaRif;
@@ -37,6 +37,6 @@ namespace ProyectoDesarrollo.Models
             FechaNacimiento = fechaNacimiento;
             Direccion = direccion;
             Polizas = polizas;
-        }
+        }*/
     }
 }
