@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProyectoDesarrollo.Models;
+using ProyectoDesarrollo.Persistence.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

@@ -1,4 +1,4 @@
-using ProyectoDesarrollo.Data;
+using ProyectoDesarrollo.Persistence.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
