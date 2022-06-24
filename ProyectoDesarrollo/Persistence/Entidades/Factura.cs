@@ -2,7 +2,7 @@
 {
     public class Factura
     {
-        public int ID { get; set; }
-        public OrdenDeCompra OrdenDeCompra { get; set; }
+        public string ID { get; set; } = null!;
+        public OrdenDeCompra ID_OrdenDeCompra { get; set; }
     }
 }

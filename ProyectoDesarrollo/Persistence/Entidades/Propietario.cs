@@ -6,15 +6,21 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace ProyectoDesarrollo.Persistence.Entidades
 {
-    public class Dueno
+    public class Propietario
     {
-        [Key] 
-        public string CedulaRif { get; set; }
-        [Required] 
-        public string PrimerNombre { get; set; }
+
+        public Propietario()
+        {
+            Vehiculo = new HashSet<Vehiculo>();
+        }
+
+        [Key]
+        public string CedulaRif { get; set; } = null!;
+        [Required]
+        public string PrimerNombre { get; set; } = null!;
         public string? SegundoNombre { get; set; }
-        [Required] 
-        public string PrimerApellido { get; set; }
+        [Required]
+        public string PrimerApellido { get; set; } = null!;
         public string? SegundoApellido { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -22,11 +28,17 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         [Required]
         public DateTime FechaNacimiento { get; set; }
         [Required]
-        public string Direccion { get; set; }
+        public string Direccion { get; set; } = null!;
+        public string Id_Poliza { get; set; } = null!;
 
-        public ICollection<Poliza> Polizas { get; set; }
 
-        /*public Dueno(string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
+        public Poliza Poliza { get; set; } = null!;
+
+        public ICollection<Vehiculo> Vehiculo { get; set; }
+
+
+
+        /*public Propietario (string cedulaRif, string primerNombre, string? segundoNombre, string primerApellido, string? segundoApellido, 
             DateTime fechaNacimiento, string direccion, ICollection<Poliza> polizas)
         {
             CedulaRif = cedulaRif;

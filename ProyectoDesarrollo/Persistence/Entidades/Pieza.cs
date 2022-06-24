@@ -1,16 +1,32 @@
 ﻿#nullable enable
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoDesarrollo.Persistence.Entidades
 {
     public class Pieza
     {
-        public int ID { get; set; }
+
+        public Pieza()
+        {
+            PiezaCotizacion = new HashSet<PiezaCotizacion>();
+            PiezaMarca = new HashSet<PiezaMarca>();
+        }
+
+        public string ID { get; set; } = null!;
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        [Required]
-        public Marca Marca { get; set; }
+
+
+        public ICollection<PiezaCotizacion> PiezaCotizacion { get; set; } = null!;
+
+        public ICollection<PiezaMarca> PiezaMarca { get; set; } = null!;
+
+
+        /*[Required]
+        public Marca Marca { get; set; } = null!;*/
+
 
         /*public Pieza(int iD, string name, string? description, Marca marca)
         {
