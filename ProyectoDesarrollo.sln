@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Administracion", "Administracion\Administracion.csproj", "{76E1238B-EE0B-4C86-A620-89A9650EAA17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroDeIncidentesPeritos", "RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj", "{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{76E1238B-EE0B-4C86-A620-89A9650EAA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76E1238B-EE0B-4C86-A620-89A9650EAA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76E1238B-EE0B-4C86-A620-89A9650EAA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
