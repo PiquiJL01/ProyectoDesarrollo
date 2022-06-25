@@ -28,7 +28,7 @@ namespace RegistroDeIncidentesPeritos
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Administracion", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Registro de Incidentes para Peritos", Version = "v1" });
             });
         }
 
@@ -52,7 +52,7 @@ namespace RegistroDeIncidentesPeritos
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Registro de Incidentes de Peritos");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Registro de Incidentes para Peritos");
             });
 
             app.UseRouting();
