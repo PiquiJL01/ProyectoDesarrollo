@@ -43,4 +43,9 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Administracion\Administracion.csproj" />
+    <ProjectReference Include="..\ProyectoDesarrollo\ProyectoDesarrollo.csproj" />
+  </ItemGroup>
 </Project>

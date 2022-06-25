@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProyectoDesarrollo", "Proye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{6D505157-32E2-4821-83DB-F424A7E10AE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Administracion", "Administracion\Administracion.csproj", "{76E1238B-EE0B-4C86-A620-89A9650EAA17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Administracion", "Administracion\Administracion.csproj", "{76E1238B-EE0B-4C86-A620-89A9650EAA17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

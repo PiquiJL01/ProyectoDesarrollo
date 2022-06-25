@@ -1,19 +1,20 @@
 ﻿using ProyectoDesarrollo.Persistence.DataBase;
+using ProyectoDesarrollo.Persistence.Entidades;
 
 namespace ProyectoDesarrollo.Persistence.DAO
 {
-    public class ExampleDAO
+    public class UsuariosDAO
     {
         public readonly DataBaseContext DbContext;
 
-        public ExampleDAO(DataBaseContext dbContext)
+        public UsuariosDAO(DataBaseContext dbContext)
         {
             DbContext = dbContext;
         }
 
-        public void Example(int id)
+        public void GetUsuario(int id)
         {
-            //using context go to line by id
+            var usuario = DbContext.Usuarios.Add(new Usuario());
         }
     }
 }
