@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Administracion", "Administr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistroDeIncidentesPeritos", "RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj", "{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroDeIncidentesPeritos", "RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj", "{166D307D-3A65-4BF1-ACD4-8BDA6E7092E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
