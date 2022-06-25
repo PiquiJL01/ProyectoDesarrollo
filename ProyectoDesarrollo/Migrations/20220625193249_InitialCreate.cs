@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace ProyectoDesarrollo.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,8 +64,7 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Usuarios_Usuarios_TallerID",
                         column: x => x.TallerID,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -81,14 +82,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_PiezasMarcas_Marcas_Id_Marca",
                         column: x => x.Id_Marca,
                         principalTable: "Marcas",
-                        principalColumn: "Name",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Name");
                     table.ForeignKey(
                         name: "FK_PiezasMarcas_Piezas_Id_Pieza",
                         column: x => x.Id_Pieza,
                         principalTable: "Piezas",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -108,14 +107,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Incidentes_Usuarios_Id_Administrador",
                         column: x => x.Id_Administrador,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Incidentes_Usuarios_Id_Perito",
                         column: x => x.Id_Perito,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -133,8 +130,7 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Polizas_Usuarios_Id_Admin",
                         column: x => x.Id_Admin,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -152,14 +148,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_ProveedoresMarcas_Marcas_Id_Marca",
                         column: x => x.Id_Marca,
                         principalTable: "Marcas",
-                        principalColumn: "Name",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Name");
                     table.ForeignKey(
                         name: "FK_ProveedoresMarcas_Usuarios_Id_Proveedor",
                         column: x => x.Id_Proveedor,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -179,20 +173,17 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Cotizaciones_Incidentes_Id_Incidente",
                         column: x => x.Id_Incidente,
                         principalTable: "Incidentes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Cotizaciones_Usuarios_Id_Proveedor",
                         column: x => x.Id_Proveedor,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Cotizaciones_Usuarios_Id_Taller",
                         column: x => x.Id_Taller,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -234,14 +225,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_OrdenesDeCompra_Cotizaciones_Id_CotizacionId",
                         column: x => x.Id_CotizacionId,
                         principalTable: "Cotizaciones",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrdenesDeCompra_Usuarios_Id_Administrador",
                         column: x => x.Id_Administrador,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -260,14 +249,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_PiezasCotizaciones_Cotizaciones_Id_Cotizacion",
                         column: x => x.Id_Cotizacion,
                         principalTable: "Cotizaciones",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_PiezasCotizaciones_Piezas_Id_Pieza",
                         column: x => x.Id_Pieza,
                         principalTable: "Piezas",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -294,14 +281,12 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Vehiculos_Marcas_Id_Marca",
                         column: x => x.Id_Marca,
                         principalTable: "Marcas",
-                        principalColumn: "Name",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Name");
                     table.ForeignKey(
                         name: "FK_Vehiculos_Propietarios_Id_Propietario",
                         column: x => x.Id_Propietario,
                         principalTable: "Propietarios",
-                        principalColumn: "CedulaRif",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CedulaRif");
                 });
 
             migrationBuilder.CreateTable(
@@ -318,8 +303,7 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_Facturas_OrdenesDeCompra_ID_OrdenDeCompraID",
                         column: x => x.ID_OrdenDeCompraID,
                         principalTable: "OrdenesDeCompra",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -340,20 +324,17 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_VehiculosIncidentesTalleres_Incidentes_Id_Incidente",
                         column: x => x.Id_Incidente,
                         principalTable: "Incidentes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_VehiculosIncidentesTalleres_Usuarios_Id_Taller",
                         column: x => x.Id_Taller,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_VehiculosIncidentesTalleres_Vehiculos_Id_Vehiculo",
                         column: x => x.Id_Vehiculo,
                         principalTable: "Vehiculos",
-                        principalColumn: "Placa",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Placa");
                 });
 
             migrationBuilder.CreateIndex(
