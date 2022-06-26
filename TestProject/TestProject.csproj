@@ -47,5 +47,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Administracion\Administracion.csproj" />
     <ProjectReference Include="..\ProyectoDesarrollo\ProyectoDesarrollo.csproj" />
+    <ProjectReference Include="..\RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj" />
+    <ProjectReference Include="..\Talleres\Talleres.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RegistroDeInicidentesPeritos\APIs\" />
+    <Folder Include="Talleres\APIs\" />
   </ItemGroup>
 </Project>
