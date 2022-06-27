@@ -3,35 +3,35 @@ using System;
 using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class TallerDAO: DAO<Taller>
+public class PropietarioDAO: DAO<Propietario>
 {
-    public TallerDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
+    public PropietarioDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
     {
     }
 
-    public override IEnumerable<Taller> Get()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Taller Get(string id)
+    public override IEnumerable<Propietario> Get()
     {
         throw new NotImplementedException();
     }
 
-    public override void Post(Taller entity)
+    public override Propietario Get(string id)
     {
         throw new NotImplementedException();
     }
 
-    public override void Put(Taller entity)
+    public override void Post(Propietario entity)
     {
         throw new NotImplementedException();
     }
 
-    public override void Delete(Taller entity)
+    public override void Put(Propietario entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Delete(Propietario entity)
     {
         throw new NotImplementedException();
     }

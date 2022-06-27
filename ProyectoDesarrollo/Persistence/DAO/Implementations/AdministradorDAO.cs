@@ -3,36 +3,35 @@ using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
 using System;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-
-public class IncidenteDAO: DAO<Incidente>
+public class AdministradorDAO :DAO<Administrador>
 {
-    public IncidenteDAO(DataBaseContext context) : base(context)
+    public AdministradorDAO(DataBaseContext context) : base(context)
     {
     }
 
-    public override IEnumerable<Incidente> Get()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Incidente Get(string id)
+    public override IEnumerable<Administrador> Get()
     {
         throw new NotImplementedException();
     }
 
-    public override void Post(Incidente entity)
+    public override Administrador Get(string id)
     {
         throw new NotImplementedException();
     }
 
-    public override void Put(Incidente entity)
+    public override void Post(Administrador entity)
     {
         throw new NotImplementedException();
     }
 
-    public override void Delete(Incidente entity)
+    public override void Put(Administrador entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Delete(Administrador entity)
     {
         throw new NotImplementedException();
     }

@@ -3,7 +3,7 @@ using ProyectoDesarrollo.Persistence.Entidades;
 using System;
 using System.Collections.Generic;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class OrdenDeCompraDAO: DAO<OrdenDeCompra>
 {

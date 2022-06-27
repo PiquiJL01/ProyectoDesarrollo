@@ -19,7 +19,6 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         public string Id_Taller { get; set; }
 
 
-
         //public VehiculoIncidenteTaller VehiculoIncidenteTaller { get; set; }
         //public ICollection<PrecioPieza> PrecioPiezas { get; set; }
 

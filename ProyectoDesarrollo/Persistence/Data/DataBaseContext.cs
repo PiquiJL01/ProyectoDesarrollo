@@ -125,8 +125,8 @@ namespace ProyectoDesarrollo.Persistence.DataBase
             });
             
 
-                //COTIZACION
-                modelBuilder.Entity<Cotizacion>(entity =>
+            //COTIZACION
+            modelBuilder.Entity<Cotizacion>(entity =>
             {
                 entity.HasIndex(e => e.Id_Proveedor, "IX_Cotizacion_IdProveedor");
 
@@ -173,7 +173,7 @@ namespace ProyectoDesarrollo.Persistence.DataBase
                     .HasForeignKey(d => d.Id_Marca);
             });
 
-            //VEHICULO-INCIDENTE-TALLER
+            //VEHICULO-INCIDENTE-TALLER-PIEZA
             modelBuilder.Entity<VehiculoIncidenteTaller>(entity =>
             {
                 entity.HasIndex(e => e.Id_Vehiculo, "IX_VehiculoIncidenteTaller_IdVehiculo");
@@ -181,6 +181,8 @@ namespace ProyectoDesarrollo.Persistence.DataBase
                 entity.HasIndex(e => e.Id_Incidente, "IX_VehiculoIncidenteTaller_IdIncidente");
 
                 entity.HasIndex(e => e.Id_Taller, "IX_VehiculoIncidenteTaller_IdTaller");
+
+                entity.HasIndex(e => e.Id_Pieza, "IX_VehiculoIncidenteTaller_IdPieza");
 
                 entity.HasOne(d => d.Vehiculo)
                     .WithMany(p => p.VehiculoIncidenteTaller)
@@ -193,6 +195,10 @@ namespace ProyectoDesarrollo.Persistence.DataBase
                 entity.HasOne(d => d.Taller)
                     .WithMany(p => p.VehiculoIncidenteTaller)
                     .HasForeignKey(d => d.Id_Taller);
+
+                entity.HasOne(d => d.Pieza)
+                    .WithMany(p => p.VehiculoIncidenteTaller)
+                    .HasForeignKey(d => d.Id_Pieza);
             });
 
 
@@ -212,16 +218,6 @@ namespace ProyectoDesarrollo.Persistence.DataBase
                     .HasForeignKey(d => d.Id_Perito);
             });
 
-
-            /*modelBuilder.Entity<Incidente>(entity =>
-            {
-                entity.Property(e => e.Fecha).HasColumnType("{0:dd-MM-yyyy}");
-            });
-
-            modelBuilder.Entity<Propietario>(entity =>
-            {
-                entity.Property(e => e.FechaNacimiento).HasColumnType("{0:dd-MM-yyyy}");
-            });*/
 
             modelBuilder.Entity<Taller>()
             .HasOne(b => b.Proveedor)
