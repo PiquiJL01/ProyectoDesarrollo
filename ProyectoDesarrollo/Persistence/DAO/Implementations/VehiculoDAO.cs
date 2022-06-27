@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class VehiculoDAO: DAO<Vehiculo>
 {

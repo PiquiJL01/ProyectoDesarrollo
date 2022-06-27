@@ -1,37 +1,37 @@
 ﻿using System.Collections.Generic;
+using System;
 using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
-using System;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class AdministradorDAO :DAO<Administrador>
+public class PeritoDAO: DAO<Perito>
 {
-    public AdministradorDAO(DataBaseContext context) : base(context)
+    public PeritoDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
     {
     }
 
-    public override IEnumerable<Administrador> Get()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Administrador Get(string id)
+    public override IEnumerable<Perito> Get()
     {
         throw new NotImplementedException();
     }
 
-    public override void Post(Administrador entity)
+    public override Perito Get(string id)
     {
         throw new NotImplementedException();
     }
 
-    public override void Put(Administrador entity)
+    public override void Post(Perito entity)
     {
         throw new NotImplementedException();
     }
 
-    public override void Delete(Administrador entity)
+    public override void Put(Perito entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Delete(Perito entity)
     {
         throw new NotImplementedException();
     }

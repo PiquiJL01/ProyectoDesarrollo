@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProyectoDesarrollo.Persistence.Entidades
+namespace ProyectoDesarrollo.BussinesLogic.DTOs
 {
-    public class VehiculoIncidenteTaller
+    public class VehiculoIncidenteTallerDTO
     {
         public int ID { get; set; }
         [DataType(DataType.Date)]
@@ -17,10 +17,10 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         public string Id_Pieza { get; set; }
 
 
-        public Vehiculo Vehiculo { get; set; }
-        public Incidente Incidente { get; set; }
-        public Taller Taller { get; set; }
-        public Pieza Pieza { get; set; }
-
+        public VehiculoDTO Vehiculo { get; set; }
+        public IncidenteDTO Incidente { get; set; }
+        public TallerDTO Taller { get; set; }
+        public PiezaDTO Pieza { get; set; }
     }
 }
+

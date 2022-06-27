@@ -365,6 +365,9 @@ namespace ProyectoDesarrollo.Migrations
                     b.Property<string>("Id_Incidente")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Id_Pieza")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Id_Taller")
                         .HasColumnType("nvarchar(450)");
 
@@ -374,6 +377,8 @@ namespace ProyectoDesarrollo.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex(new[] { "Id_Incidente" }, "IX_VehiculoIncidenteTaller_IdIncidente");
+
+                    b.HasIndex(new[] { "Id_Pieza" }, "IX_VehiculoIncidenteTaller_IdPieza");
 
                     b.HasIndex(new[] { "Id_Taller" }, "IX_VehiculoIncidenteTaller_IdTaller");
 
@@ -592,6 +597,10 @@ namespace ProyectoDesarrollo.Migrations
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Incidente");
 
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Pieza", "Pieza")
+                        .WithMany("VehiculoIncidenteTaller")
+                        .HasForeignKey("Id_Pieza");
+
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Taller", "Taller")
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Taller");
@@ -601,6 +610,8 @@ namespace ProyectoDesarrollo.Migrations
                         .HasForeignKey("Id_Vehiculo");
 
                     b.Navigation("Incidente");
+
+                    b.Navigation("Pieza");
 
                     b.Navigation("Taller");
 
@@ -642,6 +653,8 @@ namespace ProyectoDesarrollo.Migrations
                     b.Navigation("PiezaCotizacion");
 
                     b.Navigation("PiezaMarca");
+
+                    b.Navigation("VehiculoIncidenteTaller");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>

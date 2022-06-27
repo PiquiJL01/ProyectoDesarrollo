@@ -3,35 +3,35 @@ using System;
 using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PiezaDAO: DAO<Pieza>
+public class ProveedorDAO: DAO<Proveedor>
 {
-    public PiezaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
+    public ProveedorDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
     {
     }
 
-    public override IEnumerable<Pieza> Get()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override Pieza Get(string id)
+    public override IEnumerable<Proveedor> Get()
     {
         throw new NotImplementedException();
     }
 
-    public override void Post(Pieza entity)
+    public override Proveedor Get(string id)
     {
         throw new NotImplementedException();
     }
 
-    public override void Put(Pieza entity)
+    public override void Post(Proveedor entity)
     {
         throw new NotImplementedException();
     }
 
-    public override void Delete(Pieza entity)
+    public override void Put(Proveedor entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Delete(Proveedor entity)
     {
         throw new NotImplementedException();
     }

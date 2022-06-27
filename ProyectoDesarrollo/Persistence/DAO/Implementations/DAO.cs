@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public abstract class DAO<T>
 {

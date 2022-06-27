@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProyectoDesarrollo.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -315,7 +315,8 @@ namespace ProyectoDesarrollo.Migrations
                     FechaEntrega = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Id_Vehiculo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Incidente = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Id_Taller = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id_Taller = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Id_Pieza = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -324,6 +325,11 @@ namespace ProyectoDesarrollo.Migrations
                         name: "FK_VehiculosIncidentesTalleres_Incidentes_Id_Incidente",
                         column: x => x.Id_Incidente,
                         principalTable: "Incidentes",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_VehiculosIncidentesTalleres_Piezas_Id_Pieza",
+                        column: x => x.Id_Pieza,
+                        principalTable: "Piezas",
                         principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_VehiculosIncidentesTalleres_Usuarios_Id_Taller",
@@ -438,6 +444,11 @@ namespace ProyectoDesarrollo.Migrations
                 name: "IX_VehiculoIncidenteTaller_IdIncidente",
                 table: "VehiculosIncidentesTalleres",
                 column: "Id_Incidente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehiculoIncidenteTaller_IdPieza",
+                table: "VehiculosIncidentesTalleres",
+                column: "Id_Pieza");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehiculoIncidenteTaller_IdTaller",

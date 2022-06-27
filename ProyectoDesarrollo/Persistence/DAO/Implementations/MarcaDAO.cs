@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.Entidades;
 
-namespace ProyectoDesarrollo.Persistence.DAO;
+namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class MarcaDAO: DAO<Marca>
 {

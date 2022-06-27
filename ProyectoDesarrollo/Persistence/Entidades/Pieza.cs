@@ -11,6 +11,7 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         {
             PiezaCotizacion = new HashSet<PiezaCotizacion>();
             PiezaMarca = new HashSet<PiezaMarca>();
+            VehiculoIncidenteTaller = new HashSet<VehiculoIncidenteTaller>();
         }
 
         public string ID { get; set; } = null!;
@@ -22,6 +23,8 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         public ICollection<PiezaCotizacion> PiezaCotizacion { get; set; } = null!;
 
         public ICollection<PiezaMarca> PiezaMarca { get; set; } = null!;
+
+        public virtual ICollection<VehiculoIncidenteTaller> VehiculoIncidenteTaller { get; set; }
 
 
         /*[Required]
