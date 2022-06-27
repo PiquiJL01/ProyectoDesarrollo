@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Persistence.DataBase;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public abstract class DAO<T>
+public abstract class DAO<T>: IDAO<T>
 {
     private DataBaseContext _dataBaseContext;
 
