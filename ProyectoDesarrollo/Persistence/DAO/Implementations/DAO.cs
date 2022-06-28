@@ -7,7 +7,7 @@ namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public abstract class DAO<T>: IDAO<T>
 {
-    private DataBaseContext _dataBaseContext;
+    private readonly DataBaseContext _dataBaseContext;
 
     public DataBaseContext Context()
     {
@@ -21,6 +21,7 @@ public abstract class DAO<T>: IDAO<T>
 
     public abstract IEnumerable<T> Select();
     public abstract T Select(string id);
+
     public abstract void Insert(T entity);
     public abstract void Update(T entity);
     public abstract void Delete(T entity);

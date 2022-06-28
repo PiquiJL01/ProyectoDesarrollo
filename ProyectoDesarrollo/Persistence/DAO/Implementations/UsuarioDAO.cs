@@ -10,7 +10,7 @@ namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class UsuarioDAO: DAO<UsuarioDTO>
 {
-    public TallerDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
+    public UsuarioDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
 
     }

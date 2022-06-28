@@ -20,7 +20,7 @@ public class VehiculoDAO: DAO<VehiculoDTO>
         throw new NotImplementedException();
     }
 
-    public VehiculoDTO Select(string Placa)
+    public override VehiculoDTO Select(string Placa)
     {
         var query = Context().Vehiculos
             .Where(x => x.Placa == Placa)
