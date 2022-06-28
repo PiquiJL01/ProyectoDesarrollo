@@ -1,38 +1,71 @@
-﻿using ProyectoDesarrollo.Persistence.Entidades;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
+using ProyectoDesarrollo.Persistence.Entidades;
+using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class CotizacionDAO: DAO<Cotizacion>
 {
-    public CotizacionDAO(DataBaseContext context) : base(context)
+    public readonly DataBaseContext _dataBaseContext;
+
+    public CotizacionDAO(DataBaseContext dataBaseContext)
     {
+        _dataBaseContext = dataBaseContext;
     }
+
 
     public override IEnumerable<Cotizacion> Get()
     {
         throw new NotImplementedException();
     }
 
-    public override Cotizacion Get(string id)
+    public override CotizacionDTO  GetCotizacionDTO(string Id)
     {
-        throw new NotImplementedException();
+        var query = _dataBaseContext.Cotizaciones
+            .Where(c => c.Id == Id)
+            .Select(c => new CotizacionDTO
+            {
+                Id = c.Id,
+                MontoTotal = c.MontoTotal,
+                Id_Proveedor = c.Id_Proveedor,
+                Id_Incidente = c.Id_Incidente,
+                Id_Taller = c.Id_Taller,
+            });
+        return query.First();
     }
 
-    public override void Post(Cotizacion entity)
+    public Task Add(CotizacionDTO cotizacionDTO)
     {
-        throw new NotImplementedException();
+        Cotizacion cotizacion = new Cotizacion();
+        cotizacion.Id = cotizacionDTO.Id;
+        cotizacion.MontoTotal = cotizacionDTO.MontoTotal;
+        cotizacion.Id_Proveedor = cotizacionDTO.Id_Proveedor;
+        cotizacion.Id_Incidente = cotizacionDTO.Id_Incidente;
+        cotizacion.Id_Taller = cotizacionDTO.Id_Taller;
+        _dataBaseContext.Cotizaciones.Add(cotizacion);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 
-    public override void Put(Cotizacion entity)
+    public Task update(CotizacionDTO cotizacionDTO,string Id)
     {
-        throw new NotImplementedException();
-    }
+        var itemToUpdate = _dataBaseContext.Cotizaciones.Find(Id);
+        itemToUpdate.MontoTotal = cotizacionDTO.MontoTotal;
+        _dataBaseContext.SaveChanges();
 
-    public override void Delete(Cotizacion entity)
+        return Task.CompletedTask;
+     }
+
+    public Task Delete(string Id)
     {
-        throw new NotImplementedException();
+        var ItemToRemove = _dataBaseContext.Cotizaciones.Find(Id);
+        _dataBaseContext.Cotizaciones.Remove(ItemToRemove);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
+
     }
 }

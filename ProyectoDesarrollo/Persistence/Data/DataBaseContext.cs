@@ -2,6 +2,7 @@
 using ProyectoDesarrollo.Persistence.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
+using System.Collections.Generic;
 
 namespace ProyectoDesarrollo.Persistence.DataBase
 {
@@ -30,6 +31,7 @@ namespace ProyectoDesarrollo.Persistence.DataBase
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Vehiculo> Vehiculos { get; set; }
         public DbSet<VehiculoIncidenteTaller> VehiculosIncidentesTalleres { get; set; }
+        public IEnumerable<object> Administrador { get; internal set; }
 
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

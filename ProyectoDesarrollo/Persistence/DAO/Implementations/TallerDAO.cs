@@ -1,14 +1,21 @@
-﻿using ProyectoDesarrollo.Persistence.Entidades;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ProyectoDesarrollo.Persistence.DataBase;
+using ProyectoDesarrollo.Persistence.Entidades;
+using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using System.Threading.Tasks;
+using System.Linq;
+
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class TallerDAO: DAO<Taller>
 {
-    public TallerDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
+    public readonly DataBaseContext _dataBaseContext;
+
+    public TallerDAO(DataBaseContext dataBaseContext)
     {
+        _dataBaseContext = dataBaseContext;
     }
 
     public override IEnumerable<Taller> Get()
@@ -16,23 +23,48 @@ public class TallerDAO: DAO<Taller>
         throw new NotImplementedException();
     }
 
-    public override Taller Get(string id)
+    public  TallerDTO GetTaller(string Id_Taller)
     {
-        throw new NotImplementedException();
+        var query = _dataBaseContext.Talleres
+            .Where(x => x.Id_Taller == Id_Taller)
+            .Select(x => new TallerDTO
+            {
+                Id_Taller = x.Id_Taller,
+                Name = x.Name,
+                Address = x.Address,
+                PhoneNumber = x.PhoneNumber,
+            });
+        return query.First();
     }
 
-    public override void Post(Taller entity)
+    public Task Add(TallerDTO tallerDTO)
     {
-        throw new NotImplementedException();
+        Taller taller = new Taller();
+        taller.Id_Taller=tallerDTO.Id_Taller;
+        taller.Name = tallerDTO.Name;
+        taller.Address = tallerDTO.Address;
+        taller.PhoneNumber= tallerDTO.PhoneNumber;
+        _dataBaseContext.Talleres.Add(taller);
+        _dataBaseContext.SaveChanges();
+
+        return Task.CompletedTask;
     }
 
-    public override void Put(Taller entity)
+    public Task Update(TallerDTO tallerDTO,string Id_Taller)
     {
-        throw new NotImplementedException();
+        var ItemToUpdate = _dataBaseContext.Talleres.Find(Id_Taller);
+        ItemToUpdate.Name=tallerDTO.Name;
+        ItemToUpdate.Address=tallerDTO.Address;
+        ItemToUpdate.PhoneNumber=tallerDTO.PhoneNumber;
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 
-    public override void Delete(Taller entity)
+    public Task  Delete(string Id_Taller)
     {
-        throw new NotImplementedException();
+        var ItemToRemove = _dataBaseContext.Talleres.Find(Id_Taller);
+        _dataBaseContext.Talleres.Remove(ItemToRemove);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 }

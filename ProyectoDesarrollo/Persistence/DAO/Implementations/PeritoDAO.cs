@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
-using System;
 using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
+using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class PeritoDAO: DAO<Perito>
 {
-    public PeritoDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
+    public readonly DataBaseContext _dataBaseContext;
+
+    public PeritoDAO(DataBaseContext dataBaseContext)
     {
+        _dataBaseContext = dataBaseContext;
     }
 
     public override IEnumerable<Perito> Get()
@@ -16,23 +22,40 @@ public class PeritoDAO: DAO<Perito>
         throw new NotImplementedException();
     }
 
-    public override Perito Get(string id)
+    public PeritoDTO GetPerito(string Id_Perito)
     {
-        throw new NotImplementedException();
+        var query = _dataBaseContext.Peritos
+            .Where(p => p.Id == Id_Perito)
+            .Select(p => new PeritoDTO
+            {
+                Id_Perito = p.Id_Perito           
+            });
+        return query.First();
+
     }
 
-    public override void Post(Perito entity)
+    public Task Add(PeritoDTO peritoDTO)
     {
-        throw new NotImplementedException();
+        Perito  perito = new Perito();
+        perito.Id_Perito = peritoDTO.Id_Perito;
+        _dataBaseContext.Peritos.Add(perito);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 
-    public override void Put(Perito entity)
+    public Task Update(PeritoDTO peritoDTO, string Id_Perito)
     {
-        throw new NotImplementedException();
+        var ItemToUpdate = _dataBaseContext.Peritos.Find(Id_Perito);
+        ItemToUpdate.Id_Perito = peritoDTO.Id_Perito;
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 
-    public override void Delete(Perito entity)
+    public Task Delete(string Id_Perito)
     {
-        throw new NotImplementedException();
+        var ItemToRemove  = _dataBaseContext.Peritos.Find(Id_Perito);
+        _dataBaseContext.Peritos.Remove(ItemToRemove);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 }

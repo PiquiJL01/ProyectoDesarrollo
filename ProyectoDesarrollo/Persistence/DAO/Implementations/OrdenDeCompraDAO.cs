@@ -1,14 +1,20 @@
-﻿using ProyectoDesarrollo.Persistence.DataBase;
+﻿using System.Collections.Generic;
+using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
 using System;
-using System.Collections.Generic;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class OrdenDeCompraDAO: DAO<OrdenDeCompra>
 {
-    public OrdenDeCompraDAO(DataBaseContext context) : base(context)
+    public readonly DataBaseContext _dataBaseContext;
+
+    public OrdenDeCompraDAO(DataBaseContext dataBaseContext)
     {
+        _dataBaseContext = dataBaseContext;
     }
 
     public override IEnumerable<OrdenDeCompra> Get()
@@ -16,23 +22,44 @@ public class OrdenDeCompraDAO: DAO<OrdenDeCompra>
         throw new NotImplementedException();
     }
 
-    public override OrdenDeCompra Get(string id)
+    public OrdenDeCompraDTO GetOrdenDeCompra(string ID)
     {
-        throw new NotImplementedException();
+        var query = _dataBaseContext.OrdenesDeCompra
+            .Where(o => o.ID == ID)
+            .Select(o => new OrdenDeCompraDTO
+            {
+                ID = o.ID,
+                Id_Administrador = o.Id_Administrador,
+            });
+        return query.First();
+            }
+
+    public Task Add(OrdenDeCompraDTO ordenDeCompraDTO) 
+    {
+        OrdenDeCompra ordenDeCompra = new OrdenDeCompra();
+        ordenDeCompra.ID = ordenDeCompraDTO.ID;
+        ordenDeCompra.Id_Administrador = ordenDeCompraDTO.Id_Administrador;
+        _dataBaseContext.OrdenesDeCompra.Add(ordenDeCompra);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
+
     }
 
-    public override void Post(OrdenDeCompra entity)
+    public Task  Update(OrdenDeCompraDTO ordenDeCompraDTO,string  ID)
     {
-        throw new NotImplementedException();
+        var ItemToUpdate = _dataBaseContext.OrdenesDeCompra.Find(ID);
+        ItemToUpdate.ID = ordenDeCompraDTO.ID;
+        _dataBaseContext.SaveChanges();
+
+        return Task.CompletedTask;
     }
 
-    public override void Put(OrdenDeCompra entity)
+    public Task Delete(string ID)
     {
-        throw new NotImplementedException();
-    }
+        var ItemToRemove = _dataBaseContext.OrdenesDeCompra.Find(ID);
+        _dataBaseContext.OrdenesDeCompra.Remove(ItemToRemove);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
 
-    public override void Delete(OrdenDeCompra entity)
-    {
-        throw new NotImplementedException();
     }
 }

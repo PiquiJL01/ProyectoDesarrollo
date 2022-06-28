@@ -22,8 +22,7 @@ namespace ProyectoDesarrollo.Persistence.Entidades
         public ICollection<Poliza> Poliza { get; set; }
         public ICollection<Incidente> Incidente { get; set; }
         public ICollection<OrdenDeCompra> OrdenDeCompra { get; set; }
-
-
+        public string ID { get; internal set; }
     }
 }
 

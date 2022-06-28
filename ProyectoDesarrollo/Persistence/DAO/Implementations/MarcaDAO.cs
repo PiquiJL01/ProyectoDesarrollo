@@ -1,14 +1,21 @@
-﻿using ProyectoDesarrollo.Persistence.DataBase;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
+using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using System.Threading.Tasks;
+using System.Linq;
+
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public class MarcaDAO: DAO<Marca>
 {
-    public MarcaDAO(DataBaseContext context) : base(context)
+    public readonly DataBaseContext _dataBaseContext;
+
+    public MarcaDAO(DataBaseContext dataBaseContext)
     {
+        _dataBaseContext = dataBaseContext;
     }
 
     public override IEnumerable<Marca> Get()
@@ -16,23 +23,41 @@ public class MarcaDAO: DAO<Marca>
         throw new NotImplementedException();
     }
 
-    public override Marca Get(string id)
+    public MarcaDTO GetMarca(string Name)
     {
-        throw new NotImplementedException();
+        var query =_dataBaseContext.Marcas
+            .Where(m => m.Name == Name)
+            .Select(m => new MarcaDTO 
+            { 
+                Name = m.Name 
+            });
+        return query.First();
+
     }
 
-    public override void Post(Marca entity)
+    public Task Add(MarcaDTO marcaDTO)
     {
-        throw new NotImplementedException();
+        Marca marca =  new Marca();
+        marca.Name = marcaDTO.Name;
+        _dataBaseContext.Marcas.Add(marca);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 
-    public override void Put(Marca entity)
+    public Task Update (MarcaDTO marcaDTO,string Name)
     {
-        throw new NotImplementedException();
+        var itemToUpdate = _dataBaseContext.Marcas.Find(Name);
+        itemToUpdate.Name = marcaDTO.Name;
+        _dataBaseContext.SaveChanges();
+
+        return Task.CompletedTask;
     }
 
-    public override void Delete(Marca entity)
+    public Task Delete(string Name)
     {
-        throw new NotImplementedException();
+        var ItemToRemove = _dataBaseContext.Marcas.Find(Name);
+        _dataBaseContext.Marcas.Remove(ItemToRemove);
+        _dataBaseContext.SaveChanges();
+        return Task.CompletedTask;
     }
 }
