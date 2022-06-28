@@ -7,7 +7,7 @@ public interface IDAO<T>
 {
     public  IEnumerable<T> Select();
     public T Select(string id);
-    public Task Insert(T entity);
-    public Task Update(T entity);
-    public Task Delete(T entity);
+    public void Insert(T entity);
+    public void Update(T entity);
+    public void Delete(T entity);
 }

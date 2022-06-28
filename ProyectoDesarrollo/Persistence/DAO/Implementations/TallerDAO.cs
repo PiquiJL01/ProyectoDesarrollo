@@ -56,9 +56,9 @@ public class TallerDAO: DAO<TallerDTO>
         Context().SaveChanges();
     }
 
-    public Task  Delete(string Id_Taller)
+    public override void Delete(TallerDTO tallerDto)
     {
-        var itemToRemove = Context().Talleres.Find(Id_Taller);
+        var itemToRemove = Context().Talleres.Find(tallerDto.Id_Taller);
         Context().Talleres.Remove(itemToRemove);
         Context().SaveChanges();
     }
