@@ -8,23 +8,22 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PiezaDAO: DAO<Pieza>
+public class PiezaDAO: DAO<PiezaDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
 
-    public PiezaDAO(DataBaseContext dataBaseContext)
+    public PiezaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Pieza> Get()
+    public override IEnumerable<PiezaDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public PiezaDTO GetPieza(string ID)
+    public override PiezaDTO Select(string ID)
     {
-        var query = _dataBaseContext.Piezas
+        var query = Context().Piezas
             .Where(p => p.ID == ID)
             .Select(p => new PiezaDTO
             {
@@ -32,34 +31,34 @@ public class PiezaDAO: DAO<Pieza>
                 Name = p.Name,
                 Description = p.Description,
             });
+
         return query.First();
     }
 
-    public Task Add(PiezaDTO  piezaDTO)
+    public override void Insert(PiezaDTO piezaDto)
     {
         Pieza pieza = new Pieza();
-        pieza.ID = piezaDTO.ID;
-        pieza.Name = piezaDTO.Name;
-        pieza.Description = piezaDTO.Description;
-        _dataBaseContext.Piezas.Add(pieza);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        pieza.ID = piezaDto.ID;
+        pieza.Name = piezaDto.Name;
+        pieza.Description = piezaDto.Description;
+        Context().Piezas.Add(pieza);
+        Context().SaveChanges();
     }
 
-    public Task Update(PiezaDTO piezaDTO,string  ID)
+    public override void Update(PiezaDTO piezaDto)
     {
-        var ItemToUpdate = _dataBaseContext.Piezas.Find(ID);
-        ItemToUpdate.Name = piezaDTO.Name;
-        ItemToUpdate.Description = piezaDTO.Description;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Piezas.Find(piezaDto.ID);
+        itemToUpdate.Name = piezaDto.Name;
+        itemToUpdate.Description = piezaDto.Description;
+
+        Context().Piezas.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string ID)
+    public override void Delete(PiezaDTO piezaDto)
     {
-        var ItemToRemove  = _dataBaseContext.Piezas.Find(ID);
-        _dataBaseContext.Piezas.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove  = Context().Piezas.Find(piezaDto.ID);
+        Context().Piezas.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

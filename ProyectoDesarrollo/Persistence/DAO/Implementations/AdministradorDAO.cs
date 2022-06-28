@@ -8,51 +8,48 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class AdministradorDAO : DAO<Administrador>
+public class AdministradorDAO : DAO<AdministradorDTO>
 {
 
-    public readonly DataBaseContext _dataBaseContext;
-
-    public AdministradorDAO(DataBaseContext dataBaseContext)
+    public AdministradorDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
     } 
 
       
- public override IEnumerable<Administrador> Get()
+ public override IEnumerable<AdministradorDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public AdministradorDTO Get (string id)
+    public override AdministradorDTO Select(String id)
     {
-    var query = _dataBaseContext.Administradores
-    .Where(x => x.Id == id)
-    .Select(x => new AdministradorDTO
-    {
-        Id_Admin = x.Id,
-    });
-    return query.First();
+        var query = Context().Administradores
+            .Where(x => x.Id == id)
+            .Select(x => new AdministradorDTO
+            {
+                Id_Admin = x.Id,
+            });
+        return query.First();
     }
 
-    public Task Add(AdministradorDTO administradorDTO)
+    public override void Insert(AdministradorDTO administradorDto)
     {
-    Administrador administrador = new Administrador();
-    administrador.Id = administradorDTO.Id_Admin;
-    _dataBaseContext.Add(administrador);
-    _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        Administrador administrador = new Administrador();
+        administrador.Id = administradorDto.Id_Admin;
+        Context().Add(administrador);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string Id_Admin)
+    public override void Delete(AdministradorDTO administradorDto)
     {
-        var itemToUpdate = _dataBaseContext.Administradores.Find(Id_Admin);
-        _dataBaseContext.Administradores.Remove(Id_Admin);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Administradores.Find(administradorDto.Id_Admin);
+        Context().Administradores.Remove(itemToUpdate);
+
+        Context().Administradores.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public override void Update(Administrador entity)
+    public override void Update(AdministradorDTO administradorDto)
     {
         throw new NotImplementedException();
     }

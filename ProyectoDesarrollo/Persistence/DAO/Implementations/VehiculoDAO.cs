@@ -8,23 +8,21 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class VehiculoDAO: DAO<Vehiculo>
+public class VehiculoDAO: DAO<VehiculoDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public VehiculoDAO(DataBaseContext dataBaseContext)
+    public VehiculoDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Vehiculo> Get()
+    public override IEnumerable<VehiculoDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public VehiculoDTO GetVehiculo(string Placa)
+    public VehiculoDTO Select(string Placa)
     {
-        var query = _dataBaseContext.Vehiculos
+        var query = Context().Vehiculos
             .Where(x => x.Placa == Placa)
             .Select(x => new VehiculoDTO
             {
@@ -44,50 +42,52 @@ public class VehiculoDAO: DAO<Vehiculo>
         return query.First();
     }
 
-    public Task Add(VehiculoDTO  vehiculoDTO)
+    public override void Insert(VehiculoDTO vehiculoDTO)
     {
-        Vehiculo vehiculo = new Vehiculo();
-        vehiculo.Placa = vehiculoDTO.Placa;
-        vehiculo.Modelo = vehiculoDTO.Modelo;
-        vehiculo.Estado = vehiculoDTO.Estado;
-        vehiculo.Tipo = vehiculoDTO.Tipo;
-        vehiculo.SerialCarroceria = vehiculoDTO.SerialCarroceria;
-        vehiculo.Año = vehiculoDTO.Año;
-        vehiculo.Peso = vehiculoDTO.Peso;
-        vehiculo.NumeroDeEjes = vehiculoDTO.NumeroDeEjes;
-        vehiculo.Color  = vehiculoDTO.Color;
-        vehiculo.NumeroDePuestos = vehiculoDTO.NumeroDePuestos;
-        vehiculo.Id_Propietario= vehiculoDTO.Id_Propietario;
-        vehiculo.Id_Marca= vehiculoDTO.Id_Marca;
-        _dataBaseContext.Vehiculos.Add(vehiculo);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        Vehiculo vehiculo = new Vehiculo
+        {
+            Placa = vehiculoDTO.Placa,
+            Modelo = vehiculoDTO.Modelo,
+            Estado = vehiculoDTO.Estado,
+            Tipo = vehiculoDTO.Tipo,
+            SerialCarroceria = vehiculoDTO.SerialCarroceria,
+            Año = vehiculoDTO.Año,
+            Peso = vehiculoDTO.Peso,
+            NumeroDeEjes = vehiculoDTO.NumeroDeEjes,
+            Color = vehiculoDTO.Color,
+            NumeroDePuestos = vehiculoDTO.NumeroDePuestos,
+            Id_Propietario = vehiculoDTO.Id_Propietario,
+            Id_Marca = vehiculoDTO.Id_Marca
+        };
+        Context().Vehiculos.Add(vehiculo);
+        Context().SaveChanges();
     }
 
-    public Task Update(VehiculoDTO  vehiculoDTO,string Placa)
+    public override void Update(VehiculoDTO  vehiculoDto)
     {
-        var ItemToUpdate = _dataBaseContext.Vehiculos.Find(Placa);
-        ItemToUpdate.Modelo = vehiculoDTO.Modelo;
-        ItemToUpdate.Estado = vehiculoDTO.Estado;
-        ItemToUpdate.Tipo = vehiculoDTO.Tipo;
-        ItemToUpdate.SerialCarroceria = vehiculoDTO.SerialCarroceria;
-        ItemToUpdate.Año = vehiculoDTO.Año;
-        ItemToUpdate.Peso = vehiculoDTO.Peso;
-        ItemToUpdate.NumeroDeEjes= vehiculoDTO.NumeroDeEjes;
-        ItemToUpdate.Color= vehiculoDTO.Color;
-        ItemToUpdate.NumeroDePuestos= vehiculoDTO.NumeroDePuestos;
-        ItemToUpdate.Id_Propietario= vehiculoDTO.Id_Propietario;
-        ItemToUpdate.Id_Marca= vehiculoDTO.Id_Marca;
-        _dataBaseContext.SaveChanges();
-
-        return Task.CompletedTask;
+        var itemToUpdate = new Vehiculo
+        {
+            Placa = vehiculoDto.Placa,
+            Modelo = vehiculoDto.Modelo,
+            Estado = vehiculoDto.Estado,
+            Tipo = vehiculoDto.Tipo,
+            SerialCarroceria = vehiculoDto.SerialCarroceria,
+            Año = vehiculoDto.Año,
+            Peso = vehiculoDto.Peso,
+            NumeroDeEjes = vehiculoDto.NumeroDeEjes,
+            Color = vehiculoDto.Color,
+            NumeroDePuestos = vehiculoDto.NumeroDePuestos,
+            Id_Propietario = vehiculoDto.Id_Propietario,
+            Id_Marca = vehiculoDto.Id_Marca
+        };
+        Context().Vehiculos.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string Placa)
+    public override void Delete(VehiculoDTO vehiculoDto)
     {
-        var ItemToRemove = _dataBaseContext.Vehiculos.Find(Placa);
-        _dataBaseContext.Vehiculos.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove = Context().Vehiculos.Find(vehiculoDto.Placa);
+        Context().Vehiculos.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

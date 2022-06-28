@@ -8,24 +8,22 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PeritoDAO: DAO<Perito>
+public class PeritoDAO: DAO<PeritoDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public PeritoDAO(DataBaseContext dataBaseContext)
+    public PeritoDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Perito> Get()
+    public override IEnumerable<PeritoDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public PeritoDTO GetPerito(string Id_Perito)
+    public override PeritoDTO Select(string id)
     {
-        var query = _dataBaseContext.Peritos
-            .Where(p => p.Id == Id_Perito)
+        var query = Context().Peritos
+            .Where(p => p.Id == id)
             .Select(p => new PeritoDTO
             {
                 Id_Perito = p.Id_Perito           
@@ -34,28 +32,27 @@ public class PeritoDAO: DAO<Perito>
 
     }
 
-    public Task Add(PeritoDTO peritoDTO)
+    public override void Insert(PeritoDTO peritoDto)
     {
         Perito  perito = new Perito();
-        perito.Id_Perito = peritoDTO.Id_Perito;
-        _dataBaseContext.Peritos.Add(perito);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        perito.Id_Perito = peritoDto.Id_Perito;
+        Context().Peritos.Add(perito);
+        Context().SaveChanges();
     }
 
-    public Task Update(PeritoDTO peritoDTO, string Id_Perito)
+    public override void Update(PeritoDTO peritoDto)
     {
-        var ItemToUpdate = _dataBaseContext.Peritos.Find(Id_Perito);
-        ItemToUpdate.Id_Perito = peritoDTO.Id_Perito;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Peritos.Find(peritoDto.Id_Perito);
+        itemToUpdate.Id_Perito = peritoDto.Id_Perito;
+
+        Context().Peritos.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string Id_Perito)
+    public override void Delete(PeritoDTO peritoDto)
     {
-        var ItemToRemove  = _dataBaseContext.Peritos.Find(Id_Perito);
-        _dataBaseContext.Peritos.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var ItemToRemove  = Context().Peritos.Find(peritoDto.Id_Perito);
+        Context().Peritos.Remove(ItemToRemove);
+        Context().SaveChanges();
     }
 }

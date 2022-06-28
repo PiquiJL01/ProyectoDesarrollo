@@ -9,23 +9,21 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PropietarioDAO: DAO<Propietario>
+public class PropietarioDAO: DAO<PropietarioDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public PropietarioDAO(DataBaseContext dataBaseContext)
+    public PropietarioDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Propietario> Get()
+    public override IEnumerable<PropietarioDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public override PropietarioDTO GetPropietario(string CedulaRif)
+    public override PropietarioDTO Select(string CedulaRif)
     {
-        var query = _dataBaseContext.Propietarios
+        var query = Context().Propietarios
             .Where(x => x.CedulaRif == CedulaRif)
             .Select(x => new PropietarioDTO
             {
@@ -41,40 +39,40 @@ public class PropietarioDAO: DAO<Propietario>
         return query.First();
     }
 
-    public Task Add(PropietarioDTO propietarioDTO)
+    public override void Insert(PropietarioDTO propietarioDto)
     {
         Propietario propietario = new Propietario();
-        propietario.CedulaRif = propietarioDTO.CedulaRif;
-        propietario.PrimerNombre = propietarioDTO.PrimerNombre;
-        propietario.SegundoNombre= propietarioDTO.SegundoNombre;
-        propietario.PrimerApellido= propietarioDTO.PrimerApellido;
-        propietario.SegundoApellido= propietarioDTO.SegundoApellido;
-        propietario.FechaNacimiento= propietarioDTO.FechaNacimiento;
-        propietario.Direccion= propietarioDTO.Direccion;
-        propietario.Id_Poliza= propietarioDTO.Id_Poliza;
-        _dataBaseContext.Propietarios.Add(propietario);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        propietario.CedulaRif = propietarioDto.CedulaRif;
+        propietario.PrimerNombre = propietarioDto.PrimerNombre;
+        propietario.SegundoNombre= propietarioDto.SegundoNombre;
+        propietario.PrimerApellido= propietarioDto.PrimerApellido;
+        propietario.SegundoApellido= propietarioDto.SegundoApellido;
+        propietario.FechaNacimiento= propietarioDto.FechaNacimiento;
+        propietario.Direccion= propietarioDto.Direccion;
+        propietario.Id_Poliza= propietarioDto.Id_Poliza;
+        
+        Context().Propietarios.Add(propietario);
+        Context().SaveChanges();
     }
 
-    public Task  Update(PropietarioDTO  propietarioDTO,string  CedulaRif)
+    public override void Update(PropietarioDTO  propietarioDTO)
     {
-        var ItemToUpdate = _dataBaseContext.Propietarios.Find(CedulaRif);
-        ItemToUpdate.PrimerNombre= propietarioDTO.PrimerNombre;
-        ItemToUpdate.SegundoNombre= propietarioDTO.SegundoNombre;
-        ItemToUpdate.PrimerApellido = propietarioDTO.PrimerApellido;
-        ItemToUpdate.SegundoApellido = propietarioDTO.SegundoApellido;
-        ItemToUpdate.Direccion = propietarioDTO.Direccion;
-        ItemToUpdate.Id_Poliza = propietarioDTO.Id_Poliza;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Propietarios.Find(propietarioDTO.CedulaRif);
+        itemToUpdate.PrimerNombre= propietarioDTO.PrimerNombre;
+        itemToUpdate.SegundoNombre= propietarioDTO.SegundoNombre;
+        itemToUpdate.PrimerApellido = propietarioDTO.PrimerApellido;
+        itemToUpdate.SegundoApellido = propietarioDTO.SegundoApellido;
+        itemToUpdate.Direccion = propietarioDTO.Direccion;
+        itemToUpdate.Id_Poliza = propietarioDTO.Id_Poliza;
+
+        Context().Propietarios.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string CedulaRif)
+    public override void Delete(PropietarioDTO propietarioDto)
     {
-        var ItemToRemove = _dataBaseContext.Propietarios.Find(CedulaRif);
-        _dataBaseContext.Propietarios.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove = Context().Propietarios.Find(propietarioDto.CedulaRif);
+        Context().Propietarios.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

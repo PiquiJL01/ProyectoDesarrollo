@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces;
 
 public interface IDAO<T>
 {
-    public  IEnumerable<T> Get();
-    public T Get(string id);
-    public void Post(T entity);
-    public void Put(T entity);
-    public void Delete(T entity);
+    public  IEnumerable<T> Select();
+    public T Select(string id);
+    public Task Insert(T entity);
+    public Task Update(T entity);
+    public Task Delete(T entity);
 }

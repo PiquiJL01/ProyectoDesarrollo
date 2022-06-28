@@ -9,74 +9,65 @@ using System.Linq;
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 
-public class IncidenteDAO: DAO<Incidente>
+public class IncidenteDAO: DAO<IncidenteDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
 
-    public IncidenteDAO(DataBaseContext dataBaseContext)
+    public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
     }
-    public List<IncidenteDTO> VerRegistrosFactura(string incidente)
-    {
-            var data = _dataBaseContext.Incidentes
-               .Where(i => i.ID == incidente)
-               .Select(i => new IncidenteDTO
 
-               {
-                   ID = i.ID,
-                   Ubicacion = i.Ubicacion,
-                   Fecha = i.Fecha,
-                   Id_Perito = i.Id_Perito,
-                   Id_Administrador = i.Id_Administrador,
-               });
-
-            return data.ToList();
-     }
-    public override IEnumerable<Incidente> Get()
+    public override List<IncidenteDTO> Select()
     {
         throw new NotImplementedException();
+     }
+
+    public override IncidenteDTO Select(string id)
+    {
+        var data = Context().Incidentes
+            .Where(i => i.ID == id)
+            .Select(i => new IncidenteDTO
+
+            {
+                ID = i.ID,
+                Ubicacion = i.Ubicacion,
+                Fecha = i.Fecha,
+                Id_Perito = i.Id_Perito,
+                Id_Administrador = i.Id_Administrador,
+            });
+        return data.First();
     }
 
-    public IncidenteDTO GetIncidente(string ID)
+    public override void Insert(IncidenteDTO incidenteDto)
     {
-        var query = _dataBaseContext.Incidentes
-               .Where(i => i.ID == ID)
-               .Select(i => new IncidenteDTO
-
-               {
-                   ID = i.ID,
-                   Ubicacion = i.Ubicacion,
-                   Fecha = i.Fecha,
-                   Id_Perito = i.Id_Perito,
-                   Id_Administrador = i.Id_Administrador,
-               });
-        return query.First();
+        Incidente incidente = new Incidente()
+        {
+            ID = incidenteDto.ID,
+            Ubicacion = incidenteDto.Ubicacion,
+            Fecha = incidenteDto.Fecha,
+            Id_Perito = incidenteDto.Id_Perito,
+            Id_Administrador = incidenteDto.Id_Administrador
+        };
+        Context().Incidentes.Add(incidente);
+        Context().SaveChanges();
     }
 
-    public Task Add(IncidenteDTO incidenteDTO)
+    public override void Update(IncidenteDTO incidenteDto)
     {
-        Incidente incidente = new Incidente();
-        incidente.ID = incidenteDTO.ID;
-        incidente.Ubicacion = incidenteDTO.Ubicacion;
-        incidente.Fecha = incidenteDTO.Fecha;
-        incidente.Id_Perito = incidenteDTO.Id_Perito;
-        incidente.Id_Administrador = incidenteDTO.Id_Administrador;
-        return Task.CompletedTask;
-    }
-    public Task update(IncidenteDTO  incidenteDTO, string ID)
-    {
-        var itemToUpdate = _dataBaseContext.Find(ID);
-        itemToUpdate.ID = incidenteDTO.ID;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = new Incidente()
+        {
+            Ubicacion = incidenteDto.Ubicacion,
+            Fecha = incidenteDto.Fecha,
+            Id_Perito = incidenteDto.Id_Perito,
+            Id_Administrador = incidenteDto.Id_Administrador
+        };
+        Context().Incidentes.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string ID)
+    public override void Delete(IncidenteDTO incidenteDto)
     {
-        var ItemToRemove = _dataBaseContext.Incidentes.Find(ID);
-        _dataBaseContext.Incidentes.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove = Context().Incidentes.Find(incidenteDto.ID);
+        Context().Incidentes.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

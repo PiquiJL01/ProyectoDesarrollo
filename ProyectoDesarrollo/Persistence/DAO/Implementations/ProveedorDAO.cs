@@ -8,24 +8,22 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class ProveedorDAO: DAO<Proveedor>
+public class ProveedorDAO: DAO<ProveedorDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public ProveedorDAO(DataBaseContext dataBaseContext)
+    public ProveedorDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
 
-    public override IEnumerable<Proveedor> Get()
+    public override IEnumerable<ProveedorDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public ProveedorDTO GetProveedor(string Id_Proveedor)
+    public override ProveedorDTO Select(string Id_Proveedor)
     {
-        var query = _dataBaseContext.Proveedores
+        var query = Context().Proveedores
             .Where(p => p.Id == Id_Proveedor)
             .Select(p => new ProveedorDTO { 
                 Id_Proveedor = p.Id_Proveedor,
@@ -36,35 +34,31 @@ public class ProveedorDAO: DAO<Proveedor>
         return query.First();
     }
 
-    public Task  Add(ProveedorDTO proveedorDTO)
+    public override void Insert(ProveedorDTO proveedorDto)
     {
         Proveedor proveedor = new Proveedor();
-        proveedor.Id_Proveedor = proveedorDTO.Id_Proveedor;
-        proveedor.Name = proveedorDTO.Name;
-        proveedor.Address = proveedorDTO.Address;
-        proveedor.TallerID = proveedorDTO.TallerID;
-        _dataBaseContext.Proveedores.Add(proveedor);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        proveedor.Id_Proveedor = proveedorDto.Id_Proveedor;
+        proveedor.Name = proveedorDto.Name;
+        proveedor.Address = proveedorDto.Address;
+        proveedor.TallerID = proveedorDto.TallerID;
+        Context().Proveedores.Add(proveedor);
+        Context().SaveChanges();
     }
 
-    public Task Update(ProveedorDTO proveedorDTO,string Id_Proveedor)
+    public override void Update(ProveedorDTO proveedorDTO)
     {
-        var ItemToUpdate = _dataBaseContext.Proveedores.Find(Id_Proveedor);
+        var ItemToUpdate = Context().Proveedores.Find(proveedorDTO.Id_Proveedor);
         ItemToUpdate.Name = proveedorDTO.Name;
         ItemToUpdate.Address = proveedorDTO.Address;
         ItemToUpdate.TallerID = proveedorDTO.TallerID;
-        _dataBaseContext.SaveChanges();
-
-        return  Task.CompletedTask;
-
+        Context().Proveedores.Update(ItemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string Id_Proveedor)
+    public override void Delete(ProveedorDTO proveedorDto)
     {
-        var ItemToRemove  = _dataBaseContext.Proveedores.Find(Id_Proveedor);
-        _dataBaseContext.Proveedores.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove  = Context().Proveedores.Find(proveedorDto.Id_Proveedor);
+        Context().Proveedores.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

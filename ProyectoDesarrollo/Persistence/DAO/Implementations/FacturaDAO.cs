@@ -8,73 +8,61 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class FacturaDAO: DAO<Factura>
+public class FacturaDAO: DAO<FacturaDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public FacturaDAO(DataBaseContext dataBaseContext)
+    public FacturaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
     }
 
     public List<FacturaDTO> VerRegistrosFactura(string factura)
     {
-        try
-        {
-            var data = _dataBaseContext.Facturas
-               .Where(a => a.ID == factura)
-               .Select(a => new FacturaDTO
-               {
-                  ID = a.ID,
-               });
+        var data = Context().Facturas
+            .Where(a => a.ID == factura)
+            .Select(a => new FacturaDTO
+            {
+                ID = a.ID,
+            });
 
-            return data.ToList();
-        }
-        catch (Exception ex)
-        {
-            throw new ExcepcionesProyecto("Ha ocurrido un error al intentar consultar la lista de facturas" + Factura , ex.Message, ex);
-        }
-
+        return data.ToList();
     }
 
-    public override IEnumerable<Factura> Get()
+    public override IEnumerable<FacturaDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public  FacturaDAO Get(string ID)
+    public  override FacturaDTO Select(string ID)
     {
-        var query = _dataBaseContext.Administradores
+        var query = Context().Administradores
             .Where(x => x.Id == ID)
             .Select(x => new FacturaDTO
         {
         ID = x.Id,
-     });
+        });
         return query.First();
     }
 
-    public Task Add(FacturaDTO facturaDTO)
+    public override void Insert(FacturaDTO facturaDto)
     {
         Factura factura = new Factura();
-        factura.ID = facturaDTO.ID;
-        _dataBaseContext.Facturas.Add(factura);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        factura.ID = facturaDto.ID;
+        Context().Facturas.Add(factura);
+        Context().SaveChanges();
     }
 
-    //public Task Update(FacturaDTO facturaDTO,string ID)
-    //{
-    //    var ItemToUpdate = _dataBaseContext.Find(ID);
-    //    ItemToUpdate.ID = facturaDTO.ID;
-    //    _dataBaseContext.SaveChanges();
-    //    return Task.CompletedTask;
-    //}
-
-    public  Task Delete(string ID)
+    public override void Update(FacturaDTO facturaDto)
     {
-        var ItemToRemove = _dataBaseContext.Find(ID);
-        _dataBaseContext.Facturas.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Facturas.Find(facturaDto.ID);
+        itemToUpdate.ID = facturaDto.ID;
+
+        Context().Facturas.Update(itemToUpdate);
+        Context().SaveChanges();
+    }
+
+    public override void Delete(FacturaDTO facturaDto)
+    {
+        var itemToRemove = Context().Facturas.Find(facturaDto.ID);
+        Context().Facturas.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

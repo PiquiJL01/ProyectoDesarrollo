@@ -9,23 +9,21 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class TallerDAO: DAO<Taller>
+public class TallerDAO: DAO<TallerDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public TallerDAO(DataBaseContext dataBaseContext)
+    public TallerDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Taller> Get()
+    public override IEnumerable<TallerDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public  TallerDTO GetTaller(string Id_Taller)
+    public override TallerDTO Select(string Id_Taller)
     {
-        var query = _dataBaseContext.Talleres
+        var query = Context().Talleres
             .Where(x => x.Id_Taller == Id_Taller)
             .Select(x => new TallerDTO
             {
@@ -37,34 +35,31 @@ public class TallerDAO: DAO<Taller>
         return query.First();
     }
 
-    public Task Add(TallerDTO tallerDTO)
+    public override void Insert(TallerDTO tallerDto)
     {
         Taller taller = new Taller();
-        taller.Id_Taller=tallerDTO.Id_Taller;
-        taller.Name = tallerDTO.Name;
-        taller.Address = tallerDTO.Address;
-        taller.PhoneNumber= tallerDTO.PhoneNumber;
-        _dataBaseContext.Talleres.Add(taller);
-        _dataBaseContext.SaveChanges();
-
-        return Task.CompletedTask;
+        taller.Id_Taller=tallerDto.Id_Taller;
+        taller.Name = tallerDto.Name;
+        taller.Address = tallerDto.Address;
+        taller.PhoneNumber= tallerDto.PhoneNumber;
+        Context().Talleres.Add(taller);
+        Context().SaveChanges();
     }
 
-    public Task Update(TallerDTO tallerDTO,string Id_Taller)
+    public override void Update(TallerDTO tallerDto)
     {
-        var ItemToUpdate = _dataBaseContext.Talleres.Find(Id_Taller);
-        ItemToUpdate.Name=tallerDTO.Name;
-        ItemToUpdate.Address=tallerDTO.Address;
-        ItemToUpdate.PhoneNumber=tallerDTO.PhoneNumber;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Talleres.Find(tallerDto.Id_Taller);
+        itemToUpdate.Name=tallerDto.Name;
+        itemToUpdate.Address=tallerDto.Address;
+        itemToUpdate.PhoneNumber=tallerDto.PhoneNumber;
+        Context().Talleres.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
     public Task  Delete(string Id_Taller)
     {
-        var ItemToRemove = _dataBaseContext.Talleres.Find(Id_Taller);
-        _dataBaseContext.Talleres.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove = Context().Talleres.Find(Id_Taller);
+        Context().Talleres.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }

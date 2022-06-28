@@ -8,23 +8,21 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PolizaDAO: DAO<Poliza>
+public class PolizaDAO: DAO<PolizaDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public PolizaDAO(DataBaseContext dataBaseContext)
+    public PolizaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
 
-    public override IEnumerable<Poliza> Get()
+    public override IEnumerable<PolizaDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public PolizaDTO GetPoliza(string ID)
+    public override PolizaDTO Select(string ID)
     {
-        var query = _dataBaseContext.Polizas
+        var query = Context().Polizas
             .Where(p => p.ID == ID)
             .Select(p => new PolizaDTO
             {
@@ -36,32 +34,31 @@ public class PolizaDAO: DAO<Poliza>
 
     }
 
-    public Task Add(PolizaDTO  polizaDTO)
+    public override void Insert(PolizaDTO  polizaDTO)
     {
         Poliza poliza = new Poliza();
         poliza.ID = polizaDTO.ID;
         poliza.Id_Admin = polizaDTO.Id_Admin;
         poliza.TipoPoliza = (Poliza.Tipo)polizaDTO.TipoPoliza;
-        _dataBaseContext.Polizas.Add(poliza);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;  
+        Context().Polizas.Add(poliza);
+        Context().SaveChanges();
     }
 
-    public Task Update(PolizaDTO polizaDTO,string ID)
+    public override void Update(PolizaDTO polizaDTO)
     {
-        var ItemToUpdate = _dataBaseContext.Polizas.Find(ID);
-        ItemToUpdate.ID = polizaDTO.ID;
-        ItemToUpdate.Id_Admin = polizaDTO.Id_Admin;
-        ItemToUpdate.TipoPoliza = (Poliza.Tipo)polizaDTO.TipoPoliza;
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToUpdate = Context().Polizas.Find(polizaDTO.ID);
+        itemToUpdate.ID = polizaDTO.ID;
+        itemToUpdate.Id_Admin = polizaDTO.Id_Admin;
+        itemToUpdate.TipoPoliza = (Poliza.Tipo)polizaDTO.TipoPoliza;
+        
+        Context().Polizas.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string ID)
-    {
-       var  ItemToRemove  = _dataBaseContext.Polizas.Find(ID);
-        ItemToRemove.Polizas.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
-            }
+    public override void Delete(PolizaDTO polizaDto)
+    { 
+        var  itemToRemove  = Context().Polizas.Find(polizaDto.ID); 
+        Context().Polizas.Remove(itemToRemove); 
+        Context().SaveChanges();
+    }
 }

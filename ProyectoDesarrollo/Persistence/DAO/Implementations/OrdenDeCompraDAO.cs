@@ -8,24 +8,21 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class OrdenDeCompraDAO: DAO<OrdenDeCompra>
+public class OrdenDeCompraDAO: DAO<OrdenDeCompraDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public OrdenDeCompraDAO(DataBaseContext dataBaseContext)
+    public OrdenDeCompraDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
     }
 
-    public override IEnumerable<OrdenDeCompra> Get()
+    public override IEnumerable<OrdenDeCompraDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public OrdenDeCompraDTO GetOrdenDeCompra(string ID)
+    public override OrdenDeCompraDTO Select(String id)
     {
-        var query = _dataBaseContext.OrdenesDeCompra
-            .Where(o => o.ID == ID)
+        var query = Context().OrdenesDeCompra
+            .Where(o => o.ID == id)
             .Select(o => new OrdenDeCompraDTO
             {
                 ID = o.ID,
@@ -34,32 +31,30 @@ public class OrdenDeCompraDAO: DAO<OrdenDeCompra>
         return query.First();
             }
 
-    public Task Add(OrdenDeCompraDTO ordenDeCompraDTO) 
+    public override void Insert(OrdenDeCompraDTO ordenDeCompraDto) 
     {
         OrdenDeCompra ordenDeCompra = new OrdenDeCompra();
-        ordenDeCompra.ID = ordenDeCompraDTO.ID;
-        ordenDeCompra.Id_Administrador = ordenDeCompraDTO.Id_Administrador;
-        _dataBaseContext.OrdenesDeCompra.Add(ordenDeCompra);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        ordenDeCompra.ID = ordenDeCompraDto.ID;
+        ordenDeCompra.Id_Administrador = ordenDeCompraDto.Id_Administrador;
+        Context().OrdenesDeCompra.Add(ordenDeCompra);
+        Context().SaveChanges();
 
     }
 
-    public Task  Update(OrdenDeCompraDTO ordenDeCompraDTO,string  ID)
+    public override  void Update(OrdenDeCompraDTO ordenDeCompraDto)
     {
-        var ItemToUpdate = _dataBaseContext.OrdenesDeCompra.Find(ID);
-        ItemToUpdate.ID = ordenDeCompraDTO.ID;
-        _dataBaseContext.SaveChanges();
+        var itemToUpdate = Context().OrdenesDeCompra.Find(ordenDeCompraDto.ID);
+        itemToUpdate.ID = ordenDeCompraDto.ID;
 
-        return Task.CompletedTask;
+        Context().OrdenesDeCompra.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string ID)
+    public override void Delete(OrdenDeCompraDTO ordenDeCompraDto)
     {
-        var ItemToRemove = _dataBaseContext.OrdenesDeCompra.Find(ID);
-        _dataBaseContext.OrdenesDeCompra.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        var itemToRemove = Context().OrdenesDeCompra.Find(ordenDeCompraDto.ID);
+        Context().OrdenesDeCompra.Remove(itemToRemove);
+        Context().SaveChanges();
 
     }
 }

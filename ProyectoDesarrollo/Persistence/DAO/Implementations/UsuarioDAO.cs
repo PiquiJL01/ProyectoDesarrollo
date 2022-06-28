@@ -8,22 +8,20 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class UsuarioDAO: DAO<Usuario>
+public class UsuarioDAO: DAO<UsuarioDTO>
 {
-    public readonly DataBaseContext _dataBaseContext;
-
-    public TallerDAO(DataBaseContext dataBaseContext)
+    public TallerDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-        _dataBaseContext = dataBaseContext;
+
     }
-    public override IEnumerable<Usuario> Get()
+    public override IEnumerable<UsuarioDTO> Select()
     {
         throw new NotImplementedException();
     }
 
-    public  UsuarioDTO GetUsuario(string Id)
+    public override UsuarioDTO Select(string Id)
     {
-        var query = _dataBaseContext.Usuarios
+        var query = Context().Usuarios
             .Where(u => u.Id == Id)
             .Select(u => new UsuarioDTO
             {
@@ -36,49 +34,50 @@ public class UsuarioDAO: DAO<Usuario>
                 BirthDate = u.BirthDate,
                 Rol = (UsuarioDTO.RolName)u.Rol
             });
-        
+        return query.First();
     }
 
-    public Task Add(UsuarioDTO usuarioDTO)
+    public override void Insert(UsuarioDTO usuarioDto)
 
     {
-        Usuario  usuario=new Usuario();
-        usuario.Id = usuarioDTO.Id;
-        usuario.Nombre = usuarioDTO.Nombre; 
-        usuario.Apellido = usuarioDTO.Apellido;
-        usuario.Telefono = usuarioDTO.Telefono;
-        usuario.Email = usuarioDTO.Email;
-        usuario.Direccion = usuarioDTO.Direccion;
-        usuario.BirthDate = usuarioDTO.BirthDate;
-        usuario.Rol = (RolName)usuarioDTO.Rol;
-        _dataBaseContext.Usuarios.Add(usuario);
-        _dataBaseContext.SaveChanges();
-        return Task.CompletedTask;
+        Usuario usuario = new Usuario
+        {
+            Id = usuarioDto.Id,
+            Nombre = usuarioDto.Nombre,
+            Apellido = usuarioDto.Apellido,
+            Telefono = usuarioDto.Telefono,
+            Email = usuarioDto.Email,
+            Direccion = usuarioDto.Direccion,
+            BirthDate = usuarioDto.BirthDate,
+            Rol = (RolName)usuarioDto.Rol
+        };
+
+        Context().Usuarios.Add(usuario);
+        Context().SaveChanges();
     }
 
-    public Task Update( UsuarioDTO  usuarioDTO,string  Id)
+    public override void Update(UsuarioDTO usuarioDTO)
     {
-        var ItemToUpdate = _dataBaseContext.Usuarios.Find(Id);
-        ItemToUpdate.Id = Id;
-        ItemToUpdate.Nombre = usuarioDTO.Nombre;    
-        ItemToUpdate.Apellido = usuarioDTO.Apellido;    
-        ItemToUpdate.Telefono = usuarioDTO.Telefono;
-        ItemToUpdate.Email = usuarioDTO.Email;
-        ItemToUpdate.Direccion = usuarioDTO.Direccion;
-        ItemToUpdate.BirthDate = usuarioDTO.BirthDate;
-        ItemToUpdate.Rol = (RolName)usuarioDTO.Rol;
-        _dataBaseContext.SaveChanges();
+        var itemToUpdate = new Usuario
+        {
+            Id = usuarioDTO.Id,
+            Nombre = usuarioDTO.Nombre,
+            Apellido = usuarioDTO.Apellido,
+            Telefono = usuarioDTO.Telefono,
+            Email = usuarioDTO.Email,
+            Direccion = usuarioDTO.Direccion,
+            BirthDate = usuarioDTO.BirthDate,
+            Rol = (RolName)usuarioDTO.Rol
+        };
 
-        return  Task.CompletedTask;
-
+        Context().Usuarios.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public Task Delete(string Id)
+    public override void Delete(UsuarioDTO usuario)
     {
-        var ItemToRemove =_dataBaseContext.Usuarios.Find(Id);
-        _dataBaseContext.Usuarios.Remove(ItemToRemove);
-        _dataBaseContext.SaveChanges();
-
-        return Task.CompletedTask;
+        var itemToRemove = Context().Usuarios.Find(usuario.Id);
+        Context().Usuarios.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }
