@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using RCVUcab;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,30 +13,79 @@ namespace RegistroDeIncidentesPeritos.Controllers.APIs
     [ApiController]
     public class VehiculoController : ControllerBase
     {
+        private readonly VehiculoDAO _vehiculoDao;
+
+        public VehiculoController(VehiculoDAO vehiculoDao)
+        {
+            _vehiculoDao = vehiculoDao;
+        }
+
         // GET: api/<VehiculoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ApplicationResponse<IEnumerable<VehiculoDTO>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = new ApplicationResponse<IEnumerable<VehiculoDTO>>();
+            try
+            {
+                response.Data = _vehiculoDao.Select();
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // GET api/<VehiculoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ApplicationResponse<VehiculoDTO> Get(string id)
         {
-            return "value";
+            var response = new ApplicationResponse<VehiculoDTO>();
+            try
+            {
+                response.Data = _vehiculoDao.Select(id);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // POST api/<VehiculoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ApplicationResponse<string> Post([FromBody] VehiculoDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _vehiculoDao.Insert(value);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // PUT api/<VehiculoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ApplicationResponse<string> Put(int id, [FromBody] VehiculoDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _vehiculoDao.Update(value);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         /*// DELETE api/<VehiculoController>/5
