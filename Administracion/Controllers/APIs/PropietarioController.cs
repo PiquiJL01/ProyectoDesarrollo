@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Persistence.DAO;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
-using RCVUcab;
+using ProyectoDesarrollo.Responses;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
