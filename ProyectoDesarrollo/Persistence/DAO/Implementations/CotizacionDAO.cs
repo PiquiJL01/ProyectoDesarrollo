@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class CotizacionDAO: DAO<CotizacionDTO>
+public class CotizacionDAO: IIncidenteDAO<CotizacionDTO>
 {
 
     public CotizacionDAO(DataBaseContext dataBaseContext):base(dataBaseContext)

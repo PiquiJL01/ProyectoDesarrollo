@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class FacturaDAO: DAO<FacturaDTO>
+public class FacturaDAO: IIncidenteDAO<FacturaDTO>
 {
     public FacturaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

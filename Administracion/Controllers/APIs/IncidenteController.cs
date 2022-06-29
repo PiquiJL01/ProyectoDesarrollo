@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Persistence.DataBase;
+using ProyectoDesarrollo.Response;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,22 +17,38 @@ namespace Administracion.Controllers.APIs
     [ApiController]
     public class IncidenteController : ControllerBase
     {
-        private readonly IncidenteDAO _incidenteDAO;
+        private readonly IIncidenteDAO _incidenteDAO;
 
-        public IncidenteController(IncidenteDAO incidenteDao)
+        public IncidenteController(IIncidenteDAO incidenteDao)
         {
             _incidenteDAO = incidenteDao;
         }
 
         // GET: api/<IncidenteController>
-        [HttpGet]
+        /*[HttpGet]
         public IEnumerable<IncidenteDTO> Get()
         {
             return _incidenteDAO.Select();
-        }
+        }*/
 
         // GET api/<IncidenteController>/5
-        [HttpGet("{id}")]
+        [HttpGet("incidentes/{id}")]
+        public ApplicationResponse<List<IncidenteDTO>> GetIncidentesByID([Required][FromRoute] string id)
+        {
+            var response = new ApplicationResponse<List<IncidenteDTO>>();
+            try
+            {
+                response.Data = _incidenteDAO.GetIncidentesByID(id);
+            }
+            catch (ProyectoException ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
+            }
+            return response;
+        }
+
         public IncidenteDTO Get(string id)
         {
             return _incidenteDAO.Select(id);

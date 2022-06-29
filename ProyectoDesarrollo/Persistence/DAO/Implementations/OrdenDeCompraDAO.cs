@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class OrdenDeCompraDAO: DAO<OrdenDeCompraDTO>
+public class OrdenDeCompraDAO: IIncidenteDAO<OrdenDeCompraDTO>
 {
     public OrdenDeCompraDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

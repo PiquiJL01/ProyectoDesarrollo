@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class TallerDAO: DAO<TallerDTO>
+public class TallerDAO: IIncidenteDAO<TallerDTO>
 {
     public TallerDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
