@@ -29,7 +29,7 @@ public class IncidenteDAO : DAO<IncidenteDTO>
         throw new NotImplementedException();
     }
 
-    public List<IncidenteDTO> GetIncidentesByID(string id)
+    public List<IncidenteDTO> GetIncidenteByID(string id)
     {
         try
         {

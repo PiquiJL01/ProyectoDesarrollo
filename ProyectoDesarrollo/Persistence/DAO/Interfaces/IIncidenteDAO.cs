@@ -6,7 +6,7 @@ namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
     public interface IIncidenteDAO
     {
-        public List<IncidenteDTO> GetIncidentesByID(string id);
+        public List<IncidenteDTO> GetIncidenteByID(string id);
         //IncidenteDTO Select(string id);
         void Insert(IncidenteDTO incidenteDto);
         void Update(IncidenteDTO incidenteDto);
