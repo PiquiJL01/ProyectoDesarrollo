@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Persistence.DataBase;
+using RCVUcab;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,46 +17,96 @@ namespace Administracion.Controllers.APIs
     [ApiController]
     public class IncidenteController : ControllerBase
     {
-        private readonly IncidenteDAO _incidenteDAO;
+        private readonly IIncidenteDAO _incidenteDAO;
 
-        public IncidenteController(IncidenteDAO incidenteDao)
+        public IncidenteController(IIncidenteDAO incidenteDao)
         {
             _incidenteDAO = incidenteDao;
         }
 
         // GET: api/<IncidenteController>
         [HttpGet]
-        public IEnumerable<IncidenteDTO> Get()
+        public ApplicationResponse<IEnumerable<IncidenteDTO>> Get()
         {
-            return _incidenteDAO.Select();
+            var response = new ApplicationResponse<IEnumerable<IncidenteDTO>>();
+            try
+            {
+                response.Data = _incidenteDAO.Select();
+            }
+            catch(Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // GET api/<IncidenteController>/5
         [HttpGet("{id}")]
-        public IncidenteDTO Get(string id)
+        public ApplicationResponse<IncidenteDTO> Get(string id)
         {
-            return _incidenteDAO.Select(id);
+            var response = new ApplicationResponse<IncidenteDTO>();
+            try
+            {
+                response.Data = _incidenteDAO.Select(id);
+            }
+            catch (Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // POST api/<IncidenteController>
         [HttpPost]
-        public void Post([FromBody] IncidenteDTO incidenteDto)
+        public ApplicationResponse<string> Post([FromBody] IncidenteDTO incidenteDto)
         {
-            _incidenteDAO.Insert(incidenteDto);
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _incidenteDAO.Insert(incidenteDto);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // PUT api/<IncidenteController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] IncidenteDTO incidenteDto)
+        public ApplicationResponse<string> Put(int id, [FromBody] IncidenteDTO incidenteDto)
         {
-            _incidenteDAO.Update(incidenteDto);
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _incidenteDAO.Update(incidenteDto);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // DELETE api/<IncidenteController>/5
         [HttpDelete("{id}")]
-        public void Delete([FromBody]IncidenteDTO incidenteDto)
+        public ApplicationResponse<string> Delete([FromBody]IncidenteDTO incidenteDto)
         {
-            _incidenteDAO.Delete(incidenteDto);
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _incidenteDAO.Delete(incidenteDto);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
     }
 }

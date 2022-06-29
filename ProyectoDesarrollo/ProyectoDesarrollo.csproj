@@ -35,6 +35,7 @@
     <None Remove="Persistence\DAO\Interfaces\" />
     <None Remove="Persistence\DAO\Implementations\" />
     <None Remove="BussinesLogic\DTOs\" />
+    <None Remove="Response\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\Entidades\" />
@@ -42,5 +43,6 @@
     <Folder Include="Persistence\DAO\Interfaces\" />
     <Folder Include="Persistence\DAO\Implementations\" />
     <Folder Include="BussinesLogic\DTOs\" />
+    <Folder Include="Response\" />
   </ItemGroup>
 </Project>

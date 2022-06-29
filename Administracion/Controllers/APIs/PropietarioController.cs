@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Persistence.DAO;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,18 +12,25 @@ namespace Administracion.Controllers.APIs
     [ApiController]
     public class PropietarioController : ControllerBase
     {
+        private readonly PropietarioDAO _propietarioDao;
+
+        public PropietarioController(PropietarioDAO propietarioDao)
+        {
+            _propietarioDao = propietarioDao;
+        }
+
         // GET: api/<ClienteController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<PropietarioDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _propietarioDao.Select();
         }
 
         // GET api/<ClienteController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            return _propietarioDao.Select();
         }
 
         // POST api/<ClienteController>

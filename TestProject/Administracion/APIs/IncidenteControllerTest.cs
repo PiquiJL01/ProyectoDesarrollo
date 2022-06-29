@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.Extensions.Logging;
-using Moq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Administracion.Controllers.APIs;
-using Xunit;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Moq;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
-using ProyectoDesarrollo.Persistence.DataBase;
-using ProyectoDesarrollo.Persistence.Entidades;
+using ProyectoDesarrollo.Response;
+using Xunit;
 
 namespace TestProject.Administracion.APIs
 {
@@ -25,22 +22,25 @@ namespace TestProject.Administracion.APIs
         public IncidenteControllerTest()
         {
             _serviceMock = new Mock<IncidenteDAO>();
-            var lista = new List<IncidenteDTO>() { new IncidenteDTO(), new IncidenteDTO() };
-            _serviceMock.Setup(e => e.Select()).Returns(lista);
             _controller = new IncidenteController(_serviceMock.Object);
+            _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
         }
 
+
         [Fact]
-        public Task Get()
+        public Task GetIncidentesByID()
         {
-            var lista = new List<IncidenteDTO>() { new IncidenteDTO(), new IncidenteDTO() };
-            _serviceMock.Setup(e => e.Select()).Returns(lista);
+            //List<IncidenteDTO> lista = new List<IncidenteDTO>();
+            _serviceMock
+                .Setup(x => x.GetIncidentesByID(It.IsAny<string>()))
+                .Returns(new List<IncidenteDTO>());
+            var result = _controller.GetIncidentesByID("");
 
-            Assert.Equal(_controller.Get(), lista);
+            Assert.IsType<ApplicationResponse<List<IncidenteDTO>>>(result); ;
 
-            return  Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         [Fact]
