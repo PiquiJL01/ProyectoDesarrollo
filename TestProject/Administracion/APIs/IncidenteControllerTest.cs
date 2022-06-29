@@ -4,6 +4,7 @@ using Administracion.Controllers.APIs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Logging;
 using Moq;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Exceptions;
@@ -19,11 +20,13 @@ namespace TestProject.Administracion.APIs
 
         private readonly IncidenteController _controller;
         private readonly Mock<IncidenteDAO> _serviceMock;
+        private readonly Mock<ILogger<IncidenteController>> _loggerMock;
 
         public IncidenteControllerTest()
         {
+            _loggerMock = new Mock<ILogger<IncidenteController>>();
             _serviceMock = new Mock<IncidenteDAO>();
-            _controller = new IncidenteController(_serviceMock.Object);
+            _controller = new IncidenteController(_loggerMock.Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();

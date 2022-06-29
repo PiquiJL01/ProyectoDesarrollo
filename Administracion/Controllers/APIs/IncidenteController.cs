@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
@@ -18,10 +19,13 @@ namespace Administracion.Controllers.APIs
     public class IncidenteController : ControllerBase
     {
         private readonly IIncidenteDAO _incidenteDAO;
+        private readonly ILogger<IncidenteController> _logger;
 
-        public IncidenteController(IIncidenteDAO incidenteDao)
+        public IncidenteController(ILogger<IncidenteController> logger, IIncidenteDAO incidenteDao)
         {
             _incidenteDAO = incidenteDao;
+            _logger = logger;
+
         }
 
         // GET: api/<IncidenteController>
