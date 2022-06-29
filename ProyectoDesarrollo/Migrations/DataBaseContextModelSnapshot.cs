@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoDesarrollo.Persistence.DataBase;
 
+#nullable disable
+
 namespace ProyectoDesarrollo.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
@@ -15,46 +17,189 @@ namespace ProyectoDesarrollo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("MarcaProveedor", b =>
-                {
-                    b.Property<string>("MarcasName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProovedoresID")
-                        .HasColumnType("int");
-
-                    b.HasKey("MarcasName", "ProovedoresID");
-
-                    b.HasIndex("ProovedoresID");
-
-                    b.ToTable("MarcaProveedor");
-                });
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Incidente")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Proveedor")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Taller")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("MontoTotal")
                         .HasColumnType("float");
 
-                    b.Property<int?>("VehiculoIncidenteTallerID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ID");
+                    b.HasIndex(new[] { "Id_Incidente" }, "IX_Cotizacion_IdIncidente");
 
-                    b.HasIndex("VehiculoIncidenteTallerID");
+                    b.HasIndex(new[] { "Id_Proveedor" }, "IX_Cotizacion_IdProveedor");
+
+                    b.HasIndex(new[] { "Id_Taller" }, "IX_Cotizacion_IdTaller");
 
                     b.ToTable("Cotizaciones");
                 });
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Dueno", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Factura", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ID_OrdenDeCompraID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ID_OrdenDeCompraID");
+
+                    b.ToTable("Facturas");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Incidente", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Id_Administrador")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Perito")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Ubicacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex(new[] { "Id_Perito" }, "IX_Incidente_IdProveedor");
+
+                    b.HasIndex(new[] { "Id_Administrador" }, "IX_ProveedorMarca_IdMarca");
+
+                    b.ToTable("Incidentes");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Marca", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("Marcas");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Administrador")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_CotizacionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Id_CotizacionId");
+
+                    b.HasIndex(new[] { "Id_Administrador" }, "IX_OrdernDeCompra_IdAdministrador");
+
+                    b.ToTable("OrdenesDeCompra");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Pieza", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Piezas");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PiezaCotizacion", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Cotizacion")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Pieza")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Precio")
+                        .HasColumnType("real");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex(new[] { "Id_Cotizacion" }, "IX_PiezaCotizacion_IdCotizacion");
+
+                    b.HasIndex(new[] { "Id_Pieza" }, "IX_PiezaCotizacion_IdPieza");
+
+                    b.ToTable("PiezasCotizaciones");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PiezaMarca", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Marca")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Pieza")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex(new[] { "Id_Marca" }, "IX_PiezaMarca_IdMarca");
+
+                    b.HasIndex(new[] { "Id_Pieza" }, "IX_PiezaMarca_IdPieza");
+
+                    b.ToTable("PiezasMarcas");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Admin")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("TipoPoliza")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex(new[] { "Id_Admin" }, "IX_Poliza_IdAdmin");
+
+                    b.ToTable("Polizas");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Propietario", b =>
                 {
                     b.Property<string>("CedulaRif")
                         .HasColumnType("nvarchar(450)");
@@ -65,6 +210,10 @@ namespace ProyectoDesarrollo.Migrations
 
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Id_Poliza")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PrimerApellido")
                         .IsRequired()
@@ -82,191 +231,36 @@ namespace ProyectoDesarrollo.Migrations
 
                     b.HasKey("CedulaRif");
 
-                    b.ToTable("Duenos");
+                    b.HasIndex(new[] { "Id_Poliza" }, "IX_Propietario_IdPoliza");
+
+                    b.ToTable("Propietarios");
                 });
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Factura", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.ProveedorMarca", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("OrdenDeCompraID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OrdenDeCompraID");
-
-                    b.ToTable("Facturas");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Incidente", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Ubicacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Incidentes");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Marca", b =>
-                {
-                    b.Property<string>("Name")
+                    b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Name");
-
-                    b.ToTable("Marcas");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CotizacionID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProveedorID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CotizacionID");
-
-                    b.HasIndex("ProveedorID");
-
-                    b.ToTable("Ordenes de Compra");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Pieza", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MarcaName")
+                    b.Property<string>("Id_Marca")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("MarcaName");
-
-                    b.ToTable("Piezas");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DuenoCedulaRif")
-                        .IsRequired()
+                    b.Property<string>("Id_Proveedor")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TipoPoliza")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("DuenoCedulaRif");
+                    b.HasIndex(new[] { "Id_Marca" }, "IX_ProveedorMarca_IdMarca")
+                        .HasDatabaseName("IX_ProveedorMarca_IdMarca1");
 
-                    b.ToTable("Polizas");
-                });
+                    b.HasIndex(new[] { "Id_Proveedor" }, "IX_ProveedorMarca_IdProveedor");
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PrecioPieza", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CotizacionID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PiezaID")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Precio")
-                        .HasColumnType("real");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CotizacionID");
-
-                    b.HasIndex("PiezaID");
-
-                    b.ToTable("Precio de la Pieza");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Proveedor", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Proveedores");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Taller", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Talleres");
+                    b.ToTable("ProveedoresMarcas");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Usuario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -279,6 +273,10 @@ namespace ProyectoDesarrollo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -287,13 +285,7 @@ namespace ProyectoDesarrollo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProveedorID")
-                        .HasColumnType("int");
-
                     b.Property<int>("Rol")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TallerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Telefono")
@@ -302,11 +294,9 @@ namespace ProyectoDesarrollo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProveedorID");
-
-                    b.HasIndex("TallerId");
-
                     b.ToTable("Usuarios");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Vehiculo", b =>
@@ -321,17 +311,14 @@ namespace ProyectoDesarrollo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DuenoCedulaRif")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IncidenteID")
-                        .HasColumnType("int");
+                    b.Property<string>("Id_Marca")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MarcaName")
+                    b.Property<string>("Id_Propietario")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Modelo")
@@ -357,11 +344,9 @@ namespace ProyectoDesarrollo.Migrations
 
                     b.HasKey("Placa");
 
-                    b.HasIndex("DuenoCedulaRif");
+                    b.HasIndex(new[] { "Id_Marca" }, "IX_Vehiculo_IdMarca");
 
-                    b.HasIndex("IncidenteID");
-
-                    b.HasIndex("MarcaName");
+                    b.HasIndex(new[] { "Id_Propietario" }, "IX_Vehiculo_IdPropietario");
 
                     b.ToTable("Vehiculos");
                 });
@@ -370,181 +355,351 @@ namespace ProyectoDesarrollo.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<DateTime>("FechaEntrega")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IncidenteID")
-                        .HasColumnType("int");
+                    b.Property<string>("Id_Incidente")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("TallerId")
-                        .HasColumnType("int");
+                    b.Property<string>("Id_Pieza")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("VehiculoPlaca")
+                    b.Property<string>("Id_Taller")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id_Vehiculo")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("IncidenteID");
+                    b.HasIndex(new[] { "Id_Incidente" }, "IX_VehiculoIncidenteTaller_IdIncidente");
 
-                    b.HasIndex("TallerId");
+                    b.HasIndex(new[] { "Id_Pieza" }, "IX_VehiculoIncidenteTaller_IdPieza");
 
-                    b.HasIndex("VehiculoPlaca");
+                    b.HasIndex(new[] { "Id_Taller" }, "IX_VehiculoIncidenteTaller_IdTaller");
 
-                    b.ToTable("Talleres asignados a Vehiculo del Incidente");
+                    b.HasIndex(new[] { "Id_Vehiculo" }, "IX_VehiculoIncidenteTaller_IdVehiculo");
+
+                    b.ToTable("VehiculosIncidentesTalleres");
                 });
 
-            modelBuilder.Entity("MarcaProveedor", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Administrador", b =>
                 {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Marca", null)
-                        .WithMany()
-                        .HasForeignKey("MarcasName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("ProyectoDesarrollo.Persistence.Entidades.Usuario");
 
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Proveedor", null)
-                        .WithMany()
-                        .HasForeignKey("ProovedoresID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("Id_Admin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Administrador");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Perito", b =>
+                {
+                    b.HasBaseType("ProyectoDesarrollo.Persistence.Entidades.Usuario");
+
+                    b.Property<string>("Id_Perito")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Perito");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Proveedor", b =>
+                {
+                    b.HasBaseType("ProyectoDesarrollo.Persistence.Entidades.Usuario");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Proveedor_Address");
+
+                    b.Property<string>("Id_Proveedor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Proveedor_Name");
+
+                    b.Property<string>("TallerID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasIndex("TallerID")
+                        .IsUnique()
+                        .HasFilter("[TallerID] IS NOT NULL");
+
+                    b.HasDiscriminator().HasValue("Proveedor");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Taller", b =>
+                {
+                    b.HasBaseType("ProyectoDesarrollo.Persistence.Entidades.Usuario");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id_Taller")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Taller");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", b =>
                 {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.VehiculoIncidenteTaller", "VehiculoIncidenteTaller")
-                        .WithMany()
-                        .HasForeignKey("VehiculoIncidenteTallerID");
-
-                    b.Navigation("VehiculoIncidenteTaller");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Factura", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", "OrdenDeCompra")
-                        .WithMany()
-                        .HasForeignKey("OrdenDeCompraID");
-
-                    b.Navigation("OrdenDeCompra");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", "Cotizacion")
-                        .WithMany()
-                        .HasForeignKey("CotizacionID");
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Incidente", "Incidente")
+                        .WithMany("Cotizacion")
+                        .HasForeignKey("Id_Incidente");
 
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Proveedor", "Proveedor")
-                        .WithMany()
-                        .HasForeignKey("ProveedorID");
-
-                    b.Navigation("Cotizacion");
-
-                    b.Navigation("Proveedor");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Pieza", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Marca", "Marca")
-                        .WithMany()
-                        .HasForeignKey("MarcaName");
-
-                    b.Navigation("Marca");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Dueno", "Dueno")
-                        .WithMany("Polizas")
-                        .HasForeignKey("DuenoCedulaRif")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dueno");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PrecioPieza", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", null)
-                        .WithMany("PrecioPiezas")
-                        .HasForeignKey("CotizacionID");
-
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Pieza", "Pieza")
-                        .WithMany()
-                        .HasForeignKey("PiezaID");
-
-                    b.Navigation("Pieza");
-                });
-
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Usuario", b =>
-                {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Proveedor", "Proveedor")
-                        .WithMany()
-                        .HasForeignKey("ProveedorID");
+                        .WithMany("Cotizacion")
+                        .HasForeignKey("Id_Proveedor");
 
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Taller", "Taller")
-                        .WithMany()
-                        .HasForeignKey("TallerId");
+                        .WithMany("CotizacionT")
+                        .HasForeignKey("Id_Taller");
+
+                    b.Navigation("Incidente");
 
                     b.Navigation("Proveedor");
 
                     b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Vehiculo", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Factura", b =>
                 {
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Dueno", "Dueno")
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", "ID_OrdenDeCompra")
                         .WithMany()
-                        .HasForeignKey("DuenoCedulaRif");
+                        .HasForeignKey("ID_OrdenDeCompraID");
 
-                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Incidente", null)
-                        .WithMany("Implicados")
-                        .HasForeignKey("IncidenteID");
+                    b.Navigation("ID_OrdenDeCompra");
+                });
 
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Incidente", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Administrador", "Administrador")
+                        .WithMany("Incidente")
+                        .HasForeignKey("Id_Administrador");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Perito", "Perito")
+                        .WithMany("Incidente")
+                        .HasForeignKey("Id_Perito");
+
+                    b.Navigation("Administrador");
+
+                    b.Navigation("Perito");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.OrdenDeCompra", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Administrador", "Administrador")
+                        .WithMany("OrdenDeCompra")
+                        .HasForeignKey("Id_Administrador");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", "Id_Cotizacion")
+                        .WithMany()
+                        .HasForeignKey("Id_CotizacionId");
+
+                    b.Navigation("Administrador");
+
+                    b.Navigation("Id_Cotizacion");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PiezaCotizacion", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", "Cotizacion")
+                        .WithMany("PiezaCotizacion")
+                        .HasForeignKey("Id_Cotizacion");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Pieza", "Pieza")
+                        .WithMany("PiezaCotizacion")
+                        .HasForeignKey("Id_Pieza");
+
+                    b.Navigation("Cotizacion");
+
+                    b.Navigation("Pieza");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.PiezaMarca", b =>
+                {
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Marca", "Marca")
-                        .WithMany()
-                        .HasForeignKey("MarcaName");
+                        .WithMany("PiezaMarca")
+                        .HasForeignKey("Id_Marca");
 
-                    b.Navigation("Dueno");
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Pieza", "Pieza")
+                        .WithMany("PiezaMarca")
+                        .HasForeignKey("Id_Pieza");
 
                     b.Navigation("Marca");
+
+                    b.Navigation("Pieza");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Administrador", "Administrador")
+                        .WithMany("Poliza")
+                        .HasForeignKey("Id_Admin");
+
+                    b.Navigation("Administrador");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Propietario", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Poliza", "Poliza")
+                        .WithMany("Propietario")
+                        .HasForeignKey("Id_Poliza")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Poliza");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.ProveedorMarca", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Marca", "Marca")
+                        .WithMany("ProveedorMarca")
+                        .HasForeignKey("Id_Marca");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Proveedor", "Proveedor")
+                        .WithMany("ProveedorMarca")
+                        .HasForeignKey("Id_Proveedor");
+
+                    b.Navigation("Marca");
+
+                    b.Navigation("Proveedor");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Vehiculo", b =>
+                {
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Marca", "Marca")
+                        .WithMany("Vehiculo")
+                        .HasForeignKey("Id_Marca");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Propietario", "Propietario")
+                        .WithMany("Vehiculo")
+                        .HasForeignKey("Id_Propietario");
+
+                    b.Navigation("Marca");
+
+                    b.Navigation("Propietario");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.VehiculoIncidenteTaller", b =>
                 {
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Incidente", "Incidente")
-                        .WithMany()
-                        .HasForeignKey("IncidenteID");
+                        .WithMany("VehiculoIncidenteTaller")
+                        .HasForeignKey("Id_Incidente");
+
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Pieza", "Pieza")
+                        .WithMany("VehiculoIncidenteTaller")
+                        .HasForeignKey("Id_Pieza");
 
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Taller", "Taller")
-                        .WithMany()
-                        .HasForeignKey("TallerId");
+                        .WithMany("VehiculoIncidenteTaller")
+                        .HasForeignKey("Id_Taller");
 
                     b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Vehiculo", "Vehiculo")
-                        .WithMany()
-                        .HasForeignKey("VehiculoPlaca");
+                        .WithMany("VehiculoIncidenteTaller")
+                        .HasForeignKey("Id_Vehiculo");
 
                     b.Navigation("Incidente");
+
+                    b.Navigation("Pieza");
 
                     b.Navigation("Taller");
 
                     b.Navigation("Vehiculo");
                 });
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Proveedor", b =>
                 {
-                    b.Navigation("PrecioPiezas");
+                    b.HasOne("ProyectoDesarrollo.Persistence.Entidades.Taller", "Taller")
+                        .WithOne("Proveedor")
+                        .HasForeignKey("ProyectoDesarrollo.Persistence.Entidades.Proveedor", "TallerID");
+
+                    b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Dueno", b =>
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Cotizacion", b =>
                 {
-                    b.Navigation("Polizas");
+                    b.Navigation("PiezaCotizacion");
                 });
 
             modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Incidente", b =>
                 {
-                    b.Navigation("Implicados");
+                    b.Navigation("Cotizacion");
+
+                    b.Navigation("VehiculoIncidenteTaller");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Marca", b =>
+                {
+                    b.Navigation("PiezaMarca");
+
+                    b.Navigation("ProveedorMarca");
+
+                    b.Navigation("Vehiculo");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Pieza", b =>
+                {
+                    b.Navigation("PiezaCotizacion");
+
+                    b.Navigation("PiezaMarca");
+
+                    b.Navigation("VehiculoIncidenteTaller");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Poliza", b =>
+                {
+                    b.Navigation("Propietario");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Propietario", b =>
+                {
+                    b.Navigation("Vehiculo");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Vehiculo", b =>
+                {
+                    b.Navigation("VehiculoIncidenteTaller");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Administrador", b =>
+                {
+                    b.Navigation("Incidente");
+
+                    b.Navigation("OrdenDeCompra");
+
+                    b.Navigation("Poliza");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Perito", b =>
+                {
+                    b.Navigation("Incidente");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Proveedor", b =>
+                {
+                    b.Navigation("Cotizacion");
+
+                    b.Navigation("ProveedorMarca");
+                });
+
+            modelBuilder.Entity("ProyectoDesarrollo.Persistence.Entidades.Taller", b =>
+                {
+                    b.Navigation("CotizacionT");
+
+                    b.Navigation("Proveedor");
+
+                    b.Navigation("VehiculoIncidenteTaller");
                 });
 #pragma warning restore 612, 618
         }

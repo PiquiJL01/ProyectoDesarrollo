@@ -1,4 +1,4 @@
-using ProyectoDesarrollo.Persistence.DataBase;
+﻿using ProyectoDesarrollo.Persistence.DataBase;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ProyectoDesarrollo.Controllers.APIs;
 
 namespace ProyectoDesarrollo
 {

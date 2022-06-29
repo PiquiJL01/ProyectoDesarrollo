@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -13,7 +13,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-    <PackageReference Include="MockQueryable.Moq" Version="5.0.2" />
+    <PackageReference Include="MockQueryable.Moq" Version="6.0.1" />
     <PackageReference Include="Moq" Version="4.18.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -25,15 +25,35 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Administracion\Administracion.csproj" />
+    <ProjectReference Include="..\Proveedores\Proveedores.csproj" />
+    <ProjectReference Include="..\ProyectoDesarrollo\ProyectoDesarrollo.csproj" />
+    <ProjectReference Include="..\RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj" />
+    <ProjectReference Include="..\Talleres\Talleres.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="RegistroDeInicidentesPeritos\APIs\" />
+    <Folder Include="Talleres\APIs\" />
   </ItemGroup>
 </Project>
