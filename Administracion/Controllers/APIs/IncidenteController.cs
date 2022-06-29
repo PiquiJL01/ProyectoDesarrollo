@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,7 @@ using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Persistence.DataBase;
-using RCVUcab;
+using ProyectoDesarrollo.Response;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,9 +38,11 @@ namespace Administracion.Controllers.APIs
             {
                 response.Data = _incidenteDAO.Select();
             }
-            catch(Exception ex)
+            catch(ProyectoException ex)
             {
-                response.Error(ex);
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
             }
 
             return response;
@@ -47,16 +50,18 @@ namespace Administracion.Controllers.APIs
 
         // GET api/<IncidenteController>/5
         [HttpGet("{id}")]
-        public ApplicationResponse<IncidenteDTO> Get(string id)
+        public ApplicationResponse<List<IncidenteDTO>> GetIncidenteByID([Required][FromRoute] string id)
         {
-            var response = new ApplicationResponse<IncidenteDTO>();
+            var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
             {
-                response.Data = _incidenteDAO.Select(id);
+                response.Data = _incidenteDAO.GetIncidentesByID(id);
             }
-            catch (Exception ex)
+            catch (ProyectoException ex)
             {
-                response.Error(ex);
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
             }
 
             return response;
