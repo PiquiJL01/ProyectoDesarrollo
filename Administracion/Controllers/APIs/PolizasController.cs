@@ -49,7 +49,7 @@ namespace Administracion.Controllers.APIs
 
         // DELETE api/<PolizasController>/5
         [HttpDelete("{id}")]
-        public void Delete(PolizaDTO polizaDto)
+        public void Delete([FromBody]PolizaDTO polizaDto)
         {
             _polizaDao.Delete(polizaDto);
         }
