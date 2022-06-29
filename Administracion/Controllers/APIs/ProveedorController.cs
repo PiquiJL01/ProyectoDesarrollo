@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using RCVUcab;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,36 +14,96 @@ namespace Administracion.Controllers.APIs
     [ApiController]
     public class ProveedorController : ControllerBase
     {
+        private readonly ProveedorDAO _proveedorDao;
+
+        public ProveedorController(ProveedorDAO proveedorDao)
+        {
+            _proveedorDao = proveedorDao;
+        }
+
         // GET: api/<ProveedorController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ApplicationResponse<IEnumerable<ProveedorDTO>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = new ApplicationResponse<IEnumerable<ProveedorDTO>>();
+            try
+            {
+                response.Data = _proveedorDao.Select();
+            }
+            catch(Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // GET api/<ProveedorController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ApplicationResponse<ProveedorDTO> Get(string id)
         {
-            return "value";
+            var response = new ApplicationResponse<ProveedorDTO>();
+            try
+            {
+                response.Data = _proveedorDao.Select(id);
+            }
+            catch (Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // POST api/<ProveedorController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ApplicationResponse<string> Post([FromBody] ProveedorDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _proveedorDao.Insert(value);
+            }
+            catch (Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // PUT api/<ProveedorController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ApplicationResponse<string> Put(int id, [FromBody] ProveedorDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _proveedorDao.Update(value);
+            }
+            catch (Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
 
         // DELETE api/<ProveedorController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ApplicationResponse<string> Delete(ProveedorDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _proveedorDao.Delete(value);
+            }
+            catch (Exception ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
         }
     }
 }
