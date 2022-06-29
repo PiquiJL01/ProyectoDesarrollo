@@ -18,8 +18,8 @@ public class IncidenteDAO: DAO<IncidenteDTO>
 
     public override List<IncidenteDTO> Select()
     {
-        throw new NotImplementedException();
-     }
+        return new List<IncidenteDTO>();
+    }
 
     public override IncidenteDTO Select(string id)
     {

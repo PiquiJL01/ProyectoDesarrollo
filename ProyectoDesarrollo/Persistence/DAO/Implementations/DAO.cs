@@ -7,7 +7,7 @@ namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 public abstract class DAO<T>: IDAO<T>
 {
-    private readonly DataBaseContext _dataBaseContext;
+    public readonly DataBaseContext _dataBaseContext;
 
     public DataBaseContext Context()
     {
