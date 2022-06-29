@@ -5,7 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
-namespace RCVUcab
+namespace ProyectoDesarrollo.Responses
 {
     public class ApplicationResponse<T>
     {

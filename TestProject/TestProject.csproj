@@ -46,6 +46,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Administracion\Administracion.csproj" />
+    <ProjectReference Include="..\Proveedores\Proveedores.csproj" />
     <ProjectReference Include="..\ProyectoDesarrollo\ProyectoDesarrollo.csproj" />
     <ProjectReference Include="..\RegistroDeIncidentesPeritos\RegistroDeIncidentesPeritos.csproj" />
     <ProjectReference Include="..\Talleres\Talleres.csproj" />
