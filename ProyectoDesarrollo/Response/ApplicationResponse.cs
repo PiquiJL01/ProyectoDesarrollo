@@ -10,6 +10,11 @@ namespace ProyectoDesarrollo.Response
             public T Data { get; set; }
             public bool Success { get; set; } = true;
             public string Exception { get; set; }
+
+        public void Error(Exception e)
+        {
+            throw new NotImplementedException();
         }
+    }
 }
 
