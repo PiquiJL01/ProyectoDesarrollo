@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class UsuarioDAO: DAO<UsuarioDTO>
+public class UsuarioDAO: IIncidenteDAO<UsuarioDTO>
 {
     public UsuarioDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

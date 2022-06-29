@@ -12,30 +12,32 @@ using ProyectoDesarrollo.Exceptions;
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 
-public class IncidenteDAO : IIncidenteDAO
+public class IncidenteDAO : DAO<IncidenteDTO>
 {
-
-    public readonly DataBaseContext _context;
-
-    public IncidenteDAO(DataBaseContext context)
+    public IncidenteDAO(DataBaseContext context):base(context)
     {
-        _context = context;
+
     }
 
-    public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
+    /*public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
-    }
+    }*/
 
-    public override List<IncidenteDTO> Select()
+    /*public override List<IncidenteDTO> Select()
     {
         return new List<IncidenteDTO>();
+    }*/
+
+    public override IncidenteDTO Select(string id)
+    {
+        throw new NotImplementedException();
     }
 
     public List<IncidenteDTO> GetIncidentesByID(string id)
     {
         try
         {
-            var data = _context.Incidentes
+            var data = Context().Incidentes
                 .Include(b => b.VehiculoIncidenteTaller)
                 .Where(i => i.ID == id)
                 .Select(i => new IncidenteDTO
@@ -57,7 +59,7 @@ public class IncidenteDAO : IIncidenteDAO
 
     }
 
-    public void Insert(IncidenteDTO incidenteDto)
+    public override void Insert(IncidenteDTO incidenteDto)
     {
         Incidente incidente = new Incidente()
         {
@@ -67,11 +69,11 @@ public class IncidenteDAO : IIncidenteDAO
             Id_Perito = incidenteDto.Id_Perito,
             Id_Administrador = incidenteDto.Id_Administrador
         };
-        _context.Incidentes.Add(incidente);
-        _context.SaveChanges();
+        Context().Incidentes.Add(incidente);
+        Context().SaveChanges();
     }
 
-    public void Update(IncidenteDTO incidenteDto)
+    public override void Update(IncidenteDTO incidenteDto)
     {
         var itemToUpdate = new Incidente()
         {
@@ -80,14 +82,14 @@ public class IncidenteDAO : IIncidenteDAO
             Id_Perito = incidenteDto.Id_Perito,
             Id_Administrador = incidenteDto.Id_Administrador
         };
-        _context.Incidentes.Update(itemToUpdate);
-        _context.SaveChanges();
+        Context().Incidentes.Update(itemToUpdate);
+        Context().SaveChanges();
     }
 
-    public void Delete(IncidenteDTO incidenteDto)
+    public override void Delete(IncidenteDTO incidenteDto)
     {
-        var itemToRemove = _context.Incidentes.Find(incidenteDto.ID);
-        _context.Incidentes.Remove(itemToRemove);
-        _context.SaveChanges();
+        var itemToRemove = Context().Incidentes.Find(incidenteDto.ID);
+        Context().Incidentes.Remove(itemToRemove);
+        Context().SaveChanges();
     }
 }
