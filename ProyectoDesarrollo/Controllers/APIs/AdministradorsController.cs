@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
 
@@ -13,47 +12,47 @@ namespace ProyectoDesarrollo.Controllers.APIs
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IncidentesController : ControllerBase
+    public class AdministradorsController : ControllerBase
     {
         private readonly DataBaseContext _context;
 
-        public IncidentesController(DataBaseContext context)
+        public AdministradorsController(DataBaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/Incidentes
+        // GET: api/Administradors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Incidente>>> GetIncidentes()
+        public async Task<ActionResult<IEnumerable<Administrador>>> GetAdministradores()
         {
-            return await _context.Incidentes.ToListAsync();
+            return await _context.Administradores.ToListAsync();
         }
 
-        // GET: api/Incidentes/5
+        // GET: api/Administradors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Incidente>> GetIncidente(string id)
+        public async Task<ActionResult<Administrador>> GetAdministrador(string id)
         {
-            var incidente = await _context.Incidentes.FindAsync(id);
+            var administrador = await _context.Administradores.FindAsync(id);
 
-            if (incidente == null)
+            if (administrador == null)
             {
                 return NotFound();
             }
 
-            return incidente;
+            return administrador;
         }
 
-        // PUT: api/Incidentes/5
+        // PUT: api/Administradors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIncidente(string id, Incidente incidente)
+        public async Task<IActionResult> PutAdministrador(string id, Administrador administrador)
         {
-            if (id != incidente.ID)
+            if (id != administrador.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(incidente).State = EntityState.Modified;
+            _context.Entry(administrador).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +60,7 @@ namespace ProyectoDesarrollo.Controllers.APIs
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IncidenteExists(id))
+                if (!AdministradorExists(id))
                 {
                     return NotFound();
                 }
@@ -74,19 +73,19 @@ namespace ProyectoDesarrollo.Controllers.APIs
             return NoContent();
         }
 
-        // POST: api/Incidentes
+        // POST: api/Administradors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Incidente>> PostIncidente(Incidente incidente)
+        public async Task<ActionResult<Administrador>> PostAdministrador(Administrador administrador)
         {
-            _context.Incidentes.Add(incidente);
+            _context.Administradores.Add(administrador);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (IncidenteExists(incidente.ID))
+                if (AdministradorExists(administrador.Id))
                 {
                     return Conflict();
                 }
@@ -96,28 +95,28 @@ namespace ProyectoDesarrollo.Controllers.APIs
                 }
             }
 
-            return CreatedAtAction("GetIncidente", new { id = incidente.ID }, incidente);
+            return CreatedAtAction("GetAdministrador", new { id = administrador.Id }, administrador);
         }
 
-        // DELETE: api/Incidentes/5
+        // DELETE: api/Administradors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIncidente(string id)
+        public async Task<IActionResult> DeleteAdministrador(string id)
         {
-            var incidente = await _context.Incidentes.FindAsync(id);
-            if (incidente == null)
+            var administrador = await _context.Administradores.FindAsync(id);
+            if (administrador == null)
             {
                 return NotFound();
             }
 
-            _context.Incidentes.Remove(incidente);
+            _context.Administradores.Remove(administrador);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool IncidenteExists(string id)
+        private bool AdministradorExists(string id)
         {
-            return _context.Incidentes.Any(e => e.ID == id);
+            return _context.Administradores.Any(e => e.Id == id);
         }
     }
 }

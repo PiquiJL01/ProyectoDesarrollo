@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using ProyectoDesarrollo.Persistence.DataBase;
 
 namespace ProyectoDesarrollo.BussinesLogic.DTOs
 {
