@@ -19,13 +19,13 @@ namespace TestProject.Administracion.APIs
     {
 
         private readonly IncidenteController _controller;
-        private readonly Mock<IncidenteDAO> _serviceMock;
+        private readonly Mock<IIncidenteDAO> _serviceMock;
         private readonly Mock<ILogger<IncidenteController>> _loggerMock;
 
         public IncidenteControllerTest()
         {
             _loggerMock = new Mock<ILogger<IncidenteController>>();
-            _serviceMock = new Mock<IncidenteDAO>();
+            _serviceMock = new Mock<IIncidenteDAO>();
             _controller = new IncidenteController(_loggerMock.Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
@@ -34,13 +34,13 @@ namespace TestProject.Administracion.APIs
 
 
         [Fact]
-        public Task GetIncidentesByID()
+        public Task GetIncidenteByID()
         {
             //List<IncidenteDTO> lista = new List<IncidenteDTO>();
             _serviceMock
-                .Setup(x => x.GetIncidentesByID(It.IsAny<string>()))
+                .Setup(x => x.GetIncidenteByID(It.IsAny<string>()))
                 .Returns(new List<IncidenteDTO>());
-            var result = _controller.GetIncidentesByID("");
+            var result = _controller.GetIncidenteByID("");
 
             Assert.IsType<ApplicationResponse<List<IncidenteDTO>>>(result); ;
 
