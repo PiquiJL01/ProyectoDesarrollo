@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class MarcaDAO: IIncidenteDAO<MarcaDTO>
+public class MarcaDAO: DAO<MarcaDTO>
 {
     public MarcaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

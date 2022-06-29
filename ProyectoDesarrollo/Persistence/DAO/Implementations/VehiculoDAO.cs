@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class VehiculoDAO: IIncidenteDAO<VehiculoDTO>
+public class VehiculoDAO: DAO<VehiculoDTO>
 {
     public VehiculoDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

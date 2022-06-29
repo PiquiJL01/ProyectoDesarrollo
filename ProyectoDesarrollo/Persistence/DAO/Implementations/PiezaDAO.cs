@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PiezaDAO: IIncidenteDAO<PiezaDTO>
+public class PiezaDAO: DAO<PiezaDTO>
 {
 
     public PiezaDAO(DataBaseContext dataBaseContext):base(dataBaseContext)

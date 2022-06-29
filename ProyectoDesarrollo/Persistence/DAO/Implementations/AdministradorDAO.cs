@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class AdministradorDAO : IIncidenteDAO<AdministradorDTO>
+public class AdministradorDAO : DAO<AdministradorDTO>
 {
 
     public AdministradorDAO(DataBaseContext dataBaseContext):base(dataBaseContext)

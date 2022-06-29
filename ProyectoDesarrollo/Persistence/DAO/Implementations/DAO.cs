@@ -5,7 +5,7 @@ using ProyectoDesarrollo.Persistence.DataBase;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public abstract class IIncidenteDAO<T>: IDAO<T>
+public abstract class DAO<T>: IDAO<T>
 {
     public readonly DataBaseContext _dataBaseContext;
 
@@ -14,7 +14,7 @@ public abstract class IIncidenteDAO<T>: IDAO<T>
         return _dataBaseContext;
     }
 
-    protected IIncidenteDAO(DataBaseContext dataBaseContext)
+    protected DAO(DataBaseContext dataBaseContext)
     {
         _dataBaseContext = dataBaseContext;
     }

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PropietarioDAO: IIncidenteDAO<PropietarioDTO>
+public class PropietarioDAO: DAO<PropietarioDTO>
 {
     public PropietarioDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {

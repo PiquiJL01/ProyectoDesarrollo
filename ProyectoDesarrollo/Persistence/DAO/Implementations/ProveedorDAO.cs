@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class ProveedorDAO: IIncidenteDAO<ProveedorDTO>
+public class ProveedorDAO: DAO<ProveedorDTO>
 {
     public ProveedorDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
