@@ -55,7 +55,7 @@ namespace Administracion.Controllers.APIs
             var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
             {
-                response.Data = _incidenteDAO.GetIncidentesByID(id);
+                response.Data = _incidenteDAO.GetIncidenteByID(id);
             }
             catch (ProyectoException ex)
             {
@@ -76,9 +76,11 @@ namespace Administracion.Controllers.APIs
             {
                 _incidenteDAO.Insert(incidenteDto);
             }
-            catch (Exception e)
+            catch (ProyectoException ex)
             {
-                response.Error(e);
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
             }
 
             return response;
@@ -93,9 +95,11 @@ namespace Administracion.Controllers.APIs
             {
                 _incidenteDAO.Update(incidenteDto);
             }
-            catch (Exception e)
+            catch (ProyectoException ex)
             {
-                response.Error(e);
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
             }
 
             return response;
@@ -110,9 +114,11 @@ namespace Administracion.Controllers.APIs
             {
                 _incidenteDAO.Delete(incidenteDto);
             }
-            catch (Exception e)
+            catch (ProyectoException ex)
             {
-                response.Error(e);
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
             }
 
             return response;
