@@ -24,12 +24,17 @@ public class IncidenteDAO : IIncidenteDAO
 
     public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
+        _context = context;
     }
 
-    public override List<IncidenteDTO> Select()
+    /*public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
+    {
+    }*/
+
+    /*public override List<IncidenteDTO> Select()
     {
         return new List<IncidenteDTO>();
-    }
+    }*/
 
     public List<IncidenteDTO> GetIncidentesByID(string id)
     {
