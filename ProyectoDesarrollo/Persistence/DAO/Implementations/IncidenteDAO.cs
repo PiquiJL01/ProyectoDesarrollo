@@ -19,14 +19,10 @@ public class IncidenteDAO : DAO<IncidenteDTO>
 
     }
 
-    /*public IncidenteDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
-    {
-    }*/
-
-    /*public override List<IncidenteDTO> Select()
+    public override IEnumerable<IncidenteDTO> Select()
     {
         return new List<IncidenteDTO>();
-    }*/
+    }
 
     public override IncidenteDTO Select(string id)
     {
