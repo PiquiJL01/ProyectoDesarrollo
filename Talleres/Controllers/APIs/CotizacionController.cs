@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using RCVUcab;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,30 +13,79 @@ namespace Talleres.Controllers.APIs
     [ApiController]
     public class CotizacionController : ControllerBase
     {
+        private readonly CotizacionDAO _cotizacionDAO;
+
+        public CotizacionController(CotizacionDAO cotizacionDAO)
+        {
+            _cotizacionDAO = cotizacionDAO;
+        }
+
         // GET: api/<CotizacionController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ApplicationResponse<IEnumerable<CotizacionDTO>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = new ApplicationResponse<IEnumerable<CotizacionDTO>>();
+            try
+            {
+                response.Data = _cotizacionDAO.Select();
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // GET api/<CotizacionController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ApplicationResponse<CotizacionDTO> Get(string id)
         {
-            return "value";
+            var response = new ApplicationResponse<CotizacionDTO>();
+            try
+            {
+                response.Data = _cotizacionDAO.Select(id);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // POST api/<CotizacionController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ApplicationResponse<string> Post([FromBody] CotizacionDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _cotizacionDAO.Insert(value);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // PUT api/<CotizacionController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ApplicationResponse<string> Put(int id, [FromBody] CotizacionDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _cotizacionDAO.Update(value);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         /*// DELETE api/<CotizacionController>/5
