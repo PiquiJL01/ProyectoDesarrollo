@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using RCVUcab;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,18 +13,45 @@ namespace Proveedores.Controllers.APIs
     [ApiController]
     public class OrdenDeCompraController : ControllerBase
     {
+        private readonly OrdenDeCompraDAO _ordenDeCompraDao;
+
+        public OrdenDeCompraController(OrdenDeCompraDAO ordenDeCompraDao)
+        {
+            _ordenDeCompraDao = ordenDeCompraDao;
+        }
+        
         // GET: api/<OrdenDeCompraController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ApplicationResponse<IEnumerable<OrdenDeCompraDTO>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var response = new ApplicationResponse<IEnumerable<OrdenDeCompraDTO>>();
+            try
+            {
+                response.Data = _ordenDeCompraDao.Select();
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         // GET api/<OrdenDeCompraController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ApplicationResponse<OrdenDeCompraDTO> Get(string id)
         {
-            return "value";
+            var response = new ApplicationResponse<OrdenDeCompraDTO>();
+            try
+            {
+                response.Data = _ordenDeCompraDao.Select(id);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         /*// POST api/<OrdenDeCompraController>
@@ -31,8 +62,19 @@ namespace Proveedores.Controllers.APIs
 
         // PUT api/<OrdenDeCompraController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ApplicationResponse<string> Put(int id, [FromBody] OrdenDeCompraDTO value)
         {
+            var response = new ApplicationResponse<string>();
+            try
+            {
+                _ordenDeCompraDao.Update(value);
+            }
+            catch (Exception e)
+            {
+                response.Error(e);
+            }
+
+            return response;
         }
 
         /*// DELETE api/<OrdenDeCompraController>/5
