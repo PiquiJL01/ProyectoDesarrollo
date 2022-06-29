@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Administracion.Controllers.APIs;
 using Microsoft.AspNetCore.Http;
@@ -32,20 +33,63 @@ namespace TestProject.Administracion.APIs
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
         }
 
+        [Fact]
+        public Task Get()
+        {
+
+            _serviceMock
+                .Setup(x => x.Select())
+                .Returns(new List<IncidenteDTO>());
+            var result = _controller.Get();
+
+            Assert.IsType<ApplicationResponse<List<IncidenteDTO>>>(result);
+
+            return Task.CompletedTask;
+
+        }
+
+        [Fact]
+        public Task GetException()
+        {
+            _serviceMock
+                .Setup(x => x.Select(null))
+                .Throws(new ProyectoException("", new Exception()));
+
+            var ex = _controller.Get();
+
+            Assert.NotNull(ex);
+            Assert.False(ex.Success);
+            return Task.CompletedTask;
+        }
+
 
         [Fact]
         public Task GetIncidenteByID()
         {
-            //List<IncidenteDTO> lista = new List<IncidenteDTO>();
             _serviceMock
                 .Setup(x => x.GetIncidenteByID(It.IsAny<string>()))
                 .Returns(new List<IncidenteDTO>());
             var result = _controller.GetIncidenteByID("");
 
-            Assert.IsType<ApplicationResponse<List<IncidenteDTO>>>(result); ;
+            Assert.IsType<ApplicationResponse<List<IncidenteDTO>>>(result);
 
             return Task.CompletedTask;
         }
+
+        [Fact(DisplayName = "Get Incidentes By Id with Exception")]
+        public Task GetIncidenteByIDException()
+        {
+            _serviceMock
+                .Setup(x => x.GetIncidenteByID(It.IsAny<string>()))
+                .Throws(new ProyectoException("", new Exception()));
+
+            var ex = _controller.GetIncidenteByID("");
+
+            Assert.NotNull(ex);
+            Assert.False(ex.Success);
+            return Task.CompletedTask;
+        }
+
 
         [Fact]
         public void GetAllException()
@@ -53,7 +97,7 @@ namespace TestProject.Administracion.APIs
 
         }
 
-        [Fact]
+        /*[Fact]
         public void GetById()
         {
 
@@ -93,6 +137,6 @@ namespace TestProject.Administracion.APIs
         public void DeleteException()
         {
 
-        }
+        }*/
     }
 }
