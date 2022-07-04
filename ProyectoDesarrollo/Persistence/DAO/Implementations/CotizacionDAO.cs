@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -39,15 +40,23 @@ public class CotizacionDAO: DAO<CotizacionDTO>
     public override void Insert(CotizacionDTO cotizacionDto)
     {
         Cotizacion cotizacion = new Cotizacion();
+        IncidenteDAO incidente = new IncidenteDAO(Context());
         cotizacion.Id = cotizacionDto.Id;
-        cotizacion.MontoTotal = cotizacionDto.MontoTotal;
+        if (incidente.Select(cotizacionDto.Id_Incidente).Fecha.Year > 2020)
+        {
+            cotizacion.MontoTotal = cotizacionDto.MontoTotal * 0.5;
+        }
+        else
+        {
+            cotizacion.MontoTotal = cotizacionDto.MontoTotal;
+        }
         cotizacion.Id_Proveedor = cotizacionDto.Id_Proveedor;
         cotizacion.Id_Incidente = cotizacionDto.Id_Incidente;
         cotizacion.Id_Taller = cotizacionDto.Id_Taller;
         Context().Cotizaciones.Add(cotizacion);
         Context().SaveChanges();
     }
-
+    
     public override void Update(CotizacionDTO cotizacionDto)
     {
         var itemToUpdate = Context().Cotizaciones.Find(cotizacionDto.Id);
