@@ -88,4 +88,48 @@ public class IncidenteDAO : DAO<IncidenteDTO>
         Context().Incidentes.Remove(itemToRemove);
         Context().SaveChanges();
     }
+
+    public List<IncidenteDTO> DeleteIncidente(string id)
+    {
+        try
+        {
+            
+            var itemToRemove = Context().Incidentes.Find(id);
+            Context().Incidentes.Remove(itemToRemove);
+            Context().SaveChanges();
+
+            /*var data = Context().Incidentes
+                .Include(b => b.VehiculoIncidenteTaller)
+                .Where(i => i.ID == id)
+                .Select(i => new IncidenteDTO
+                {
+                    ID = i.ID,
+                    Ubicacion = i.Ubicacion,
+                    Fecha = i.Fecha,
+                    Id_Perito = i.Id_Perito,
+                    Id_Administrador = i.Id_Administrador,
+                }).ToList();*/
+
+            var data = Context().Incidentes
+                    .Include(b => b.VehiculoIncidenteTaller)
+                    .Select(i => new IncidenteDTO
+                    {
+                        ID = i.ID,
+                        Ubicacion = i.Ubicacion,
+                        Fecha = i.Fecha,
+                        Id_Perito = i.Id_Perito,
+                        Id_Administrador = i.Id_Administrador,
+                    }).ToList();
+
+            return data.ToList();
+
+            //return data.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ProyectoException("Ha ocurrido un error al intentar consultar la lista de incidentes: "
+              + id, ex.Message, ex);
+        }
+
+    }
 }

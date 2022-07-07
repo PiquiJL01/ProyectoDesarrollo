@@ -42,6 +42,7 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
+    <None Remove="ProyectoDesarrollo\APIs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,5 +56,6 @@
   <ItemGroup>
     <Folder Include="RegistroDeInicidentesPeritos\APIs\" />
     <Folder Include="Talleres\APIs\" />
+    <Folder Include="ProyectoDesarrollo\APIs\" />
   </ItemGroup>
 </Project>

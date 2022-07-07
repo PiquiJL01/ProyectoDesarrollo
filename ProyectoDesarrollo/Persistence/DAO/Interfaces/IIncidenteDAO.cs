@@ -14,6 +14,8 @@ namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
         IEnumerable<IncidenteDTO> Select();
         IEnumerable<IncidenteDTO> Select(string id);
         //List<IncidenteDTO> GetIncidentesById(string id);
+        public List<IncidenteDTO> DeleteIncidente(string id);
+
     }
 }
 

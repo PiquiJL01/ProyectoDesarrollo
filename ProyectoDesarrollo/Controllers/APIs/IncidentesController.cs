@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Exceptions;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Persistence.DataBase;
 using ProyectoDesarrollo.Persistence.Entidades;
+using ProyectoDesarrollo.Response;
 
 namespace ProyectoDesarrollo.Controllers.APIs
 {
@@ -15,6 +19,16 @@ namespace ProyectoDesarrollo.Controllers.APIs
     [ApiController]
     public class IncidentesController : ControllerBase
     {
+        private readonly IIncidenteDAO _incidenteDAO;
+        private readonly ILogger<IncidentesController> _logger;
+
+        public IncidentesController(ILogger<IncidentesController> logger, IIncidenteDAO incidenteDao)
+        {
+            _incidenteDAO = incidenteDao;
+            _logger = logger;
+
+        }
+
         private readonly DataBaseContext _context;
 
         public IncidentesController(DataBaseContext context)
@@ -101,8 +115,25 @@ namespace ProyectoDesarrollo.Controllers.APIs
 
         // DELETE: api/Incidentes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteIncidente(string id)
+        public ApplicationResponse<List<IncidenteDTO>> DeleteIncidente(string id)
         {
+            var response = new ApplicationResponse<List<IncidenteDTO>>();
+            try
+            {
+                response.Data = _incidenteDAO.DeleteIncidente(id);
+            }
+            catch (ProyectoException ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+                response.Exception = ex.Excepcion.ToString();
+            }
+
+            return response;
+        }
+        /*public async Task<IActionResult> DeleteIncidente(string id)
+        {
+
             var incidente = await _context.Incidentes.FindAsync(id);
             if (incidente == null)
             {
@@ -113,7 +144,7 @@ namespace ProyectoDesarrollo.Controllers.APIs
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool IncidenteExists(string id)
         {
