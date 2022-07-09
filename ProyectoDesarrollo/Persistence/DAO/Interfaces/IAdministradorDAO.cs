@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class IAdministradorDAO
+    public interface IAdministradorDAO
     {
-        public IAdministradorDAO()
-        {
-        }
+        public List<UsuarioDTO> GetAdministradores();
     }
 }
 

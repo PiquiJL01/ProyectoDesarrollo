@@ -35,7 +35,12 @@
     <None Remove="Persistence\DAO\Interfaces\" />
     <None Remove="Persistence\DAO\Implementations\" />
     <None Remove="BussinesLogic\DTOs\" />
-    <None Remove="Response\" />
+    <None Remove="Controllers\Administrador\" />
+    <None Remove="Persistence\DAO\Implementaciones\" />
+    <None Remove="Controllers\Cotizacion\" />
+    <None Remove="Controllers\Perito\" />
+    <None Remove="Controllers\Incidente\" />
+    <None Remove="Controllers\Taller\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\Entidades\" />
@@ -43,6 +48,11 @@
     <Folder Include="Persistence\DAO\Interfaces\" />
     <Folder Include="Persistence\DAO\Implementations\" />
     <Folder Include="BussinesLogic\DTOs\" />
-    <Folder Include="Response\" />
+    <Folder Include="Controllers\Administrador\" />
+    <Folder Include="Persistence\DAO\Implementaciones\" />
+    <Folder Include="Controllers\Cotizacion\" />
+    <Folder Include="Controllers\Perito\" />
+    <Folder Include="Controllers\Incidente\" />
+    <Folder Include="Controllers\Taller\" />
   </ItemGroup>
 </Project>

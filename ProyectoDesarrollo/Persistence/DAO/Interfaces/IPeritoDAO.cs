@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class IPeritoDAO
+    public interface IPeritoDAO
     {
-        public IPeritoDAO()
-        {
-        }
+        public List<UsuarioDTO> GetPeritos();
     }
 }
 

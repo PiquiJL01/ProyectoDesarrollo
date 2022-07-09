@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class ITallerDAO
+    public interface ITallerDAO
     {
-        public ITallerDAO()
-        {
-        }
+        public List<TallerDTO> GetTalleres();
     }
+}
 }
 

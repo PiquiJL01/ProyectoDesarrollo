@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class ICotizacionDAO
+    public interface ICotizacionDAO
     {
-        public ICotizacionDAO()
-        {
-        }
+        public List<IncidenteDTO> GetCotizacionesByIncidente(string incidente);
     }
 }
 
