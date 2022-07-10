@@ -12,11 +12,11 @@ namespace ProyectoDesarrollo.Controllers.APIs
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdministradorsController : ControllerBase
+    public class AdministradoresController : ControllerBase
     {
         private readonly DataBaseContext _context;
 
-        public AdministradorsController(DataBaseContext context)
+        public AdministradoresController(DataBaseContext context)
         {
             _context = context;
         }

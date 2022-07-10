@@ -48,11 +48,6 @@
     <Folder Include="Persistence\DAO\Interfaces\" />
     <Folder Include="Persistence\DAO\Implementations\" />
     <Folder Include="BussinesLogic\DTOs\" />
-    <Folder Include="Controllers\Administrador\" />
     <Folder Include="Persistence\DAO\Implementaciones\" />
-    <Folder Include="Controllers\Cotizacion\" />
-    <Folder Include="Controllers\Perito\" />
-    <Folder Include="Controllers\Incidente\" />
-    <Folder Include="Controllers\Taller\" />
   </ItemGroup>
 </Project>

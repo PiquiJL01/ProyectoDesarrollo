@@ -10,6 +10,8 @@ using ProyectoDesarrollo.Persistence.Entidades;
 
 namespace ProyectoDesarrollo.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class PropietariosController : Controller
     {
         private readonly DataBaseContext _context;

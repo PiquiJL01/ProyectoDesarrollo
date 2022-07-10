@@ -7,27 +7,29 @@ using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Responses;
 
-namespace ProyectoDesarrollo.Controllers.Taller
+namespace ProyectoDesarrollo.Controllers
 {
-    public class TallerController : Controller
+    [Route("[controller]")]
+    [ApiController]
+    public class AdministradorController : Controller
     {
-        private readonly ITallerDAO _TallerDAO;
-        private readonly ILogger<TallerController> _logger;
+        private readonly IAdministradorDAO _administradorDAO;
+        private readonly ILogger<AdministradorController> _logger;
 
-        public TallerController(ILogger<TallerController> logger, ITallerDAO TallerDAO)
+        public AdministradorController(ILogger<AdministradorController> logger, IAdministradorDAO administradorDAO)
         {
-            _TallerDAO = TallerDAO;
+            _administradorDAO = administradorDAO;
             _logger = logger;
         }
 
 
-        [HttpGet("Taller")]
-        public ApplicationResponse<List<TallerDTO>> GetTalleres()
+        [HttpGet]
+        public ApplicationResponse<List<UsuarioDTO>> GetAdministradores()
         {
-            var response = new ApplicationResponse<List<TallerDTO>>();
+            var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
             {
-                response.Data = _TallerDAO.GetTalleres();
+                response.Data = _administradorDAO.GetAdministradores();
             }
             catch (ProyectoException ex)
             {

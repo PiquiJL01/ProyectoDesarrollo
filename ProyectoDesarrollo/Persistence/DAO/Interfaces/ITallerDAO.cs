@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
     public interface ITallerDAO
@@ -9,5 +10,5 @@ namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
         public List<TallerDTO> GetTalleres();
     }
 }
-}
+
 

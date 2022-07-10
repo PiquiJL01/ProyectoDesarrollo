@@ -8,8 +8,10 @@ using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using ProyectoDesarrollo.Responses;
 
-namespace ProyectoDesarrollo.Controllers.Cotizacion
+namespace ProyectoDesarrollo.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class CotizacionController : Controller
     {
         private readonly ICotizacionDAO _cotizacionDAO;
@@ -23,7 +25,7 @@ namespace ProyectoDesarrollo.Controllers.Cotizacion
 
 
         [HttpGet("cotizaciones/{incidente}")]
-        public ApplicationResponse<List<IncidenteDTO>> GetCotizacionesByIncidente([Required][FromRoute]  string incidente)
+        public ApplicationResponse<List<IncidenteDTO>> GetCotizacionesByIncidente([Required][FromRoute] string incidente)
         {
             var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
