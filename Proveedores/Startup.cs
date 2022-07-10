@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ProyectoDesarrollo.Persistence.Data;
 using ProyectoDesarrollo.Persistence.DataBase;
 
 namespace Proveedores
