@@ -41,9 +41,9 @@ namespace ProyectoDesarrollo.Controllers
         }*/
 
         [HttpGet]
-        public List<AdministradorDTO> GetAdministradoresDtos()
+        public string GetAdministradoresDtos()
         {
-            return _administradorDAO.Select();
+            return "prueba";
         }
     }
 }
