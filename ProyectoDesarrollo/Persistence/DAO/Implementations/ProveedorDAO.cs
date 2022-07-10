@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -16,7 +17,7 @@ public class ProveedorDAO: DAO<ProveedorDTO>
     }
 
 
-    public override IEnumerable<ProveedorDTO> Select()
+    public override List<ProveedorDTO> Select()
     {
         throw new NotImplementedException();
     }

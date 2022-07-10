@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Entidades;
 using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
@@ -16,9 +17,9 @@ namespace ProyectoDesarrollo.Controllers
         private readonly IAdministradorDAO _administradorDAO;
         private readonly ILogger<AdministradorController> _logger;
 
-        public AdministradorController(ILogger<AdministradorController> logger, IAdministradorDAO administradorDAO)
+        public AdministradorController(ILogger<AdministradorController> logger, IAdministradorDAO administradorDao)
         {
-            _administradorDAO = administradorDAO;
+            _administradorDAO = administradorDao;
             _logger = logger;
         }
 
@@ -39,8 +40,6 @@ namespace ProyectoDesarrollo.Controllers
             }
             return response;
         }
-
-
     }
 }
 

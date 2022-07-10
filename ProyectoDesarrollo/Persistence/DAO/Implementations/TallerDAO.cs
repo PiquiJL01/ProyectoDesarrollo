@@ -5,20 +5,48 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using ProyectoDesarrollo.Exceptions;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
 
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class TallerDAO: DAO<TallerDTO>
+public class TallerDAO: DAO<TallerDTO>, ITallerDAO
 {
     public TallerDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
 
     }
 
-    public override IEnumerable<TallerDTO> Select()
+    public override List<TallerDTO> Select()
     {
         throw new NotImplementedException();
+    }
+
+    //Get Talleres
+    public List<TallerDTO> GetTalleres()
+    {
+        try
+        {
+            var data = _dataBaseContext.Talleres
+                .Include(b => b.Id_Taller)
+                .Select(b => new TallerDTO
+                {
+                    Id_Taller = b.Id_Taller,
+                    Name = b.Name,
+                    Address = b.Address,
+                    PhoneNumber = b.PhoneNumber,
+                });
+
+            return data.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ProyectoException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                , ex.Message, ex);
+        }
     }
 
     public override TallerDTO Select(string Id_Taller)

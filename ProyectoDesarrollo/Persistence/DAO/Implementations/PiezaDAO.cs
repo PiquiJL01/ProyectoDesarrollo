@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -16,7 +17,7 @@ public class PiezaDAO: DAO<PiezaDTO>
 
     }
 
-    public override IEnumerable<PiezaDTO> Select()
+    public override List<PiezaDTO> Select()
     {
         throw new NotImplementedException();
     }

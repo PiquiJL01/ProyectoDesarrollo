@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Implementations;
-using RCVUcab;
+using ProyectoDesarrollo.Responses;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,7 +30,7 @@ namespace Talleres.Controllers.APIs
             {
                 response.Data = _incidenteDao.Select();
             }
-            catch (Exception e)
+            catch (ProyectoException e)
             {
                 response.Error(e);
             }

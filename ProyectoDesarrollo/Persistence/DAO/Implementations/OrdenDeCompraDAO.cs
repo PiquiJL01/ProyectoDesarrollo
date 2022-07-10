@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -14,7 +15,7 @@ public class OrdenDeCompraDAO: DAO<OrdenDeCompraDTO>
     {
     }
 
-    public override IEnumerable<OrdenDeCompraDTO> Select()
+    public override List<OrdenDeCompraDTO> Select()
     {
         throw new NotImplementedException();
     }

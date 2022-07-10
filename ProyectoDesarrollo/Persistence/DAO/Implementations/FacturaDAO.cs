@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -26,7 +27,7 @@ public class FacturaDAO: DAO<FacturaDTO>
         return data.ToList();
     }
 
-    public override IEnumerable<FacturaDTO> Select()
+    public override List<FacturaDTO> Select()
     {
         throw new NotImplementedException();
     }

@@ -8,18 +8,19 @@ using ProyectoDesarrollo.Persistence.DAO.Interfaces;
 using System.Threading.Tasks;
 using System.Linq;
 using ProyectoDesarrollo.Exceptions;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
 
-public class IncidenteDAO : DAO<IncidenteDTO>
+public class IncidenteDAO : DAO<IncidenteDTO>, IIncidenteDAO
 {
     public IncidenteDAO(DataBaseContext context):base(context)
     {
 
     }
 
-    public override IEnumerable<IncidenteDTO> Select()
+    public override List<IncidenteDTO> Select()
     {
         return new List<IncidenteDTO>();
     }
@@ -87,5 +88,40 @@ public class IncidenteDAO : DAO<IncidenteDTO>
         var itemToRemove = Context().Incidentes.Find(incidenteDto.ID);
         Context().Incidentes.Remove(itemToRemove);
         Context().SaveChanges();
+    }
+
+    //Get Incidentes
+    public List<AdministradorDTO> GetIncidentesByAdministrador(string administrador)
+    {
+        try
+        {
+            var data = _dataBaseContext.Administradores
+                .Include(b => b.Incidente)
+                .Where(b => b.Id_Admin == administrador)
+                .Select(b => new AdministradorDTO
+                {
+                    Id_Admin = b.Id,
+                    Incidente = b.Incidente.Select(p => new IncidenteDTO
+                    {
+                        ID = p.ID,
+                        Ubicacion = p.Ubicacion,
+                        Fecha = p.Fecha,
+                        VehiculoIncidenteTaller = p.VehiculoIncidenteTaller.Select(w => new VehiculoIncidenteTallerDTO
+                        {
+                            Id_Vehiculo = w.Id_Vehiculo,
+                            Id_Pieza = w.Id_Pieza
+
+                        }).ToList()
+
+                    }).ToList()
+                });
+
+            return data.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ProyectoException("Ha ocurrido un error al intentar consultar la lista de Incidentes: "
+                , ex.Message, ex);
+        }
     }
 }

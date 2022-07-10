@@ -8,9 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+using ProyectoDesarrollo.Persistence.DAO.Implementations;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
+using ProyectoDesarrollo.Persistence.Entidades;
 
 namespace ProyectoDesarrollo
 {
@@ -28,6 +34,14 @@ namespace ProyectoDesarrollo
         {
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IDataBaseContext, DataBaseContext>();
+            services.AddTransient<IAdministradorDAO, AdministradorDAO>();
+            services.AddTransient<ICotizacionDAO, CotizacionDAO>();
+            services.AddTransient<IIncidenteDAO, IncidenteDAO>();
+            services.AddTransient<IPeritoDAO, PeritoDAO>();
+            services.AddTransient<IPropietarioDAO, PropietarioDAO>();
+            services.AddTransient<ITallerDAO, TallerDAO>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -52,7 +66,9 @@ namespace ProyectoDesarrollo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseSwagger();

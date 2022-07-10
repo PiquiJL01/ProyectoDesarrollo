@@ -1,11 +1,11 @@
 ﻿using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class IPolizaDAO
+    public interface IPolizaDAO : IDAO<PolizaDTO>
     {
-        public IPolizaDAO()
-        {
-        }
+
     }
 }
 

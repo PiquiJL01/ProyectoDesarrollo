@@ -1,11 +1,11 @@
 ﻿using System;
+using ProyectoDesarrollo.BussinesLogic.DTOs;
+
 namespace ProyectoDesarrollo.Persistence.DAO.Interfaces
 {
-    public class IPropietarioDAO
+    public interface IPropietarioDAO : IDAO<PropietarioDTO>
     {
-        public IPropietarioDAO()
-        {
-        }
+
     }
 }
 

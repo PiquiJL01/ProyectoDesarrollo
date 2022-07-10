@@ -9,7 +9,7 @@ using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
 {
-    [Route("[controller]")]
+    /*[Route("[controller]")]
     [ApiController]
     public class PeritoController : Controller
     {
@@ -41,6 +41,6 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-    }
+    }*/
 }
 

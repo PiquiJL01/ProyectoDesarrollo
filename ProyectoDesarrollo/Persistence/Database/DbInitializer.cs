@@ -1,6 +1,7 @@
 ﻿using ProyectoDesarrollo.Persistence.Entidades;
 using System;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DataBase
 {

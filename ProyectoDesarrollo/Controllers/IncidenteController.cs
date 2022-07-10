@@ -9,7 +9,7 @@ using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
 {
-    [Route("[controller]")]
+    /*[Route("[controller]")]
     [ApiController]
     public class IncidenteController : Controller
     {
@@ -23,7 +23,7 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-        [HttpGet("Incidentes")]
+        [HttpGet]
         public ApplicationResponse<List<AdministradorDTO>> GetIncidentesByAdministrador(string administrador)
         {
             var response = new ApplicationResponse<List<AdministradorDTO>>();
@@ -41,6 +41,6 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-    }
+    }*/
 }
 

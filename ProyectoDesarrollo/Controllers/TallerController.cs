@@ -9,7 +9,7 @@ using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
 {
-    [Route("[controller]")]
+    /*[Route("[controller]")]
     [ApiController]
     public class TallerController : Controller
     {
@@ -23,13 +23,13 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-        [HttpGet("Taller")]
+        [HttpGet]
         public ApplicationResponse<List<TallerDTO>> GetTalleres()
         {
             var response = new ApplicationResponse<List<TallerDTO>>();
             try
             {
-                response.Data = _TallerDAO.GetTalleres();
+                response.Data = _TallerDAO.Select();
             }
             catch (ProyectoException ex)
             {
@@ -41,6 +41,6 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-    }
+    }*/
 }
 

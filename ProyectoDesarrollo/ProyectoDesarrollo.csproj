@@ -45,9 +45,7 @@
   <ItemGroup>
     <Folder Include="Persistence\Entidades\" />
     <Folder Include="Persistence\Data\" />
-    <Folder Include="Persistence\DAO\Interfaces\" />
     <Folder Include="Persistence\DAO\Implementations\" />
     <Folder Include="BussinesLogic\DTOs\" />
-    <Folder Include="Persistence\DAO\Implementaciones\" />
   </ItemGroup>
 </Project>

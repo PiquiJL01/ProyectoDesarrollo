@@ -5,6 +5,7 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
@@ -14,7 +15,7 @@ public class UsuarioDAO: DAO<UsuarioDTO>
     {
 
     }
-    public override IEnumerable<UsuarioDTO> Select()
+    public override List<UsuarioDTO> Select()
     {
         throw new NotImplementedException();
     }

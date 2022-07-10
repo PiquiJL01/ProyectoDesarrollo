@@ -5,17 +5,21 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using ProyectoDesarrollo.Exceptions;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PeritoDAO: DAO<PeritoDTO>
+public class PeritoDAO: DAO<PeritoDTO>, IPeritoDAO
 {
     public PeritoDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
 
     }
 
-    public override IEnumerable<PeritoDTO> Select()
+    public override List<PeritoDTO> Select()
     {
         throw new NotImplementedException();
     }
@@ -54,5 +58,29 @@ public class PeritoDAO: DAO<PeritoDTO>
         var ItemToRemove  = Context().Peritos.Find(peritoDto.Id_Perito);
         Context().Peritos.Remove(ItemToRemove);
         Context().SaveChanges();
+    }
+
+    //Get Peritoes
+    public List<UsuarioDTO> GetPeritos()
+    {
+        try
+        {
+            var data = _dataBaseContext.Usuarios
+                .Include(b => b.Id)
+                .Where(b => b.Rol == Entidades.RolName.Perito)
+                .Select(b => new UsuarioDTO
+                {
+                    Id = b.Id,
+                    Nombre = b.Nombre,
+                    Apellido = b.Apellido,
+                });
+
+            return data.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ProyectoException("Ha ocurrido un error al intentar consultar la lista de Peritos: "
+                , ex.Message, ex);
+        }
     }
 }

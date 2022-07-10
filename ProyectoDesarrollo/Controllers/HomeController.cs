@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoDesarrollo.Controllers
 {
-    [Route("[controller]")]
+    /*[Route("[controller]")]
     [ApiController]
     public class HomeController : Controller
     {
@@ -35,5 +35,5 @@ namespace ProyectoDesarrollo.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+    }*/
 }

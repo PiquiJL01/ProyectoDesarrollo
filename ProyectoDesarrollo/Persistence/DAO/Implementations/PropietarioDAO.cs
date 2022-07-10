@@ -5,18 +5,20 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
 
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class PropietarioDAO: DAO<PropietarioDTO>
+public class PropietarioDAO: DAO<PropietarioDTO>, IPropietarioDAO
 {
     public PropietarioDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
     {
 
     }
 
-    public override IEnumerable<PropietarioDTO> Select()
+    public override List<PropietarioDTO> Select()
     {
         throw new NotImplementedException();
     }

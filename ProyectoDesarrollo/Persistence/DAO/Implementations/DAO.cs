@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
 using ProyectoDesarrollo.Persistence.DataBase;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
@@ -19,7 +20,7 @@ public abstract class DAO<T>: IDAO<T>
         _dataBaseContext = dataBaseContext;
     }
 
-    public abstract IEnumerable<T> Select();
+    public abstract List<T> Select();
     public abstract T Select(string id);
 
     public abstract void Insert(T entity);

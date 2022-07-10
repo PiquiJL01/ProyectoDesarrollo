@@ -5,10 +5,14 @@ using System;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using ProyectoDesarrollo.Exceptions;
+using ProyectoDesarrollo.Persistence.DAO.Interfaces;
+using ProyectoDesarrollo.Persistence.Data;
 
 namespace ProyectoDesarrollo.Persistence.DAO.Implementations;
 
-public class AdministradorDAO : DAO<AdministradorDTO>
+public class AdministradorDAO : DAO<AdministradorDTO>, IAdministradorDAO
 {
 
     public AdministradorDAO(DataBaseContext dataBaseContext):base(dataBaseContext)
@@ -16,9 +20,33 @@ public class AdministradorDAO : DAO<AdministradorDTO>
     } 
 
       
- public override IEnumerable<AdministradorDTO> Select()
+    public override List<AdministradorDTO> Select()
     {
         throw new NotImplementedException();
+    }
+
+    //Get Administradores
+    public List<UsuarioDTO> GetAdministradores()
+    {
+        try
+        {
+            var data = _dataBaseContext.Usuarios
+                .Include(b => b.Id)
+                .Where(b => b.Rol == Entidades.RolName.Administrador)
+                .Select(b => new UsuarioDTO
+                {
+                    Id = b.Id,
+                    Nombre = b.Nombre,
+                    Apellido = b.Apellido,
+                });
+
+            return data.ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new ProyectoException("Ha ocurrido un error al intentar consultar la lista de administradores: "
+                , ex.Message, ex);
+        }
     }
 
     public override AdministradorDTO Select(String id)

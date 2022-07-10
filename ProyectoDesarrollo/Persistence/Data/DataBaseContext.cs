@@ -4,12 +4,24 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
 
-namespace ProyectoDesarrollo.Persistence.DataBase
+namespace ProyectoDesarrollo.Persistence.Data
 {
-    public partial class DataBaseContext : DbContext
+    public partial class DataBaseContext : DbContext,IDataBaseContext
     {
+        public DataBaseContext()
+        {
+        }
+
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
+        }
+
+        public DbContext DbContext
+        {
+            get
+            {
+                return this;
+            }
         }
 
         //public DbSet<Class> Classes { get; set; }
