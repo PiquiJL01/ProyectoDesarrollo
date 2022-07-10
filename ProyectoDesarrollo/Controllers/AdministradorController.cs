@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using ProyectoDesarrollo.BussinesLogic.DTOs;
 using ProyectoDesarrollo.Exceptions;
 using ProyectoDesarrollo.Persistence.DAO.Interfaces;
-using ProyectoDesarrollo.Persistence.Entidades;
 using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
@@ -24,8 +23,8 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-        [HttpGet]
-        public ApplicationResponse<List<UsuarioDTO>> GetAdministradores()
+        /*[HttpGet]
+        public List<UsuarioDTO> GetAdministradores()
         {
             var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
@@ -38,7 +37,13 @@ namespace ProyectoDesarrollo.Controllers
                 response.Message = ex.Message;
                 response.Exception = ex.Excepcion.ToString();
             }
-            return response;
+            return response.Data;
+        }*/
+
+        [HttpGet]
+        public List<AdministradorDTO> GetAdministradoresDtos()
+        {
+            return _administradorDAO.Select();
         }
     }
 }

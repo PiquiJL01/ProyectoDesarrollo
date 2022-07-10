@@ -10,7 +10,7 @@ using ProyectoDesarrollo.Responses;
 
 namespace ProyectoDesarrollo.Controllers
 {
-    [Route("[controller]")]
+    /*[Route("[controller]")]
     [ApiController]
     public class CotizacionController : Controller
     {
@@ -42,6 +42,6 @@ namespace ProyectoDesarrollo.Controllers
         }
 
 
-    }
+    }*/
 }
 
