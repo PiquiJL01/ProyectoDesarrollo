@@ -1,16 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using ProyectoDesarrollo.Persistence.DAO.Implementations;
-using ProyectoDesarrollo.Persistence.DAO.Interfaces;
-using ProyectoDesarrollo.Persistence.Data;
-using ProyectoDesarrollo.Persistence.Entidades;
+using RCVUcab.Persistence.DAOs.Implementations;
+using RCVUcab.Persistence.DAOs.Interfaces;
+using RCVUcab.Persistence.Database;
 
-namespace ProyectoDesarrollo
+namespace RCVUcab
 {
     public class Startup
     {
@@ -24,9 +23,13 @@ namespace ProyectoDesarrollo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllers();
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IRCVDbContext, RCVDbContext>();
+            services.AddTransient<IProviderDAO, ProviderDAO>();
             services.AddTransient<IDataBaseContext, DataBaseContext>();
             services.AddTransient<IAdministradorDAO, AdministradorDAO>();
             services.AddTransient<ICotizacionDAO, CotizacionDAO>();
@@ -35,14 +38,12 @@ namespace ProyectoDesarrollo
             services.AddTransient<IPropietarioDAO, PropietarioDAO>();
             services.AddTransient<ITallerDAO, TallerDAO>();
 
-            services.AddDatabaseDeveloperPageExceptionFilter();
-
             services.AddControllersWithViews();
-
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProyectoDesarrollo", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RCVUcab", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +52,7 @@ namespace ProyectoDesarrollo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -67,7 +69,7 @@ namespace ProyectoDesarrollo
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProyectoDesarrollo");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RCVUcab");
             });
 
             app.UseRouting();
@@ -76,9 +78,7 @@ namespace ProyectoDesarrollo
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
