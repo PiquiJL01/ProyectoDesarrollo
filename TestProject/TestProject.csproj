@@ -42,13 +42,19 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
+    <None Remove="RCVUcab\" />
+    <None Remove="RCVUcab\UnitTests\" />
+    <None Remove="RCVUcab\UnitTests\Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProyectoDesarrollo\ProyectoDesarrollo.csproj" />
+    <ProjectReference Include="..\RCVUcab\RCVUcab.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ProyectoDesarrollo\" />
+    <Folder Include="RCVUcab\" />
+    <Folder Include="RCVUcab\UnitTests\" />
+    <Folder Include="RCVUcab\UnitTests\Controllers\" />
   </ItemGroup>
 </Project>
