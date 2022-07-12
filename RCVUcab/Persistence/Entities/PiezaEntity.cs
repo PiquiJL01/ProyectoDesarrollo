@@ -16,7 +16,7 @@ namespace RCVUcab.Persistence.Entities
         public string ID { get; set; } = null!;
         [Required]
         public string Name { get; set; } = null!;
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
 
         public ICollection<PiezaCotizacionEntity> PiezaCotizacion { get; set; } = null!;

@@ -16,10 +16,10 @@ namespace RCVUcab.Persistence.Entities
         public string CedulaRif { get; set; } = null!;
         [Required]
         public string PrimerNombre { get; set; } = null!;
-        public string? SegundoNombre { get; set; }
+        public string SegundoNombre { get; set; }
         [Required]
         public string PrimerApellido { get; set; } = null!;
-        public string? SegundoApellido { get; set; }
+        public string SegundoApellido { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Nacimiento")]

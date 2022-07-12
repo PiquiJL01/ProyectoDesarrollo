@@ -59,19 +59,22 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             Context().SaveChanges();
         }
 
-        //Get Peritoes
+        //Get Peritos
         public List<UsuarioDTO> GetPeritos()
         {
             try
             {
                 var data = _dataBaseContext.Usuarios
-                    .Include(b => b.Id)
                     .Where(b => b.Rol == RolName.Perito)
                     .Select(b => new UsuarioDTO
                     {
                         Id = b.Id,
                         Nombre = b.Nombre,
                         Apellido = b.Apellido,
+                        Telefono = b.Telefono,
+                        Email = b.Email,
+                        Direccion = b.Direccion,
+                        BirthDate = b.BirthDate
                     });
 
                 return data.ToList();

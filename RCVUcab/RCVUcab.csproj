@@ -24,4 +24,10 @@
     <PackageReference Include="System.ServiceModel.Web" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Controllers\Perito\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Perito\" />
+  </ItemGroup>
 </Project>
