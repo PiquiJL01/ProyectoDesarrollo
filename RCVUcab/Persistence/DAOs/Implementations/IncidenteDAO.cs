@@ -12,7 +12,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 {
     public class IncidenteDAO : DAO<IncidenteDTO>, IIncidenteDAO
     {
-        public IncidenteDAO(DataBaseContext context) : base(context)
+        public IncidenteDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {
 
         }
@@ -47,8 +47,8 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             }
             catch (Exception ex)
             {
-                throw new RCVException(
-                    id, ex.Message, ex);
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de proveedores para la marca: "
+                  + id, ex.Message, ex);
             }
 
         }
@@ -87,31 +87,20 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             Context().SaveChanges();
         }
 
-        //Get Incidentes
-        public List<AdministradorDTO> GetIncidentesByAdministrador(string administrador)
+        //Get Incidentes - PROBADO
+        public List<IncidenteDTO> GetIncidentesByAdministrador(string administrador)
         {
             try
             {
-                var data = _dataBaseContext.Administradores
-                    .Include(b => b.Incidente)
-                    .Where(b => b.Id_Admin == administrador)
-                    .Select(b => new AdministradorDTO
+                var data = _dataBaseContext.Incidentes
+                    .Where(b => b.Id_Administrador == administrador)
+                    .Select(b => new IncidenteDTO
                     {
-                        Id_Admin = b.Id,
-                        Incidente = b.Incidente.Select(p => new IncidenteDTO
-                        {
-                            ID = p.ID,
-                            Ubicacion = p.Ubicacion,
-                            Fecha = p.Fecha,
-                            VehiculoIncidenteTaller = p.VehiculoIncidenteTaller.Select(w =>
-                                new VehiculoIncidenteTallerDTO
-                                {
-                                    Id_Vehiculo = w.Id_Vehiculo,
-                                    Id_Pieza = w.Id_Pieza
-
-                                }).ToList()
-
-                        }).ToList()
+                        Id_Administrador = administrador,
+                        ID = b.ID,
+                        Ubicacion = b.Ubicacion,
+                        Fecha = b.Fecha,
+                        Id_Perito = b.Id_Perito
                     });
 
                 return data.ToList();

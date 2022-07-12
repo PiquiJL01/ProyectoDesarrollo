@@ -5,7 +5,7 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
 {
     public interface IIncidenteDAO
     {
-        public List<AdministradorDTO> GetIncidentesByAdministrador(string administrador);
+        public List<IncidenteDTO> GetIncidentesByAdministrador(string administrador);
     }
 }
 
