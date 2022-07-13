@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RCVUcab.BussinesLogic.DTOs;
@@ -10,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RCVUcab.Controllers.Administracion
 {
     [ApiController]
-    [Route("Administracion")]
+    [Route("Administracion/[controller]")]
     public class AdministradorController : Controller
     {
         private readonly IAdministradorDAO _administradorDAO;
@@ -22,7 +23,7 @@ namespace RCVUcab.Controllers.Administracion
             _logger = logger;
         }
 
-        [HttpGet("[controller]")]
+        [HttpGet]
         public ApplicationResponse<List<UsuarioDTO>> GetAdministradores()
         {
             var response = new ApplicationResponse<List<UsuarioDTO>>();
@@ -32,9 +33,7 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
             return response;
         }
