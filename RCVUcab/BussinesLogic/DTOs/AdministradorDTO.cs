@@ -2,7 +2,7 @@
 
 namespace RCVUcab.BussinesLogic.DTOs
 {
-    public class AdministradorDTO
+    public class AdministradorDTO : UsuarioDTO
     {
             public string Id_Admin { get; set; }
 
