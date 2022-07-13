@@ -13,5 +13,16 @@ namespace RCVUcab.Responses
         public T Data { get; set; }
         public bool Success { get; set; } = true;
         public string Exception { get; set; }
+
+        /// <summary>
+        /// Maneja los errores de las repuestas de los controladores
+        /// </summary>
+        /// <param name="exception">Error obtenido por el comando ejecutado</param>
+        public void Error(Exception exception)
+        {
+            Success = false;
+            Message = exception.Message;
+            Exception = exception.ToString();
+        }
     }
 }
