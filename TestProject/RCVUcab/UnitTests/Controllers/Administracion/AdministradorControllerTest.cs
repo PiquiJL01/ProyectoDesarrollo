@@ -13,7 +13,7 @@ using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;
 using Xunit;
 
-namespace TestProject.RCVUcab.UnitTests.Controllers
+namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
 {
     public class AdministradorControllerTest
     {
@@ -59,4 +59,3 @@ namespace TestProject.RCVUcab.UnitTests.Controllers
         }
     }
 }
-

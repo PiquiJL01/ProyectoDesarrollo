@@ -45,6 +45,7 @@
     <None Remove="RCVUcab\" />
     <None Remove="RCVUcab\UnitTests\" />
     <None Remove="RCVUcab\UnitTests\Controllers\" />
+    <None Remove="RCVUcab\UnitTests\Controllers\Administracion\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,5 +57,6 @@
     <Folder Include="RCVUcab\" />
     <Folder Include="RCVUcab\UnitTests\" />
     <Folder Include="RCVUcab\UnitTests\Controllers\" />
+    <Folder Include="RCVUcab\UnitTests\Controllers\Administracion\" />
   </ItemGroup>
 </Project>
