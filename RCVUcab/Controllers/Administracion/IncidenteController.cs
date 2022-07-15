@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RCVUcab.BussinesLogic.DTOs;
+using RCVUcab.Exceptions;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;
 
@@ -21,7 +22,7 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpPost]
-        public ApplicationResponse<IncidenteDTO> PostAdministrador([FromBody] IncidenteDTO IncidenteDto)
+        public ApplicationResponse<IncidenteDTO> PostIncidente([FromBody] IncidenteDTO IncidenteDto)
         {
             var response = new ApplicationResponse<IncidenteDTO>()
             {
@@ -32,7 +33,7 @@ namespace RCVUcab.Controllers.Administracion
             {
                 _IncidenteDao.Insert(IncidenteDto);
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
                 response.Error(ex);
             }
