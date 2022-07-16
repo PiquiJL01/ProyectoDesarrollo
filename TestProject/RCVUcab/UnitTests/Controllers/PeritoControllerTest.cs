@@ -19,13 +19,13 @@ namespace TestProject.RCVUcab.UnitTests.Controllers
     {
 
         private readonly PeritoController _controller;
-        private readonly Mock<IPeritoDAO> _serviceMock;
+        private readonly Mock<IUsuarioDAO> _serviceMock;
         private readonly Mock<ILogger<PeritoController>> _loggerMock;
 
         public PeritoControllerTest()
         {
             _loggerMock = new Mock<ILogger<PeritoController>>();
-            _serviceMock = new Mock<IPeritoDAO>();
+            _serviceMock = new Mock<IUsuarioDAO>();
             _controller = new PeritoController(_loggerMock.Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();

@@ -18,13 +18,13 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
     public class AdministradorControllerTest
     {
         private readonly AdministradorController _controller;
-        private readonly Mock<IAdministradorDAO> _serviceMock;
+        private readonly Mock<IUsuarioDAO> _serviceMock;
         private readonly Mock<ILogger<AdministradorController>> _loggerMock;
 
         public AdministradorControllerTest()
         {
             _loggerMock = new Mock<ILogger<AdministradorController>>();
-            _serviceMock = new Mock<IAdministradorDAO>();
+            _serviceMock = new Mock<IUsuarioDAO>();
             _controller = new AdministradorController(_loggerMock.Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();

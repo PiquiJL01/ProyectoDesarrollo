@@ -46,7 +46,7 @@ namespace RCVUcab.Controllers.Administracion
             {
                 response.Data = _propietarioDao.Select(id);
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
                 response.Error((ex));
             }
@@ -55,7 +55,7 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpPost]
-        public ApplicationResponse<PropietarioDTO> PostAdministrador([FromBody] PropietarioDTO propietarioDto)
+        public ApplicationResponse<PropietarioDTO> PostPropietario([FromBody] PropietarioDTO propietarioDto)
         {
             var response = new ApplicationResponse<PropietarioDTO>()
             {
@@ -66,7 +66,7 @@ namespace RCVUcab.Controllers.Administracion
             {
                 _propietarioDao.Insert(propietarioDto);
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
                 response.Error(ex);
             }
@@ -75,7 +75,7 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpPut]
-        public ApplicationResponse<PropietarioDTO> PutAdministrador([FromBody]PropietarioDTO propietarioDto)
+        public ApplicationResponse<PropietarioDTO> PutPropietario([FromBody]PropietarioDTO propietarioDto)
         {
             var response = new ApplicationResponse<PropietarioDTO>()
             {
@@ -93,7 +93,7 @@ namespace RCVUcab.Controllers.Administracion
                     response.Error(new Exception("No existe"));
                 }
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
                 response.Error(ex);
             }
@@ -112,7 +112,7 @@ namespace RCVUcab.Controllers.Administracion
 
                 _propietarioDao.Delete(response.Data);
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
                 response.Error(ex);
             }
