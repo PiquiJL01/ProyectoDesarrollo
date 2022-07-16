@@ -12,7 +12,7 @@ namespace RCVUcab.Persistence.Entities
         }
 
 
-        public string Id_Taller { get; set; } = null!;
+        public string ID { get; set; } = null!;
         public string Name { get; set; }
         public string Address { get; set; }
         public int PhoneNumber { get; set; }

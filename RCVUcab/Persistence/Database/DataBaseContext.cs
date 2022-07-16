@@ -222,10 +222,6 @@ namespace RCVUcab.Persistence.Database
                 entity.HasOne(d => d.Administrador)
                     .WithMany(p => p.Incidente)
                     .HasForeignKey(d => d.Id_Administrador);
-
-                entity.HasOne(d => d.Perito)
-                    .WithMany(p => p.Incidente)
-                    .HasForeignKey(d => d.Id_Perito);
             });
 
 

@@ -30,10 +30,10 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             try
             {
                 var data = _dataBaseContext.Talleres
-                    .Include(b => b.Id_Taller)
+                    .Include(b => b.ID)
                     .Select(b => new TallerDTO
                     {
-                        Id_Taller = b.Id_Taller,
+                        Id_Taller = b.ID,
                         Name = b.Name,
                         Address = b.Address,
                         PhoneNumber = b.PhoneNumber,
@@ -51,10 +51,10 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         public override TallerDTO Select(string Id_Taller)
         {
             var query = Context().Talleres
-                .Where(x => x.Id_Taller == Id_Taller)
+                .Where(x => x.ID == Id_Taller)
                 .Select(x => new TallerDTO
                 {
-                    Id_Taller = x.Id_Taller,
+                    Id_Taller = x.ID,
                     Name = x.Name,
                     Address = x.Address,
                     PhoneNumber = x.PhoneNumber,
@@ -65,7 +65,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         public override void Insert(TallerDTO tallerDto)
         {
             TallerEntity taller = new TallerEntity();
-            taller.Id_Taller = tallerDto.Id_Taller;
+            taller.ID = tallerDto.Id_Taller;
             taller.Name = tallerDto.Name;
             taller.Address = tallerDto.Address;
             taller.PhoneNumber = tallerDto.PhoneNumber;
