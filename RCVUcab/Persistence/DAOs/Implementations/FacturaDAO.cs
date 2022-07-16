@@ -32,7 +32,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override FacturaDTO Select(string ID)
         {
-            var query = Context().Administradores
+            var query = Context().Usuarios
                 .Where(x => x.Id == ID)
                 .Select(x => new FacturaDTO
                 {

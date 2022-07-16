@@ -2,7 +2,7 @@
 
 namespace RCVUcab.Persistence.Entities
 {
-    public class ProveedorEntity : UsuarioEntity
+    public class ProveedorEntity
     {
         public ProveedorEntity()
         {

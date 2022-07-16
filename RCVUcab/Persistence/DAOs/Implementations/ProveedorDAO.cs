@@ -25,7 +25,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         public override ProveedorDTO Select(string Id_Proveedor)
         {
             var query = Context().Proveedores
-                .Where(p => p.Id == Id_Proveedor)
+                .Where(p => p.Id_Proveedor == Id_Proveedor)
                 .Select(p => new ProveedorDTO
                 {
                     Id_Proveedor = p.Id_Proveedor,

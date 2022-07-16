@@ -29,7 +29,7 @@ namespace RCVUcab.Persistence.Entities
         public Propietario Propietario { get; set; }*/
 
 
-        public AdministradorEntity Administrador { get; set; } = null!;
+        public UsuarioEntity Administrador { get; set; } = null!;
 
         public ICollection<PropietarioEntity> Propietario { get; set; }
     }

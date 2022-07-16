@@ -33,7 +33,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                     Email = u.Email,
                     Direccion = u.Direccion,
                     BirthDate = u.BirthDate,
-                    Rol = (UsuarioDTO.RolName)u.Rol
+                    Rol = u.Rol
                 });
             return query.First();
         }
@@ -50,7 +50,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                 Email = usuarioDto.Email,
                 Direccion = usuarioDto.Direccion,
                 BirthDate = usuarioDto.BirthDate,
-                Rol = (RolName)usuarioDto.Rol
+                Rol = usuarioDto.Rol
             };
 
             Context().Usuarios.Add(usuario);
@@ -68,7 +68,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                 Email = usuarioDTO.Email,
                 Direccion = usuarioDTO.Direccion,
                 BirthDate = usuarioDTO.BirthDate,
-                Rol = (RolName)usuarioDTO.Rol
+                Rol = usuarioDTO.Rol
             };
 
             Context().Usuarios.Update(itemToUpdate);

@@ -1,18 +1,9 @@
-﻿#nullable enable
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RCVUcab.Persistence.Entities
 {
-
-    public enum RolName
-    {
-        Administrador,
-        U_Taller,
-        U_Proveedor,
-        Perito
-    }
-
-	public class UsuarioEntity
+    public class UsuarioEntity
 	{
         public string Id { get; set; } = null!;
         public string Nombre { get; set; } = null!;
@@ -21,6 +12,9 @@ namespace RCVUcab.Persistence.Entities
         public string Email { get; set; } = null!;
         public string Direccion { get; set; } = null!;
         public DateTime BirthDate { get; set; }
-        public RolName Rol { get; set; }
+        public string Rol { get; set; }
+        public ICollection<PolizaEntity> Poliza { get; set; }
+        public ICollection<IncidenteEntity> Incidente { get; set; }
+        public ICollection<OrdenDeCompraEntity> OrdenDeCompra { get; set; }
     }
 }

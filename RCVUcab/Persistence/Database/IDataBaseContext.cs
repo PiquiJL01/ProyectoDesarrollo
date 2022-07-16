@@ -8,13 +8,11 @@ namespace RCVUcab.Persistence.Database
     {
         DbContext DbContext { get; }
 
-        DbSet<AdministradorEntity> Administradores { get; set; }
         DbSet<CotizacionEntity> Cotizaciones { get; set; }
         DbSet<FacturaEntity> Facturas { get; set; }
         DbSet<IncidenteEntity> Incidentes { get; set; }
         DbSet<MarcaEntity> Marcas { get; set; }
         DbSet<OrdenDeCompraEntity> OrdenesDeCompra { get; set; }
-        DbSet<PeritoEntity> Peritos { get; set; }
         DbSet<PiezaEntity> Piezas { get; set; }
         DbSet<PiezaCotizacionEntity> PiezasCotizaciones { get; set; }
         DbSet<PiezaMarcaEntity> PiezasMarcas { get; set; }

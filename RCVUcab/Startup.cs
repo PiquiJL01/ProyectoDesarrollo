@@ -31,10 +31,8 @@ namespace RCVUcab
             services.AddTransient<IRCVDbContext, RCVDbContext>();
             services.AddTransient<IProviderDAO, ProviderDAO>();
             services.AddTransient<IDataBaseContext, DataBaseContext>();
-            services.AddTransient<IAdministradorDAO, AdministradorDAO>();
             services.AddTransient<ICotizacionDAO, CotizacionDAO>();
             services.AddTransient<IIncidenteDAO, IncidenteDAO>();
-            services.AddTransient<IPeritoDAO, PeritoDAO>();
             services.AddTransient<IPropietarioDAO, PropietarioDAO>();
             services.AddTransient<ITallerDAO, TallerDAO>();
 

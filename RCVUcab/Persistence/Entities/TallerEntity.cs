@@ -2,7 +2,7 @@
 
 namespace RCVUcab.Persistence.Entities
 {
-    public class TallerEntity : UsuarioEntity
+    public class TallerEntity
     {
         public TallerEntity()
         {

@@ -24,8 +24,8 @@ namespace RCVUcab.Persistence.Entities
 
         public ICollection<CotizacionEntity> Cotizacion { get; set; }
 
-        public PeritoEntity Perito { get; set; }
-        public AdministradorEntity Administrador { get; set; }
+        public UsuarioEntity Perito { get; set; }
+        public UsuarioEntity Administrador { get; set; }
         
 
     }

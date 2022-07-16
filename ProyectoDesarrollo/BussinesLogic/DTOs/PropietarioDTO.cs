@@ -14,6 +14,7 @@ namespace ProyectoDesarrollo.BussinesLogic.DTOs
         [Required]
         public string PrimerApellido { get; set; } = null!;
         public string SegundoApellido { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Nacimiento")]
