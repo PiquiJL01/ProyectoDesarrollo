@@ -21,23 +21,16 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<TallerDTO> Select()
         {
-            throw new NotImplementedException();
-        }
-
-        //Get Talleres
-        public List<TallerDTO> GetTalleres()
-        {
             try
             {
-                var data = _dataBaseContext.Talleres
-                    .Include(b => b.ID)
+                var data = Context().Talleres
                     .Select(b => new TallerDTO
                     {
-                        Id_Taller = b.ID,
+                        ID = b.ID,
                         Name = b.Name,
                         Address = b.Address,
                         PhoneNumber = b.PhoneNumber,
-                    });
+                    }).ToList();
 
                 return data.ToList();
             }
@@ -48,13 +41,41 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             }
         }
 
-        public override TallerDTO Select(string Id_Taller)
+
+        //PROBADO CON MANEJO DE EXCEPTION
+        public List<TallerDTO> GetTalleresByID(string id)
+        {
+            try
+            {
+                   var data = Context().Talleres
+                    .Where(i => i.ID == id)
+                    .Select(i => new TallerDTO
+                    {
+                        ID = id,
+                        Name = i.Name,
+                        Address = i.Address,
+                        PhoneNumber = i.PhoneNumber,
+                    }).ToList();
+
+                    return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
+        }
+
+
+        public override TallerDTO Select(string IdTaller)
         {
             var query = Context().Talleres
-                .Where(x => x.ID == Id_Taller)
+                .Where(x => x.ID == IdTaller)
                 .Select(x => new TallerDTO
                 {
-                    Id_Taller = x.ID,
+                    ID = x.ID,
                     Name = x.Name,
                     Address = x.Address,
                     PhoneNumber = x.PhoneNumber,
@@ -65,7 +86,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         public override void Insert(TallerDTO tallerDto)
         {
             TallerEntity taller = new TallerEntity();
-            taller.ID = tallerDto.Id_Taller;
+            taller.ID = tallerDto.ID;
             taller.Name = tallerDto.Name;
             taller.Address = tallerDto.Address;
             taller.PhoneNumber = tallerDto.PhoneNumber;
@@ -75,7 +96,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override void Update(TallerDTO tallerDto)
         {
-            var itemToUpdate = Context().Talleres.Find(tallerDto.Id_Taller);
+            var itemToUpdate = Context().Talleres.Find(tallerDto.ID);
             itemToUpdate.Name = tallerDto.Name;
             itemToUpdate.Address = tallerDto.Address;
             itemToUpdate.PhoneNumber = tallerDto.PhoneNumber;
@@ -85,7 +106,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override void Delete(TallerDTO tallerDto)
         {
-            var itemToRemove = Context().Talleres.Find(tallerDto.Id_Taller);
+            var itemToRemove = Context().Talleres.Find(tallerDto.ID);
             Context().Talleres.Remove(itemToRemove);
             Context().SaveChanges();
         }
