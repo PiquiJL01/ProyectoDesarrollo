@@ -12,10 +12,10 @@ namespace RCVUcab.Controllers.Perito
     [Route("Perito")]
     public class PeritoController : Controller
     {
-        private readonly IPeritoDAO _PeritoDAO;
+        private readonly IUsuarioDAO _PeritoDAO;
         private readonly ILogger<PeritoController> _logger;
 
-        public PeritoController(ILogger<PeritoController> logger, IPeritoDAO PeritoDAO)
+        public PeritoController(ILogger<PeritoController> logger, IUsuarioDAO PeritoDAO)
         {
             _PeritoDAO = PeritoDAO;
             _logger = logger;

@@ -91,6 +91,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             {
                 var data = _dataBaseContext.Usuarios
                     .Include(b => b.Id)
+                    //********** REVISAR ROL **************
                     .Where(b => b.Rol == b.Rol)
                     .Select(b => new UsuarioDTO
                     {
@@ -104,6 +105,32 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             catch (Exception ex)
             {
                 throw new RCVException("Ha ocurrido un error al intentar consultar la lista de administradores: "
+                    , ex.Message, ex);
+            }
+        }
+
+
+        //Get Peritoes
+        public List<UsuarioDTO> GetPeritos()
+        {
+            try
+            {
+                var data = _dataBaseContext.Usuarios
+                    .Include(b => b.Id)
+                    //********** REVISAR ROL **************
+                    .Where(b => b.Rol == b.Rol)
+                    .Select(b => new UsuarioDTO
+                    {
+                        Id = b.Id,
+                        Nombre = b.Nombre,
+                        Apellido = b.Apellido,
+                    });
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Peritos: "
                     , ex.Message, ex);
             }
         }
