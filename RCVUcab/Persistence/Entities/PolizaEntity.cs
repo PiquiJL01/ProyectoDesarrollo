@@ -24,11 +24,6 @@ namespace RCVUcab.Persistence.Entities
         public Tipo TipoPoliza { get; set; }
         public string Id_Admin { get; set; }
 
-
-        /*[Required]
-        public Propietario Propietario { get; set; }*/
-
-
         public UsuarioEntity Administrador { get; set; } = null!;
 
         public ICollection<PropietarioEntity> Propietario { get; set; }

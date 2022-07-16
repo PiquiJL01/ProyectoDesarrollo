@@ -17,7 +17,7 @@ namespace RCVUcab.BussinesLogic.DTOs
         public Tipo TipoPoliza { get; set; }
         public string Id_Admin { get; set; }
 
-        public AdministradorDTO Administrador { get; set; } = null!;
+        public UsuarioDTO Administrador { get; set; } = null!;
 
         public List<PropietarioDTO> Propietario { get; set; }
     }

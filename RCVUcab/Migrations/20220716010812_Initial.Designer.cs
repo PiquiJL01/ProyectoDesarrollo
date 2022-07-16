@@ -12,8 +12,8 @@ using RCVUcab.Persistence.Database;
 namespace RCVUcab.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220716002912_UpdateUsuarios")]
-    partial class UpdateUsuarios
+    [Migration("20220716010812_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

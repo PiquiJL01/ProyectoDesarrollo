@@ -4,6 +4,8 @@ using System.Linq;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
+using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
@@ -80,6 +82,30 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             var itemToRemove = Context().Usuarios.Find(usuario.Id);
             Context().Usuarios.Remove(itemToRemove);
             Context().SaveChanges();
+        }
+
+        //Get Administradores
+        public List<UsuarioDTO> GetAdministradores()
+        {
+            try
+            {
+                var data = _dataBaseContext.Usuarios
+                    .Include(b => b.Id)
+                    .Where(b => b.Rol == b.Rol)
+                    .Select(b => new UsuarioDTO
+                    {
+                        Id = b.Id,
+                        Nombre = b.Nombre,
+                        Apellido = b.Apellido,
+                    });
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de administradores: "
+                    , ex.Message, ex);
+            }
         }
     }
 }
