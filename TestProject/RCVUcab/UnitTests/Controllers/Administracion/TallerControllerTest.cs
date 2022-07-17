@@ -18,17 +18,27 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
     public class TallerControllerTest
     {
         private readonly TallerController _controller;
+        private readonly TallerController _controller2;
         private readonly Mock<ITallerDAO> _serviceMock;
+        private readonly Mock<ITallerDAO> _serviceMock2;
         private readonly Mock<TallerDTO> _sMock;
+        private readonly Mock<ILogger<TallerController>> _loggerMock;
 
         public TallerControllerTest()
         {
+            _loggerMock = new Mock<ILogger<TallerController>>();
             _serviceMock = new Mock<ITallerDAO>();
+            _serviceMock2 = new Mock<ITallerDAO>();
             _sMock = new Mock<TallerDTO>();
             _controller = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
+
+            _controller2 = new TallerController(_loggerMock.Object, _serviceMock2.Object);
+            _controller2.ControllerContext = new ControllerContext();
+            _controller2.ControllerContext.HttpContext = new DefaultHttpContext();
+            _controller2.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
         }
 
 
@@ -182,6 +192,8 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
                 .Setup(i => i.GetTalleresByID(It.IsAny<string>()))
                 .Returns(new List<TallerDTO>());
 
+
+            var exist = _controller2.GetTallerById("");
             var result = _controller.PutTaller(_sMock.Object);
 
             //Assert.True(exist.Data.Equals(null));
