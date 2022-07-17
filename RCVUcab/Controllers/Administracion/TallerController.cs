@@ -79,6 +79,7 @@ namespace RCVUcab.Controllers.Administracion
             return response;
         }
 
+
         [HttpPut]
         public ApplicationResponse<TallerDTO> PutTaller([FromBody] TallerDTO TallerDto)
         {
@@ -92,10 +93,12 @@ namespace RCVUcab.Controllers.Administracion
                 if (_TallerDao.Select(TallerDto.ID) != null)
                 {
                     _TallerDao.Update(TallerDto);
+
+                    response.Message = "El taller ha sido modificado exitosamente";
                 }
                 else
                 {
-                    response.Error(new Exception("No existe"));
+                    response.Message ="No existe";
                 }
             }
             catch (RCVException ex)
