@@ -19,11 +19,15 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
     {
         private readonly TallerController _controller;
         private readonly Mock<ITallerDAO> _serviceMock;
+        private readonly Mock<ITallerDAO> _serviceMock2;
         private readonly Mock<TallerDTO> _sMock;
+        private readonly Mock<ILogger<TallerController>> _loggerMock;
 
         public TallerControllerTest()
         {
+            _loggerMock = new Mock<ILogger<TallerController>>();
             _serviceMock = new Mock<ITallerDAO>();
+            _serviceMock2 = new Mock<ITallerDAO>();
             _sMock = new Mock<TallerDTO>();
             _controller = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
@@ -168,8 +172,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
 
 
 
-        //***** PUT TALLER UNIT TEST IF NOT EXIST ******
-        //*********** REVISAR *************
+        //PUT TALLER UNIT TEST IF NOT EXIST
 
         [Fact(DisplayName = "PUT Taller if Id does not exist")]
         public Task PutTallerIfIdDoesNotExist()
@@ -182,6 +185,8 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
                 .Setup(i => i.GetTalleresByID(It.IsAny<string>()))
                 .Returns(new List<TallerDTO>());
 
+
+            var exist = _controller.GetTallerById("");
             var result = _controller.PutTaller(_sMock.Object);
 
             //Assert.True(exist.Data.Equals(null));
