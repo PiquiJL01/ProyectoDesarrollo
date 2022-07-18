@@ -5,16 +5,9 @@ namespace RCVUcab.BussinesLogic.DTOs
 {
     public class PolizaDTO
     {
-        public enum Tipo
-        {
-            TodoIncluido,
-            SoloAsegurado,
-            SoloTerceros
-        }
-
         public string ID { get; set; } = null!;
         [Required]
-        public Tipo TipoPoliza { get; set; }
+        public string TipoPoliza { get; set; }
         public string Id_Admin { get; set; }
 
         public UsuarioDTO Administrador { get; set; } = null!;

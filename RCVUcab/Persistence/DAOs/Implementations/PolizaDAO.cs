@@ -47,7 +47,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                  {
                      ID = id,
                      Id_Admin = i.Id_Admin,
-                     TipoPoliza = (PolizaDTO.Tipo)i.TipoPoliza
+                     TipoPoliza = i.TipoPoliza
                  }).ToList();
 
                 return data.ToList();
@@ -69,7 +69,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                 {
                     ID = p.ID,
                     Id_Admin = p.Id_Admin,
-                    TipoPoliza = (PolizaDTO.Tipo)p.TipoPoliza
+                    TipoPoliza = p.TipoPoliza
                 });
             return query.First();
 
@@ -80,7 +80,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             PolizaEntity poliza = new PolizaEntity();
             poliza.ID = polizaDTO.ID;
             poliza.Id_Admin = polizaDTO.Id_Admin;
-            poliza.TipoPoliza = (PolizaEntity.Tipo)polizaDTO.TipoPoliza;
+            poliza.TipoPoliza = polizaDTO.TipoPoliza;
             Context().Polizas.Add(poliza);
             Context().SaveChanges();
         }
@@ -90,7 +90,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             var itemToUpdate = Context().Polizas.Find(polizaDTO.ID);
             itemToUpdate.ID = polizaDTO.ID;
             itemToUpdate.Id_Admin = polizaDTO.Id_Admin;
-            itemToUpdate.TipoPoliza = (PolizaEntity.Tipo)polizaDTO.TipoPoliza;
+            itemToUpdate.TipoPoliza = polizaDTO.TipoPoliza;
 
             Context().Polizas.Update(itemToUpdate);
             Context().SaveChanges();

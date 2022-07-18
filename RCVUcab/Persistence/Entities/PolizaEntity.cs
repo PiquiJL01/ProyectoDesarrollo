@@ -5,14 +5,6 @@ namespace RCVUcab.Persistence.Entities
 {
     public class PolizaEntity
     {
-        public enum Tipo
-        {
-            TodoIncluido,
-            SoloAsegurado,
-            SoloTerceros
-        }
-
-
         public PolizaEntity()
         {
             Propietario = new HashSet<PropietarioEntity>();
@@ -21,7 +13,7 @@ namespace RCVUcab.Persistence.Entities
 
         public string ID { get; set; } = null!;
         [Required]
-        public Tipo TipoPoliza { get; set; }
+        public string TipoPoliza { get; set; }
         public string Id_Admin { get; set; }
 
         public UsuarioEntity Administrador { get; set; } = null!;
