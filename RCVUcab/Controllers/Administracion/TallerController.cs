@@ -32,9 +32,7 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
             return response;
         }
@@ -49,9 +47,7 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
 
             return response;
@@ -71,9 +67,7 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
 
             return response;
@@ -100,14 +94,12 @@ namespace RCVUcab.Controllers.Administracion
                 }
                 else
                 {
-                    response.Message ="No existe";
+                    response.Message = "No existe";
                 }
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
 
             return response;

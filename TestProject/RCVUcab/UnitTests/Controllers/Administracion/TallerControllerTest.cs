@@ -30,6 +30,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             _serviceMock = new Mock<ITallerDAO>();
             //_serviceMock2 = new Mock<ITallerDAO>();
             _sMock = new Mock<TallerDTO>();
+            _sMock.Object.ID = "1";
             _controller = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
@@ -189,6 +190,10 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             _serviceMock
                 .Setup(p => p.Update(_sMock.Object))
                 .Throws(new RCVException("", new Exception()));
+
+            _serviceMock
+                .Setup(p => p.GetTalleresByID(_sMock.Object.ID))
+                .Returns(new List<TallerDTO>() { _sMock.Object });
 
             var ex = _controller.PutTaller(_sMock.Object);
 
