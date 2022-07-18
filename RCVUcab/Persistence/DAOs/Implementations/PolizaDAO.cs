@@ -4,6 +4,7 @@ using System.Linq;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
+using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
@@ -17,7 +18,47 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<PolizaDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Polizas
+                    .Select(b => new PolizaDTO
+                    {
+                        ID = b.ID,
+                        Id_Admin = b.Id_Admin,
+                        //TipoPoliza = b.TipoPoliza
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public List<PolizaDTO> GetPolizasByID(string id)
+        {
+            try
+            {
+                var data = Context().Polizas
+                 .Where(i => i.ID == id)
+                 .Select(i => new PolizaDTO
+                 {
+                     ID = id,
+                     Id_Admin = i.Id_Admin,
+                     TipoPoliza = (PolizaDTO.Tipo)i.TipoPoliza
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override PolizaDTO Select(string ID)
