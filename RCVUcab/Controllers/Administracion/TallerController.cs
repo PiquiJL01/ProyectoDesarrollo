@@ -118,11 +118,9 @@ namespace RCVUcab.Controllers.Administracion
 
                 response.Message = "Taller " + id + " ha sido eliminado exitosamente";
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                response.Error(ex);
             }
 
             return response;

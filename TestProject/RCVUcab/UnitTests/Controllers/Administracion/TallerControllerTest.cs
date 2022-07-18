@@ -202,6 +202,45 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             return Task.CompletedTask;
         }
 
+
+        //DELETE TALLER UNIT TEST
+        [Fact(DisplayName = "DELETE Taller")]
+        public Task DeleteTaller_Test()
+        {
+
+            _serviceMock
+                .Setup(x => x.Select(It.IsAny<string>()));
+
+            _serviceMock
+                .Setup(i => i.Delete(_sMock.Object));
+
+            var result = _controller.DeleteTaller(It.IsAny<string>());
+
+            //Assert.True(exist.Success);
+            //Assert.NotNull(exist);
+
+            Assert.IsType<ApplicationResponse<TallerDTO>>(result);
+            return Task.CompletedTask;
+        }
+
+        //PUT TALLER UNIT TEST WITH EXCEPTION
+        [Fact(DisplayName = "DELETE Taller with Exception")]
+        public Task DeleteTaller_WithException()
+        {
+            _serviceMock
+                .Setup(x => x.Select(It.IsAny<string>()))
+                .Throws(new RCVException("", new Exception()));
+
+            _serviceMock
+                .Setup(i => i.Delete(_sMock.Object));
+
+            var ex = _controller.DeleteTaller(It.IsAny<string>());
+
+            Assert.NotNull(ex);
+            Assert.False(ex.Success);
+            return Task.CompletedTask;
+        }
+
     }
 }
 
