@@ -42,7 +42,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         }
 
 
-        //PROBADO CON MANEJO DE EXCEPTION
+        
         public List<TallerDTO> GetTalleresByID(string id)
         {
             try

@@ -5,7 +5,7 @@ using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
-
+using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
@@ -18,7 +18,61 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<PropietarioDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Propietarios
+                    .Select(x => new PropietarioDTO
+                    {
+                        CedulaRif = x.CedulaRif,
+                        PrimerNombre = x.PrimerNombre,
+                        SegundoNombre = x.SegundoNombre,
+                        PrimerApellido = x.PrimerApellido,
+                        SegundoApellido = x.SegundoApellido,
+                        FechaNacimiento = x.FechaNacimiento,
+                        Direccion = x.Direccion,
+                        Id_Poliza = x.Id_Poliza
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+
+
+        public List<PropietarioDTO> GetPropietarioByID(string id)
+        {
+            try
+            {
+                var data = Context().Propietarios
+                 .Where(x => x.CedulaRif == id)
+                 .Select(x => new PropietarioDTO
+                 {
+                     CedulaRif = x.CedulaRif,
+                     PrimerNombre = x.PrimerNombre,
+                     SegundoNombre = x.SegundoNombre,
+                     PrimerApellido = x.PrimerApellido,
+                     SegundoApellido = x.SegundoApellido,
+                     FechaNacimiento = x.FechaNacimiento,
+                     Direccion = x.Direccion,
+                     Id_Poliza = x.Id_Poliza
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Propietario para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override PropietarioDTO Select(string CedulaRif)

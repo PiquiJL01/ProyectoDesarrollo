@@ -18,9 +18,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
     public class TallerControllerTest
     {
         private readonly TallerController _controller;
-        //private readonly TallerController _controller2;
         private readonly Mock<ITallerDAO> _serviceMock;
-        //private readonly Mock<ITallerDAO> _serviceMock2;
         private readonly Mock<TallerDTO> _sMock;
         private readonly Mock<ILogger<TallerController>> _loggerMock;
 
@@ -28,7 +26,6 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
         {
             _loggerMock = new Mock<ILogger<TallerController>>();
             _serviceMock = new Mock<ITallerDAO>();
-            //_serviceMock2 = new Mock<ITallerDAO>();
             _sMock = new Mock<TallerDTO>();
             _sMock.Object.ID = "1";
             _controller = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock.Object);
@@ -36,16 +33,11 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
 
-            /*_controller2 = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock2.Object);
-            _controller2.ControllerContext = new ControllerContext();
-            _controller2.ControllerContext.HttpContext = new DefaultHttpContext();
-            _controller2.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
-            */
         }
 
 
         //GET TALLER UNIT TEST
-        [Fact(DisplayName = "Get Talleres")]
+        [Fact(DisplayName = "GET Talleres")]
         public Task GetTalleres()
         {
             _serviceMock
@@ -60,7 +52,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
 
 
         //GET TALLER UNIT TEST WITH EXCEPTION
-        [Fact(DisplayName = "Get Talleres with Exception")]
+        [Fact(DisplayName = "GET Talleres with Exception")]
         public Task GetTalleresException()
         {
             _serviceMock
@@ -76,7 +68,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
 
 
         //GET TALLER BY ID UNIT TEST
-        [Fact(DisplayName = "Get Talleres By Id")]
+        [Fact(DisplayName = "GET Talleres By Id")]
         public Task GetTalleresById()
         {
             _serviceMock
@@ -91,7 +83,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
 
 
         //GET TALLER BY ID UNIT TEST WITH EXCEPTION
-        [Fact(DisplayName = "Get Talleres By Id with Exception")]
+        [Fact(DisplayName = "GET Talleres By Id with Exception")]
         public Task GetTalleresByIdException()
         {
             _serviceMock

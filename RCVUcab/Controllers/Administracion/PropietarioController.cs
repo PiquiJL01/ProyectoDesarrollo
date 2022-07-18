@@ -24,7 +24,7 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpGet]
-        public ApplicationResponse<List<PropietarioDTO>> GetAdministradores()
+        public ApplicationResponse<List<PropietarioDTO>> GetPropietarios()
         {
             var response = new ApplicationResponse<List<PropietarioDTO>>();
             try
@@ -38,13 +38,13 @@ namespace RCVUcab.Controllers.Administracion
             return response;
         }
 
-        [HttpGet("id")]
-        public ApplicationResponse<PropietarioDTO> GetPropietarioById([FromRoute]string id)
+        [HttpGet("{id}")]
+        public ApplicationResponse<List<PropietarioDTO>> GetPropietarioById([FromRoute]string id)
         {
-            var response = new ApplicationResponse<PropietarioDTO>();
+            var response = new ApplicationResponse<List<PropietarioDTO>>();
             try
             {
-                response.Data = _propietarioDao.Select(id);
+                response.Data = _propietarioDao.GetPropietarioByID(id);
             }
             catch (RCVException ex)
             {
@@ -84,16 +84,20 @@ namespace RCVUcab.Controllers.Administracion
 
             try
             {
-                if (_propietarioDao.Select(propietarioDto.CedulaRif) != null)
+                var list = _propietarioDao.GetPropietarioByID(propietarioDto.CedulaRif);
+
+                if (list.Exists(x => x.CedulaRif.Contains(propietarioDto.CedulaRif)))
                 {
                     _propietarioDao.Update(propietarioDto);
+
+                    response.Message = "El Propietario ha sido modificado exitosamente";
                 }
                 else
                 {
                     response.Error(new Exception("No existe"));
                 }
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
                 response.Error(ex);
             }
@@ -101,7 +105,7 @@ namespace RCVUcab.Controllers.Administracion
             return response;
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public ApplicationResponse<PropietarioDTO> DeletePropietario([FromRoute] string id)
         {
             var response = new ApplicationResponse<PropietarioDTO>();
@@ -112,7 +116,7 @@ namespace RCVUcab.Controllers.Administracion
 
                 _propietarioDao.Delete(response.Data);
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
                 response.Error(ex);
             }
