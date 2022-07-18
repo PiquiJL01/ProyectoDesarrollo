@@ -90,7 +90,9 @@ namespace RCVUcab.Controllers.Administracion
 
             try
             {
-                if (_TallerDao.Select(TallerDto.ID) != null)
+                var list = _TallerDao.GetTalleresByID(TallerDto.ID);
+
+                if (list.Exists(x => x.ID.Contains(TallerDto.ID)))
                 {
                     _TallerDao.Update(TallerDto);
 

@@ -18,8 +18,9 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
     public class TallerControllerTest
     {
         private readonly TallerController _controller;
+        //private readonly TallerController _controller2;
         private readonly Mock<ITallerDAO> _serviceMock;
-        private readonly Mock<ITallerDAO> _serviceMock2;
+        //private readonly Mock<ITallerDAO> _serviceMock2;
         private readonly Mock<TallerDTO> _sMock;
         private readonly Mock<ILogger<TallerController>> _loggerMock;
 
@@ -27,12 +28,18 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
         {
             _loggerMock = new Mock<ILogger<TallerController>>();
             _serviceMock = new Mock<ITallerDAO>();
-            _serviceMock2 = new Mock<ITallerDAO>();
+            //_serviceMock2 = new Mock<ITallerDAO>();
             _sMock = new Mock<TallerDTO>();
             _controller = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock.Object);
             _controller.ControllerContext = new ControllerContext();
             _controller.ControllerContext.HttpContext = new DefaultHttpContext();
             _controller.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
+
+            /*_controller2 = new TallerController(new Mock<ILogger<TallerController>>().Object, _serviceMock2.Object);
+            _controller2.ControllerContext = new ControllerContext();
+            _controller2.ControllerContext.HttpContext = new DefaultHttpContext();
+            _controller2.ControllerContext.ActionDescriptor = new ControllerActionDescriptor();
+            */
         }
 
 
@@ -127,25 +134,6 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             return Task.CompletedTask;
         }
 
-        /*var response = new ApplicationResponse<TallerDTO>()
-            {
-                Data = TallerDto
-            };
-
-            try
-            {
-                if (_TallerDao.Select(TallerDto.ID) != null)
-                {
-                    _TallerDao.Update(TallerDto);
-
-                    response.Message = "El taller ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Error(new Exception("No existe"));
-                }
-            }
-        */
 
         //PUT TALLER UNIT TEST IF EXIST
         [Fact(DisplayName = "PUT Taller if Id Exist")]
@@ -188,7 +176,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             var exist = _controller.GetTallerById("");
             var result = _controller.PutTaller(_sMock.Object);
 
-            //Assert.True(exist.Data.Equals(null));
+            Assert.False(exist.Data.Exists(x => x.ID.Contains(It.IsAny<string>())));
             Assert.Equal("No existe", result.Message);
             
             return Task.CompletedTask;
@@ -199,10 +187,10 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
         public Task PutTallerException()
         {
             _serviceMock
-                .Setup(x => x.Insert(_sMock.Object))
+                .Setup(p => p.Update(_sMock.Object))
                 .Throws(new RCVException("", new Exception()));
 
-            var ex = _controller.PostTaller(_sMock.Object);
+            var ex = _controller.PutTaller(_sMock.Object);
 
             Assert.NotNull(ex);
             Assert.False(ex.Success);
