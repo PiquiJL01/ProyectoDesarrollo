@@ -5,6 +5,7 @@ using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
+using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
@@ -19,7 +20,51 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<ProveedorDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Proveedores
+                    .Select(p => new ProveedorDTO
+                    {
+                        Id_Proveedor = p.ID,
+                        Name = p.Name,
+                        Address = p.Address,
+                        TallerID = p.TallerID,
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Proveedores: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public List<ProveedorDTO> GetProveedoresByID(string id)
+        {
+            try
+            {
+                var data = Context().Proveedores
+                 .Where(i => i.ID == id)
+                 .Select(i => new ProveedorDTO
+                 {
+                     Id_Proveedor = id,
+                     Name = i.Name,
+                     Address = i.Address,
+                     TallerID = i.TallerID,
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override ProveedorDTO Select(string Id_Proveedor)
