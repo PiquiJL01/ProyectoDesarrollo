@@ -2,7 +2,7 @@
 
 public static class TipoPoliza
 {
-    public static string CoberturaTotal = "Cobertura Total";
-    public static string SoloTerceros = "Solo a terceros";
-    public static string SoloAsegurado = "Solo al asegurado";
+    public const string CoberturaTotal = "Cobertura Total";
+    public const string SoloTerceros = "Solo a terceros";
+    public const string SoloAsegurado = "Solo al asegurado";
 }

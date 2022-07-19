@@ -2,8 +2,8 @@
 
 public static class RolUsuario
 {
-    public static string Administrador = "Admin";
-    public static string Taller = "Taller";
-    public static string Proveedor = "Proveedor";
-    public static string Perito = "Perito";
+    public const string Administrador = "Admin";
+    public const string Taller = "Taller";
+    public const string Proveedor = "Proveedor";
+    public const string Perito = "Perito";
 }
