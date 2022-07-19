@@ -25,7 +25,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                     {
                         ID = b.ID,
                         Id_Admin = b.Id_Admin,
-                        //TipoPoliza = b.TipoPoliza
+                        TipoPoliza = b.TipoPoliza
                     }).ToList();
 
                 return data.ToList();

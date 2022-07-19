@@ -9,7 +9,9 @@ using RCVUcab.Responses;
 
 namespace RCVUcab.Controllers.Administracion
 {
-    public class PolizaController
+    [ApiController]
+    [Route("Administracion/[controller]")]
+    public class PolizaController : Controller
     {
         private readonly IPolizaDAO _polizaDao;
         private readonly ILogger<PolizaController> _logger;
