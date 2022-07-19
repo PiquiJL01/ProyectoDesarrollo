@@ -19,21 +19,9 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<IncidenteDTO> Select()
         {
-            return new List<IncidenteDTO>();
-        }
-
-        public override IncidenteDTO Select(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<IncidenteDTO> GetIncidenteByID(string id)
-        {
             try
             {
                 var data = Context().Incidentes
-                    .Include(b => b.VehiculoIncidenteTaller)
-                    .Where(i => i.ID == id)
                     .Select(i => new IncidenteDTO
                     {
                         ID = i.ID,
@@ -41,13 +29,56 @@ namespace RCVUcab.Persistence.DAOs.Implementations
                         Fecha = i.Fecha,
                         Id_Perito = i.Id_Perito,
                         Id_Administrador = i.Id_Administrador,
+
                     }).ToList();
 
                 return data.ToList();
             }
             catch (Exception ex)
             {
-                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de proveedores para la marca: "
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public override IncidenteDTO Select(string id)
+        {
+            var query = Context().Incidentes
+                .Where(i => i.ID == id)
+                .Select(i => new IncidenteDTO
+                {
+                    ID = i.ID,
+                    Ubicacion = i.Ubicacion,
+                    Fecha = i.Fecha,
+                    Id_Perito = i.Id_Perito,
+                    Id_Administrador = i.Id_Administrador,
+
+                });
+            return query.First();
+        }
+
+        public List<IncidenteDTO> GetIncidenteByID(string id)
+        {
+            try
+            {
+                var data = Context().Incidentes
+                 .Where(i => i.ID == id)
+                 .Select(i => new IncidenteDTO
+                 {
+                     ID = i.ID,
+                     Ubicacion = i.Ubicacion,
+                     Fecha = i.Fecha,
+                     Id_Perito = i.Id_Perito,
+                     Id_Administrador = i.Id_Administrador,
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
                   + id, ex.Message, ex);
             }
 

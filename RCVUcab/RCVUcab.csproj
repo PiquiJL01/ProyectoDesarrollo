@@ -27,9 +27,11 @@
   <ItemGroup>
     <None Remove="Controllers\Perito\" />
     <None Remove="Controllers\Incidente\" />
+    <None Remove="Controllers\Taller\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Perito\" />
     <Folder Include="Controllers\Incidente\" />
+    <Folder Include="Controllers\Taller\" />
   </ItemGroup>
 </Project>
