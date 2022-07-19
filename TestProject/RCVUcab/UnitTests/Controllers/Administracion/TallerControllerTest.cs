@@ -215,7 +215,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
             return Task.CompletedTask;
         }
 
-        //PUT TALLER UNIT TEST WITH EXCEPTION
+        //DELETE TALLER UNIT TEST WITH EXCEPTION
         [Fact(DisplayName = "DELETE Taller with Exception")]
         public Task DeleteTaller_WithException()
         {

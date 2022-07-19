@@ -20,7 +20,53 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<CotizacionDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Cotizaciones
+                    .Select(c => new CotizacionDTO
+                    {
+                        Id = c.Id,
+                        MontoTotal = c.MontoTotal,
+                        Id_Proveedor = c.Id_Proveedor,
+                        Id_Incidente = c.Id_Incidente,
+                        Id_Taller = c.Id_Taller,
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public List<CotizacionDTO> GetCotizacionesByID(string id)
+        {
+            try
+            {
+                var data = Context().Cotizaciones
+                 .Where(c => c.Id == id)
+                 .Select(c => new CotizacionDTO
+                 {
+                     Id = c.Id,
+                     MontoTotal = c.MontoTotal,
+                     Id_Proveedor = c.Id_Proveedor,
+                     Id_Incidente = c.Id_Incidente,
+                     Id_Taller = c.Id_Taller,
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override CotizacionDTO Select(string id)
