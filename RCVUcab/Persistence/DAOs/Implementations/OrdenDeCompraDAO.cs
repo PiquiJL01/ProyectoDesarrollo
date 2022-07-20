@@ -4,6 +4,7 @@ using System.Linq;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
+using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
@@ -16,10 +17,51 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<OrdenDeCompraDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().OrdenesDeCompra
+                    .Select(b => new OrdenDeCompraDTO
+                    {
+                        ID = b.ID,
+                        Id_Administrador = b.Id_Administrador,
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
         }
 
-        public override OrdenDeCompraDTO Select(String id)
+
+        public List<OrdenDeCompraDTO> GetOrdenesDeCompraByID(string id)
+        {
+            try
+            {
+                var data = Context().OrdenesDeCompra
+                 .Where(i => i.ID == id)
+                 .Select(i => new OrdenDeCompraDTO
+                 {
+                     ID = i.ID,
+                     Id_Administrador = i.Id_Administrador,
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
+        }
+
+        public override OrdenDeCompraDTO Select(string id)
         {
             var query = Context().OrdenesDeCompra
                 .Where(o => o.ID == id)
