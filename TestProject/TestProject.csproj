@@ -48,6 +48,7 @@
     <None Remove="RCVUcab\UnitTests\Controllers\Administracion\" />
     <None Remove="RCVUcab\UnitTests\Controllers\Perito\" />
     <None Remove="RCVUcab\UnitTests\Controllers\Taller\" />
+    <None Remove="RCVUcab\UnitTests\Controllers\Proveedor\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,5 +63,6 @@
     <Folder Include="RCVUcab\UnitTests\Controllers\Administracion\" />
     <Folder Include="RCVUcab\UnitTests\Controllers\Perito\" />
     <Folder Include="RCVUcab\UnitTests\Controllers\Taller\" />
+    <Folder Include="RCVUcab\UnitTests\Controllers\Proveedor\" />
   </ItemGroup>
 </Project>

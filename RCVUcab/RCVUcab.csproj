@@ -28,10 +28,12 @@
     <None Remove="Controllers\Perito\" />
     <None Remove="Controllers\Incidente\" />
     <None Remove="Controllers\Taller\" />
+    <None Remove="Controllers\Proveedor\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Perito\" />
     <Folder Include="Controllers\Incidente\" />
     <Folder Include="Controllers\Taller\" />
+    <Folder Include="Controllers\Proveedor\" />
   </ItemGroup>
 </Project>

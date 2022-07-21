@@ -7,13 +7,11 @@ using RCVUcab.Exceptions;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;
 
-
-namespace RCVUcab.Controllers.Cotizacion
+namespace RCVUcab.Controllers.Proveedor
 {
-
     [ApiController]
-    [Route("Taller/[controller]")]
-    public class CotizacionController : Controller
+    [Route("Proveedor/[controller]")]
+    public class CotizacionController
     {
         private readonly ICotizacionDAO _CotizacionDao;
         private readonly ILogger<CotizacionController> _logger;
@@ -54,27 +52,6 @@ namespace RCVUcab.Controllers.Cotizacion
 
             return response;
         }
-
-        [HttpPost]
-        public ApplicationResponse<CotizacionDTO> PostCotizacion([FromBody] CotizacionDTO CotizacionDto)
-        {
-            var response = new ApplicationResponse<CotizacionDTO>()
-            {
-                Data = CotizacionDto
-            };
-
-            try
-            {
-                _CotizacionDao.Insert(CotizacionDto);
-            }
-            catch (RCVException ex)
-            {
-                response.Error(ex);
-            }
-
-            return response;
-        }
-
 
         [HttpPut]
         public ApplicationResponse<CotizacionDTO> PutCotizacion([FromBody] CotizacionDTO CotizacionDto)
