@@ -181,6 +181,7 @@ namespace RCVUcab.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MontoTotal = table.Column<double>(type: "float", nullable: false),
                     Observacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CotizacionEstatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Id_Proveedor = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Incidente = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Taller = table.Column<string>(type: "nvarchar(450)", nullable: true)

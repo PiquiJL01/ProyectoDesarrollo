@@ -27,6 +27,9 @@ namespace RCVUcab.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CotizacionEstatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id_Incidente")
                         .HasColumnType("nvarchar(450)");
 
