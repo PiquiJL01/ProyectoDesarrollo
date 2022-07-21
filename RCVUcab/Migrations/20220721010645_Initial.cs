@@ -138,7 +138,7 @@ namespace RCVUcab.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TipoPoliza = table.Column<int>(type: "int", nullable: false),
+                    TipoPoliza = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Id_Admin = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -180,6 +180,7 @@ namespace RCVUcab.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MontoTotal = table.Column<double>(type: "float", nullable: false),
+                    Observacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Id_Proveedor = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Incidente = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Taller = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -257,7 +258,10 @@ namespace RCVUcab.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id_Pieza = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Id_Cotizacion = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Precio = table.Column<float>(type: "real", nullable: false)
+                    Precio = table.Column<float>(type: "real", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Descuento = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TiempoDeEntrega = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

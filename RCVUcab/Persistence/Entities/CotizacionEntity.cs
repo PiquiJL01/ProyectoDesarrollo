@@ -14,6 +14,7 @@ namespace RCVUcab.Persistence.Entities
 
         public string Id { get; set; } = null!;
         public double MontoTotal { get; set; }
+        public string Observacion { get; set; }
         public string Id_Proveedor { get; set; }
         public string Id_Incidente { get; set; }
         public string Id_Taller { get; set; }

@@ -39,6 +39,9 @@ namespace RCVUcab.Migrations
                     b.Property<double>("MontoTotal")
                         .HasColumnType("float");
 
+                    b.Property<string>("Observacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex(new[] { "Id_Incidente" }, "IX_Cotizacion_IdIncidente");
@@ -131,6 +134,12 @@ namespace RCVUcab.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descuento")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id_Cotizacion")
                         .HasColumnType("nvarchar(450)");
 
@@ -139,6 +148,9 @@ namespace RCVUcab.Migrations
 
                     b.Property<float>("Precio")
                         .HasColumnType("real");
+
+                    b.Property<string>("TiempoDeEntrega")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -194,8 +206,9 @@ namespace RCVUcab.Migrations
                     b.Property<string>("Id_Admin")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TipoPoliza")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoPoliza")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

@@ -6,6 +6,10 @@
         public string Id_Pieza { get; set; }
         public string Id_Cotizacion { get; set; }
         public float Precio { get; set; }
+        public int Cantidad { get; set; }
+        public string Descuento { get; set; }
+        public string TiempoDeEntrega { get; set; }
+
 
         public PiezaEntity Pieza { get; set; }
         public CotizacionEntity Cotizacion { get; set; }
