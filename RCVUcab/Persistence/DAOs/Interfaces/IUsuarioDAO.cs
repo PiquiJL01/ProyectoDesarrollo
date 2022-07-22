@@ -7,6 +7,7 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
     {
         public List<UsuarioDTO> GetAdministradores();
         public List<UsuarioDTO> GetPeritos();
+        public List<UsuarioDTO> GetUsuariosByID(string id);
     }
 }
 

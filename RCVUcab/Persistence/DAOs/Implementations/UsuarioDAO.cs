@@ -19,7 +19,59 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<UsuarioDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Usuarios
+                    .Select(u => new UsuarioDTO
+                    {
+                        Id = u.Id,
+                        Nombre = u.Nombre,
+                        Apellido = u.Apellido,
+                        Telefono = u.Telefono,
+                        Email = u.Email,
+                        Direccion = u.Direccion,
+                        BirthDate = u.BirthDate,
+                        Rol = u.Rol
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public List<UsuarioDTO> GetUsuariosByID(string id)
+        {
+            try
+            {
+                var data = Context().Usuarios
+                 .Where(u => u.Id == id)
+                 .Select(u => new UsuarioDTO
+                 {
+                     Id = u.Id,
+                     Nombre = u.Nombre,
+                     Apellido = u.Apellido,
+                     Telefono = u.Telefono,
+                     Email = u.Email,
+                     Direccion = u.Direccion,
+                     BirthDate = u.BirthDate,
+                     Rol = u.Rol
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override UsuarioDTO Select(string Id)
