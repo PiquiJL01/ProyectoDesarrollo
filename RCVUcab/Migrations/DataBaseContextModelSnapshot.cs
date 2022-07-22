@@ -149,6 +149,9 @@ namespace RCVUcab.Migrations
                     b.Property<string>("Id_Pieza")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("PiezaEstatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Precio")
                         .HasColumnType("real");
 

@@ -12,7 +12,7 @@ using RCVUcab.Persistence.Database;
 namespace RCVUcab.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220721182907_Initial")]
+    [Migration("20220722025825_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,6 +150,9 @@ namespace RCVUcab.Migrations
 
                     b.Property<string>("Id_Pieza")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PiezaEstatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Precio")
                         .HasColumnType("real");

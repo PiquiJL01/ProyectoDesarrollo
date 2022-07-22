@@ -262,7 +262,8 @@ namespace RCVUcab.Migrations
                     Precio = table.Column<float>(type: "real", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
                     Descuento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TiempoDeEntrega = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TiempoDeEntrega = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PiezaEstatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
