@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using RCVUcab.BussinesLogic.DTOs;
+using RCVUcab.Exceptions;
+using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
 
@@ -17,7 +20,67 @@ namespace RCVUcab.Persistence.DAOs.Implementations
 
         public override List<VehiculoDTO> Select()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = Context().Vehiculos
+                    .Select(x => new VehiculoDTO
+                    {
+                        Placa = x.Placa,
+                        Modelo = x.Modelo,
+                        Estado = x.Estado,
+                        Tipo = x.Tipo,
+                        SerialCarroceria = x.SerialCarroceria,
+                        Año = x.Año,
+                        Peso = x.Peso,
+                        NumeroDeEjes = x.NumeroDeEjes,
+                        Color = x.Color,
+                        NumeroDePuestos = x.NumeroDePuestos,
+                        Id_Propietario = x.Id_Propietario,
+                        Id_Marca = x.Id_Marca
+
+                    }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
+            }
+        }
+
+        public List<VehiculoDTO> GetVehiculosByID(string id)
+        {
+            try
+            {
+                var data = Context().Vehiculos
+                 .Where(x => x.Placa == id)
+                 .Select(x => new VehiculoDTO
+                 {
+                     Placa = x.Placa,
+                     Modelo = x.Modelo,
+                     Estado = x.Estado,
+                     Tipo = x.Tipo,
+                     SerialCarroceria = x.SerialCarroceria,
+                     Año = x.Año,
+                     Peso = x.Peso,
+                     NumeroDeEjes = x.NumeroDeEjes,
+                     Color = x.Color,
+                     NumeroDePuestos = x.NumeroDePuestos,
+                     Id_Propietario = x.Id_Propietario,
+                     Id_Marca = x.Id_Marca
+
+                 }).ToList();
+
+                return data.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + id, ex.Message, ex);
+            }
+
         }
 
         public override VehiculoDTO Select(string Placa)
