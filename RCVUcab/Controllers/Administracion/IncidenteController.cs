@@ -9,7 +9,7 @@ using RCVUcab.Responses;
 namespace RCVUcab.Controllers.Administracion
 {
     [ApiController]
-    [Route("Incidente/[controller]")]
+    [Route("Administracion/[controller]")]
     public class IncidenteController : Controller
     {
         private readonly IIncidenteDAO _IncidenteDao;

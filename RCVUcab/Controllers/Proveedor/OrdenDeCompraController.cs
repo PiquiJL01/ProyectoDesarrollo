@@ -11,7 +11,7 @@ using RCVUcab.Responses;
 namespace RCVUcab.Controllers.Proveedor
 {
     [ApiController]
-    [Route("OrdenDeCompra/[controller]")]
+    [Route("Proveedor/[controller]")]
     public class OrdenDeCompraController : Controller
     {
         private readonly IOrdenDeCompraDAO _OrdenDeCompraDao;

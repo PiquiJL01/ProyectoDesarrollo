@@ -7,11 +7,11 @@ using RCVUcab.Exceptions;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;
 
-namespace RCVUcab.Controllers.OrdenDeCompra
+namespace RCVUcab.Controllers.Taller
 {
 
     [ApiController]
-    [Route("OrdenDeCompra/[controller]")]
+    [Route("Taller/[controller]")]
     public class OrdenDeCompraController : Controller
     {
         private readonly IOrdenDeCompraDAO _OrdenDeCompraDao;
