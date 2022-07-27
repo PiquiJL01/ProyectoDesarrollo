@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Controllers.OrdenDeCompra;
+using RCVUcab.Controllers.Taller;
 using RCVUcab.Exceptions;
 using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;

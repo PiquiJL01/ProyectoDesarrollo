@@ -5,7 +5,7 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
 {
     public interface IPolizaDAO : IDAO<PolizaDTO>
     {
-        public List<PolizaDTO> GetPolizaByID(string id);
+        public List<PolizaDTO> GetPolizasByID(string id);
     }
 }
 

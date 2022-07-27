@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using RCVUcab.BussinesLogic.DTOs;
+using RCVUcab.Exceptions;
+using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
-using Microsoft.EntityFrameworkCore;
-using RCVUcab.Exceptions;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
 
-    public class UsuarioDAO : DAO<UsuarioDTO>
+    public class UsuarioDAO : DAO<UsuarioDTO>, IUsuarioDAO
     {
         public UsuarioDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {
@@ -39,7 +40,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             }
             catch (Exception ex)
             {
-                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Usuarios: "
                     , ex.Message, ex);
             }
         }
@@ -68,7 +69,7 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             }
             catch (Exception ex)
             {
-                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Usuario para el: "
                   + id, ex.Message, ex);
             }
 
@@ -142,7 +143,6 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             try
             {
                 var data = _dataBaseContext.Usuarios
-                    .Include(b => b.Id)
                     //********** REVISAR ROL **************
                     .Where(b => b.Rol == b.Rol)
                     .Select(b => new UsuarioDTO
@@ -168,7 +168,6 @@ namespace RCVUcab.Persistence.DAOs.Implementations
             try
             {
                 var data = _dataBaseContext.Usuarios
-                    .Include(b => b.Id)
                     //********** REVISAR ROL **************
                     .Where(b => b.Rol == b.Rol)
                     .Select(b => new UsuarioDTO

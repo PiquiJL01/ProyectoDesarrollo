@@ -9,6 +9,7 @@ using RCVUcab.Responses;
 
 namespace RCVUcab.Controllers.Administracion
 {
+
     [ApiController]
     [Route("Administracion/[controller]")]
     public class UsuarioController : Controller

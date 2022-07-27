@@ -4,11 +4,11 @@ using System.Linq;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
-
+using RCVUcab.Persistence.DAOs.Interfaces;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
-    public class MarcaDAO : DAO<MarcaDTO>
+    public class MarcaDAO : DAO<MarcaDTO>, IMarcaDAO
     {
         public MarcaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {

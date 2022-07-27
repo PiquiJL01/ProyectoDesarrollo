@@ -2,7 +2,7 @@
 
 namespace RCVUcab.Persistence.DAOs.Interfaces
 {
-    public interface IPiezaDAO: IDAO<PiezaCotizacionDTO>
+    public interface IPiezaDAO: IDAO<PiezaDTO>
     {
 
     }

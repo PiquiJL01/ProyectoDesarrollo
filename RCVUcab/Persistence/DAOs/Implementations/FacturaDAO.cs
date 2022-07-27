@@ -4,10 +4,11 @@ using System.Linq;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
+using RCVUcab.Persistence.DAOs.Interfaces;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
-    public class FacturaDAO : DAO<FacturaDTO>
+    public class FacturaDAO : DAO<FacturaDTO>, IFacturaDAO
     {
         public FacturaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {

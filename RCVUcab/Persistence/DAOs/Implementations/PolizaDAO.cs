@@ -5,11 +5,12 @@ using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
 using RCVUcab.Exceptions;
+using RCVUcab.Persistence.DAOs.Interfaces;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
 
-    public class PolizaDAO : DAO<PolizaDTO>
+    public class PolizaDAO : DAO<PolizaDTO>, IPolizaDAO
     {
         public PolizaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {

@@ -29,12 +29,20 @@ namespace RCVUcab
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IRCVDbContext, RCVDbContext>();
-            services.AddTransient<IProviderDAO, ProviderDAO>();
             services.AddTransient<IDataBaseContext, DataBaseContext>();
             services.AddTransient<ICotizacionDAO, CotizacionDAO>();
+            services.AddTransient<IFacturaDAO, FacturaDAO>();
             services.AddTransient<IIncidenteDAO, IncidenteDAO>();
+            services.AddTransient<IMarcaDAO, MarcaDAO>();
+            services.AddTransient<IOrdenDeCompraDAO, OrdenDeCompraDAO>();
+            services.AddTransient<IPiezaDAO, PiezaDAO>();
+            services.AddTransient<IPolizaDAO, PolizaDAO>();
             services.AddTransient<IPropietarioDAO, PropietarioDAO>();
+            services.AddTransient<IProveedorDAO, ProveedorDAO>();
             services.AddTransient<ITallerDAO, TallerDAO>();
+            services.AddTransient<IUsuarioDAO, UsuarioDAO>();
+            services.AddTransient<IVehiculoDAO, VehiculoDAO>();
+
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>

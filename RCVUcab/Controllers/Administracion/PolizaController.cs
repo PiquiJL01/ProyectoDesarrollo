@@ -43,7 +43,7 @@ namespace RCVUcab.Controllers.Administracion
             var response = new ApplicationResponse<List<PolizaDTO>>();
             try
             {
-                response.Data = _polizaDao.GetPolizaByID(id);
+                response.Data = _polizaDao.GetPolizasByID(id);
             }
             catch (RCVException ex)
             {
@@ -83,7 +83,7 @@ namespace RCVUcab.Controllers.Administracion
 
             try
             {
-                var list = _polizaDao.GetPolizaByID(PolizaDto.ID);
+                var list = _polizaDao.GetPolizasByID(PolizaDto.ID);
 
                 if (list.Exists(x => x.ID.Contains(PolizaDto.ID)))
                 {

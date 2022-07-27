@@ -11,7 +11,7 @@ using RCVUcab.Persistence.Entities;
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
 
-    public class VehiculoDAO : DAO<VehiculoDTO>
+    public class VehiculoDAO : DAO<VehiculoDTO>, IVehiculoDAO
     {
         public VehiculoDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {

@@ -5,11 +5,12 @@ using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Persistence.Database;
 using RCVUcab.Persistence.Entities;
 using RCVUcab.Exceptions;
+using RCVUcab.Persistence.DAOs.Interfaces;
 
 namespace RCVUcab.Persistence.DAOs.Implementations
 {
 
-    public class OrdenDeCompraDAO : DAO<OrdenDeCompraDTO>
+    public class OrdenDeCompraDAO : DAO<OrdenDeCompraDTO>, IOrdenDeCompraDAO
     {
         public OrdenDeCompraDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
         {
