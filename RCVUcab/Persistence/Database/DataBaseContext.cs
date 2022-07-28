@@ -174,6 +174,8 @@ namespace RCVUcab.Persistence.Database
 
                 entity.HasIndex(e => e.Id_Marca, "IX_ProveedorMarca_IdMarca");
 
+                entity.HasIndex(e => e.Id_Taller, "IX_ProveedorMarca_IdTaller");
+
                 entity.HasOne(d => d.Proveedor)
                     .WithMany(p => p.ProveedorMarca)
                     .HasForeignKey(d => d.Id_Proveedor);
@@ -181,6 +183,10 @@ namespace RCVUcab.Persistence.Database
                 entity.HasOne(d => d.Marca)
                     .WithMany(p => p.ProveedorMarca)
                     .HasForeignKey(d => d.Id_Marca);
+
+                entity.HasOne(d => d.Taller)
+                    .WithMany(p => p.ProveedorMarca)
+                    .HasForeignKey(d => d.Id_Taller);
             });
 
             //VEHICULO-INCIDENTE-TALLER-PIEZA

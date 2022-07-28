@@ -7,6 +7,7 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
     {
         //public List<TallerDTO> GetTalleres();
         public List<TallerDTO> GetTalleresByID(string id);
+        public List<ProveedorMarcaDTO> GetTalleresByBrand(string brand);
     }
 }
 

@@ -14,6 +14,8 @@ namespace RCVUcab.BussinesLogic.DTOs
         public virtual List<CotizacionDTO> CotizacionT { get; set; }
 
         public virtual List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
+
+        public List<ProveedorMarcaDTO> ProveedorMarca { get; set; }
     }
 }
 

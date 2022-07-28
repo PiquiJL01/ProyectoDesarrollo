@@ -69,6 +69,34 @@ namespace RCVUcab.Persistence.DAOs.Implementations
         }
 
 
+        public List<ProveedorMarcaDTO> GetTalleresByBrand(string marca)
+        {
+            try
+            {
+                var data = Context().ProveedoresMarcas
+                   .Include(b => b.Taller)
+                   .Where(b => b.Id_Marca == marca)
+                   .Select(b => new ProveedorMarcaDTO
+                   {
+                       Id_Marca = b.Id_Marca,
+                       Taller = new TallerDTO
+                       {
+                           ID = b.Taller.ID,
+                           Name = b.Taller.Name,
+
+                       }
+                   }).ToList();
+
+                return data.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de talleres para la marca: "
+              + marca, ex.Message, ex);
+            }
+        }
+
+
         public override TallerDTO Select(string IdTaller)
         {
             var query = Context().Talleres

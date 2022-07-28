@@ -53,6 +53,22 @@ namespace RCVUcab.Controllers.Administracion
             return response;
         }
 
+        [HttpGet("{marca}/TalleresByBrand")]
+        public ApplicationResponse<List<ProveedorMarcaDTO>> GetTallerByBrand([FromRoute] string marca)
+        {
+            var response = new ApplicationResponse<List<ProveedorMarcaDTO>>();
+            try
+            {
+                response.Data = _TallerDao.GetTalleresByBrand(marca);
+            }
+            catch (RCVException ex)
+            {
+                response.Error(ex);
+            }
+
+            return response;
+        }
+
         [HttpPost]
         public ApplicationResponse<TallerDTO> PostTaller([FromBody] TallerDTO TallerDto)
         {

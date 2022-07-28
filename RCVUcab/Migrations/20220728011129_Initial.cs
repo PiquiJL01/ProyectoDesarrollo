@@ -157,7 +157,8 @@ namespace RCVUcab.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Id_Proveedor = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Id_Marca = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Id_Marca = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Id_Taller = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,6 +172,11 @@ namespace RCVUcab.Migrations
                         name: "FK_ProveedoresMarcas_Proveedores_Id_Proveedor",
                         column: x => x.Id_Proveedor,
                         principalTable: "Proveedores",
+                        principalColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_ProveedoresMarcas_Talleres_Id_Taller",
+                        column: x => x.Id_Taller,
+                        principalTable: "Talleres",
                         principalColumn: "ID");
                 });
 
@@ -457,6 +463,11 @@ namespace RCVUcab.Migrations
                 name: "IX_ProveedorMarca_IdProveedor",
                 table: "ProveedoresMarcas",
                 column: "Id_Proveedor");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProveedorMarca_IdTaller",
+                table: "ProveedoresMarcas",
+                column: "Id_Taller");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehiculo_IdMarca",

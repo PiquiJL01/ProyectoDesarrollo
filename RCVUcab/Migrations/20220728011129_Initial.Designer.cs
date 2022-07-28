@@ -12,7 +12,7 @@ using RCVUcab.Persistence.Database;
 namespace RCVUcab.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220722025825_Initial")]
+    [Migration("20220728011129_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -295,12 +295,17 @@ namespace RCVUcab.Migrations
                     b.Property<string>("Id_Proveedor")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Id_Taller")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ID");
 
                     b.HasIndex(new[] { "Id_Marca" }, "IX_ProveedorMarca_IdMarca")
                         .HasDatabaseName("IX_ProveedorMarca_IdMarca1");
 
                     b.HasIndex(new[] { "Id_Proveedor" }, "IX_ProveedorMarca_IdProveedor");
+
+                    b.HasIndex(new[] { "Id_Taller" }, "IX_ProveedorMarca_IdTaller");
 
                     b.ToTable("ProveedoresMarcas");
                 });
@@ -570,9 +575,15 @@ namespace RCVUcab.Migrations
                         .WithMany("ProveedorMarca")
                         .HasForeignKey("Id_Proveedor");
 
+                    b.HasOne("RCVUcab.Persistence.Entities.TallerEntity", "Taller")
+                        .WithMany("ProveedorMarca")
+                        .HasForeignKey("Id_Taller");
+
                     b.Navigation("Marca");
 
                     b.Navigation("Proveedor");
+
+                    b.Navigation("Taller");
                 });
 
             modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoEntity", b =>
@@ -669,6 +680,8 @@ namespace RCVUcab.Migrations
                     b.Navigation("CotizacionT");
 
                     b.Navigation("Proveedor");
+
+                    b.Navigation("ProveedorMarca");
 
                     b.Navigation("VehiculoIncidenteTaller");
                 });

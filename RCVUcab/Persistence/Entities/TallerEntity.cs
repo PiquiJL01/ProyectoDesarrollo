@@ -8,7 +8,8 @@ namespace RCVUcab.Persistence.Entities
         {
             CotizacionT = new HashSet<CotizacionEntity>();
             VehiculoIncidenteTaller = new HashSet<VehiculoIncidenteTallerEntity>();
-            
+            ProveedorMarca = new HashSet<ProveedorMarcaEntity>();
+
         }
 
 
@@ -22,6 +23,8 @@ namespace RCVUcab.Persistence.Entities
         public virtual ICollection<CotizacionEntity> CotizacionT { get; set; }
 
         public virtual ICollection<VehiculoIncidenteTallerEntity> VehiculoIncidenteTaller { get; set; }
+
+        public ICollection<ProveedorMarcaEntity> ProveedorMarca { get; set; }
 
     }
 }
