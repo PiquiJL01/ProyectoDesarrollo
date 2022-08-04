@@ -70,7 +70,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
         public Task GetPolizasById()
         {
             _serviceMock
-                .Setup(x => x.GetPolizasByID(It.IsAny<string>()))
+                .Setup(x => x.GetPolizaByID(It.IsAny<string>()))
                 .Returns(new List<PolizaDTO>());
 
             var result = _controller.GetPolizaById("");
@@ -85,7 +85,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
         public Task GetPolizasByIdException()
         {
             _serviceMock
-                .Setup(x => x.GetPolizasByID(It.IsAny<string>()))
+                .Setup(x => x.GetPolizaByID(It.IsAny<string>()))
                 .Throws(new RCVException("", new Exception()));
 
             var ex = _controller.GetPolizaById("");
@@ -135,7 +135,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
                 .Setup(x => x.Update(_sMock.Object));
 
             _serviceMock
-                .Setup(i => i.GetPolizasByID(It.IsAny<string>()))
+                .Setup(i => i.GetPolizaByID(It.IsAny<string>()))
                 .Returns(new List<PolizaDTO>());
 
 
@@ -160,7 +160,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
                 .Setup(x => x.Update(_sMock.Object));
 
             _serviceMock
-                .Setup(i => i.GetPolizasByID(It.IsAny<string>()))
+                .Setup(i => i.GetPolizaByID(It.IsAny<string>()))
                 .Returns(new List<PolizaDTO>());
 
 
@@ -182,7 +182,7 @@ namespace TestProject.RCVUcab.UnitTests.Controllers.Administracion
                 .Throws(new RCVException("", new Exception()));
 
             _serviceMock
-                .Setup(p => p.GetPolizasByID(_sMock.Object.ID))
+                .Setup(p => p.GetPolizaByID(_sMock.Object.ID))
                 .Returns(new List<PolizaDTO>() { _sMock.Object });
 
             var ex = _controller.PutPoliza(_sMock.Object);
