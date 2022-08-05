@@ -29,7 +29,7 @@ public class ProviderMQ
         }
         catch (Exception ex)
         {
-            throw;
+            throw ex;
         }
     }
 

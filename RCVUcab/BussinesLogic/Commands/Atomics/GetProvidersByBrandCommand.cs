@@ -1,4 +1,6 @@
 ﻿using RCVUcab.BussinesLogic.DTOs;
+using RCVUcab.Persistence;
+using RCVUcab.Persistence.DAOs.DB;
 
 namespace RCVUcab.BussinesLogic.Commands.Atomics;
 

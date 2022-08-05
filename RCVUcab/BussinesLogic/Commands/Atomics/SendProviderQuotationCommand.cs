@@ -1,5 +1,7 @@
 ﻿using System;
 using RCVUcab.BussinesLogic.DTOs;
+using RCVUcab.Persistence;
+using RCVUcab.Persistence.DAOs.MQ;
 
 namespace RCVUcab.BussinesLogic.Commands.Atomics;
 
