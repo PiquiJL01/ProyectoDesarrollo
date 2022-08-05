@@ -17,12 +17,12 @@ namespace RCVUcab.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.CotizacionEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.CotizacionEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -56,7 +56,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Cotizaciones");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.FacturaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.FacturaEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -71,7 +71,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Facturas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.IncidenteEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.IncidenteEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -95,14 +95,14 @@ namespace RCVUcab.DataAccess.Migrations
 
                     b.HasIndex("PeritoId");
 
-                    b.HasIndex(new[] { "Id_Perito" }, "IX_Incidente_IdPerito");
+                    b.HasIndex(new[] { "Id_Perito" }, "IX_Incidente_IdProveedor");
 
                     b.HasIndex(new[] { "Id_Administrador" }, "IX_ProveedorMarca_IdMarca");
 
                     b.ToTable("Incidentes");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.MarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.MarcaEntity", b =>
                 {
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
@@ -112,7 +112,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Marcas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.OrdenDeCompraEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.OrdenDeCompraEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -132,7 +132,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("OrdenesDeCompra");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaCotizacionEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaCotizacionEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -167,7 +167,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("PiezasCotizaciones");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -184,7 +184,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Piezas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaMarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaMarcaEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -204,7 +204,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("PiezasMarcas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PolizaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PolizaEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -223,7 +223,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Polizas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PropietarioEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PropietarioEntity", b =>
                 {
                     b.Property<string>("CedulaRif")
                         .HasColumnType("nvarchar(450)");
@@ -259,7 +259,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Propietarios");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.ProveedorEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.ProveedorEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -282,7 +282,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Proveedores");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.ProveedorMarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.ProveedorMarcaEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -308,7 +308,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("ProveedoresMarcas");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.TallerEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.TallerEntity", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
@@ -327,7 +327,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Talleres");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.UsuarioEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.UsuarioEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -358,7 +358,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.VehiculoEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoEntity", b =>
                 {
                     b.Property<string>("Placa")
                         .HasColumnType("nvarchar(450)");
@@ -410,7 +410,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("Vehiculos");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.VehiculoIncidenteTallerEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoIncidenteTallerEntity", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -446,17 +446,17 @@ namespace RCVUcab.DataAccess.Migrations
                     b.ToTable("VehiculosIncidentesTalleres");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.CotizacionEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.CotizacionEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.IncidenteEntity", "Incidente")
+                    b.HasOne("RCVUcab.Persistence.Entities.IncidenteEntity", "Incidente")
                         .WithMany("Cotizacion")
                         .HasForeignKey("Id_Incidente");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.ProveedorEntity", "Proveedor")
+                    b.HasOne("RCVUcab.Persistence.Entities.ProveedorEntity", "Proveedor")
                         .WithMany("Cotizacion")
                         .HasForeignKey("Id_Proveedor");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.TallerEntity", "Taller")
+                    b.HasOne("RCVUcab.Persistence.Entities.TallerEntity", "Taller")
                         .WithMany("CotizacionT")
                         .HasForeignKey("Id_Taller");
 
@@ -467,22 +467,22 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.FacturaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.FacturaEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.OrdenDeCompraEntity", "ID_OrdenDeCompra")
+                    b.HasOne("RCVUcab.Persistence.Entities.OrdenDeCompraEntity", "ID_OrdenDeCompra")
                         .WithMany()
                         .HasForeignKey("ID_OrdenDeCompraID");
 
                     b.Navigation("ID_OrdenDeCompra");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.IncidenteEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.IncidenteEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.UsuarioEntity", "Administrador")
+                    b.HasOne("RCVUcab.Persistence.Entities.UsuarioEntity", "Administrador")
                         .WithMany("Incidente")
                         .HasForeignKey("Id_Administrador");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.UsuarioEntity", "Perito")
+                    b.HasOne("RCVUcab.Persistence.Entities.UsuarioEntity", "Perito")
                         .WithMany()
                         .HasForeignKey("PeritoId");
 
@@ -491,13 +491,13 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Perito");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.OrdenDeCompraEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.OrdenDeCompraEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.UsuarioEntity", "Administrador")
+                    b.HasOne("RCVUcab.Persistence.Entities.UsuarioEntity", "Administrador")
                         .WithMany("OrdenDeCompra")
                         .HasForeignKey("Id_Administrador");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.CotizacionEntity", "Id_Cotizacion")
+                    b.HasOne("RCVUcab.Persistence.Entities.CotizacionEntity", "Id_Cotizacion")
                         .WithMany()
                         .HasForeignKey("Id_CotizacionId");
 
@@ -506,13 +506,13 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Id_Cotizacion");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaCotizacionEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaCotizacionEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.CotizacionEntity", "Cotizacion")
+                    b.HasOne("RCVUcab.Persistence.Entities.CotizacionEntity", "Cotizacion")
                         .WithMany("PiezaCotizacion")
                         .HasForeignKey("Id_Cotizacion");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.PiezaEntity", "Pieza")
+                    b.HasOne("RCVUcab.Persistence.Entities.PiezaEntity", "Pieza")
                         .WithMany("PiezaCotizacion")
                         .HasForeignKey("Id_Pieza");
 
@@ -521,13 +521,13 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Pieza");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaMarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaMarcaEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.MarcaEntity", "Marca")
+                    b.HasOne("RCVUcab.Persistence.Entities.MarcaEntity", "Marca")
                         .WithMany("PiezaMarca")
                         .HasForeignKey("Id_Marca");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.PiezaEntity", "Pieza")
+                    b.HasOne("RCVUcab.Persistence.Entities.PiezaEntity", "Pieza")
                         .WithMany("PiezaMarca")
                         .HasForeignKey("Id_Pieza");
 
@@ -536,44 +536,44 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Pieza");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PolizaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PolizaEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.UsuarioEntity", "Administrador")
+                    b.HasOne("RCVUcab.Persistence.Entities.UsuarioEntity", "Administrador")
                         .WithMany("Poliza")
                         .HasForeignKey("Id_Admin");
 
                     b.Navigation("Administrador");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PropietarioEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PropietarioEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.PolizaEntity", "Poliza")
+                    b.HasOne("RCVUcab.Persistence.Entities.PolizaEntity", "Poliza")
                         .WithMany("Propietario")
                         .HasForeignKey("Id_Poliza");
 
                     b.Navigation("Poliza");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.ProveedorEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.ProveedorEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.TallerEntity", "Taller")
+                    b.HasOne("RCVUcab.Persistence.Entities.TallerEntity", "Taller")
                         .WithOne("Proveedor")
-                        .HasForeignKey("RCVUcab.DataAccess.Entities.ProveedorEntity", "TallerID");
+                        .HasForeignKey("RCVUcab.Persistence.Entities.ProveedorEntity", "TallerID");
 
                     b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.ProveedorMarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.ProveedorMarcaEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.MarcaEntity", "Marca")
+                    b.HasOne("RCVUcab.Persistence.Entities.MarcaEntity", "Marca")
                         .WithMany("ProveedorMarca")
                         .HasForeignKey("Id_Marca");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.ProveedorEntity", "Proveedor")
+                    b.HasOne("RCVUcab.Persistence.Entities.ProveedorEntity", "Proveedor")
                         .WithMany("ProveedorMarca")
                         .HasForeignKey("Id_Proveedor");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.TallerEntity", "Taller")
+                    b.HasOne("RCVUcab.Persistence.Entities.TallerEntity", "Taller")
                         .WithMany("ProveedorMarca")
                         .HasForeignKey("Id_Taller");
 
@@ -584,13 +584,13 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Taller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.VehiculoEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.MarcaEntity", "Marca")
+                    b.HasOne("RCVUcab.Persistence.Entities.MarcaEntity", "Marca")
                         .WithMany("Vehiculo")
                         .HasForeignKey("Id_Marca");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.PropietarioEntity", "Propietario")
+                    b.HasOne("RCVUcab.Persistence.Entities.PropietarioEntity", "Propietario")
                         .WithMany("Vehiculo")
                         .HasForeignKey("Id_Propietario");
 
@@ -599,21 +599,21 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Propietario");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.VehiculoIncidenteTallerEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoIncidenteTallerEntity", b =>
                 {
-                    b.HasOne("RCVUcab.DataAccess.Entities.IncidenteEntity", "Incidente")
+                    b.HasOne("RCVUcab.Persistence.Entities.IncidenteEntity", "Incidente")
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Incidente");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.PiezaEntity", "Pieza")
+                    b.HasOne("RCVUcab.Persistence.Entities.PiezaEntity", "Pieza")
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Pieza");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.TallerEntity", "Taller")
+                    b.HasOne("RCVUcab.Persistence.Entities.TallerEntity", "Taller")
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Taller");
 
-                    b.HasOne("RCVUcab.DataAccess.Entities.VehiculoEntity", "Vehiculo")
+                    b.HasOne("RCVUcab.Persistence.Entities.VehiculoEntity", "Vehiculo")
                         .WithMany("VehiculoIncidenteTaller")
                         .HasForeignKey("Id_Vehiculo");
 
@@ -626,19 +626,19 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Vehiculo");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.CotizacionEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.CotizacionEntity", b =>
                 {
                     b.Navigation("PiezaCotizacion");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.IncidenteEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.IncidenteEntity", b =>
                 {
                     b.Navigation("Cotizacion");
 
                     b.Navigation("VehiculoIncidenteTaller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.MarcaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.MarcaEntity", b =>
                 {
                     b.Navigation("PiezaMarca");
 
@@ -647,7 +647,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Vehiculo");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PiezaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PiezaEntity", b =>
                 {
                     b.Navigation("PiezaCotizacion");
 
@@ -656,24 +656,24 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("VehiculoIncidenteTaller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PolizaEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PolizaEntity", b =>
                 {
                     b.Navigation("Propietario");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.PropietarioEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.PropietarioEntity", b =>
                 {
                     b.Navigation("Vehiculo");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.ProveedorEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.ProveedorEntity", b =>
                 {
                     b.Navigation("Cotizacion");
 
                     b.Navigation("ProveedorMarca");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.TallerEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.TallerEntity", b =>
                 {
                     b.Navigation("CotizacionT");
 
@@ -684,7 +684,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("VehiculoIncidenteTaller");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.UsuarioEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.UsuarioEntity", b =>
                 {
                     b.Navigation("Incidente");
 
@@ -693,7 +693,7 @@ namespace RCVUcab.DataAccess.Migrations
                     b.Navigation("Poliza");
                 });
 
-            modelBuilder.Entity("RCVUcab.DataAccess.Entities.VehiculoEntity", b =>
+            modelBuilder.Entity("RCVUcab.Persistence.Entities.VehiculoEntity", b =>
                 {
                     b.Navigation("VehiculoIncidenteTaller");
                 });

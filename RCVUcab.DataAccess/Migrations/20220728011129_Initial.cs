@@ -393,7 +393,7 @@ namespace RCVUcab.DataAccess.Migrations
                 column: "ID_OrdenDeCompraID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Incidente_IdPerito",
+                name: "IX_Incidente_IdProveedor",
                 table: "Incidentes",
                 column: "Id_Perito");
 
