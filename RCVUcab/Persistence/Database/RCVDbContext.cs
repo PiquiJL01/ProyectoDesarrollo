@@ -21,7 +21,7 @@ namespace RCVUcab.Persistence.Database
             }
         }
 
-        public virtual DbSet<ProviderEntityEntity> Providers
+        public virtual DbSet<ProviderEntity> Providers
         {
             get; set;
         }

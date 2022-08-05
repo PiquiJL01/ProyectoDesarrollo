@@ -10,7 +10,7 @@ namespace RCVUcab.Persistence.Database
             get;
         }
 
-        DbSet<ProviderEntityEntity> Providers
+        DbSet<ProviderEntity> Providers
         {
             get; set;
         }

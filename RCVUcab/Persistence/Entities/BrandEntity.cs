@@ -6,6 +6,6 @@ namespace RCVUcab.Persistence.Entities
     {
         public string Name { get; set; }
         public string Country { get; set; }
-        public ICollection<ProviderEntityEntity> Providers { get; set; }
+        public ICollection<ProviderEntity> Providers { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RCVUcab.BussinesLogic.DTOs;
 using RCVUcab.Exceptions;
@@ -6,6 +7,10 @@ using RCVUcab.Persistence.DAOs.Interfaces;
 using RCVUcab.Responses;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.Commands.Atomics;
+using RCVUcab.BussinesLogic.Commands.Composes;
+using RCVUcab.Persistence.Mappers;
 
 namespace RCVUcab.Controllers.Provider
 {
@@ -13,30 +18,45 @@ namespace RCVUcab.Controllers.Provider
     [Route("provider")]
     public class ProviderController : Controller
     {
-        private readonly IProviderDAO _providerDAO;
         private readonly ILogger<ProviderController> _logger;
 
-        public ProviderController(ILogger<ProviderController> logger, IProviderDAO providerDAO)
+        public ProviderController(ILogger<ProviderController> logger)
         {
-            _providerDAO = providerDAO;
             _logger = logger;
         }
 
-        [HttpGet("[controller]/{brand}")]
-        public ApplicationResponse<List<BrandDTO>> GetProvidersByBrand([Required][FromRoute] string brand)
+        [HttpGet("{brand}")]
+        public BrandDTO GetProvidersByBrand([Required][FromRoute] string brand)
         {
-            var response = new ApplicationResponse<List<BrandDTO>>();
             try
             {
-                response.Data = _providerDAO.GetProvidersByBrand(brand);
+                GetProvidersByBrandCommand command =
+                    CommandFactory.createGetProvidersByBrandCommand(brand);
+                command.Execute();
+                return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                throw;
             }
-            return response;
+        }
+
+
+        [HttpPost("quotation")]
+        public QuotationDTO CreateClaimAuctionQuotation([FromBody] QuotationDTO request)
+        {
+            try
+            {
+                var quotation = QuotationMapper.MapDtoToEntity(request);
+                CreateProviderQuotationCommand command =
+                    CommandFactory.createCreateProviderQuotationCommand(quotation);
+                command.Execute();
+                return command.GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

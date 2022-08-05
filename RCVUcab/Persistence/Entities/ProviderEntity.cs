@@ -2,7 +2,7 @@
 
 namespace RCVUcab.Persistence.Entities
 {
-    public class ProviderEntityEntity : BaseEntity
+    public class ProviderEntity : BaseEntity
     {
         public string Name { get; set; }
 
