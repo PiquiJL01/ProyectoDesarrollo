@@ -36,7 +36,7 @@ namespace RCVUcab.DataAccess.DAOs.DB
 
 
 
-        public List<TallerDTO> GetTalleresByID(string id)
+        public TallerDTO GetTalleresByID(string id)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace RCVUcab.DataAccess.DAOs.DB
                      PhoneNumber = i.PhoneNumber,
                  }).ToList();
 
-                return data.ToList();
+                return data.Single();
 
             }
             catch (Exception ex)
@@ -104,15 +104,29 @@ namespace RCVUcab.DataAccess.DAOs.DB
             return query.First();
         }
 
-        public void Insert(TallerDTO tallerDto)
+        public TallerDTO Insert(TallerEntity taller)
         {
-            TallerEntity taller = new TallerEntity();
+            _context.Talleres.Add(taller);
+            _context.DbContext.SaveChanges();
+
+            var data = _context.Talleres
+                .Where(i => i.ID == taller.ID)
+                .Select(x => new TallerDTO
+                {
+                    ID = x.ID,
+                    Name = x.Name,
+                    Address = x.Address,
+                    PhoneNumber = x.PhoneNumber,
+                });
+            return data.First();
+
+            /*TallerEntity taller = new TallerEntity();
             taller.ID = tallerDto.ID;
             taller.Name = tallerDto.Name;
             taller.Address = tallerDto.Address;
             taller.PhoneNumber = tallerDto.PhoneNumber;
             _context.Talleres.Add(taller);
-            _context.DbContext.SaveChanges();
+            _context.DbContext.SaveChanges();*/
         }
 
         public void Update(TallerDTO tallerDto)

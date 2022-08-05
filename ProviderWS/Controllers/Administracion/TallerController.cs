@@ -6,7 +6,9 @@ using Microsoft.Extensions.Logging;
 using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
+using RCVUcab.BussinesLogic.Commands.Commands.Composes;
 using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.BussinesLogic.Mappers.Mappers;
 
 namespace ProviderWS.Controllers.Administracion
 {
@@ -24,7 +26,7 @@ namespace ProviderWS.Controllers.Administracion
         }*/
 
         [HttpGet("{taller}")]
-        public List<TallerDTO> GetTallerById([Required][FromRoute] string taller)
+        public TallerDTO GetTallerById([Required][FromRoute] string taller)
         {
             try
             {
@@ -37,6 +39,57 @@ namespace ProviderWS.Controllers.Administracion
             {
                 throw;
             }
+        }
+
+        [HttpGet]
+        public List<TallerDTO> GetTalleres()
+        {
+            try
+            {
+                GetTalleresCommand command =
+                  CommandFactory.createGetTalleresCommand();
+                command.Execute();
+                return command.GetResultList();
+            }
+            catch (RCVException ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet("{marca}/TalleresByBrand")]
+        public List<ProveedorMarcaDTO> GetTallerByBrand([FromRoute] string marca)
+        {
+            try
+            {
+                //response.Data = _TallerDao.GetTalleresByBrand(marca);
+                GetTalleresByBrandCommand command =
+                  CommandFactory.createGetTalleresByBrandCommand(marca);
+                command.Execute();
+                return command.GetResultList();
+            }
+            catch (RCVException ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public TallerDTO PostTaller([FromBody] TallerDTO TallerDto)
+        {
+            try
+            {
+                var taller = TallerMapper.MapDtoToEntity(TallerDto);
+                CreateTallerCommand command =
+                  CommandFactory.createCreateTallerCommand(taller);
+                command.Execute();
+                return command.GetResult();
+            }
+            catch (RCVException ex)
+            {
+                throw ex;
+            }
+
         }
 
         /*[HttpGet]

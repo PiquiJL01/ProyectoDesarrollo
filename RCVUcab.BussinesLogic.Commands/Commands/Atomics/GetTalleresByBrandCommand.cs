@@ -5,29 +5,28 @@ using RCVUcab.DataAccess.DAOs.DB;
 
 namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
 {
-    public class GetTallerByIdCommand : Command<TallerDTO>
+    public class GetTalleresByBrandCommand : Command<ProveedorMarcaDTO>
     {
-        private readonly string _taller;
-        private TallerDTO _result;
+        private List<ProveedorMarcaDTO> _result;
+        private readonly string _marca;
 
-        public GetTallerByIdCommand(string taller)
+        public GetTalleresByBrandCommand(string marca)
         {
-            _taller = taller;
+            _marca = marca;
         }
-
 
         public override void Execute()
         {
             TallerDB dao = TallerDAOFactory.CreateTallerDB();
-            _result = dao.GetTalleresByID(_taller);
+            _result = dao.GetTalleresByBrand(_marca);
         }
 
-        public override TallerDTO GetResult()
+        public override List<ProveedorMarcaDTO> GetResultList()
         {
             return _result;
         }
 
-        public override List<TallerDTO> GetResultList()
+        public override ProveedorMarcaDTO GetResult()
         {
             throw new NotImplementedException();
         }

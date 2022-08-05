@@ -12,7 +12,8 @@ namespace RCVUcab.BussinesLogic.Mappers.Mappers
             {
                 ID = dto.ID,
                 Name = dto.Name,
-                Address = dto.Address
+                Address = dto.Address,
+                PhoneNumber = dto.PhoneNumber
             };
             return Taller;
         }
@@ -25,7 +26,8 @@ namespace RCVUcab.BussinesLogic.Mappers.Mappers
             {
                 ID = entity.ID,
                 Name = entity.Name,
-                Address = entity.Address
+                Address = entity.Address,
+                PhoneNumber = entity.PhoneNumber
             };
             return Taller;
         }

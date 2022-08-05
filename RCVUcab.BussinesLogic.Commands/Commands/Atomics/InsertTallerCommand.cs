@@ -2,15 +2,16 @@
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.DAOFactory;
 using RCVUcab.DataAccess.DAOs.DB;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
 {
-    public class GetTallerByIdCommand : Command<TallerDTO>
+    public class InsertTallerCommand : Command<TallerDTO>
     {
-        private readonly string _taller;
+        private readonly TallerEntity _taller;
         private TallerDTO _result;
 
-        public GetTallerByIdCommand(string taller)
+        public InsertTallerCommand(TallerEntity taller)
         {
             _taller = taller;
         }
@@ -19,7 +20,7 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
         public override void Execute()
         {
             TallerDB dao = TallerDAOFactory.CreateTallerDB();
-            _result = dao.GetTalleresByID(_taller);
+            _result = dao.Insert(_taller);
         }
 
         public override TallerDTO GetResult()

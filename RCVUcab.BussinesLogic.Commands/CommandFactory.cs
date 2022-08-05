@@ -1,5 +1,7 @@
 ﻿using System;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
+using RCVUcab.BussinesLogic.Commands.Commands.Composes;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Commands
 {
@@ -8,6 +10,26 @@ namespace RCVUcab.BussinesLogic.Commands
         public static GetTallerByIdCommand createGetTallerByIdCommand(string taller)
         {
             return new GetTallerByIdCommand(taller);
+        }
+
+        public static GetTalleresCommand createGetTalleresCommand()
+        {
+            return new GetTalleresCommand();
+        }
+
+        public static GetTalleresByBrandCommand createGetTalleresByBrandCommand(string marca)
+        {
+            return new GetTalleresByBrandCommand(marca);
+        }
+
+        public static CreateTallerCommand createCreateTallerCommand(TallerEntity taller)
+        {
+            return new CreateTallerCommand(taller);
+        }
+
+        public static InsertTallerCommand createInsertTallerCommand(TallerEntity taller)
+        {
+            return new InsertTallerCommand(taller);
         }
 
         /*public static CreateProviderQuotationCommand createCreateProviderQuotationCommand(QuotationEntity quotation)
