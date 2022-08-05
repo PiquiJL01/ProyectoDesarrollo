@@ -36,7 +36,7 @@ namespace RCVUcab.DataAccess.DAOs.DB
 
 
 
-        public TallerDTO GetTalleresByID(string id)
+        public List<TallerDTO> GetTalleresByID(string id)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace RCVUcab.DataAccess.DAOs.DB
                      PhoneNumber = i.PhoneNumber,
                  }).ToList();
 
-                return data.Single();
+                return data.ToList();
 
             }
             catch (Exception ex)

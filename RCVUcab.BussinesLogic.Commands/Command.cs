@@ -5,7 +5,7 @@ namespace RCVUcab.BussinesLogic.Commands
     {
         public abstract void Execute();
 
-        public abstract TOut GetResult();
+        public abstract List<TOut> GetResult();
     }
 }
 

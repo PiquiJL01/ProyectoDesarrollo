@@ -4,10 +4,10 @@
     "anonymousAuthentication": true
   },
   "profiles": {
-    "RCVUcab.BussinesLogic.DTOs": {
+    "RCVUcab.BussinesLogic.DTO": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:21800",
+      "applicationUrl": "http://localhost:20023",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

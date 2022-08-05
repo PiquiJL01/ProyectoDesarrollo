@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
-using RCVUcab.BussinesLogic.DTOs.DTOs;
+using RCVUcab.BussinesLogic.DTO.DTOs;
 
 namespace ProviderWS.Controllers.Administracion
 {
@@ -24,7 +24,7 @@ namespace ProviderWS.Controllers.Administracion
         }*/
 
         [HttpGet("{taller}")]
-        public TallerDTO GetTallerById([Required][FromRoute] string taller)
+        public List<TallerDTO> GetTallerById([Required][FromRoute] string taller)
         {
             try
             {

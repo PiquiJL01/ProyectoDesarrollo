@@ -7,7 +7,7 @@
     "RCVUcab.DataAccess": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:63760",
+      "applicationUrl": "http://localhost:62425",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -204,7 +204,7 @@ namespace RCVUcab.DataAccess.Database
             //INCIDENTE
             modelBuilder.Entity<IncidenteEntity>(entity =>
             {
-                entity.HasIndex(e => e.Id_Perito, "IX_Incidente_IdProveedor");
+                entity.HasIndex(e => e.Id_Perito, "IX_Incidente_IdPerito");
 
                 entity.HasIndex(e => e.Id_Administrador, "IX_ProveedorMarca_IdMarca");
 

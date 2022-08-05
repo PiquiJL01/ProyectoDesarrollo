@@ -10,7 +10,7 @@ namespace RCVUcab.DataAccess
         {
             var builder = new DbContextOptionsBuilder<DataBaseContext>();
             var connectionString = "Server=localhost;Database=bdDesarrollo;User Id=sa;Password=<Anabel47*>;";
-            builder.UseNpgsql(connectionString);
+            builder.UseSqlServer(connectionString);
             return new DataBaseContext(builder.Options);
         }
     }

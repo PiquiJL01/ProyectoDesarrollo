@@ -8,7 +8,7 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
     public class GetTallerByIdCommand : Command<TallerDTO>
     {
         private readonly string _taller;
-        private TallerDTO _result;
+        private List<TallerDTO> _result;
 
         public GetTallerByIdCommand(string taller)
         {
@@ -22,7 +22,7 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
             _result = dao.GetTalleresByID(_taller);
         }
 
-        public override TallerDTO GetResult()
+        public override List<TallerDTO> GetResult()
         {
             return _result;
         }
