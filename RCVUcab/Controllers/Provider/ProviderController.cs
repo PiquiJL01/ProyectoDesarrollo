@@ -47,9 +47,8 @@ namespace RCVUcab.Controllers.Provider
         {
             try
             {
-                var quotation = QuotationMapper.MapDtoToEntity(request);
                 CreateProviderQuotationCommand command =
-                    CommandFactory.createCreateProviderQuotationCommand(quotation);
+                    CommandFactory.createCreateProviderQuotationCommand(QuotationMapper.MapDtoToEntity(request));
                 command.Execute();
                 return command.GetResult();
             }
