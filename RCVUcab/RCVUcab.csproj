@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Persistence\DAOs\DB\**" />
+    <Compile Remove="Persistence\DAOs\MQ\**" />
+    <Content Remove="Persistence\DAOs\DB\**" />
+    <Content Remove="Persistence\DAOs\MQ\**" />
+    <EmbeddedResource Remove="Persistence\DAOs\DB\**" />
+    <EmbeddedResource Remove="Persistence\DAOs\MQ\**" />
+    <None Remove="Persistence\DAOs\DB\**" />
+    <None Remove="Persistence\DAOs\MQ\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
       <PrivateAssets>all</PrivateAssets>
@@ -35,7 +46,5 @@
     <Folder Include="Controllers\Incidente\" />
     <Folder Include="Controllers\Taller\" />
     <Folder Include="Controllers\Proveedor\" />
-    <Folder Include="Persistence\DAOs\MQ\" />
-    <Folder Include="Persistence\DAOs\DB\" />
   </ItemGroup>
 </Project>

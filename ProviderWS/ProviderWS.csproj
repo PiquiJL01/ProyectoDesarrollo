@@ -11,6 +11,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'RCVUcab' " />
   <ItemGroup>
+    <Compile Remove="Controllers\Perito\**" />
+    <Content Remove="Controllers\Perito\**" />
+    <EmbeddedResource Remove="Controllers\Perito\**" />
+    <None Remove="Controllers\Perito\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="AutoMapper" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Swashbuckle.AspNetCore" />
@@ -29,7 +35,6 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Controllers\Administracion\" />
-    <Folder Include="Controllers\Perito\" />
     <Folder Include="Controllers\Proveedor\" />
     <Folder Include="Controllers\Taller\" />
     <Folder Include="Exceptions\" />
