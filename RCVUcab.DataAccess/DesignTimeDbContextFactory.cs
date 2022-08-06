@@ -6,11 +6,15 @@ namespace RCVUcab.DataAccess
 {
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DataBaseContext>
     {
+        private string ConexionJoselyn = "Server=localhost;Database=bdDesarrollo;User Id=sa;Password=<Anabel47*>;";
+
+        private string ConexionJose =
+            "Server=(localdb)\\mssqllocaldb;Database=bdDesarrollo;Trusted_Connection=True;MultipleActiveResultSets=true";
+
         public DataBaseContext CreateDbContext(string[]? args)
         {
             var builder = new DbContextOptionsBuilder<DataBaseContext>();
-            var connectionString = "Server=localhost;Database=bdDesarrollo;User Id=sa;Password=<Anabel47*>;";
-            builder.UseSqlServer(connectionString);
+            builder.UseSqlServer(ConexionJoselyn);
             return new DataBaseContext(builder.Options);
         }
     }

@@ -1,6 +1,5 @@
-﻿/*using System.Collections.Generic;
-using RCVUcab.Persistence.DAOs.Interfaces;
-using RCVUcab.Persistence.Database;
+﻿using RCVUcab.DataAccess.DAOs.Interfaces;
+using RCVUcab.DataAccess.Database;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
@@ -25,4 +24,4 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
         public abstract void Update(T entity);
         public abstract void Delete(T entity);
     }
-}*/
+}

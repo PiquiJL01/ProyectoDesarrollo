@@ -1,10 +1,9 @@
-﻿/*using RCVUcab.BussinesLogic.DTOs;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
-namespace RCVUcab.Persistence.DAOs.Interfaces
+namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface IPiezaDAO: IDAO<PiezaDTO>
     {
 
     }
-}*/
-
+}

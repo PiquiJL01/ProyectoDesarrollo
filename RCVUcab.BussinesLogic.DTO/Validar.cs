@@ -1,5 +1,4 @@
-﻿using System;
-using RCVUcab.BussinesLogic.DTO.DTOs;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
 namespace RCVUcab.BussinesLogic.DTO
 {

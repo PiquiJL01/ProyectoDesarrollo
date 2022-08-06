@@ -1,7 +1,6 @@
-﻿/*using System.Collections.Generic;
-using RCVUcab.BussinesLogic.DTOs;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
-namespace RCVUcab.Persistence.DAOs.Interfaces
+namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface ITallerDAO: IDAO<TallerDTO>
     {
@@ -9,6 +8,4 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
         public List<TallerDTO> GetTalleresByID(string id);
         public List<ProveedorMarcaDTO> GetTalleresByBrand(string brand);
     }
-}*/
-
-
+}

@@ -34,17 +34,4 @@
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
     <PackageReference Include="System.ServiceModel.Web" Version="1.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Controllers\Perito\" />
-    <None Remove="Controllers\Incidente\" />
-    <None Remove="Controllers\Taller\" />
-    <None Remove="Controllers\Proveedor\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Perito\" />
-    <Folder Include="Controllers\Incidente\" />
-    <Folder Include="Controllers\Taller\" />
-    <Folder Include="Controllers\Proveedor\" />
-  </ItemGroup>
 </Project>

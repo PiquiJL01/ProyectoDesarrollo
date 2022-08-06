@@ -1,6 +1,4 @@
-﻿/*using System.Collections.Generic;
-
-namespace RCVUcab.Persistence.DAOs.Interfaces
+﻿namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface IDAO<T>
     {
@@ -10,4 +8,4 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
         public void Update(T entity);
         public void Delete(T entity);
     }
-}*/
+}

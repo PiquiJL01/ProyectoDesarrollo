@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RCVUcab.DataAccess.Entities
+﻿namespace RCVUcab.DataAccess.Entities
 {
     public class TallerEntity
     {

@@ -1,5 +1,4 @@
-﻿using System;
-namespace RCVUcab.BussinesLogic.DTO.DTOs
+﻿namespace RCVUcab.BussinesLogic.DTO.DTOs
 {
     public class CotizacionDTO
     {

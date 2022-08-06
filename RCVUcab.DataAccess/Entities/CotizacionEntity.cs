@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Principal;
-
-namespace RCVUcab.DataAccess.Entities
+﻿namespace RCVUcab.DataAccess.Entities
 {
     public class CotizacionEntity
     {

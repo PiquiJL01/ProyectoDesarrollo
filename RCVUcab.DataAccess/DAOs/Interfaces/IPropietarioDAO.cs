@@ -1,11 +1,9 @@
-﻿/*using System.Collections.Generic;
-using RCVUcab.BussinesLogic.DTOs;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
-namespace RCVUcab.Persistence.DAOs.Interfaces
+namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface IPropietarioDAO : IDAO<PropietarioDTO>
     {
         public List<PropietarioDTO> GetPropietarioByID(string id);
     }
-}*/
-
+}

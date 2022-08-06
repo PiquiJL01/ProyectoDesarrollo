@@ -1,4 +1,5 @@
-﻿using RCVUcab.Persistence.Mappers;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Mappers.Mappers;
 

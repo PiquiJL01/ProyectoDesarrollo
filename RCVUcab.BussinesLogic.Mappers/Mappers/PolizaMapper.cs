@@ -1,4 +1,5 @@
-﻿using RCVUcab.Persistence.Mappers;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Mappers.Mappers;
 
@@ -42,7 +43,7 @@ public static class PolizaMapper
 
         return new PolizaDTO
         {
-            Administrador = UsuarioMapper.entityToDto(poliza.Administrador),
+            Administrador = UsuarioMapper.EntityToDto(poliza.Administrador),
             ID = poliza.ID,
             Id_Admin = poliza.Id_Admin,
             Propietario = list,

@@ -1,7 +1,6 @@
-﻿/*using System.Collections.Generic;
-using RCVUcab.BussinesLogic.DTOs;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
-namespace RCVUcab.Persistence.DAOs.Interfaces
+namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface IUsuarioDAO : IDAO<UsuarioDTO>
     {
@@ -9,5 +8,4 @@ namespace RCVUcab.Persistence.DAOs.Interfaces
         public List<UsuarioDTO> GetPeritos();
         public List<UsuarioDTO> GetUsuariosByID(string id);
     }
-}*/
-
+}

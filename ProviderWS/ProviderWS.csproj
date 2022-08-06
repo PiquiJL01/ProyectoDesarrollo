@@ -11,12 +11,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'RCVUcab' " />
   <ItemGroup>
-    <Compile Remove="Controllers\Perito\**" />
-    <Content Remove="Controllers\Perito\**" />
-    <EmbeddedResource Remove="Controllers\Perito\**" />
-    <None Remove="Controllers\Perito\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="AutoMapper" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Swashbuckle.AspNetCore" />
@@ -33,18 +27,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Controllers\Administracion\" />
     <Folder Include="Controllers\Proveedor\" />
-    <Folder Include="Controllers\Taller\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RCVUcab.BussinesLogic.Commands\RCVUcab.BussinesLogic.Commands.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
-    <ProjectReference Include="..\RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
+    <ProjectReference Include="..\RCVUcab.BussinesLogic.Commands\RCVUcab.BussinesLogic.Commands.csproj" />
+    <ProjectReference Include="..\RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj" />
+    <ProjectReference Include="..\RCVUcab.BussinesLogic.Mappers\RCVUcab.BussinesLogic.Mappers.csproj" />
+    <ProjectReference Include="..\RCVUcab.DataAccess\RCVUcab.DataAccess.csproj" />
   </ItemGroup>
 </Project>

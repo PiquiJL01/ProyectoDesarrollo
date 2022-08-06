@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
@@ -79,7 +76,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var taller = TallerMapper.MapDtoToEntity(TallerDto);
+                var taller = TallerMapper.DtoToEntity(TallerDto);
                 CreateTallerCommand command =
                   CommandFactory.createCreateTallerCommand(taller);
                 command.Execute();

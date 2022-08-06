@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.BussinesLogic.Mappers.Mappers;
-using RCVUcab.Persistence.Entities;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Entities;
 
-namespace RCVUcab.Persistence.Mappers;
+namespace RCVUcab.BussinesLogic.Mappers.Mappers;
 
 public static class PropietarioMapper
 {

@@ -1,11 +1,10 @@
-﻿/*using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Persistence.DAOs.Interfaces;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 
-namespace RCVUcab.Persistence.DAOs.Interfaces
+namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
     public interface IMarcaDAO: IDAO<MarcaDTO>
     {
 
     }
-}*/
+}
 

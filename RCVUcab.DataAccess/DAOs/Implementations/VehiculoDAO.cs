@@ -1,12 +1,8 @@
-﻿/*using System.Collections.Generic;
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Exceptions;
-using RCVUcab.Persistence.DAOs.Interfaces;
-using RCVUcab.Persistence.Database;
-using RCVUcab.Persistence.Entities;
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.DAOs.Interfaces;
+using RCVUcab.DataAccess.Database;
+using RCVUcab.DataAccess.Entities;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
@@ -154,4 +150,4 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             Context().SaveChanges();
         }
     }
-}*/
+}
