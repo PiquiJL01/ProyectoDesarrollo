@@ -3,21 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProyectoDesarrollo", "ProyectoDesarrollo\ProyectoDesarrollo.csproj", "{962A2B18-CF82-48CD-8A2C-401A16B0E91C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{6D505157-32E2-4821-83DB-F424A7E10AE5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCVUcab", "RCVUcab\RCVUcab.csproj", "{CCD09FE0-5628-4E8C-B751-925E2ABF12AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProviderWS", "ProviderWS\ProviderWS.csproj", "{470D63CA-DE8E-4BC3-BC88-D0AA08E3CB89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProviderWS", "ProviderWS\ProviderWS.csproj", "{470D63CA-DE8E-4BC3-BC88-D0AA08E3CB89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCVUcab.BussinesLogic.Mappers", "RCVUcab.BussinesLogic.Mappers\RCVUcab.BussinesLogic.Mappers.csproj", "{97872DB4-1054-43BC-9319-9A1DBDEFDB1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCVUcab.DataAccess", "RCVUcab.DataAccess\RCVUcab.DataAccess.csproj", "{B43FC508-5931-4982-89B5-DCC8C70E6304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCVUcab.DataAccess", "RCVUcab.DataAccess\RCVUcab.DataAccess.csproj", "{B43FC508-5931-4982-89B5-DCC8C70E6304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCVUcab.BussinesLogic.Commands", "RCVUcab.BussinesLogic.Commands\RCVUcab.BussinesLogic.Commands.csproj", "{519A7DE0-4555-4EA7-8345-E902D6E743D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCVUcab.BussinesLogic.Commands", "RCVUcab.BussinesLogic.Commands\RCVUcab.BussinesLogic.Commands.csproj", "{519A7DE0-4555-4EA7-8345-E902D6E743D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCVUcab.BussinesLogic.DTO", "RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj", "{011B780F-60F9-4DD0-99C2-E9C157845AD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCVUcab.BussinesLogic.DTO", "RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj", "{011B780F-60F9-4DD0-99C2-E9C157845AD2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCVUcab.BussinesLogic.Mappers", "RCVUcab.BussinesLogic.Mappers\RCVUcab.BussinesLogic.Mappers.csproj", "{9497D916-A045-4F40-8A0F-C1BABE3D87BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{962A2B18-CF82-48CD-8A2C-401A16B0E91C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{962A2B18-CF82-48CD-8A2C-401A16B0E91C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{962A2B18-CF82-48CD-8A2C-401A16B0E91C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{962A2B18-CF82-48CD-8A2C-401A16B0E91C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D505157-32E2-4821-83DB-F424A7E10AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D505157-32E2-4821-83DB-F424A7E10AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D505157-32E2-4821-83DB-F424A7E10AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,10 +35,6 @@ Global
 		{470D63CA-DE8E-4BC3-BC88-D0AA08E3CB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{470D63CA-DE8E-4BC3-BC88-D0AA08E3CB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{470D63CA-DE8E-4BC3-BC88-D0AA08E3CB89}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97872DB4-1054-43BC-9319-9A1DBDEFDB1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97872DB4-1054-43BC-9319-9A1DBDEFDB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97872DB4-1054-43BC-9319-9A1DBDEFDB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97872DB4-1054-43BC-9319-9A1DBDEFDB1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B43FC508-5931-4982-89B5-DCC8C70E6304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B43FC508-5931-4982-89B5-DCC8C70E6304}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B43FC508-5931-4982-89B5-DCC8C70E6304}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +47,10 @@ Global
 		{011B780F-60F9-4DD0-99C2-E9C157845AD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{011B780F-60F9-4DD0-99C2-E9C157845AD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{011B780F-60F9-4DD0-99C2-E9C157845AD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9497D916-A045-4F40-8A0F-C1BABE3D87BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9497D916-A045-4F40-8A0F-C1BABE3D87BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9497D916-A045-4F40-8A0F-C1BABE3D87BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9497D916-A045-4F40-8A0F-C1BABE3D87BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

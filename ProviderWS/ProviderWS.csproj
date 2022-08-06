@@ -41,8 +41,5 @@
     <ProjectReference Include="..\RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\RCVUcab.BussinesLogic.Mappers\RCVUcab.BussinesLogic.Mappers.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -35,5 +35,7 @@
     <Folder Include="Controllers\Incidente\" />
     <Folder Include="Controllers\Taller\" />
     <Folder Include="Controllers\Proveedor\" />
+    <Folder Include="Persistence\DAOs\MQ\" />
+    <Folder Include="Persistence\DAOs\DB\" />
   </ItemGroup>
 </Project>
