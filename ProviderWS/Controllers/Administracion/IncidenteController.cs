@@ -21,7 +21,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostIncidenteCommand(IncidenteDto);
+                var command = PostCommandFactory.CreatePostIncidenteCommand(IncidenteDto);
                 command.Execute();
                 return command.GetResult();
             }

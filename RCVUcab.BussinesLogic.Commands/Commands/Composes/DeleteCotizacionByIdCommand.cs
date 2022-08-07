@@ -13,9 +13,9 @@ public class DeleteCotizacionByIdCommand : Command<CotizacionDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetCotizacionCommand(_id);
+        var command1 = GetByCommandFactory.CreateGetCotizacionCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreateDeleteCotizacionCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreateDeleteCotizacionCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }

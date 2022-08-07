@@ -14,9 +14,9 @@ public class DeleteUsuarioByIdCommand : Command<UsuarioDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetUsuarioCommand(_id);
+        var command1 = GetCommandFactory.CreateGetUsuarioCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreateDeleteUsuarioCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreateDeleteUsuarioCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }

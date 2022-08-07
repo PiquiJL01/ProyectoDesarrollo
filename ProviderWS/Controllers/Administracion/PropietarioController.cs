@@ -24,7 +24,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetPropietarosCommand();
+                var command = GetCommandFactory.CreateGetPropietarosCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -39,7 +39,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetPropietariosByIdCommand(id);
+                var command = GetByCommandFactory.CreateGetPropietariosByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -54,7 +54,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostPropietarioCommand(propietarioDto);
+                var command = PostCommandFactory.CreatePostPropietarioCommand(propietarioDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -69,7 +69,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutPropietarioCommand(propietarioDto);
+                var command = PutCommandFactory.CreatePutPropietarioCommand(propietarioDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -84,7 +84,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeletePropietarioByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeletePropietarioByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

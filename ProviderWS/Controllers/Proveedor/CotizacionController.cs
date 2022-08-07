@@ -1,4 +1,7 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace ProviderWS.Controllers.Proveedor
 {
@@ -6,75 +9,56 @@ namespace ProviderWS.Controllers.Proveedor
     [Route("Proveedor/[controller]")]
     public class CotizacionController
     {
-        private readonly ICotizacionDAO _CotizacionDao;
         private readonly ILogger<CotizacionController> _logger;
 
-        public CotizacionController(ILogger<CotizacionController> logger, ICotizacionDAO CotizacionDao)
+        public CotizacionController(ILogger<CotizacionController> logger)
         {
-            _CotizacionDao = CotizacionDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<CotizacionDTO>> GetCotizaciones()
+        public List<CotizacionDTO> GetCotizaciones()
         {
-            var response = new ApplicationResponse<List<CotizacionDTO>>();
             try
             {
-                response.Data = _CotizacionDao.Select();
+                var command = GetCommandFactory.CreateGetCotizacionesCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<CotizacionDTO>> GetCotizacionById([FromRoute] string id)
+        public List<CotizacionDTO> GetCotizacionById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<CotizacionDTO>>();
             try
             {
-                response.Data = _CotizacionDao.GetCotizacionesByID(id);
+                var command = GetByCommandFactory.CreateGetCotizacionesByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPut]
-        public ApplicationResponse<CotizacionDTO> PutCotizacion([FromBody] CotizacionDTO CotizacionDto)
+        public CotizacionDTO PutCotizacion([FromBody] CotizacionDTO CotizacionDto)
         {
-            var response = new ApplicationResponse<CotizacionDTO>()
-            {
-                Data = CotizacionDto
-            };
-
             try
             {
-                var list = _CotizacionDao.GetCotizacionesByID(CotizacionDto.Id);
-
-                if (list.Exists(x => x.Id.Contains(CotizacionDto.Id)))
-                {
-                    _CotizacionDao.Update(CotizacionDto);
-
-                    response.Message = "El Cotizacion ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = PutCommandFactory.CreatePutCotizacionCommand(CotizacionDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
-}*/
+}

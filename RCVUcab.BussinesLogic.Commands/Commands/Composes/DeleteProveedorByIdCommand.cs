@@ -14,9 +14,9 @@ public class DeleteProveedorByIdCommand : Command<ProveedorDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetProveedorCommand(_id);
+        var command1 = GetCommandFactory.CreateGetProveedorCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreateDeleteProveedorCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreateDeleteProveedorCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }

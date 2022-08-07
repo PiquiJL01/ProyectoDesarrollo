@@ -22,7 +22,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetTallerByIdCommand(taller);
+                var command = GetCommandFactory.CreateGetTallerByIdCommand(taller);
                 command.Execute();
                 return command.GetResult();
             }
@@ -37,7 +37,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetTalleresCommand();
+                var command = GetCommandFactory.CreateGetTalleresCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -53,7 +53,7 @@ namespace ProviderWS.Controllers.Administracion
             try
             {
                 //response.Data = _TallerDao.GetTalleresByBrand(marca);
-                var command = CommandFactory.CreateGetTalleresByBrandCommand(marca);
+                var command = GetCommandFactory.CreateGetTalleresByBrandCommand(marca);
                 command.Execute();
                 return command.GetResult();
             }
@@ -68,7 +68,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostTallerCommand(TallerDto);
+                var command = PostCommandFactory.CreatePostTallerCommand(TallerDto);
                 command.Execute();
                 return command.GetResult();
             }

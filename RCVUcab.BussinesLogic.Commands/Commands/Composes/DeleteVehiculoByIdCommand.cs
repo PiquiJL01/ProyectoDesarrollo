@@ -13,9 +13,9 @@ public class DeleteVehiculoByIdCommand : Command<VehiculoDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetVehiculoCommand(_id);
+        var command1 = GetCommandFactory.CreateGetVehiculoCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreateDeleteVehiculoCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreateDeleteVehiculoCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }
