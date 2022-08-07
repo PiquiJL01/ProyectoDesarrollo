@@ -39,4 +39,9 @@ public static class PostCommandFactory
     {
         return new PostVehiculoCommand(vehiculo);
     }
+
+    public static PostCotizacionCommand CreatePostCotizacionCommand(CotizacionDTO cotizacion)
+    {
+        return new PostCotizacionCommand(cotizacion);
+    }
 }

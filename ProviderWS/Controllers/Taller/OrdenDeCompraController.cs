@@ -1,4 +1,7 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Taller
 {
@@ -7,75 +10,56 @@ namespace RCVUcab.Controllers.Taller
     [Route("Taller/[controller]")]
     public class OrdenDeCompraController : Controller
     {
-        private readonly IOrdenDeCompraDAO _OrdenDeCompraDao;
         private readonly ILogger<OrdenDeCompraController> _logger;
 
-        public OrdenDeCompraController(ILogger<OrdenDeCompraController> logger, IOrdenDeCompraDAO OrdenDeCompraDao)
+        public OrdenDeCompraController(ILogger<OrdenDeCompraController> logger)
         {
-            _OrdenDeCompraDao = OrdenDeCompraDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<OrdenDeCompraDTO>> GetOrdenesDeCompra()
+        public List<OrdenDeCompraDTO> GetOrdenesDeCompra()
         {
-            var response = new ApplicationResponse<List<OrdenDeCompraDTO>>();
             try
             {
-                response.Data = _OrdenDeCompraDao.Select();
+                var command = GetCommandFactory.CreateGetOrdenesDeCompraCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<OrdenDeCompraDTO>> GetOrdenDeCompraById([FromRoute] string id)
+        public List<OrdenDeCompraDTO> GetOrdenDeCompraById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<OrdenDeCompraDTO>>();
             try
             {
-                response.Data = _OrdenDeCompraDao.GetOrdenesDeCompraByID(id);
+                var command = GetByCommandFactory.CreateGetOrdenDeCompraByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPut]
-        public ApplicationResponse<OrdenDeCompraDTO> PutOrdenDeCompra([FromBody] OrdenDeCompraDTO OrdenDeCompraDto)
+        public OrdenDeCompraDTO PutOrdenDeCompra([FromBody] OrdenDeCompraDTO OrdenDeCompraDto)
         {
-            var response = new ApplicationResponse<OrdenDeCompraDTO>()
-            {
-                Data = OrdenDeCompraDto
-            };
-
             try
             {
-                var list = _OrdenDeCompraDao.GetOrdenesDeCompraByID(OrdenDeCompraDto.ID);
-
-                if (list.Exists(x => x.ID.Contains(OrdenDeCompraDto.ID)))
-                {
-                    _OrdenDeCompraDao.Update(OrdenDeCompraDto);
-
-                    response.Message = "El OrdenDeCompra ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = PutCommandFactory.CreatePutOrdeDeCompraCommand(OrdenDeCompraDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
-}*/
+}

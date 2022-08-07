@@ -1,4 +1,7 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Taller
 {
@@ -6,75 +9,56 @@ namespace RCVUcab.Controllers.Taller
     [Route("Taller/[controller]")]
     public class IncidenteController : Controller
     {
-        private readonly IIncidenteDAO _IncidenteDao;
         private readonly ILogger<IncidenteController> _logger;
 
-        public IncidenteController(ILogger<IncidenteController> logger, IIncidenteDAO IncidenteDao)
+        public IncidenteController(ILogger<IncidenteController> logger)
         {
-            _IncidenteDao = IncidenteDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<IncidenteDTO>> GetIncidentes()
+        public List<IncidenteDTO> GetIncidentes()
         {
-            var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
             {
-                response.Data = _IncidenteDao.Select();
+                var command = GetCommandFactory.CreateGetIncidentesCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<IncidenteDTO>> GetIncidenteById([FromRoute] string id)
+        public List<IncidenteDTO> GetIncidenteById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
             {
-                response.Data = _IncidenteDao.GetIncidenteByID(id);
+                var command = GetByCommandFactory.CreateGetIncidentesByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPut]
-        public ApplicationResponse<IncidenteDTO> PutIncidente([FromBody] IncidenteDTO IncidenteDto)
+        public IncidenteDTO PutIncidente([FromBody] IncidenteDTO IncidenteDto)
         {
-            var response = new ApplicationResponse<IncidenteDTO>()
-            {
-                Data = IncidenteDto
-            };
-
             try
             {
-                var list = _IncidenteDao.GetIncidenteByID(IncidenteDto.ID);
-
-                if (list.Exists(x => x.ID.Contains(IncidenteDto.ID)))
-                {
-                    _IncidenteDao.Update(IncidenteDto);
-
-                    response.Message = "El Incidente ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = PutCommandFactory.CreatePutIncidenteCommand(IncidenteDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
-}*/
+}
