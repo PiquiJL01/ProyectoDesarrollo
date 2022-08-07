@@ -8,5 +8,6 @@ namespace RCVUcab.DataAccess.DAOs.Interfaces
         //public List<TallerDTO> GetTalleres();
         public List<TallerEntity> GetTalleresByID(string id);
         public List<ProveedorMarcaEntity> GetTalleresByBrand(string brand);
+        public TallerEntity InsertR(TallerEntity taller);
     }
 }

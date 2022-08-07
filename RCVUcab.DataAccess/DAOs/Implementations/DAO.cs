@@ -14,7 +14,6 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         public abstract List<T> Select();
         public abstract T Select(string id);
-
         public abstract void Insert(T entity);
         public abstract void Update(T entity);
         public abstract void Delete(T entity);

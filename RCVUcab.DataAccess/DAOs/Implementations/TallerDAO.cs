@@ -105,6 +105,23 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             Context().SaveChanges();
         }
 
+        public TallerEntity InsertR(TallerEntity taller)
+        {
+            Context().Talleres.Add(taller);
+            Context().SaveChanges();
+
+            var query = Context().Talleres
+                .Where(x => x.ID == taller.ID)
+                .Select(x => new TallerEntity
+                {
+                    ID = x.ID,
+                    Name = x.Name,
+                    Address = x.Address,
+                    PhoneNumber = x.PhoneNumber,
+                });
+            return query.First();
+        }
+
         public override void Update(TallerEntity taller)
         {
             Context().Talleres.Update(taller);

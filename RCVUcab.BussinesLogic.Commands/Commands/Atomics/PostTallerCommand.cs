@@ -7,7 +7,8 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
 {
     public class PostTallerCommand : Command<TallerDTO>
     {
-        private readonly TallerDTO _taller;
+        private TallerDTO _taller;
+        private TallerDTO _result;
 
         public PostTallerCommand(TallerDTO taller)
         {
@@ -17,7 +18,7 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics
         public override void Execute()
         {
             TallerDAO dao = TallerDAOFactory.CreateTallerDao();
-            dao.Insert(TallerMapper.DtoToEntity(_taller));
+            SetResult(TallerMapper.EntityToDto(dao.InsertR(TallerMapper.DtoToEntity(_taller))));
         }
     }
 }
