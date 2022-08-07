@@ -23,7 +23,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetProveedoresCommand();
+                var command = GetCommandFactory.CreateGetProveedoresCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -38,7 +38,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetProveedoresById(id);
+                var command = GetByCommandFactory.CreateGetProveedoresById(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -53,7 +53,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostProveedorCommand(ProveedorDto);
+                var command = PostCommandFactory.CreatePostProveedorCommand(ProveedorDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -69,7 +69,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutProveedorCommand(ProveedorDto);
+                var command = PutCommandFactory.CreatePutProveedorCommand(ProveedorDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -84,7 +84,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeleteProveedorByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeleteProveedorByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

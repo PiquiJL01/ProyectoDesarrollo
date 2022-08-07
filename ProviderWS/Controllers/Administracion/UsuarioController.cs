@@ -22,7 +22,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetUsuariosCommand();
+                var command = GetCommandFactory.CreateGetUsuariosCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -37,7 +37,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetUsuariosByIdCommand(id);
+                var command = GetByCommandFactory.CreateGetUsuariosByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -52,7 +52,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CretaePostUsuarioCommand(UsuarioDto);
+                var command = PostCommandFactory.CretaePostUsuarioCommand(UsuarioDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -68,7 +68,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutUsuarioCommand(UsuarioDto);
+                var command = PutCommandFactory.CreatePutUsuarioCommand(UsuarioDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -83,7 +83,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeleteUsuarioByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeleteUsuarioByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

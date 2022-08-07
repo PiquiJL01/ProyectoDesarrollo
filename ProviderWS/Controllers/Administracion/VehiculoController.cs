@@ -21,7 +21,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetVehiculosCommand();
+                var command = GetCommandFactory.CreateGetVehiculosCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -36,7 +36,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetVehiculosByIdCommand(id);
+                var command = GetByCommandFactory.CreateGetVehiculosByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -51,7 +51,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostVehiculoCommand(VehiculoDto);
+                var command = PostCommandFactory.CreatePostVehiculoCommand(VehiculoDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -67,7 +67,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutVehiculoCommand(VehiculoDto);
+                var command = PutCommandFactory.CreatePutVehiculoCommand(VehiculoDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -82,7 +82,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeleteVehiculoByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeleteVehiculoByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

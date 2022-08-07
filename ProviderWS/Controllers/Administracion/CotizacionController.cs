@@ -25,7 +25,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetCotizacionesCommand();
+                var command = GetCommandFactory.CreateGetCotizacionesCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -40,7 +40,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetCotizacionesByIdCommand(id);
+                var command = GetByCommandFactory.CreateGetCotizacionesByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -55,7 +55,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutCotizacionCommand(CotizacionDto);
+                var command = PutCommandFactory.CreatePutCotizacionCommand(CotizacionDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -70,7 +70,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeleteCotizacionByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeleteCotizacionByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

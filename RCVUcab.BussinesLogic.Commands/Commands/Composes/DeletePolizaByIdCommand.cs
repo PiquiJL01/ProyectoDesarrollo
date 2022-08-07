@@ -13,9 +13,9 @@ public class DeletePolizaByIdCommand : Command<PolizaDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetPolizaCommand(_id);
+        var command1 = GetCommandFactory.CreateGetPolizaCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreatedDeletePolizaCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreatedDeletePolizaCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }

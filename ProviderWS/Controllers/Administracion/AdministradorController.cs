@@ -23,7 +23,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetAdministradoresCommand();
+                var command = GetCommandFactory.CreateGetAdministradoresCommand();
                 command.Execute();
                 return command.GetResult();
             }

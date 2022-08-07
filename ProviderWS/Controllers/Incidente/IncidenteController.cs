@@ -1,37 +1,37 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
+
 namespace RCVUcab.Controllers.Incidente
 {
     [ApiController]
-    [Route("Incidente")]
+    [Route("Incidente/[controller]")]
     public class IncidenteController : Controller
     {
-        private readonly IIncidenteDAO _IncidenteDAO;
         private readonly ILogger<IncidenteController> _logger;
 
-        public IncidenteController(ILogger<IncidenteController> logger, IIncidenteDAO IncidenteDAO)
+        public IncidenteController(ILogger<IncidenteController> logger)
         {
-            _IncidenteDAO = IncidenteDAO;
             _logger = logger;
         }
 
 
         [HttpGet]
-        public ApplicationResponse<List<IncidenteDTO>> GetIncidentesByAdministrador(string administrador)
+        public List<IncidenteDTO> GetIncidentesByAdministrador(string administrador)
         {
-            var response = new ApplicationResponse<List<IncidenteDTO>>();
             try
             {
-                response.Data = _IncidenteDAO.GetIncidentesByAdministrador(administrador);
+                var command = GetByCommandFactory.CreateGetIncidenteByAdministradorCommand(administrador);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                throw;
             }
-            return response;
         }
 
 
     }
-}*/
+}

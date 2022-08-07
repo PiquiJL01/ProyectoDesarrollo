@@ -13,9 +13,9 @@ public class DeletePropietarioByIdCommand : Command<PropietarioDTO>
 
     public override void Execute()
     {
-        var command1 = CommandFactory.CreateGetPropietarioCommand(_id);
+        var command1 = GetCommandFactory.CreateGetPropietarioCommand(_id);
         command1.Execute();
-        var command2 = CommandFactory.CreateDeletePropietarioCommand(command1.GetResult());
+        var command2 = DeleteCommandFactory.CreateDeletePropietarioCommand(command1.GetResult());
         command2.Execute();
         SetResult(command2.GetResult());
     }

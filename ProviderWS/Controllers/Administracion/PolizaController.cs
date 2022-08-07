@@ -24,7 +24,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetPolizasCommand();
+                var command = GetCommandFactory.CreateGetPolizasCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -39,7 +39,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateGetPolizaByIdCommand(id);
+                var command = GetByCommandFactory.CreateGetPolizaByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }
@@ -54,7 +54,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePostPolizaCommand(PolizaDto);
+                var command = PostCommandFactory.CreatePostPolizaCommand(PolizaDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -69,7 +69,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreatePutPolizaCommand(PolizaDto);
+                var command = PutCommandFactory.CreatePutPolizaCommand(PolizaDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -84,7 +84,7 @@ namespace RCVUcab.Controllers.Administracion
         {
             try
             {
-                var command = CommandFactory.CreateDeletePolizaByIdCommand(id);
+                var command = DeleteByCommandFactory.CreateDeletePolizaByIdCommand(id);
                 command.Execute();
                 return command.GetResult();
             }

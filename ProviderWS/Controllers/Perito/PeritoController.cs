@@ -1,41 +1,37 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Perito
 {
     [ApiController]
-    [Route("Perito")]
+    [Route("Perito/[controller]")]
     public class PeritoController : Controller
     {
-        private readonly IUsuarioDAO _PeritoDAO;
         private readonly ILogger<PeritoController> _logger;
 
-        public PeritoController(ILogger<PeritoController> logger, IUsuarioDAO PeritoDAO)
+        public PeritoController(ILogger<PeritoController> logger)
         {
-            _PeritoDAO = PeritoDAO;
             _logger = logger;
         }
 
 
         [HttpGet("Perito")]
-        public ApplicationResponse<List<UsuarioDTO>> GetPeritos()
+        public List<UsuarioDTO> GetPeritos()
         {
-            var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
             {
-                response.Data = _PeritoDAO.GetPeritos();
+                var command = GetCommandFactory.CreateGetPeritosCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Success = false;
-                response.Message = ex.Message;
-                response.Exception = ex.Excepcion.ToString();
+                throw;
             }
-            return response;
         }
 
 
     }
-}*/
+}
