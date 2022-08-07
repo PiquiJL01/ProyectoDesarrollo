@@ -14,7 +14,7 @@ namespace RCVUcab.DataAccess
         public DataBaseContext CreateDbContext(string[]? args)
         {
             var builder = new DbContextOptionsBuilder<DataBaseContext>();
-            builder.UseSqlServer(ConexionJose);
+            builder.UseSqlServer(ConexionJoselyn);
             return new DataBaseContext(builder.Options);
         }
     }
