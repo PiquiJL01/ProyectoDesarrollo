@@ -1,10 +1,13 @@
 ﻿using System;
+using RCVUcab.DataAccess.DAOs.Implementations;
+
 namespace RCVUcab.DataAccess.DAOFactory
 {
-    public class ProveedorDAOFactory
+    public static class ProveedorDAOFactory
     {
-        public ProveedorDAOFactory()
+        public static ProveedorDAO CreateProveedorDao()
         {
+            return new ProveedorDAO();
         }
     }
 }

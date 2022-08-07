@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Exceptions;
@@ -19,104 +20,78 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpGet]
-        public ApplicationResponse<List<PolizaDTO>> GetPolizas()
+        public List<PolizaDTO> GetPolizas()
         {
-            var response = new ApplicationResponse<List<PolizaDTO>>();
             try
             {
-                response.Data = _polizaDao.Select();
+                var command = CommandFactory.CreateGetPolizasCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<PolizaDTO>> GetPolizaById([FromRoute] string id)
+        public List<PolizaDTO> GetPolizaById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<PolizaDTO>>();
             try
             {
-                response.Data = _polizaDao.GetPolizasByID(id);
+                var command = CommandFactory.CreateGetPolizaByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error((ex));
+                throw;
             }
-
-            return response;
         }
 
         [HttpPost]
-        public ApplicationResponse<PolizaDTO> PostPoliza([FromBody] PolizaDTO PolizaDto)
+        public PolizaDTO PostPoliza([FromBody] PolizaDTO PolizaDto)
         {
-            var response = new ApplicationResponse<PolizaDTO>()
-            {
-                Data = PolizaDto
-            };
-
             try
             {
-                _polizaDao.Insert(PolizaDto);
+                var command = CommandFactory.CreatePostPolizaCommand(PolizaDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPut]
-        public ApplicationResponse<PolizaDTO> PutPoliza([FromBody] PolizaDTO PolizaDto)
+        public PolizaDTO PutPoliza([FromBody] PolizaDTO PolizaDto)
         {
-            var response = new ApplicationResponse<PolizaDTO>()
-            {
-                Data = PolizaDto
-            };
-
             try
             {
-                var list = _polizaDao.GetPolizasByID(PolizaDto.ID);
-
-                if (list.Exists(x => x.ID.Contains(PolizaDto.ID)))
-                {
-                    _polizaDao.Update(PolizaDto);
-
-                    response.Message = "El Poliza ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Error(new Exception("No existe"));
-                }
+                var command = CommandFactory.CreatePutPolizaCommand(PolizaDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpDelete("{id}")]
-        public ApplicationResponse<PolizaDTO> DeletePoliza([FromRoute] string id)
+        public PolizaDTO DeletePoliza([FromRoute] string id)
         {
-            var response = new ApplicationResponse<PolizaDTO>();
-
             try
             {
-                response.Data = _polizaDao.Select(id);
-
-                _polizaDao.Delete(response.Data);
+                var command = CommandFactory.CreateDeletePolizaByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
 }

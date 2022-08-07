@@ -7,11 +7,6 @@ public static class ProveedorMarcaMapper
 {
     public static ProveedorMarcaEntity DtoToEntity(ProveedorMarcaDTO proveedorMarca)
     {
-        if (proveedorMarca == null)
-        {
-            return null;
-        }
-
         return new ProveedorMarcaEntity
         {
             ID = proveedorMarca.ID,
@@ -26,11 +21,6 @@ public static class ProveedorMarcaMapper
 
     public static ProveedorMarcaDTO EntityToDto(ProveedorMarcaEntity proveedorMarca)
     {
-        if (proveedorMarca == null)
-        {
-            return null;
-        }
-
         return new ProveedorMarcaDTO
         {
             ID = proveedorMarca.ID,
@@ -41,5 +31,26 @@ public static class ProveedorMarcaMapper
             Proveedor = ProveedorMapper.EntityToDto(proveedorMarca.Proveedor),
             Taller = TallerMapper.EntityToDto(proveedorMarca.Taller)
         };
+    }
+
+    public static List<ProveedorMarcaEntity> ListDtoToEntities(ICollection<ProveedorMarcaDTO> proeveedorMarcas)
+    {
+        var list = new List<ProveedorMarcaEntity>();
+        foreach (var proveedorMarcaDto in proeveedorMarcas)
+        {
+            list.Add(DtoToEntity(proveedorMarcaDto));
+        }
+        return list;
+    }
+
+    public static List<ProveedorMarcaDTO> ListEntityToDtos(ICollection<ProveedorMarcaEntity> proveedorMarcas)
+    {
+        var list = new List<ProveedorMarcaDTO>();
+        foreach (var proveedorMarcaEntity in proveedorMarcas)
+        {
+            list.Add(EntityToDto(proveedorMarcaEntity));
+        }
+
+        return list;
     }
 }

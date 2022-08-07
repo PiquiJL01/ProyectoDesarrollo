@@ -96,10 +96,9 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             Context().SaveChanges();
         }
 
-        public override void Delete(UsuarioDTO usuario)
+        public override void Delete(UsuarioEntity usuario)
         {
-            var itemToRemove = Context().Usuarios.Find(usuario.Id);
-            Context().Usuarios.Remove(itemToRemove);
+            Context().Usuarios.Remove(usuario);
             Context().SaveChanges();
         }
 

@@ -7,11 +7,6 @@ public static class OrdenDeCompraMapper
 {
     public static OrdenDeCompraEntity DtoToEntity(OrdenDeCompraDTO ordenDeCompra)
     {
-        if (ordenDeCompra == null)
-        {
-            return null;
-        }
-
         return new OrdenDeCompraEntity
         {
             Administrador = UsuarioMapper.DtoToEntity(ordenDeCompra.Administrador),
@@ -23,11 +18,6 @@ public static class OrdenDeCompraMapper
 
     public static OrdenDeCompraDTO EntityToDto(OrdenDeCompraEntity ordenDeCompra)
     {
-        if (ordenDeCompra == null)
-        {
-            return null;
-        }
-
         return new OrdenDeCompraDTO
         {
             Administrador = UsuarioMapper.EntityToDto(ordenDeCompra.Administrador),
@@ -35,5 +25,27 @@ public static class OrdenDeCompraMapper
             Id_Administrador = ordenDeCompra.Id_Administrador,
             Id_Cotizacion = CotizacionMapper.EntityToDto(ordenDeCompra.Id_Cotizacion)
         };
+    }
+
+    public static List<OrdenDeCompraEntity> ListDtoToEntity(ICollection<OrdenDeCompraDTO> ordenesDeCompra)
+    {
+        var list = new List<OrdenDeCompraEntity>();
+        foreach (var ordenDeCompraDto in ordenesDeCompra)
+        {
+            list.Add(DtoToEntity(ordenDeCompraDto));
+        }
+
+        return list;
+    }
+
+    public static List<OrdenDeCompraDTO> ListEntityToDtos(ICollection<OrdenDeCompraEntity> ordnesDeCompra)
+    {
+        var list = new List<OrdenDeCompraDTO>();
+        foreach (var ordenDeCompraEntity in ordnesDeCompra)
+        {
+            list.Add(EntityToDto(ordenDeCompraEntity));
+        }
+
+        return list;
     }
 }

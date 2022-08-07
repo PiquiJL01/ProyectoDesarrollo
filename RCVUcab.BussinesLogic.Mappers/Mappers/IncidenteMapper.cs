@@ -7,67 +7,54 @@ public static class IncidenteMapper
 {
     public static IncidenteEntity DtoToEntity(IncidenteDTO incidente)
     {
-        if (incidente == null)
-        {
-            return null;
-        }
-
-        var listCotizacion = new List<CotizacionEntity>();
-        foreach (var cotizacionDto in incidente.Cotizacion)
-        {
-            listCotizacion.Add(CotizacionMapper.DtoToEntity(cotizacionDto));
-        }
-
-        var listVehiculoIncidenteTaller = new List<VehiculoIncidenteTallerEntity>();
-        foreach (var vehiculoIncidenteTaller in incidente.VehiculoIncidenteTaller)
-        {
-            listVehiculoIncidenteTaller.Add(VehiculoIncidenteTallerMapper.DtoToEntity(vehiculoIncidenteTaller));
-        }
-
         return new IncidenteEntity
         {
             Administrador = UsuarioMapper.DtoToEntity(incidente.Administrador),
-            Cotizacion = listCotizacion,
+            Cotizacion = CotizacionMapper.ListDtoToEntities(incidente.Cotizacion),
             Fecha = incidente.Fecha,
             ID = incidente.ID,
             Id_Administrador = incidente.Id_Administrador,
             Id_Perito = incidente.Id_Perito,
             Perito = UsuarioMapper.DtoToEntity(incidente.Perito),
             Ubicacion = incidente.Ubicacion,
-            VehiculoIncidenteTaller = listVehiculoIncidenteTaller
+            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(incidente.VehiculoIncidenteTaller)
         };
     }
 
     public static IncidenteDTO EntityToDto(IncidenteEntity incidente)
     {
-        if (incidente == null)
-        {
-            return null;
-        }
-
-        var listCotizacion = new List<CotizacionDTO>();
-        foreach (var cotizacion in incidente.Cotizacion)
-        {
-            listCotizacion.Add(CotizacionMapper.EntityToDto(cotizacion));
-        }
-
-        var listVehiculoIncidenteTaller = new List<VehiculoIncidenteTallerDTO>();
-        foreach (var vehiculoIncidenteTaller in incidente.VehiculoIncidenteTaller)
-        {
-            listVehiculoIncidenteTaller.Add(VehiculoIncidenteTallerMapper.EntityToDto(vehiculoIncidenteTaller));
-        }
-
         return new IncidenteDTO
         {
             Administrador = UsuarioMapper.EntityToDto(incidente.Administrador),
-            Cotizacion = listCotizacion,
+            Cotizacion = CotizacionMapper.ListEntityToDtos(incidente.Cotizacion),
             Fecha = incidente.Fecha,
             ID = incidente.ID,
             Id_Administrador = incidente.Id_Administrador,
             Id_Perito = incidente.Id_Perito,
             Perito = UsuarioMapper.EntityToDto(incidente.Perito),
             Ubicacion = incidente.Ubicacion,
-            VehiculoIncidenteTaller = listVehiculoIncidenteTaller
+            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(incidente.VehiculoIncidenteTaller)
         };
+    }
+
+    public static List<IncidenteEntity> ListDtoToEntities(ICollection<IncidenteDTO> incidentes)
+    {
+        var list = new List<IncidenteEntity>();
+        foreach (var incidenteDto in incidentes)
+        {
+            list.Add(DtoToEntity(incidenteDto));
+        }
+        return list;
+    }
+
+    public static List<IncidenteDTO> ListEntityToDtos(ICollection<IncidenteEntity> incidentes)
+    {
+        var list = new List<IncidenteDTO>();
+        foreach (var incidenteEntity in incidentes)
+        {
+            list.Add(EntityToDto(incidenteEntity));
+        }
+
+        return list;
     }
 }

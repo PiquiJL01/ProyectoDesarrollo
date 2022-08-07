@@ -1,4 +1,5 @@
-﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Mappers.Mappers;
@@ -7,29 +8,6 @@ public static class UsuarioMapper
 {
     public static UsuarioEntity DtoToEntity(UsuarioDTO usuario)
     {
-        if (usuario == null)
-        {
-            return null;
-        }
-
-        var listIncidente = new List<IncidenteEntity>();
-        foreach (var incidente in usuario.Incidente)
-        {
-            listIncidente.Add(IncidenteMapper.DtoToEntity(incidente));
-        }
-
-        var listOrdenDeCompra = new List<OrdenDeCompraEntity>();
-        foreach (var ordenDeCompra in usuario.OrdenDeCompra)
-        {
-            listOrdenDeCompra.Add(OrdenDeCompraMapper.DtoToEntity(ordenDeCompra));
-        }
-
-        var listPoliza = new List<PolizaEntity>();
-        foreach (var poliza in usuario.Poliza)
-        {
-            listPoliza.Add(PolizaMapper.DtoToEntity(poliza));
-        }
-
         return new UsuarioEntity
         {
             Apellido = usuario.Apellido,
@@ -37,10 +15,10 @@ public static class UsuarioMapper
             Direccion = usuario.Direccion,
             Email = usuario.Email,
             Id = usuario.Id,
-            Incidente = listIncidente,
+            Incidente = IncidenteMapper.ListDtoToEntities(usuario.Incidente),
             Nombre = usuario.Nombre,
-            OrdenDeCompra = listOrdenDeCompra,
-            Poliza = listPoliza,
+            OrdenDeCompra = OrdenDeCompraMapper.ListDtoToEntity(usuario.OrdenDeCompra),
+            Poliza = PolizaMapper.ListDtoToEntities(usuario.Poliza),
             Rol = usuario.Rol,
             Telefono = usuario.Telefono
         };
@@ -48,29 +26,6 @@ public static class UsuarioMapper
 
     public static UsuarioDTO EntityToDto(UsuarioEntity usuario)
     {
-        if (usuario == null)
-        {
-            return null;
-        }
-
-        var listIncidente = new List<IncidenteDTO>();
-        foreach (var incidente in usuario.Incidente)
-        {
-            listIncidente.Add(IncidenteMapper.EntityToDto(incidente));
-        }
-
-        var listOrdenDeCompra = new List<OrdenDeCompraDTO>();
-        foreach (var ordenDeCompra in usuario.OrdenDeCompra)
-        {
-            listOrdenDeCompra.Add(OrdenDeCompraMapper.EntityToDto(ordenDeCompra));
-        }
-
-        var listPoliza = new List<PolizaDTO>();
-        foreach (var poliza in usuario.Poliza)
-        {
-            listPoliza.Add(PolizaMapper.EntityToDto(poliza));
-        }
-
         return new UsuarioDTO
         {
             Apellido = usuario.Apellido,
@@ -78,12 +33,34 @@ public static class UsuarioMapper
             Direccion = usuario.Direccion,
             Email = usuario.Email,
             Id = usuario.Id,
-            Incidente = listIncidente,
+            Incidente = IncidenteMapper.ListEntityToDtos(usuario.Incidente),
             Nombre = usuario.Nombre,
-            OrdenDeCompra = listOrdenDeCompra,
-            Poliza = listPoliza,
+            OrdenDeCompra = OrdenDeCompraMapper.ListEntityToDtos(usuario.OrdenDeCompra),
+            Poliza = PolizaMapper.ListEntityToDtos(usuario.Poliza),
             Rol = usuario.Rol,
             Telefono = usuario.Telefono
         };
+    }
+
+    public static List<UsuarioEntity> ListDtoToEntities(ICollection<UsuarioDTO> usuarios)
+    {
+        var list = new List<UsuarioEntity>();
+        foreach (var usuarioDto in usuarios)
+        {
+            list.Add(DtoToEntity(usuarioDto));
+        }
+
+        return list;
+    }
+
+    public static List<UsuarioDTO> ListEntityToDtos(ICollection<UsuarioEntity> usuarios)
+    {
+        var list = new List<UsuarioDTO>();
+        foreach (var usuarioEntity in usuarios)
+        {
+            list.Add(EntityToDto(usuarioEntity));
+        }
+
+        return list;
     }
 }

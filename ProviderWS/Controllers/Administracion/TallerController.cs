@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using RCVUcab.BussinesLogic.Commands;
-using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
-using RCVUcab.BussinesLogic.Commands.Commands.Composes;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.BussinesLogic.Mappers.Mappers;
 using RCVUcab.DataAccess.Exceptions;
 
 namespace ProviderWS.Controllers.Administracion
@@ -13,22 +10,19 @@ namespace ProviderWS.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class TallerController : Controller
     {
-        /*private readonly ITallerDAO _TallerDao;
         private readonly ILogger<TallerController> _logger;
 
-        public TallerController(ILogger<TallerController> logger, ITallerDAO TallerDao)
+        public TallerController(ILogger<TallerController> logger)
         {
-            _TallerDao = TallerDao;
             _logger = logger;
-        }*/
+        }
 
         [HttpGet("{taller}")]
         public TallerDTO GetTallerById([Required][FromRoute] string taller)
         {
             try
             {
-                GetTallerByIdCommand command =
-                  CommandFactory.createGetTallerByIdCommand(taller);
+                var command = CommandFactory.CreateGetTallerByIdCommand(taller);
                 command.Execute();
                 return command.GetResult();
             }
@@ -43,8 +37,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                GetTalleresCommand command =
-                  CommandFactory.createGetTalleresCommand();
+                var command = CommandFactory.CreateGetTalleresCommand();
                 command.Execute();
                 return command.GetResult();
             }
@@ -54,14 +47,13 @@ namespace ProviderWS.Controllers.Administracion
             }
         }
 
-        [HttpGet("{marca}/TalleresByBrand")]
+        [HttpGet("TalleresByBrand/{marca}")]
         public List<ProveedorMarcaDTO> GetTallerByBrand([FromRoute] string marca)
         {
             try
             {
                 //response.Data = _TallerDao.GetTalleresByBrand(marca);
-                GetTalleresByBrandCommand command =
-                  CommandFactory.createGetTalleresByBrandCommand(marca);
+                var command = CommandFactory.CreateGetTalleresByBrandCommand(marca);
                 command.Execute();
                 return command.GetResult();
             }
@@ -76,9 +68,7 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                var taller = TallerMapper.DtoToEntity(TallerDto);
-                CreateTallerCommand command =
-                  CommandFactory.createCreateTallerCommand(taller);
+                var command = CommandFactory.CreatePostTallerCommand(TallerDto);
                 command.Execute();
                 return command.GetResult();
             }
@@ -89,22 +79,7 @@ namespace ProviderWS.Controllers.Administracion
 
         }
 
-        /*[HttpGet]
-        public ApplicationResponse<List<TallerDTO>> GetTalleres()
-        {
-            var response = new ApplicationResponse<List<TallerDTO>>();
-            try
-            {
-                response.Data = _TallerDao.Select();
-            }
-            catch (RCVException ex)
-            {
-                response.Error(ex);
-            }
-            return response;
-        }
-
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public ApplicationResponse<List<TallerDTO>> GetTallerById([FromRoute] string id)
         {
             var response = new ApplicationResponse<List<TallerDTO>>();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Exceptions;
@@ -19,104 +20,78 @@ namespace RCVUcab.Controllers.Administracion
         }
 
         [HttpGet]
-        public ApplicationResponse<List<PropietarioDTO>> GetPropietarios()
+        public List<PropietarioDTO> GetPropietarios()
         {
-            var response = new ApplicationResponse<List<PropietarioDTO>>();
             try
             {
-                response.Data = _propietarioDao.Select();
+                var command = CommandFactory.CreateGetPropietarosCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<PropietarioDTO>> GetPropietarioById([FromRoute]string id)
+        public List<PropietarioDTO> GetPropietariosById([FromRoute]string id)
         {
-            var response = new ApplicationResponse<List<PropietarioDTO>>();
             try
             {
-                response.Data = _propietarioDao.GetPropietarioByID(id);
+                var command = CommandFactory.CreateGetPropietariosByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error((ex));
+                throw;
             }
-
-            return response;
         }
 
         [HttpPost]
-        public ApplicationResponse<PropietarioDTO> PostPropietario([FromBody] PropietarioDTO propietarioDto)
+        public PropietarioDTO PostPropietario([FromBody] PropietarioDTO propietarioDto)
         {
-            var response = new ApplicationResponse<PropietarioDTO>()
-            {
-                Data = propietarioDto
-            };
-
             try
             {
-                _propietarioDao.Insert(propietarioDto);
+                var command = CommandFactory.CreatePostPropietarioCommand(propietarioDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPut]
-        public ApplicationResponse<PropietarioDTO> PutPropietario([FromBody]PropietarioDTO propietarioDto)
+        public PropietarioDTO PutPropietario([FromBody]PropietarioDTO propietarioDto)
         {
-            var response = new ApplicationResponse<PropietarioDTO>()
-            {
-                Data = propietarioDto
-            };
-
             try
             {
-                var list = _propietarioDao.GetPropietarioByID(propietarioDto.CedulaRif);
-
-                if (list.Exists(x => x.CedulaRif.Contains(propietarioDto.CedulaRif)))
-                {
-                    _propietarioDao.Update(propietarioDto);
-
-                    response.Message = "El Propietario ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Error(new Exception("No existe"));
-                }
+                var command = CommandFactory.CreatePutPropietarioCommand(propietarioDto);
+                command.Execute();
+                return command.Execute();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpDelete("{id}")]
-        public ApplicationResponse<PropietarioDTO> DeletePropietario([FromRoute] string id)
+        public PropietarioDTO DeletePropietario([FromRoute] string id)
         {
-            var response = new ApplicationResponse<PropietarioDTO>();
-
             try
             {
-                response.Data = _propietarioDao.Select(id);
-
-                _propietarioDao.Delete(response.Data);
+                var command = CommandFactory.CreateDeletePropietarioByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
 }

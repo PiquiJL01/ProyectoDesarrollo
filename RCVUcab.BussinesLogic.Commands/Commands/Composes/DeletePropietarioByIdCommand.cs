@@ -1,0 +1,22 @@
+﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+
+namespace RCVUcab.BussinesLogic.Commands.Commands.Composes;
+
+public class DeletePropietarioByIdCommand : Command<PropietarioDTO>
+{
+    private string _id;
+
+    public DeletePropietarioByIdCommand(string id)
+    {
+        _id = id;
+    }
+
+    public override void Execute()
+    {
+        var command1 = CommandFactory.CreateGetPropietarioCommand(_id);
+        command1.Execute();
+        var command2 = CommandFactory.CreateDeletePropietarioCommand(command1.GetResult());
+        command2.Execute();
+        SetResult(command2.GetResult());
+    }
+}

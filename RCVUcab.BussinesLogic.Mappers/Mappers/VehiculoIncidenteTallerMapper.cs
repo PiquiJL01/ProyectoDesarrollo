@@ -7,11 +7,6 @@ public static class VehiculoIncidenteTallerMapper
 {
     public static VehiculoIncidenteTallerEntity DtoToEntity(VehiculoIncidenteTallerDTO vehiculoIncidenteTaller)
     {
-        if (vehiculoIncidenteTaller == null)
-        {
-            return null;
-        }
-
         return new VehiculoIncidenteTallerEntity
         {
             FechaEntrega = vehiculoIncidenteTaller.FechaEntrega,
@@ -29,11 +24,6 @@ public static class VehiculoIncidenteTallerMapper
 
     public static VehiculoIncidenteTallerDTO EntityToDto(VehiculoIncidenteTallerEntity vehiculoIncidenteTaller)
     {
-        if (vehiculoIncidenteTaller == null)
-        {
-            return null;
-        }
-
         return new VehiculoIncidenteTallerDTO()
         {
             FechaEntrega = vehiculoIncidenteTaller.FechaEntrega,
@@ -47,5 +37,29 @@ public static class VehiculoIncidenteTallerMapper
             Taller = TallerMapper.EntityToDto(vehiculoIncidenteTaller.Taller),
             Vehiculo = VehiculoMapper.EntityToDto(vehiculoIncidenteTaller.Vehiculo)
         };
+    }
+
+    public static List<VehiculoIncidenteTallerEntity> ListDtoToEntities(
+        ICollection<VehiculoIncidenteTallerDTO> vehiculoIncidenteTalleres)
+    {
+        var list = new List<VehiculoIncidenteTallerEntity>();
+        foreach (var vehiculoIncidenteTallerDto in vehiculoIncidenteTalleres)
+        {
+            list.Add(DtoToEntity(vehiculoIncidenteTallerDto));
+        }
+
+        return list;
+    }
+
+    public static List<VehiculoIncidenteTallerDTO> ListEntityToDtos(
+        ICollection<VehiculoIncidenteTallerEntity> vehiculoIncidenteTalleres)
+    {
+        var list = new List<VehiculoIncidenteTallerDTO>();
+        foreach (var vehiculoIncidenteTallerEntity in vehiculoIncidenteTalleres)
+        {
+            list.Add(EntityToDto(vehiculoIncidenteTallerEntity));
+        }
+
+        return list;
     }
 }

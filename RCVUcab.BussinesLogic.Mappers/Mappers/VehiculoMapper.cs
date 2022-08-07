@@ -7,17 +7,6 @@ public static class VehiculoMapper
 {
     public static VehiculoEntity DtoToEntity(VehiculoDTO vehiculo)
     {
-        if (vehiculo == null)
-        {
-            return null;
-        }
-
-        var list = new List<VehiculoIncidenteTallerEntity>();
-        foreach (var vehiculoIncidenteTaller in vehiculo.VehiculoIncidenteTaller)
-        {
-            list.Add(VehiculoIncidenteTallerMapper.DtoToEntity(vehiculoIncidenteTaller));
-        }
-
         return new VehiculoEntity
         {
             Año = vehiculo.Año,
@@ -34,23 +23,12 @@ public static class VehiculoMapper
             Propietario = PropietarioMapper.DtoToEntity(vehiculo.Propietario),
             SerialCarroceria = vehiculo.SerialCarroceria,
             Tipo = vehiculo.Tipo,
-            VehiculoIncidenteTaller = list
+            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(vehiculo.VehiculoIncidenteTaller)
         };
     }
 
     public static VehiculoDTO EntityToDto(VehiculoEntity vehiculo)
     {
-        if (vehiculo == null)
-        {
-            return null;
-        }
-
-        var list = new List<VehiculoIncidenteTallerDTO>();
-        foreach (var vehiculoIncidenteTaller in vehiculo.VehiculoIncidenteTaller)
-        {
-            list.Add(VehiculoIncidenteTallerMapper.EntityToDto(vehiculoIncidenteTaller));
-        }
-
         return new VehiculoDTO
         {
             Año = vehiculo.Año,
@@ -67,7 +45,29 @@ public static class VehiculoMapper
             Propietario = PropietarioMapper.EntityToDto(vehiculo.Propietario),
             SerialCarroceria = vehiculo.SerialCarroceria,
             Tipo = vehiculo.Tipo,
-            VehiculoIncidenteTaller = list
+            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(vehiculo.VehiculoIncidenteTaller)
         };
+    }
+
+    public static List<VehiculoEntity> ListDtoToEntities(ICollection<VehiculoDTO> vehiculos)
+    {
+        var list = new List<VehiculoEntity>();
+        foreach (var vehiculoDto in vehiculos)
+        {
+            list.Add(DtoToEntity(vehiculoDto));
+        }
+
+        return list;
+    }
+
+    public static List<VehiculoDTO> ListEntityToDtos(ICollection<VehiculoEntity> vehiculos)
+    {
+        var list = new List<VehiculoDTO>();
+        foreach (var vehiculoEntity in vehiculos)
+        {
+            list.Add(EntityToDto(vehiculoEntity));
+        }
+
+        return list;
     }
 }

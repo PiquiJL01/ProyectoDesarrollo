@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Exceptions;
-using RCVUcab.Persistence.DAOs.Interfaces;
-using RCVUcab.Responses;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Administracion
 {
@@ -14,117 +10,87 @@ namespace RCVUcab.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioDAO _UsuarioDao;
         private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(ILogger<UsuarioController> logger, IUsuarioDAO UsuarioDao)
+        public UsuarioController(ILogger<UsuarioController> logger)
         {
-            _UsuarioDao = UsuarioDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<UsuarioDTO>> GetUsuarios()
+        public List<UsuarioDTO> GetUsuarios()
         {
-            var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
             {
-                response.Data = _UsuarioDao.Select();
+                var command = CommandFactory.CreateGetUsuariosCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<UsuarioDTO>> GetUsuarioById([FromRoute] string id)
+        public List<UsuarioDTO> GetUsuarioById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
             {
-                response.Data = _UsuarioDao.GetUsuariosByID(id);
+                var command = CommandFactory.CreateGetUsuariosByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPost]
-        public ApplicationResponse<UsuarioDTO> PostUsuario([FromBody] UsuarioDTO UsuarioDto)
+        public UsuarioDTO PostUsuario([FromBody] UsuarioDTO UsuarioDto)
         {
-            var response = new ApplicationResponse<UsuarioDTO>()
-            {
-                Data = UsuarioDto
-            };
-
             try
             {
-                _UsuarioDao.Insert(UsuarioDto);
+                var command = CommandFactory.CretaePostUsuarioCommand(UsuarioDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
 
         [HttpPut]
-        public ApplicationResponse<UsuarioDTO> PutUsuario([FromBody] UsuarioDTO UsuarioDto)
+        public UsuarioDTO PutUsuario([FromBody] UsuarioDTO UsuarioDto)
         {
-            var response = new ApplicationResponse<UsuarioDTO>()
-            {
-                Data = UsuarioDto
-            };
-
             try
             {
-                var list = _UsuarioDao.GetUsuariosByID(UsuarioDto.Id);
-
-                if (list.Exists(x => x.Id.Contains(UsuarioDto.Id)))
-                {
-                    _UsuarioDao.Update(UsuarioDto);
-
-                    response.Message = "El Usuario ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = CommandFactory.CreatePutUsuarioCommand(UsuarioDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpDelete("{id}")]
-        public ApplicationResponse<UsuarioDTO> DeleteUsuario([FromRoute] string id)
+        public UsuarioDTO DeleteUsuario([FromRoute] string id)
         {
-            var response = new ApplicationResponse<UsuarioDTO>();
-
             try
             {
-                response.Data = _UsuarioDao.Select(id);
-
-                _UsuarioDao.Delete(response.Data);
-
-                response.Message = "Usuario " + id + " ha sido eliminado exitosamente";
+                var command = CommandFactory.CreateDeleteUsuarioByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
 }

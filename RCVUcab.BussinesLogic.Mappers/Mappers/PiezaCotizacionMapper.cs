@@ -7,11 +7,6 @@ public static class PiezaCotizacionMapper
 {
     public static PiezaCotizacionEntity DtoToEntity(PiezaCotizacionDTO piezaCotizacion)
     {
-        if (piezaCotizacion == null)
-        {
-            return null;
-        }
-
         return new PiezaCotizacionEntity
         {
             Cantidad = 0, //piezaCotizacion.Cantidad,
@@ -29,11 +24,6 @@ public static class PiezaCotizacionMapper
 
     public static PiezaCotizacionDTO EntityToDto(PiezaCotizacionEntity piezaCotizacion)
     {
-        if (piezaCotizacion == null)
-        {
-            return null;
-        }
-
         return new PiezaCotizacionDTO
         {
             Cotizacion = CotizacionMapper.EntityToDto(piezaCotizacion.Cotizacion),
@@ -43,5 +33,27 @@ public static class PiezaCotizacionMapper
             Pieza = PiezaMapper.EntityToDto(piezaCotizacion.Pieza),
             Precio = piezaCotizacion.Precio
         };
+    }
+
+    public static List<PiezaCotizacionEntity> ListDtoToEntities(ICollection<PiezaCotizacionDTO> piezaCotizaciones)
+    {
+        var list = new List<PiezaCotizacionEntity>();
+        foreach (var piezaCotizacionDto in piezaCotizaciones)
+        {
+            list.Add(DtoToEntity(piezaCotizacionDto));
+        }
+
+        return list;
+    }
+
+    public static List<PiezaCotizacionDTO> ListEntityToDtos(ICollection<PiezaCotizacionEntity> piezaCotizaciones)
+    {
+        var list = new List<PiezaCotizacionDTO>();
+        foreach (var piezaCotizacionEntity in piezaCotizaciones)
+        {
+            list.Add(EntityToDto(piezaCotizacionEntity));
+        }
+
+        return list;
     }
 }

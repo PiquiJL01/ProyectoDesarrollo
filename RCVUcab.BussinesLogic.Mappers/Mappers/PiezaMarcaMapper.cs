@@ -7,11 +7,6 @@ public static class PiezaMarcaMapper
 {
     public static PiezaMarcaEntity DtoToEntity(PiezaMarcaDTO piezaMarca)
     {
-        if (piezaMarca == null)
-        {
-            return null;
-        }
-
         return new PiezaMarcaEntity
         {
             ID = piezaMarca.ID,
@@ -24,11 +19,6 @@ public static class PiezaMarcaMapper
 
     public static PiezaMarcaDTO EntityToDto(PiezaMarcaEntity piezaMarca)
     {
-        if (piezaMarca == null)
-        {
-            return null;
-        }
-
         return new PiezaMarcaDTO
         {
             ID = piezaMarca.ID,
@@ -37,5 +27,27 @@ public static class PiezaMarcaMapper
             Marca = MarcaMapper.EntityToDto(piezaMarca.Marca),
             Pieza = PiezaMapper.EntityToDto(piezaMarca.Pieza)
         };
+    }
+
+    public static List<PiezaMarcaEntity> ListDtoToEntities(ICollection<PiezaMarcaDTO> piezaMarcas)
+    {
+        var list = new List<PiezaMarcaEntity>();
+        foreach (var piezaMarcaDto in piezaMarcas)
+        {
+            list.Add(DtoToEntity(piezaMarcaDto));
+        }
+
+        return list;
+    }
+
+    public static List<PiezaMarcaDTO> ListEntityToDtos(ICollection<PiezaMarcaEntity> piezaMarcas)
+    {
+        var list = new List<PiezaMarcaDTO>();
+        foreach (var piezaMarcaEntity in piezaMarcas)
+        {
+            list.Add(EntityToDto(piezaMarcaEntity));
+        }
+
+        return list;
     }
 }

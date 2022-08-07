@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RCVUcab.BussinesLogic.DTO\RCVUcab.BussinesLogic.DTO.csproj" />
+    <ProjectReference Include="..\RCVUcab.BussinesLogic.Mappers\RCVUcab.BussinesLogic.Mappers.csproj" />
     <ProjectReference Include="..\RCVUcab.DataAccess\RCVUcab.DataAccess.csproj" />
   </ItemGroup>
 

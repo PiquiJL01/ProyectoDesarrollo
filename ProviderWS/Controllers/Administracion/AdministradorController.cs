@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Exceptions;
@@ -10,28 +11,26 @@ namespace ProviderWS.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class AdministradorController : Controller
     {
-        private readonly IUsuarioDAO _administradorDAO;
         private readonly ILogger<AdministradorController> _logger;
 
-        public AdministradorController(ILogger<AdministradorController> logger, IUsuarioDAO administradorDao)
+        public AdministradorController(ILogger<AdministradorController> logger)
         {
-            _administradorDAO = administradorDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<UsuarioDTO>> GetAdministradores()
+        public List<UsuarioDTO> GetAdministradores()
         {
-            var response = new ApplicationResponse<List<UsuarioDTO>>();
             try
             {
-                response.Data = _administradorDAO.GetAdministradores();
+                var command = CommandFactory.CreateGetAdministradoresCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
     }
 }

@@ -7,17 +7,6 @@ public static class PropietarioMapper
 {
     public static PropietarioEntity DtoToEntity(PropietarioDTO propietario)
     {
-        if (propietario == null)
-        {
-            return null;
-        }
-
-        var list = new List<VehiculoEntity>();
-        foreach (var vehiculo in propietario.Vehiculo)
-        {
-            list.Add(VehiculoMapper.DtoToEntity(vehiculo));
-        }
-
         return new PropietarioEntity
         {
             CedulaRif = propietario.CedulaRif,
@@ -29,23 +18,12 @@ public static class PropietarioMapper
             PrimerNombre = propietario.PrimerNombre,
             SegundoApellido = propietario.SegundoApellido,
             SegundoNombre = propietario.SegundoNombre,
-            Vehiculo = list
+            Vehiculo = VehiculoMapper.ListDtoToEntities(propietario.Vehiculo)
         };
     }
 
     public static PropietarioDTO EntityToDto(PropietarioEntity propietario)
     {
-        if (propietario == null)
-        {
-            return null;
-        }
-
-        var list = new List<VehiculoDTO>();
-        foreach (var vehiculo in propietario.Vehiculo)
-        {
-            list.Add(VehiculoMapper.EntityToDto(vehiculo));
-        }
-
         return new PropietarioDTO
         {
             CedulaRif = propietario.CedulaRif,
@@ -57,7 +35,29 @@ public static class PropietarioMapper
             PrimerNombre = propietario.PrimerNombre,
             SegundoApellido = propietario.SegundoApellido,
             SegundoNombre = propietario.SegundoNombre,
-            Vehiculo = list
+            Vehiculo = VehiculoMapper.ListEntityToDtos(propietario.Vehiculo)
         };
+    }
+
+    public static List<PropietarioEntity> ListDtoToEntities(ICollection<PropietarioDTO> propietarios)
+    {
+        var list = new List<PropietarioEntity>();
+        foreach (var propietarioDto in propietarios)
+        {
+            list.Add(DtoToEntity(propietarioDto));
+        }
+
+        return list;
+    }
+
+    public static List<PropietarioDTO> ListEntityToDtos(ICollection<PropietarioEntity> propietarios)
+    {
+        var list = new List<PropietarioDTO>();
+        foreach (var propietarioEntity in propietarios)
+        {
+            list.Add(EntityToDto(propietarioEntity));
+        }
+
+        return list;
     }
 }

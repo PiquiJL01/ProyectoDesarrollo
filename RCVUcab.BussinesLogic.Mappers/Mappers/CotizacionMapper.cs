@@ -7,17 +7,6 @@ public static class CotizacionMapper
 {
     public static CotizacionEntity DtoToEntity(CotizacionDTO cotizacion)
     {
-        if (cotizacion == null)
-        {
-            return null;
-        }
-
-        var list = new List<PiezaCotizacionEntity>();
-        foreach (var piezaCotizacionEntity in cotizacion.PiezaCotizacion)
-        {
-            list.Add(PiezaCotizacionMapper.DtoToEntity(piezaCotizacionEntity));
-        }
-
         return new CotizacionEntity
         {
             Id = cotizacion.Id,
@@ -26,7 +15,7 @@ public static class CotizacionMapper
             Id_Taller = cotizacion.Id_Taller,
             Incidente = IncidenteMapper.DtoToEntity(cotizacion.Incidente),
             MontoTotal = cotizacion.MontoTotal,
-            PiezaCotizacion = list,
+            PiezaCotizacion = PiezaCotizacionMapper.ListDtoToEntities(cotizacion.PiezaCotizacion),
             Proveedor = ProveedorMapper.DtoToEntity(cotizacion.Proveedor),
             Taller = TallerMapper.DtoToEntity(cotizacion.Taller)
         };
@@ -34,17 +23,6 @@ public static class CotizacionMapper
 
     public static CotizacionDTO EntityToDto(CotizacionEntity cotizacion)
     {
-        if (cotizacion == null)
-        {
-            return null;
-        }
-
-        var list = new List<PiezaCotizacionDTO>();
-        foreach (var piezaCotizacionEntity in cotizacion.PiezaCotizacion)
-        {
-            list.Add(PiezaCotizacionMapper.EntityToDto(piezaCotizacionEntity));
-        }
-
         return new CotizacionDTO
         {
             Id = cotizacion.Id,
@@ -53,9 +31,31 @@ public static class CotizacionMapper
             Id_Taller = cotizacion.Id_Taller,
             Incidente = IncidenteMapper.EntityToDto(cotizacion.Incidente),
             MontoTotal = cotizacion.MontoTotal,
-            PiezaCotizacion = list,
+            PiezaCotizacion = PiezaCotizacionMapper.ListEntityToDtos(cotizacion.PiezaCotizacion),
             Proveedor = ProveedorMapper.EntityToDto(cotizacion.Proveedor),
             Taller = TallerMapper.EntityToDto(cotizacion.Taller)
         };
+    }
+
+    public static List<CotizacionEntity> ListDtoToEntities(ICollection<CotizacionDTO> cotizaciones)
+    {
+        var list = new List<CotizacionEntity>();
+        foreach (var CotizacionEntity in cotizaciones)
+        {
+            list.Add(DtoToEntity(CotizacionEntity));
+        }
+
+        return list;
+    }
+
+    public static List<CotizacionDTO> ListEntityToDtos(ICollection<CotizacionEntity> cotizaciones)
+    {
+        var list = new List<CotizacionDTO>();
+        foreach (var CotizacionEntity in cotizaciones)
+        {
+            list.Add(EntityToDto(CotizacionEntity));
+        }
+
+        return list;
     }
 }

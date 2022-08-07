@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Exceptions;
-using RCVUcab.Persistence.DAOs.Interfaces;
-using RCVUcab.Responses;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.Commands;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Administracion
 {
@@ -13,117 +9,87 @@ namespace RCVUcab.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class VehiculoController : Controller
     {
-        private readonly IVehiculoDAO _VehiculoDao;
         private readonly ILogger<VehiculoController> _logger;
 
-        public VehiculoController(ILogger<VehiculoController> logger, IVehiculoDAO VehiculoDao)
+        public VehiculoController(ILogger<VehiculoController> logger)
         {
-            _VehiculoDao = VehiculoDao;
             _logger = logger;
         }
 
         [HttpGet]
-        public ApplicationResponse<List<VehiculoDTO>> GetVehiculos()
+        public List<VehiculoDTO> GetVehiculos()
         {
-            var response = new ApplicationResponse<List<VehiculoDTO>>();
             try
             {
-                response.Data = _VehiculoDao.Select();
+                var command = CommandFactory.CreateGetVehiculosCommand();
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-            return response;
         }
 
         [HttpGet("{id}")]
-        public ApplicationResponse<List<VehiculoDTO>> GetVehiculoById([FromRoute] string id)
+        public List<VehiculoDTO> GetVehiculoById([FromRoute] string id)
         {
-            var response = new ApplicationResponse<List<VehiculoDTO>>();
             try
             {
-                response.Data = _VehiculoDao.GetVehiculosByID(id);
+                var command = CommandFactory.CreateGetVehiculosByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpPost]
-        public ApplicationResponse<VehiculoDTO> PostVehiculo([FromBody] VehiculoDTO VehiculoDto)
+        public VehiculoDTO PostVehiculo([FromBody] VehiculoDTO VehiculoDto)
         {
-            var response = new ApplicationResponse<VehiculoDTO>()
-            {
-                Data = VehiculoDto
-            };
-
             try
             {
-                _VehiculoDao.Insert(VehiculoDto);
+                var command = CommandFactory.CreatePostVehiculoCommand(VehiculoDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
 
         [HttpPut]
-        public ApplicationResponse<VehiculoDTO> PutVehiculo([FromBody] VehiculoDTO VehiculoDto)
+        public VehiculoDTO PutVehiculo([FromBody] VehiculoDTO VehiculoDto)
         {
-            var response = new ApplicationResponse<VehiculoDTO>()
-            {
-                Data = VehiculoDto
-            };
-
             try
             {
-                var list = _VehiculoDao.GetVehiculosByID(VehiculoDto.Placa);
-
-                if (list.Exists(x => x.Placa.Contains(VehiculoDto.Placa)))
-                {
-                    _VehiculoDao.Update(VehiculoDto);
-
-                    response.Message = "El Vehiculo ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = CommandFactory.CreatePutVehiculoCommand(VehiculoDto);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
 
         [HttpDelete("{id}")]
-        public ApplicationResponse<VehiculoDTO> DeleteVehiculo([FromRoute] string id)
+        public VehiculoDTO DeleteVehiculo([FromRoute] string id)
         {
-            var response = new ApplicationResponse<VehiculoDTO>();
-
             try
             {
-                response.Data = _VehiculoDao.Select(id);
-
-                _VehiculoDao.Delete(response.Data);
-
-                response.Message = "Vehiculo " + id + " ha sido eliminado exitosamente";
+                var command = CommandFactory.CreateDeleteVehiculoByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {
-                response.Error(ex);
+                throw;
             }
-
-            return response;
         }
     }
 }
