@@ -15,10 +15,10 @@ public static class UsuarioMapper
             Direccion = usuario.Direccion,
             Email = usuario.Email,
             Id = usuario.Id,
-            Incidente = IncidenteMapper.ListDtoToEntities(usuario.Incidente),
+            //Incidente = IncidenteMapper.ListDtoToEntities(usuario.Incidente),
             Nombre = usuario.Nombre,
-            OrdenDeCompra = OrdenDeCompraMapper.ListDtoToEntity(usuario.OrdenDeCompra),
-            Poliza = PolizaMapper.ListDtoToEntities(usuario.Poliza),
+            //OrdenDeCompra = OrdenDeCompraMapper.ListDtoToEntity(usuario.OrdenDeCompra),
+            //Poliza = PolizaMapper.ListDtoToEntities(usuario.Poliza),
             Rol = usuario.Rol,
             Telefono = usuario.Telefono
         };
@@ -33,10 +33,10 @@ public static class UsuarioMapper
             Direccion = usuario.Direccion,
             Email = usuario.Email,
             Id = usuario.Id,
-            Incidente = IncidenteMapper.ListEntityToDtos(usuario.Incidente),
+            //Incidente = IncidenteMapper.ListEntityToDtos(usuario.Incidente),
             Nombre = usuario.Nombre,
-            OrdenDeCompra = OrdenDeCompraMapper.ListEntityToDtos(usuario.OrdenDeCompra),
-            Poliza = PolizaMapper.ListEntityToDtos(usuario.Poliza),
+            //OrdenDeCompra = OrdenDeCompraMapper.ListEntityToDtos(usuario.OrdenDeCompra),
+            //Poliza = PolizaMapper.ListEntityToDtos(usuario.Poliza),
             Rol = usuario.Rol,
             Telefono = usuario.Telefono
         };

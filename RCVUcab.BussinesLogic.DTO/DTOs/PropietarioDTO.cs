@@ -19,9 +19,8 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Poliza { get; set; } = null!;
 
 
-        public PolizaDTO Poliza { get; set; } = null!;
-
-        public List<VehiculoDTO> Vehiculo { get; set; }
+        //public PolizaDTO Poliza { get; set; } = null!;
+        //public List<VehiculoDTO> Vehiculo { get; set; }
     }
 }
 

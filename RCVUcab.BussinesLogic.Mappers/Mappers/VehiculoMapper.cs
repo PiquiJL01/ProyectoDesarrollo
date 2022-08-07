@@ -14,16 +14,16 @@ public static class VehiculoMapper
             Estado = vehiculo.Estado,
             Id_Marca = vehiculo.Id_Marca,
             Id_Propietario = vehiculo.Id_Propietario,
-            Marca = MarcaMapper.DtoToEntity(vehiculo.Marca),
+            //Marca = MarcaMapper.DtoToEntity(vehiculo.Marca),
             Modelo = vehiculo.Modelo,
             NumeroDeEjes = vehiculo.NumeroDeEjes,
             NumeroDePuestos = vehiculo.NumeroDePuestos,
             Peso = vehiculo.Peso,
             Placa = vehiculo.Placa,
-            Propietario = PropietarioMapper.DtoToEntity(vehiculo.Propietario),
+            //Propietario = PropietarioMapper.DtoToEntity(vehiculo.Propietario),
             SerialCarroceria = vehiculo.SerialCarroceria,
             Tipo = vehiculo.Tipo,
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(vehiculo.VehiculoIncidenteTaller)
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(vehiculo.VehiculoIncidenteTaller)
         };
     }
 
@@ -36,16 +36,16 @@ public static class VehiculoMapper
             Estado = vehiculo.Estado,
             Id_Marca = vehiculo.Id_Marca,
             Id_Propietario = vehiculo.Id_Propietario,
-            Marca = MarcaMapper.EntityToDto(vehiculo.Marca),
+            //Marca = MarcaMapper.EntityToDto(vehiculo.Marca),
             Modelo = vehiculo.Modelo,
             NumeroDeEjes = vehiculo.NumeroDeEjes,
             NumeroDePuestos = vehiculo.NumeroDePuestos,
             Peso = vehiculo.Peso,
             Placa = vehiculo.Placa,
-            Propietario = PropietarioMapper.EntityToDto(vehiculo.Propietario),
+            //Propietario = PropietarioMapper.EntityToDto(vehiculo.Propietario),
             SerialCarroceria = vehiculo.SerialCarroceria,
             Tipo = vehiculo.Tipo,
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(vehiculo.VehiculoIncidenteTaller)
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(vehiculo.VehiculoIncidenteTaller)
         };
     }
 

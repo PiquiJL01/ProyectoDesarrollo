@@ -10,12 +10,12 @@ public static class PiezaCotizacionMapper
         return new PiezaCotizacionEntity
         {
             Cantidad = 0, //piezaCotizacion.Cantidad,
-            Cotizacion = CotizacionMapper.DtoToEntity(piezaCotizacion.Cotizacion),
+            //Cotizacion = CotizacionMapper.DtoToEntity(piezaCotizacion.Cotizacion),
             Descuento = "", //piezaCotizacion.Descuento
             ID = piezaCotizacion.ID,
             Id_Cotizacion = piezaCotizacion.Id_Cotizacion,
             Id_Pieza = piezaCotizacion.Id_Pieza,
-            Pieza = PiezaMapper.DtoToEntity(piezaCotizacion.Pieza),
+            //Pieza = PiezaMapper.DtoToEntity(piezaCotizacion.Pieza),
             PiezaEstatus = "", //piezaCotizacion.Pieza
             Precio = piezaCotizacion.Precio,
             TiempoDeEntrega = "" //piezaCotizacion.TiempoEntrega
@@ -26,11 +26,11 @@ public static class PiezaCotizacionMapper
     {
         return new PiezaCotizacionDTO
         {
-            Cotizacion = CotizacionMapper.EntityToDto(piezaCotizacion.Cotizacion),
+            //Cotizacion = CotizacionMapper.EntityToDto(piezaCotizacion.Cotizacion),
             ID = piezaCotizacion.ID,
             Id_Cotizacion = piezaCotizacion.Id_Cotizacion,
             Id_Pieza = piezaCotizacion.Id_Pieza,
-            Pieza = PiezaMapper.EntityToDto(piezaCotizacion.Pieza),
+            //Pieza = PiezaMapper.EntityToDto(piezaCotizacion.Pieza),
             Precio = piezaCotizacion.Precio
         };
     }

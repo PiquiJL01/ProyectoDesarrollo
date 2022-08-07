@@ -10,7 +10,7 @@ public static class FacturaMapper
         return new FacturaEntity
         {
             ID = factura.ID,
-            ID_OrdenDeCompra = OrdenDeCompraMapper.DtoToEntity(factura.ID_OrdenDeCompra)
+            //ID_OrdenDeCompra = OrdenDeCompraMapper.DtoToEntity(factura.ID_OrdenDeCompra)
         };
     }
 
@@ -19,7 +19,7 @@ public static class FacturaMapper
         return new FacturaDTO
         {
             ID = factura.ID,
-            ID_OrdenDeCompra = OrdenDeCompraMapper.EntityToDto(factura.ID_OrdenDeCompra)
+            //ID_OrdenDeCompra = OrdenDeCompraMapper.EntityToDto(factura.ID_OrdenDeCompra)
         };
     }
 

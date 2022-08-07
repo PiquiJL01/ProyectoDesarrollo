@@ -13,9 +13,10 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Direccion { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         public string Rol { get; set; }
-        public List<PolizaDTO> Poliza { get; set; }
-        public List<IncidenteDTO> Incidente { get; set; }
-        public List<OrdenDeCompraDTO> OrdenDeCompra { get; set; }
+
+        //public List<PolizaDTO> Poliza { get; set; }
+        //public List<IncidenteDTO> Incidente { get; set; }
+        //public List<OrdenDeCompraDTO> OrdenDeCompra { get; set; }
     }
 }
 

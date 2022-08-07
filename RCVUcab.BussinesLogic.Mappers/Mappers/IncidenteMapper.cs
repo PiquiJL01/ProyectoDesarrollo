@@ -9,15 +9,15 @@ public static class IncidenteMapper
     {
         return new IncidenteEntity
         {
-            Administrador = UsuarioMapper.DtoToEntity(incidente.Administrador),
-            Cotizacion = CotizacionMapper.ListDtoToEntities(incidente.Cotizacion),
+            //Administrador = UsuarioMapper.DtoToEntity(incidente.Administrador),
+            //Cotizacion = CotizacionMapper.ListDtoToEntities(incidente.Cotizacion),
             Fecha = incidente.Fecha,
             ID = incidente.ID,
             Id_Administrador = incidente.Id_Administrador,
             Id_Perito = incidente.Id_Perito,
-            Perito = UsuarioMapper.DtoToEntity(incidente.Perito),
+            //Perito = UsuarioMapper.DtoToEntity(incidente.Perito),
             Ubicacion = incidente.Ubicacion,
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(incidente.VehiculoIncidenteTaller)
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(incidente.VehiculoIncidenteTaller)
         };
     }
 
@@ -25,15 +25,15 @@ public static class IncidenteMapper
     {
         return new IncidenteDTO
         {
-            Administrador = UsuarioMapper.EntityToDto(incidente.Administrador),
-            Cotizacion = CotizacionMapper.ListEntityToDtos(incidente.Cotizacion),
+            //Administrador = UsuarioMapper.EntityToDto(incidente.Administrador),
+            //Cotizacion = CotizacionMapper.ListEntityToDtos(incidente.Cotizacion),
             Fecha = incidente.Fecha,
             ID = incidente.ID,
             Id_Administrador = incidente.Id_Administrador,
             Id_Perito = incidente.Id_Perito,
-            Perito = UsuarioMapper.EntityToDto(incidente.Perito),
+            //Perito = UsuarioMapper.EntityToDto(incidente.Perito),
             Ubicacion = incidente.Ubicacion,
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(incidente.VehiculoIncidenteTaller)
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(incidente.VehiculoIncidenteTaller)
         };
     }
 

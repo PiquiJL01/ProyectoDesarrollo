@@ -12,11 +12,9 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Description { get; set; }
 
 
-        public List<PiezaCotizacionDTO> PiezaCotizacion { get; set; } = null!;
-
-        public List<PiezaMarcaDTO> PiezaMarca { get; set; } = null!;
-
-        public virtual List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
+        //public List<PiezaCotizacionDTO> PiezaCotizacion { get; set; } = null!;
+        //public List<PiezaMarcaDTO> PiezaMarca { get; set; } = null!;
+        //public virtual List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
     }
 }
 

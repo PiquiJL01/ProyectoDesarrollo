@@ -12,8 +12,8 @@ public static class PiezaMarcaMapper
             ID = piezaMarca.ID,
             Id_Marca = piezaMarca.Id_Marca,
             Id_Pieza = piezaMarca.Id_Pieza,
-            Marca = MarcaMapper.DtoToEntity(piezaMarca.Marca),
-            Pieza = PiezaMapper.DtoToEntity(piezaMarca.Pieza)
+            //Marca = MarcaMapper.DtoToEntity(piezaMarca.Marca),
+            //Pieza = PiezaMapper.DtoToEntity(piezaMarca.Pieza)
         };
     }
 
@@ -24,8 +24,8 @@ public static class PiezaMarcaMapper
             ID = piezaMarca.ID,
             Id_Marca = piezaMarca.Id_Marca,
             Id_Pieza = piezaMarca.Id_Pieza,
-            Marca = MarcaMapper.EntityToDto(piezaMarca.Marca),
-            Pieza = PiezaMapper.EntityToDto(piezaMarca.Pieza)
+            //Marca = MarcaMapper.EntityToDto(piezaMarca.Marca),
+            //Pieza = PiezaMapper.EntityToDto(piezaMarca.Pieza)
         };
     }
 

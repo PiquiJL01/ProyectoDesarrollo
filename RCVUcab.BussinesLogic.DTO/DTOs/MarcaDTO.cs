@@ -7,11 +7,11 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
     {
         public string Name { get; set; }
 
-        public List<ProveedorMarcaDTO> ProveedorMarca { get; set; }
+        //public List<ProveedorMarcaDTO> ProveedorMarca { get; set; }
 
-        public List<PiezaMarcaDTO> PiezaMarca { get; set; }
+        //public List<PiezaMarcaDTO> PiezaMarca { get; set; }
 
-        public List<VehiculoDTO> Vehiculo { get; set; }
+        //public List<VehiculoDTO> Vehiculo { get; set; }
     }
 }
 

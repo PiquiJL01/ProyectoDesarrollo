@@ -17,10 +17,10 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Pieza { get; set; }
 
 
-        public VehiculoDTO Vehiculo { get; set; }
-        public IncidenteDTO Incidente { get; set; }
-        public TallerDTO Taller { get; set; }
-        public PiezaDTO Pieza { get; set; }
+        //public VehiculoDTO Vehiculo { get; set; }
+        //public IncidenteDTO Incidente { get; set; }
+        //public TallerDTO Taller { get; set; }
+        //public PiezaDTO Pieza { get; set; }
     }
 }
 

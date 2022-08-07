@@ -28,12 +28,9 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Marca { get; set; }
 
 
-        public MarcaDTO Marca { get; set; } = null!;
-
-        public PropietarioDTO Propietario { get; set; } = null;
-
-
-        public List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
+        //public MarcaDTO Marca { get; set; } = null!;
+        //public PropietarioDTO Propietario { get; set; } = null;
+        //public List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
     }
 }
 

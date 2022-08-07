@@ -9,10 +9,10 @@ public static class OrdenDeCompraMapper
     {
         return new OrdenDeCompraEntity
         {
-            Administrador = UsuarioMapper.DtoToEntity(ordenDeCompra.Administrador),
+            //Administrador = UsuarioMapper.DtoToEntity(ordenDeCompra.Administrador),
             ID = ordenDeCompra.ID,
             Id_Administrador = ordenDeCompra.Id_Administrador,
-            Id_Cotizacion = CotizacionMapper.DtoToEntity(ordenDeCompra.Id_Cotizacion)
+            //Id_Cotizacion = CotizacionMapper.DtoToEntity(ordenDeCompra.Id_Cotizacion)
         };
     }
 
@@ -20,10 +20,10 @@ public static class OrdenDeCompraMapper
     {
         return new OrdenDeCompraDTO
         {
-            Administrador = UsuarioMapper.EntityToDto(ordenDeCompra.Administrador),
+            //Administrador = UsuarioMapper.EntityToDto(ordenDeCompra.Administrador),
             ID = ordenDeCompra.ID,
             Id_Administrador = ordenDeCompra.Id_Administrador,
-            Id_Cotizacion = CotizacionMapper.EntityToDto(ordenDeCompra.Id_Cotizacion)
+            //Id_Cotizacion = CotizacionMapper.EntityToDto(ordenDeCompra.Id_Cotizacion)
         };
     }
 

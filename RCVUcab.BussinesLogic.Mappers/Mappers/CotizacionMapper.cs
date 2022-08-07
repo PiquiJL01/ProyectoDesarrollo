@@ -13,11 +13,11 @@ public static class CotizacionMapper
             Id_Incidente = cotizacion.Id_Incidente,
             Id_Proveedor = cotizacion.Id_Proveedor,
             Id_Taller = cotizacion.Id_Taller,
-            Incidente = IncidenteMapper.DtoToEntity(cotizacion.Incidente),
+            //Incidente = IncidenteMapper.DtoToEntity(cotizacion.Incidente),
             MontoTotal = cotizacion.MontoTotal,
-            PiezaCotizacion = PiezaCotizacionMapper.ListDtoToEntities(cotizacion.PiezaCotizacion),
-            Proveedor = ProveedorMapper.DtoToEntity(cotizacion.Proveedor),
-            Taller = TallerMapper.DtoToEntity(cotizacion.Taller)
+            //PiezaCotizacion = PiezaCotizacionMapper.ListDtoToEntities(cotizacion.PiezaCotizacion),
+            //Proveedor = ProveedorMapper.DtoToEntity(cotizacion.Proveedor),
+            //Taller = TallerMapper.DtoToEntity(cotizacion.Taller)
         };
     }
 
@@ -29,11 +29,11 @@ public static class CotizacionMapper
             Id_Incidente = cotizacion.Id_Incidente,
             Id_Proveedor = cotizacion.Id_Proveedor,
             Id_Taller = cotizacion.Id_Taller,
-            Incidente = IncidenteMapper.EntityToDto(cotizacion.Incidente),
+            //Incidente = IncidenteMapper.EntityToDto(cotizacion.Incidente),
             MontoTotal = cotizacion.MontoTotal,
-            PiezaCotizacion = PiezaCotizacionMapper.ListEntityToDtos(cotizacion.PiezaCotizacion),
-            Proveedor = ProveedorMapper.EntityToDto(cotizacion.Proveedor),
-            Taller = TallerMapper.EntityToDto(cotizacion.Taller)
+            //PiezaCotizacion = PiezaCotizacionMapper.ListEntityToDtos(cotizacion.PiezaCotizacion),
+            //Proveedor = ProveedorMapper.EntityToDto(cotizacion.Proveedor),
+            //Taller = TallerMapper.EntityToDto(cotizacion.Taller)
         };
     }
 

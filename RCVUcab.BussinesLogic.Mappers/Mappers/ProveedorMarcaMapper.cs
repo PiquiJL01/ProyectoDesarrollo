@@ -13,9 +13,9 @@ public static class ProveedorMarcaMapper
             Id_Marca = proveedorMarca.Id_Marca,
             Id_Proveedor = proveedorMarca.Id_Proveedor,
             Id_Taller = proveedorMarca.Id_Taller,
-            Marca = MarcaMapper.DtoToEntity(proveedorMarca.Marca),
-            Proveedor = ProveedorMapper.DtoToEntity(proveedorMarca.Proveedor),
-            Taller = TallerMapper.DtoToEntity(proveedorMarca.Taller)
+            //Marca = MarcaMapper.DtoToEntity(proveedorMarca.Marca),
+            //Proveedor = ProveedorMapper.DtoToEntity(proveedorMarca.Proveedor),
+            //Taller = TallerMapper.DtoToEntity(proveedorMarca.Taller)
         };
     }
 
@@ -27,9 +27,9 @@ public static class ProveedorMarcaMapper
             Id_Marca = proveedorMarca.Id_Marca,
             Id_Proveedor = proveedorMarca.Id_Proveedor,
             Id_Taller = proveedorMarca.Id_Taller,
-            Marca = MarcaMapper.EntityToDto(proveedorMarca.Marca),
-            Proveedor = ProveedorMapper.EntityToDto(proveedorMarca.Proveedor),
-            Taller = TallerMapper.EntityToDto(proveedorMarca.Taller)
+            //Marca = MarcaMapper.EntityToDto(proveedorMarca.Marca),
+            //Proveedor = ProveedorMapper.EntityToDto(proveedorMarca.Proveedor),
+            //Taller = TallerMapper.EntityToDto(proveedorMarca.Taller)
         };
     }
 

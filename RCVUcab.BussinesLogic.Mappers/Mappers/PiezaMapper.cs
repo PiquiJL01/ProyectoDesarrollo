@@ -12,9 +12,9 @@ public static class PiezaMapper
             Description = pieza.Description,
             ID = pieza.ID,
             Name = pieza.Name,
-            PiezaCotizacion = PiezaCotizacionMapper.ListDtoToEntities(pieza.PiezaCotizacion),
-            PiezaMarca = PiezaMarcaMapper.ListDtoToEntities(pieza.PiezaMarca),
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(pieza.VehiculoIncidenteTaller)
+            //PiezaCotizacion = PiezaCotizacionMapper.ListDtoToEntities(pieza.PiezaCotizacion),
+            //PiezaMarca = PiezaMarcaMapper.ListDtoToEntities(pieza.PiezaMarca),
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(pieza.VehiculoIncidenteTaller)
         };
     }
 
@@ -25,9 +25,9 @@ public static class PiezaMapper
             Description = pieza.Description,
             ID = pieza.ID,
             Name = pieza.Name,
-            PiezaCotizacion = PiezaCotizacionMapper.ListEntityToDtos(pieza.PiezaCotizacion),
-            PiezaMarca = PiezaMarcaMapper.ListEntityToDtos(pieza.PiezaMarca),
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(pieza.VehiculoIncidenteTaller)
+            //PiezaCotizacion = PiezaCotizacionMapper.ListEntityToDtos(pieza.PiezaCotizacion),
+            //PiezaMarca = PiezaMarcaMapper.ListEntityToDtos(pieza.PiezaMarca),
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(pieza.VehiculoIncidenteTaller)
         };
     }
 

@@ -15,10 +15,10 @@ public static class VehiculoIncidenteTallerMapper
             Id_Pieza = vehiculoIncidenteTaller.Id_Pieza,
             Id_Taller = vehiculoIncidenteTaller.Id_Taller,
             Id_Vehiculo = vehiculoIncidenteTaller.Id_Vehiculo,
-            Incidente = IncidenteMapper.DtoToEntity(vehiculoIncidenteTaller.Incidente),
-            Pieza = PiezaMapper.DtoToEntity(vehiculoIncidenteTaller.Pieza),
-            Taller = TallerMapper.DtoToEntity(vehiculoIncidenteTaller.Taller),
-            Vehiculo = VehiculoMapper.DtoToEntity(vehiculoIncidenteTaller.Vehiculo)
+            //Incidente = IncidenteMapper.DtoToEntity(vehiculoIncidenteTaller.Incidente),
+            //Pieza = PiezaMapper.DtoToEntity(vehiculoIncidenteTaller.Pieza),
+            //Taller = TallerMapper.DtoToEntity(vehiculoIncidenteTaller.Taller),
+            //Vehiculo = VehiculoMapper.DtoToEntity(vehiculoIncidenteTaller.Vehiculo)
         };
     }
 
@@ -32,10 +32,10 @@ public static class VehiculoIncidenteTallerMapper
             Id_Pieza = vehiculoIncidenteTaller.Id_Pieza,
             Id_Taller = vehiculoIncidenteTaller.Id_Taller,
             Id_Vehiculo = vehiculoIncidenteTaller.Id_Vehiculo,
-            Incidente = IncidenteMapper.EntityToDto(vehiculoIncidenteTaller.Incidente),
-            Pieza = PiezaMapper.EntityToDto(vehiculoIncidenteTaller.Pieza),
-            Taller = TallerMapper.EntityToDto(vehiculoIncidenteTaller.Taller),
-            Vehiculo = VehiculoMapper.EntityToDto(vehiculoIncidenteTaller.Vehiculo)
+            //Incidente = IncidenteMapper.EntityToDto(vehiculoIncidenteTaller.Incidente),
+            //Pieza = PiezaMapper.EntityToDto(vehiculoIncidenteTaller.Pieza),
+            //Taller = TallerMapper.EntityToDto(vehiculoIncidenteTaller.Taller),
+            //Vehiculo = VehiculoMapper.EntityToDto(vehiculoIncidenteTaller.Vehiculo)
         };
     }
 

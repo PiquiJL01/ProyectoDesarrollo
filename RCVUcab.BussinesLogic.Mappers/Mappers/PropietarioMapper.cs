@@ -13,12 +13,12 @@ public static class PropietarioMapper
             Direccion = propietario.Direccion,
             FechaNacimiento = propietario.FechaNacimiento,
             Id_Poliza = propietario.Id_Poliza,
-            Poliza = PolizaMapper.DtoToEntity(propietario.Poliza),
+            //Poliza = PolizaMapper.DtoToEntity(propietario.Poliza),
             PrimerApellido = propietario.PrimerApellido,
             PrimerNombre = propietario.PrimerNombre,
             SegundoApellido = propietario.SegundoApellido,
             SegundoNombre = propietario.SegundoNombre,
-            Vehiculo = VehiculoMapper.ListDtoToEntities(propietario.Vehiculo)
+            //Vehiculo = VehiculoMapper.ListDtoToEntities(propietario.Vehiculo)
         };
     }
 
@@ -30,12 +30,12 @@ public static class PropietarioMapper
             Direccion = propietario.Direccion,
             FechaNacimiento = propietario.FechaNacimiento,
             Id_Poliza = propietario.Id_Poliza,
-            Poliza = PolizaMapper.EntityToDto(propietario.Poliza),
+            //Poliza = PolizaMapper.EntityToDto(propietario.Poliza),
             PrimerApellido = propietario.PrimerApellido,
             PrimerNombre = propietario.PrimerNombre,
             SegundoApellido = propietario.SegundoApellido,
             SegundoNombre = propietario.SegundoNombre,
-            Vehiculo = VehiculoMapper.ListEntityToDtos(propietario.Vehiculo)
+            //Vehiculo = VehiculoMapper.ListEntityToDtos(propietario.Vehiculo)
         };
     }
 

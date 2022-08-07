@@ -5,8 +5,8 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
     {
         public string ID { get; set; }
         public string Id_Administrador { get; set; }
-        public CotizacionDTO Id_Cotizacion { get; set; }
-        public UsuarioDTO Administrador { get; set; }
+        //public CotizacionDTO Id_Cotizacion { get; set; }
+        //public UsuarioDTO Administrador { get; set; }
     }
 }
 

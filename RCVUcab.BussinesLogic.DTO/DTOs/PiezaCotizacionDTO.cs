@@ -8,8 +8,8 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Cotizacion { get; set; }
         public float Precio { get; set; }
 
-        public PiezaDTO Pieza { get; set; }
-        public CotizacionDTO Cotizacion { get; set; }
+        //public PiezaDTO Pieza { get; set; }
+        //public CotizacionDTO Cotizacion { get; set; }
     }
 }
 

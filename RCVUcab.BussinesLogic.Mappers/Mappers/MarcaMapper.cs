@@ -10,9 +10,9 @@ public static class MarcaMapper
         return new MarcaEntity
         {
             Name = marca.Name,
-            PiezaMarca = PiezaMarcaMapper.ListDtoToEntities(marca.PiezaMarca),
-            ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(marca.ProveedorMarca),
-            Vehiculo = VehiculoMapper.ListDtoToEntities(marca.Vehiculo)
+            //PiezaMarca = PiezaMarcaMapper.ListDtoToEntities(marca.PiezaMarca),
+            //ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(marca.ProveedorMarca),
+            //Vehiculo = VehiculoMapper.ListDtoToEntities(marca.Vehiculo)
         };
     }
 
@@ -21,9 +21,9 @@ public static class MarcaMapper
         return new MarcaDTO
         {
             Name = marca.Name,
-            PiezaMarca = PiezaMarcaMapper.ListEntityToDtos(marca.PiezaMarca),
-            ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(marca.ProveedorMarca),
-            Vehiculo = VehiculoMapper.ListEntityToDtos(marca.Vehiculo)
+            //PiezaMarca = PiezaMarcaMapper.ListEntityToDtos(marca.PiezaMarca),
+            //ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(marca.ProveedorMarca),
+            //Vehiculo = VehiculoMapper.ListEntityToDtos(marca.Vehiculo)
         };
     }
 

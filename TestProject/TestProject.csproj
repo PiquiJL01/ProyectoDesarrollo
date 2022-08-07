@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ProyectoDesarrollo\**" />
+    <EmbeddedResource Remove="ProyectoDesarrollo\**" />
+    <None Remove="ProyectoDesarrollo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="coverlet.msbuild" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -56,7 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ProyectoDesarrollo\" />
     <Folder Include="RCVUcab\" />
     <Folder Include="RCVUcab\UnitTests\" />
     <Folder Include="RCVUcab\UnitTests\Controllers\" />

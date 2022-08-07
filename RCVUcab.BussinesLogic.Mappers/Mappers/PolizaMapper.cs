@@ -9,10 +9,10 @@ public static class PolizaMapper
     {
         return new PolizaEntity
         {
-            Administrador = UsuarioMapper.DtoToEntity(poliza.Administrador),
+            //Administrador = UsuarioMapper.DtoToEntity(poliza.Administrador),
             ID = poliza.ID,
             Id_Admin = poliza.Id_Admin,
-            Propietario = PropietarioMapper.ListDtoToEntities(poliza.Propietario),
+            //Propietario = PropietarioMapper.ListDtoToEntities(poliza.Propietario),
             TipoPoliza = poliza.TipoPoliza
         };
     }
@@ -21,10 +21,10 @@ public static class PolizaMapper
     {
         return new PolizaDTO
         {
-            Administrador = UsuarioMapper.EntityToDto(poliza.Administrador),
+            //Administrador = UsuarioMapper.EntityToDto(poliza.Administrador),
             ID = poliza.ID,
             Id_Admin = poliza.Id_Admin,
-            Propietario = PropietarioMapper.ListEntityToDtos(poliza.Propietario),
+            //Propietario = PropietarioMapper.ListEntityToDtos(poliza.Propietario),
             TipoPoliza = poliza.TipoPoliza
         };
     }

@@ -10,11 +10,11 @@ public static class ProveedorMapper
         return new ProveedorEntity
         {
             Address = proveedor.Address,
-            Cotizacion = CotizacionMapper.ListDtoToEntities(proveedor.Cotizacion),
+            //Cotizacion = CotizacionMapper.ListDtoToEntities(proveedor.Cotizacion),
             ID = proveedor.Id_Proveedor,
             Name = proveedor.Name,
-            ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(proveedor.ProveedorMarca),
-            Taller = TallerMapper.DtoToEntity(proveedor.Taller),
+            //ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(proveedor.ProveedorMarca),
+            //Taller = TallerMapper.DtoToEntity(proveedor.Taller),
             TallerID = proveedor.TallerID
         };
     }
@@ -24,11 +24,11 @@ public static class ProveedorMapper
         return new ProveedorDTO
         {
             Address = proveedor.Address,
-            Cotizacion = CotizacionMapper.ListEntityToDtos(proveedor.Cotizacion),
+            //Cotizacion = CotizacionMapper.ListEntityToDtos(proveedor.Cotizacion),
             Id_Proveedor = proveedor.ID,
             Name = proveedor.Name,
-            ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(proveedor.ProveedorMarca),
-            Taller = TallerMapper.EntityToDto(proveedor.Taller),
+            //ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(proveedor.ProveedorMarca),
+            //Taller = TallerMapper.EntityToDto(proveedor.Taller),
             TallerID = proveedor.TallerID
         };
     }

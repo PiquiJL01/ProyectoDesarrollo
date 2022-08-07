@@ -12,12 +12,10 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Perito { get; set; }
         public string Id_Administrador { get; set; }
 
-        public ICollection<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
-
-        public ICollection<CotizacionDTO> Cotizacion { get; set; }
-
-        public UsuarioDTO Perito { get; set; }
-        public UsuarioDTO Administrador { get; set; }
+        //public ICollection<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
+        //public ICollection<CotizacionDTO> Cotizacion { get; set; }
+        //public UsuarioDTO Perito { get; set; }
+        //public UsuarioDTO Administrador { get; set; }
     }
 }
 

@@ -8,9 +8,9 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Id_Marca { get; set; }
         public string Id_Taller { get; set; }
 
-        public ProveedorDTO Proveedor { get; set; }
-        public MarcaDTO Marca { get; set; }
-        public TallerDTO Taller { get; set; }
+        //public ProveedorDTO Proveedor { get; set; }
+        //public MarcaDTO Marca { get; set; }
+        //public TallerDTO Taller { get; set; }
     }
 }
 
