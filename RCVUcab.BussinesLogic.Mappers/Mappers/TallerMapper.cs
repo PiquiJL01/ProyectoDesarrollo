@@ -10,12 +10,12 @@ public static class TallerMapper
         return new TallerEntity
         {
             Address = taller.Address,
-            CotizacionT = CotizacionMapper.ListDtoToEntities(taller.CotizacionT),
+            //CotizacionT = CotizacionMapper.ListDtoToEntities(taller.CotizacionT),
             ID = taller.ID,
             Name = taller.Name,
             PhoneNumber = taller.PhoneNumber,
-            Proveedor = ProveedorMapper.DtoToEntity(taller.Proveedor),
-            ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(taller.ProveedorMarca),
+            //Proveedor = ProveedorMapper.DtoToEntity(taller.Proveedor),
+            //ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(taller.ProveedorMarca),
             VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(taller.VehiculoIncidenteTaller)
         };
     }
@@ -25,13 +25,13 @@ public static class TallerMapper
         return new TallerDTO
         {
             Address = taller.Address,
-            CotizacionT = CotizacionMapper.ListEntityToDtos(taller.CotizacionT),
+            //CotizacionT = CotizacionMapper.ListEntityToDtos(taller.CotizacionT),
             ID = taller.ID,
             Name = taller.Name,
             PhoneNumber = taller.PhoneNumber,
-            Proveedor = ProveedorMapper.EntityToDto(taller.Proveedor),
-            ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(taller.ProveedorMarca),
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(taller.VehiculoIncidenteTaller)
+            //Proveedor = ProveedorMapper.EntityToDto(taller.Proveedor),
+            //ProveedorMarca = ProveedorMarcaMapper.ListEntityToDtos(taller.ProveedorMarca),
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListEntityToDtos(taller.VehiculoIncidenteTaller)
         };
     }
 
