@@ -71,7 +71,7 @@ namespace RCVUcab.Controllers.Administracion
             {
                 var command = CommandFactory.CreatePutPropietarioCommand(propietarioDto);
                 command.Execute();
-                return command.Execute();
+                return command.GetResult();
             }
             catch (Exception ex)
             {

@@ -1,8 +1,4 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿/*using Microsoft.AspNetCore.Mvc;
 
 namespace ProviderWS.Controllers.Proveedor
 {
@@ -10,7 +6,7 @@ namespace ProviderWS.Controllers.Proveedor
     [Route("Proveedor/[controller]")]
     public class CotizacionController
     {
-        /*private readonly ICotizacionDAO _CotizacionDao;
+        private readonly ICotizacionDAO _CotizacionDao;
         private readonly ILogger<CotizacionController> _logger;
 
         public CotizacionController(ILogger<CotizacionController> logger, ICotizacionDAO CotizacionDao)
@@ -79,7 +75,6 @@ namespace ProviderWS.Controllers.Proveedor
             }
 
             return response;
-        }*/
+        }
     }
-}
-
+}*/

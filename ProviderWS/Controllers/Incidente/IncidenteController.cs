@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using RCVUcab.BussinesLogic.DTOs;
-using RCVUcab.Exceptions;
-using RCVUcab.Persistence.DAOs.Interfaces;
-using RCVUcab.Responses;
-
+﻿/*using Microsoft.AspNetCore.Mvc;
 namespace RCVUcab.Controllers.Incidente
 {
     [ApiController]
@@ -42,5 +34,4 @@ namespace RCVUcab.Controllers.Incidente
 
 
     }
-}
-
+}*/

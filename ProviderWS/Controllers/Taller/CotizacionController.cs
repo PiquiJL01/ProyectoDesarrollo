@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +10,7 @@ namespace ProviderWS.Controllers.Taller
     [Route("Taller/[controller]")]
     public class CotizacionController : Controller
     {
-        /*private readonly ICotizacionDAO _CotizacionDao;
+        private readonly ICotizacionDAO _CotizacionDao;
         private readonly ILogger<CotizacionController> _logger;
 
         public CotizacionController(ILogger<CotizacionController> logger, ICotizacionDAO CotizacionDao)
@@ -100,7 +100,6 @@ namespace ProviderWS.Controllers.Taller
             }
 
             return response;
-        }*/
+        }
     }
-}
-
+}*/

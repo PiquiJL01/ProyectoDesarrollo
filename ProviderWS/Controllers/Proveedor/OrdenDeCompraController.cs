@@ -1,7 +1,4 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 
@@ -11,7 +8,7 @@ namespace ProviderWS.Controllers.Proveedor
     [Route("Proveedor/[controller]")]
     public class OrdenDeCompraController : Controller
     {
-        /*private readonly IOrdenDeCompraDAO _OrdenDeCompraDao;
+        private readonly IOrdenDeCompraDAO _OrdenDeCompraDao;
         private readonly ILogger<OrdenDeCompraController> _logger;
 
         public OrdenDeCompraController(ILogger<OrdenDeCompraController> logger, IOrdenDeCompraDAO OrdenDeCompraDao)
@@ -80,7 +77,6 @@ namespace ProviderWS.Controllers.Proveedor
             }
 
             return response;
-        }*/
+        }
     }
-}
-
+}*/
