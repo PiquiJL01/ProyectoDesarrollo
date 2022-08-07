@@ -10,13 +10,13 @@ namespace RCVUcab.BussinesLogic.DTO.DTOs
         public string Address { get; set; }
         public int PhoneNumber { get; set; }
 
-        public ProveedorDTO Proveedor { get; set; }
+        //public ProveedorDTO Proveedor { get; set; }
 
-        public virtual List<CotizacionDTO> CotizacionT { get; set; }
+        //public virtual List<CotizacionDTO> CotizacionT { get; set; }
 
-        public virtual List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
+        //public virtual List<VehiculoIncidenteTallerDTO> VehiculoIncidenteTaller { get; set; }
 
-        public List<ProveedorMarcaDTO> ProveedorMarca { get; set; }
+        //public List<ProveedorMarcaDTO> ProveedorMarca { get; set; }
     }
 }
 

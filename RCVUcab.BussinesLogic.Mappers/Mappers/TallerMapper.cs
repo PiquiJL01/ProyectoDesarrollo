@@ -16,7 +16,7 @@ public static class TallerMapper
             PhoneNumber = taller.PhoneNumber,
             //Proveedor = ProveedorMapper.DtoToEntity(taller.Proveedor),
             //ProveedorMarca = ProveedorMarcaMapper.ListDtoToEntities(taller.ProveedorMarca),
-            VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(taller.VehiculoIncidenteTaller)
+            //VehiculoIncidenteTaller = VehiculoIncidenteTallerMapper.ListDtoToEntities(taller.VehiculoIncidenteTaller)
         };
     }
 
