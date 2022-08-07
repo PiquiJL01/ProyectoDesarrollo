@@ -1,6 +1,7 @@
 ﻿using System;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
 using RCVUcab.BussinesLogic.Commands.Commands.Composes;
+using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.BussinesLogic.Commands
@@ -22,12 +23,12 @@ namespace RCVUcab.BussinesLogic.Commands
             return new GetTalleresByBrandCommand(marca);
         }
 
-        public static CreateTallerCommand createCreateTallerCommand(TallerEntity taller)
+        public static CreateTallerCommand createCreateTallerCommand(TallerDTO taller)
         {
             return new CreateTallerCommand(taller);
         }
 
-        public static InsertTallerCommand createInsertTallerCommand(TallerEntity taller)
+        public static InsertTallerCommand createInsertTallerCommand(TallerDTO taller)
         {
             return new InsertTallerCommand(taller);
         }

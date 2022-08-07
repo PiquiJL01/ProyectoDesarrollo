@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
+using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.DAOs.Interfaces;
+using RCVUcab.DataAccess.Exceptions;
 
 
 namespace ProviderWS.Controllers.Administracion
@@ -10,7 +10,7 @@ namespace ProviderWS.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class AdministradorController : Controller
     {
-        /*private readonly IUsuarioDAO _administradorDAO;
+        private readonly IUsuarioDAO _administradorDAO;
         private readonly ILogger<AdministradorController> _logger;
 
         public AdministradorController(ILogger<AdministradorController> logger, IUsuarioDAO administradorDao)
@@ -32,8 +32,7 @@ namespace ProviderWS.Controllers.Administracion
                 response.Error(ex);
             }
             return response;
-        }*/
-
+        }
     }
 }
 

@@ -1,9 +1,10 @@
 ﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
-    public interface IPropietarioDAO : IDAO<PropietarioDTO>
+    public interface IPropietarioDAO : IDAO<PropietarioEntity>
     {
-        public List<PropietarioDTO> GetPropietarioByID(string id);
+        public List<PropietarioEntity> GetPropietarioByID(string id);
     }
 }

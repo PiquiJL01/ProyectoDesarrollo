@@ -7,22 +7,16 @@ using RCVUcab.DataAccess.Exceptions;
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
 
-    public class ProveedorDAO : DAO<ProveedorDTO>, IProveedorDAO
+    public class ProveedorDAO : DAO<ProveedorEntity>, IProveedorDAO
     {
-        public ProveedorDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-
-        public override List<ProveedorDTO> Select()
+        public override List<ProveedorEntity> Select()
         {
             try
             {
                 var data = Context().Proveedores
-                    .Select(p => new ProveedorDTO
+                    .Select(p => new ProveedorEntity
                     {
-                        Id_Proveedor = p.ID,
+                        ID = p.ID,
                         Name = p.Name,
                         Address = p.Address,
                         TallerID = p.TallerID,
@@ -38,15 +32,15 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public List<ProveedorDTO> GetProveedoresByID(string id)
+        public List<ProveedorEntity> GetProveedoresByID(string id)
         {
             try
             {
                 var data = Context().Proveedores
                  .Where(i => i.ID == id)
-                 .Select(i => new ProveedorDTO
+                 .Select(i => new ProveedorEntity
                  {
-                     Id_Proveedor = id,
+                     ID = id,
                      Name = i.Name,
                      Address = i.Address,
                      TallerID = i.TallerID,
@@ -64,13 +58,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override ProveedorDTO Select(string Id_Proveedor)
+        public override ProveedorEntity Select(string Id_Proveedor)
         {
             var query = Context().Proveedores
                 .Where(p => p.ID == Id_Proveedor)
-                .Select(p => new ProveedorDTO
+                .Select(p => new ProveedorEntity
                 {
-                    Id_Proveedor = p.ID,
+                    ID = p.ID,
                     Name = p.Name,
                     Address = p.Address,
                     TallerID = p.TallerID,
@@ -78,31 +72,21 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(ProveedorDTO proveedorDto)
+        public override void Insert(ProveedorEntity proveedor)
         {
-            ProveedorEntity proveedor = new ProveedorEntity();
-            proveedor.ID = proveedorDto.Id_Proveedor;
-            proveedor.Name = proveedorDto.Name;
-            proveedor.Address = proveedorDto.Address;
-            proveedor.TallerID = proveedorDto.TallerID;
             Context().Proveedores.Add(proveedor);
             Context().SaveChanges();
         }
 
-        public override void Update(ProveedorDTO proveedorDTO)
+        public override void Update(ProveedorEntity proveedor)
         {
-            var ItemToUpdate = Context().Proveedores.Find(proveedorDTO.Id_Proveedor);
-            ItemToUpdate.Name = proveedorDTO.Name;
-            ItemToUpdate.Address = proveedorDTO.Address;
-            ItemToUpdate.TallerID = proveedorDTO.TallerID;
-            Context().Proveedores.Update(ItemToUpdate);
+            Context().Proveedores.Update(proveedor);
             Context().SaveChanges();
         }
 
-        public override void Delete(ProveedorDTO proveedorDto)
+        public override void Delete(ProveedorEntity proveedor)
         {
-            var itemToRemove = Context().Proveedores.Find(proveedorDto.Id_Proveedor);
-            Context().Proveedores.Remove(itemToRemove);
+            Context().Proveedores.Remove(proveedor);
             Context().SaveChanges();
         }
     }

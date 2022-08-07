@@ -1,9 +1,9 @@
-﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+﻿using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
-    public interface IPolizaDAO : IDAO<PolizaDTO>
+    public interface IPolizaDAO : IDAO<PolizaEntity>
     {
-        public List<PolizaDTO> GetPolizasByID(string id);
+        public List<PolizaEntity> GetPolizasByID(string id);
     }
 }

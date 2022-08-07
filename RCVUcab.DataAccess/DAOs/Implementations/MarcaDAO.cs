@@ -5,49 +5,39 @@ using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-    public class MarcaDAO : DAO<MarcaDTO>, IMarcaDAO
+    public class MarcaDAO : DAO<MarcaEntity>, IMarcaDAO
     {
-        public MarcaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-        }
-
-        public override List<MarcaDTO> Select()
+        public override List<MarcaEntity> Select()
         {
             throw new NotImplementedException();
         }
 
-        public override MarcaDTO Select(string name)
+        public override MarcaEntity Select(string name)
         {
             var query = Context().Marcas
                 .Where(m => m.Name == name)
-                .Select(m => new MarcaDTO
+                .Select(m => new MarcaEntity
                 {
                     Name = m.Name
                 });
             return query.First();
         }
 
-        public override void Insert(MarcaDTO marcaDto)
+        public override void Insert(MarcaEntity marca)
         {
-            MarcaEntity marca = new MarcaEntity();
-            marca.Name = marcaDto.Name;
             Context().Marcas.Add(marca);
             Context().SaveChanges();
         }
 
-        public override void Update(MarcaDTO marcaDto)
+        public override void Update(MarcaEntity marca)
         {
-            var itemToUpdate = Context().Marcas.Find(marcaDto.Name);
-            itemToUpdate.Name = marcaDto.Name;
-
-            Context().Marcas.Update(itemToUpdate);
+            Context().Marcas.Update(marca);
             Context().SaveChanges();
         }
 
-        public override void Delete(MarcaDTO marcaDto)
+        public override void Delete(MarcaEntity marca)
         {
-            var itemToRemove = Context().Marcas.Find(marcaDto.Name);
-            Context().Marcas.Remove(itemToRemove);
+            Context().Marcas.Remove(marca);
             Context().SaveChanges();
         }
     }

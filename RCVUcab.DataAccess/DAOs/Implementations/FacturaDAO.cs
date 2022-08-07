@@ -1,21 +1,15 @@
-﻿using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.DAOs.Interfaces;
-using RCVUcab.DataAccess.Database;
+﻿using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-    public class FacturaDAO : DAO<FacturaDTO>, IFacturaDAO
+    public class FacturaDAO : DAO<FacturaEntity>, IFacturaDAO
     {
-        public FacturaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-        }
-
-        public List<FacturaDTO> VerRegistrosFactura(string factura)
+        public List<FacturaEntity> VerRegistrosFactura(string factura)
         {
             var data = Context().Facturas
                 .Where(a => a.ID == factura)
-                .Select(a => new FacturaDTO
+                .Select(a => new FacturaEntity
                 {
                     ID = a.ID,
                 });
@@ -23,42 +17,40 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return data.ToList();
         }
 
-        public override List<FacturaDTO> Select()
+        public override List<FacturaEntity> Select()
         {
             throw new NotImplementedException();
         }
 
-        public override FacturaDTO Select(string ID)
+        public override FacturaEntity Select(string ID)
         {
             var query = Context().Usuarios
                 .Where(x => x.Id == ID)
-                .Select(x => new FacturaDTO
+                .Select(x => new FacturaEntity
                 {
                     ID = x.Id,
                 });
             return query.First();
         }
 
-        public override void Insert(FacturaDTO facturaDto)
+        public override void Insert(FacturaEntity factura)
         {
-            FacturaEntity factura = new FacturaEntity();
-            factura.ID = facturaDto.ID;
             Context().Facturas.Add(factura);
             Context().SaveChanges();
         }
 
-        public override void Update(FacturaDTO facturaDto)
+        public override void Update(FacturaEntity factura)
         {
-            var itemToUpdate = Context().Facturas.Find(facturaDto.ID);
-            itemToUpdate.ID = facturaDto.ID;
+            var itemToUpdate = Context().Facturas.Find(factura.ID);
+            itemToUpdate.ID = factura.ID;
 
             Context().Facturas.Update(itemToUpdate);
             Context().SaveChanges();
         }
 
-        public override void Delete(FacturaDTO facturaDto)
+        public override void Delete(FacturaEntity factura)
         {
-            var itemToRemove = Context().Facturas.Find(facturaDto.ID);
+            var itemToRemove = Context().Facturas.Find(factura.ID);
             Context().Facturas.Remove(itemToRemove);
             Context().SaveChanges();
         }

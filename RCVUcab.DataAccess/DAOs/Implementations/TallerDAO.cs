@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Database;
@@ -8,20 +9,14 @@ using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-
-    public class TallerDAO : DAO<TallerDTO>, ITallerDAO
+    public class TallerDAO : DAO<TallerEntity>, ITallerDAO
     {
-        public TallerDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<TallerDTO> Select()
+        public override List<TallerEntity> Select()
         {
             try
             {
                 var data = Context().Talleres
-                    .Select(b => new TallerDTO
+                    .Select(b => new TallerEntity
                     {
                         ID = b.ID,
                         Name = b.Name,
@@ -38,15 +33,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-
-        
-        public List<TallerDTO> GetTalleresByID(string id)
+        public List<TallerEntity> GetTalleresByID(string id)
         {
             try
             {
                    var data = Context().Talleres
                     .Where(i => i.ID == id)
-                    .Select(i => new TallerDTO
+                    .Select(i => new TallerEntity
                     {
                         ID = id,
                         Name = i.Name,
@@ -65,18 +58,17 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-
-        public List<ProveedorMarcaDTO> GetTalleresByBrand(string marca)
+        public List<ProveedorMarcaEntity> GetTalleresByBrand(string marca)
         {
             try
             {
                 var data = Context().ProveedoresMarcas
                    .Include(b => b.Taller)
                    .Where(b => b.Id_Marca == marca)
-                   .Select(b => new ProveedorMarcaDTO
+                   .Select(b => new ProveedorMarcaEntity()
                    {
                        Id_Marca = b.Id_Marca,
-                       Taller = new TallerDTO
+                       Taller = new TallerEntity
                        {
                            ID = b.Taller.ID,
                            Name = b.Taller.Name,
@@ -93,12 +85,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-
-        public override TallerDTO Select(string IdTaller)
+        public override TallerEntity Select(string IdTaller)
         {
             var query = Context().Talleres
                 .Where(x => x.ID == IdTaller)
-                .Select(x => new TallerDTO
+                .Select(x => new TallerEntity
                 {
                     ID = x.ID,
                     Name = x.Name,
@@ -108,31 +99,21 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(TallerDTO tallerDto)
+        public override void Insert(TallerEntity taller)
         {
-            TallerEntity taller = new TallerEntity();
-            taller.ID = tallerDto.ID;
-            taller.Name = tallerDto.Name;
-            taller.Address = tallerDto.Address;
-            taller.PhoneNumber = tallerDto.PhoneNumber;
             Context().Talleres.Add(taller);
             Context().SaveChanges();
         }
 
-        public override void Update(TallerDTO tallerDto)
+        public override void Update(TallerEntity taller)
         {
-            var itemToUpdate = Context().Talleres.Find(tallerDto.ID);
-            itemToUpdate.Name = tallerDto.Name;
-            itemToUpdate.Address = tallerDto.Address;
-            itemToUpdate.PhoneNumber = tallerDto.PhoneNumber;
-            Context().Talleres.Update(itemToUpdate);
+            Context().Talleres.Update(taller);
             Context().SaveChanges();
         }
 
-        public override void Delete(TallerDTO tallerDto)
+        public override void Delete(TallerEntity taller)
         {
-            var itemToRemove = Context().Talleres.Find(tallerDto.ID);
-            Context().Talleres.Remove(itemToRemove);
+            Context().Talleres.Remove(taller);
             Context().SaveChanges();
         }
     }

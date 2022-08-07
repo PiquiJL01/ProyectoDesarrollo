@@ -7,19 +7,14 @@ using RCVUcab.DataAccess.Exceptions;
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
 
-    public class PolizaDAO : DAO<PolizaDTO>, IPolizaDAO
+    public class PolizaDAO : DAO<PolizaEntity>, IPolizaDAO
     {
-        public PolizaDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<PolizaDTO> Select()
+        public override List<PolizaEntity> Select()
         {
             try
             {
                 var data = Context().Polizas
-                    .Select(b => new PolizaDTO
+                    .Select(b => new PolizaEntity
                     {
                         ID = b.ID,
                         Id_Admin = b.Id_Admin,
@@ -35,13 +30,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public List<PolizaDTO> GetPolizasByID(string id)
+        public List<PolizaEntity> GetPolizasByID(string id)
         {
             try
             {
                 var data = Context().Polizas
                  .Where(i => i.ID == id)
-                 .Select(i => new PolizaDTO
+                 .Select(i => new PolizaEntity
                  {
                      ID = id,
                      Id_Admin = i.Id_Admin,
@@ -59,11 +54,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override PolizaDTO Select(string ID)
+        public override PolizaEntity Select(string ID)
         {
             var query = Context().Polizas
                 .Where(p => p.ID == ID)
-                .Select(p => new PolizaDTO
+                .Select(p => new PolizaEntity
                 {
                     ID = p.ID,
                     Id_Admin = p.Id_Admin,
@@ -73,31 +68,21 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override void Insert(PolizaDTO polizaDTO)
+        public override void Insert(PolizaEntity poliza)
         {
-            PolizaEntity poliza = new PolizaEntity();
-            poliza.ID = polizaDTO.ID;
-            poliza.Id_Admin = polizaDTO.Id_Admin;
-            poliza.TipoPoliza = polizaDTO.TipoPoliza;
             Context().Polizas.Add(poliza);
             Context().SaveChanges();
         }
 
-        public override void Update(PolizaDTO polizaDTO)
+        public override void Update(PolizaEntity poliza)
         {
-            var itemToUpdate = Context().Polizas.Find(polizaDTO.ID);
-            itemToUpdate.ID = polizaDTO.ID;
-            itemToUpdate.Id_Admin = polizaDTO.Id_Admin;
-            itemToUpdate.TipoPoliza = polizaDTO.TipoPoliza;
-
-            Context().Polizas.Update(itemToUpdate);
+            Context().Polizas.Update(poliza);
             Context().SaveChanges();
         }
 
-        public override void Delete(PolizaDTO polizaDto)
+        public override void Delete(PolizaEntity poliza)
         {
-            var itemToRemove = Context().Polizas.Find(polizaDto.ID);
-            Context().Polizas.Remove(itemToRemove);
+            Context().Polizas.Remove(poliza);
             Context().SaveChanges();
         }
     }

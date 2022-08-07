@@ -7,10 +7,9 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Composes
 {
     public class CreateTallerCommand : Command<TallerDTO>
     {
-        private readonly TallerEntity _taller;
-        private TallerDTO _result;
+        private readonly TallerDTO _taller;
 
-        public CreateTallerCommand(TallerEntity taller)
+        public CreateTallerCommand(TallerDTO taller)
         {
             _taller = taller;
         }
@@ -20,19 +19,9 @@ namespace RCVUcab.BussinesLogic.Commands.Commands.Composes
         {
             InsertTallerCommand commandInsert = CommandFactory.createInsertTallerCommand(_taller);
             commandInsert.Execute();
-            _result = commandInsert.GetResult();
+            SetResult(commandInsert.GetResult());
             /*SendProviderQuotationCommand commandSend = CommandFactory.createSendProviderQuotationCommand(_result);
             commandSend.Execute();*/
-        }
-
-        public override TallerDTO GetResult()
-        {
-            return _result;
-        }
-
-        public override List<TallerDTO> GetResultList()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.Commands.Commands.Atomics;
 using RCVUcab.BussinesLogic.Commands.Commands.Composes;
 using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.BussinesLogic.Mappers.Mappers;
+using RCVUcab.DataAccess.Exceptions;
 
 namespace ProviderWS.Controllers.Administracion
 {
@@ -46,7 +46,7 @@ namespace ProviderWS.Controllers.Administracion
                 GetTalleresCommand command =
                   CommandFactory.createGetTalleresCommand();
                 command.Execute();
-                return command.GetResultList();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {
@@ -63,7 +63,7 @@ namespace ProviderWS.Controllers.Administracion
                 GetTalleresByBrandCommand command =
                   CommandFactory.createGetTalleresByBrandCommand(marca);
                 command.Execute();
-                return command.GetResultList();
+                return command.GetResult();
             }
             catch (RCVException ex)
             {

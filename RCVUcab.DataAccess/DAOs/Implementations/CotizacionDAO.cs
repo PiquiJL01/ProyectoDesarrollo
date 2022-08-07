@@ -7,20 +7,14 @@ using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-    public class CotizacionDAO : DAO<CotizacionDTO>, ICotizacionDAO
+    public class CotizacionDAO : DAO<CotizacionEntity>, ICotizacionDAO
     {
-
-        public CotizacionDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-        }
-
-
-        public override List<CotizacionDTO> Select()
+        public override List<CotizacionEntity> Select()
         {
             try
             {
                 var data = Context().Cotizaciones
-                    .Select(c => new CotizacionDTO
+                    .Select(c => new CotizacionEntity()
                     {
                         Id = c.Id,
                         MontoTotal = c.MontoTotal,
@@ -39,13 +33,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public List<CotizacionDTO> GetCotizacionesByID(string id)
+        public List<CotizacionEntity> GetCotizacionesByID(string id)
         {
             try
             {
                 var data = Context().Cotizaciones
                  .Where(c => c.Id == id)
-                 .Select(c => new CotizacionDTO
+                 .Select(c => new CotizacionEntity()
                  {
                      Id = c.Id,
                      MontoTotal = c.MontoTotal,
@@ -66,11 +60,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override CotizacionDTO Select(string id)
+        public override CotizacionEntity Select(string id)
         {
             var query = Context().Cotizaciones
                 .Where(c => c.Id == id)
-                .Select(c => new CotizacionDTO
+                .Select(c => new CotizacionEntity()
                 {
                     Id = c.Id,
                     MontoTotal = c.MontoTotal,
@@ -81,52 +75,46 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(CotizacionDTO cotizacionDto)
+        public override void Insert(CotizacionEntity cotizacion)
         {
-            CotizacionEntity cotizacion = new CotizacionEntity();
-            cotizacion.Id = cotizacionDto.Id;
-            cotizacion.MontoTotal = cotizacionDto.MontoTotal;
-            cotizacion.Id_Proveedor = cotizacionDto.Id_Proveedor;
-            cotizacion.Id_Incidente = cotizacionDto.Id_Incidente;
-            cotizacion.Id_Taller = cotizacionDto.Id_Taller;
             Context().Cotizaciones.Add(cotizacion);
             Context().SaveChanges();
         }
 
-        public override void Update(CotizacionDTO cotizacionDto)
+        public override void Update(CotizacionEntity cotizacion)
         {
-            var itemToUpdate = Context().Cotizaciones.Find(cotizacionDto.Id);
-            itemToUpdate.MontoTotal = cotizacionDto.MontoTotal;
+            var itemToUpdate = Context().Cotizaciones.Find(cotizacion.Id);
+            itemToUpdate.MontoTotal = cotizacion.MontoTotal;
 
             Context().Cotizaciones.Update(itemToUpdate);
             Context().SaveChanges();
         }
 
-        public override void Delete(CotizacionDTO cotizacionDto)
+        public override void Delete(CotizacionEntity cotizacion)
         {
-            var ItemToRemove = Context().Cotizaciones.Find(cotizacionDto.Id);
+            var ItemToRemove = Context().Cotizaciones.Find(cotizacion.Id);
             Context().Cotizaciones.Remove(ItemToRemove);
             Context().SaveChanges();
         }
 
-        public List<IncidenteDTO> GetCotizacionesByIncidente(string incidente)
+        public List<IncidenteEntity> GetCotizacionesByIncidente(string incidente)
         {
             try
             {
                 var data = _dataBaseContext.Incidentes
                     .Include(b => b.Cotizacion)
                     .Where(b => b.ID == incidente)
-                    .Select(b => new IncidenteDTO
+                    .Select(b => new IncidenteEntity
                     {
                         ID = b.ID,
                         Fecha = b.Fecha,
-                        Cotizacion = b.Cotizacion.Select(p => new CotizacionDTO
+                        Cotizacion = b.Cotizacion.Select(p => new CotizacionEntity()
                         {
                             Id = p.Id,
                             MontoTotal = p.MontoTotal,
                             Id_Proveedor = p.Id_Proveedor,
                             Id_Taller = p.Id_Taller,
-                            PiezaCotizacion = p.PiezaCotizacion.Select(d => new PiezaCotizacionDTO
+                            PiezaCotizacion = p.PiezaCotizacion.Select(d => new PiezaCotizacionEntity
                             {
                                 Id_Pieza = d.Id_Pieza,
 

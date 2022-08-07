@@ -1,13 +1,13 @@
-﻿using System;
-using RCVUcab.DataAccess.DAOs.DB;
+﻿using RCVUcab.DataAccess.DAOs.DB;
+using RCVUcab.DataAccess.DAOs.Implementations;
 
 namespace RCVUcab.DataAccess.DAOFactory
 {
     public class TallerDAOFactory
     {
-        public static TallerDB CreateTallerDB()
+        public static TallerDAO CreateTallerDAO()
         {
-            return new TallerDB();
+            return new TallerDAO();
         }
 
         /*public static TallerMQ CreateTallerMQ()

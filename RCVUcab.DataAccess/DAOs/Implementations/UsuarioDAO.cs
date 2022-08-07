@@ -7,19 +7,14 @@ using RCVUcab.DataAccess.Exceptions;
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
 
-    public class UsuarioDAO : DAO<UsuarioDTO>, IUsuarioDAO
+    public class UsuarioDAO : DAO<UsuarioEntity>, IUsuarioDAO
     {
-        public UsuarioDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<UsuarioDTO> Select()
+        public override List<UsuarioEntity> Select()
         {
             try
             {
                 var data = Context().Usuarios
-                    .Select(u => new UsuarioDTO
+                    .Select(u => new UsuarioEntity
                     {
                         Id = u.Id,
                         Nombre = u.Nombre,
@@ -41,13 +36,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public List<UsuarioDTO> GetUsuariosByID(string id)
+        public List<UsuarioEntity> GetUsuariosByID(string id)
         {
             try
             {
                 var data = Context().Usuarios
                  .Where(u => u.Id == id)
-                 .Select(u => new UsuarioDTO
+                 .Select(u => new UsuarioEntity
                  {
                      Id = u.Id,
                      Nombre = u.Nombre,
@@ -71,11 +66,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override UsuarioDTO Select(string Id)
+        public override UsuarioEntity Select(string Id)
         {
             var query = Context().Usuarios
                 .Where(u => u.Id == Id)
-                .Select(u => new UsuarioDTO
+                .Select(u => new UsuarioEntity
                 {
                     Id = u.Id,
                     Nombre = u.Nombre,
@@ -89,40 +84,15 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(UsuarioDTO usuarioDto)
-
+        public override void Insert(UsuarioEntity usuario)
         {
-            UsuarioEntity usuario = new UsuarioEntity()
-            {
-                Id = usuarioDto.Id,
-                Nombre = usuarioDto.Nombre,
-                Apellido = usuarioDto.Apellido,
-                Telefono = usuarioDto.Telefono,
-                Email = usuarioDto.Email,
-                Direccion = usuarioDto.Direccion,
-                BirthDate = usuarioDto.BirthDate,
-                Rol = usuarioDto.Rol
-            };
-
             Context().Usuarios.Add(usuario);
             Context().SaveChanges();
         }
 
-        public override void Update(UsuarioDTO usuarioDTO)
+        public override void Update(UsuarioEntity usuario)
         {
-            var itemToUpdate = new UsuarioEntity()
-            {
-                Id = usuarioDTO.Id,
-                Nombre = usuarioDTO.Nombre,
-                Apellido = usuarioDTO.Apellido,
-                Telefono = usuarioDTO.Telefono,
-                Email = usuarioDTO.Email,
-                Direccion = usuarioDTO.Direccion,
-                BirthDate = usuarioDTO.BirthDate,
-                Rol = usuarioDTO.Rol
-            };
-
-            Context().Usuarios.Update(itemToUpdate);
+            Context().Usuarios.Update(usuario);
             Context().SaveChanges();
         }
 
@@ -134,14 +104,14 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
         }
 
         //Get Administradores
-        public List<UsuarioDTO> GetAdministradores()
+        public List<UsuarioEntity> GetAdministradores()
         {
             try
             {
                 var data = _dataBaseContext.Usuarios
                     //********** REVISAR ROL **************
                     .Where(b => b.Rol == b.Rol)
-                    .Select(b => new UsuarioDTO
+                    .Select(b => new UsuarioEntity
                     {
                         Id = b.Id,
                         Nombre = b.Nombre,
@@ -159,14 +129,14 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
 
         //Get Peritoes
-        public List<UsuarioDTO> GetPeritos()
+        public List<UsuarioEntity> GetPeritos()
         {
             try
             {
                 var data = _dataBaseContext.Usuarios
                     //********** REVISAR ROL **************
                     .Where(b => b.Rol == b.Rol)
-                    .Select(b => new UsuarioDTO
+                    .Select(b => new UsuarioEntity
                     {
                         Id = b.Id,
                         Nombre = b.Nombre,

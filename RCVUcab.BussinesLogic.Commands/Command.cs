@@ -1,13 +1,20 @@
-﻿using System;
-namespace RCVUcab.BussinesLogic.Commands
+﻿namespace RCVUcab.BussinesLogic.Commands
 {
     public abstract class Command<TOut> : ICommand<TOut>
     {
+        private TOut _result;
+
         public abstract void Execute();
 
-        public abstract TOut GetResult();
+        protected void SetResult(TOut result)
+        {
+            _result = result;
+        }
 
-        public abstract List<TOut> GetResultList();
+        public TOut GetResult()
+        {
+            return _result;
+        }
     }
 }
 

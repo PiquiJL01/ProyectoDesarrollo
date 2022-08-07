@@ -1,24 +1,18 @@
-﻿using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.DAOs.Interfaces;
-using RCVUcab.DataAccess.Database;
+﻿using RCVUcab.DataAccess.DAOs.Interfaces;
 using RCVUcab.DataAccess.Entities;
 using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
 
-    public class OrdenDeCompraDAO : DAO<OrdenDeCompraDTO>, IOrdenDeCompraDAO
+    public class OrdenDeCompraDAO : DAO<OrdenDeCompraEntity>, IOrdenDeCompraDAO
     {
-        public OrdenDeCompraDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-        }
-
-        public override List<OrdenDeCompraDTO> Select()
+        public override List<OrdenDeCompraEntity> Select()
         {
             try
             {
                 var data = Context().OrdenesDeCompra
-                    .Select(b => new OrdenDeCompraDTO
+                    .Select(b => new OrdenDeCompraEntity
                     {
                         ID = b.ID,
                         Id_Administrador = b.Id_Administrador,
@@ -35,13 +29,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
         }
 
 
-        public List<OrdenDeCompraDTO> GetOrdenesDeCompraByID(string id)
+        public List<OrdenDeCompraEntity> GetOrdenesDeCompraByID(string id)
         {
             try
             {
                 var data = Context().OrdenesDeCompra
                  .Where(i => i.ID == id)
-                 .Select(i => new OrdenDeCompraDTO
+                 .Select(i => new OrdenDeCompraEntity
                  {
                      ID = i.ID,
                      Id_Administrador = i.Id_Administrador,
@@ -59,11 +53,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override OrdenDeCompraDTO Select(string id)
+        public override OrdenDeCompraEntity Select(string id)
         {
             var query = Context().OrdenesDeCompra
                 .Where(o => o.ID == id)
-                .Select(o => new OrdenDeCompraDTO
+                .Select(o => new OrdenDeCompraEntity
                 {
                     ID = o.ID,
                     Id_Administrador = o.Id_Administrador,
@@ -71,29 +65,22 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(OrdenDeCompraDTO ordenDeCompraDto)
+        public override void Insert(OrdenDeCompraEntity ordenDeCompra)
         {
-            OrdenDeCompraEntity ordenDeCompra = new OrdenDeCompraEntity();
-            ordenDeCompra.ID = ordenDeCompraDto.ID;
-            ordenDeCompra.Id_Administrador = ordenDeCompraDto.Id_Administrador;
             Context().OrdenesDeCompra.Add(ordenDeCompra);
             Context().SaveChanges();
 
         }
 
-        public override void Update(OrdenDeCompraDTO ordenDeCompraDto)
+        public override void Update(OrdenDeCompraEntity ordenDeCompra)
         {
-            var itemToUpdate = Context().OrdenesDeCompra.Find(ordenDeCompraDto.ID);
-            itemToUpdate.ID = ordenDeCompraDto.ID;
-
-            Context().OrdenesDeCompra.Update(itemToUpdate);
+            Context().OrdenesDeCompra.Update(ordenDeCompra);
             Context().SaveChanges();
         }
 
-        public override void Delete(OrdenDeCompraDTO ordenDeCompraDto)
+        public override void Delete(OrdenDeCompraEntity ordenDeCompra)
         {
-            var itemToRemove = Context().OrdenesDeCompra.Find(ordenDeCompraDto.ID);
-            Context().OrdenesDeCompra.Remove(itemToRemove);
+            Context().OrdenesDeCompra.Remove(ordenDeCompra);
             Context().SaveChanges();
 
         }

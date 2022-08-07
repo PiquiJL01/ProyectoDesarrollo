@@ -1,9 +1,10 @@
 ﻿using RCVUcab.BussinesLogic.DTO.DTOs;
+using RCVUcab.DataAccess.Entities;
 
 namespace RCVUcab.DataAccess.DAOs.Interfaces
 {
-    public interface IOrdenDeCompraDAO: IDAO<OrdenDeCompraDTO>
+    public interface IOrdenDeCompraDAO: IDAO<OrdenDeCompraEntity>
     {
-        public List<OrdenDeCompraDTO> GetOrdenesDeCompraByID(string id);
+        public List<OrdenDeCompraEntity> GetOrdenesDeCompraByID(string id);
     }
 }

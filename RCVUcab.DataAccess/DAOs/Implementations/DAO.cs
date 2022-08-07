@@ -5,16 +5,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 {
     public abstract class DAO<T> : IDAO<T>
     {
-        public readonly DataBaseContext _dataBaseContext;
+        public readonly DataBaseContext _dataBaseContext = new DesignTimeDbContextFactory().CreateDbContext(null);
 
         public DataBaseContext Context()
         {
             return _dataBaseContext;
-        }
-
-        protected DAO(DataBaseContext dataBaseContext)
-        {
-            _dataBaseContext = dataBaseContext;
         }
 
         public abstract List<T> Select();

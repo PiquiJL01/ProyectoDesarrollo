@@ -7,19 +7,14 @@ using RCVUcab.DataAccess.Exceptions;
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
 
-    public class VehiculoDAO : DAO<VehiculoDTO>, IVehiculoDAO
+    public class VehiculoDAO : DAO<VehiculoEntity>, IVehiculoDAO
     {
-        public VehiculoDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<VehiculoDTO> Select()
+        public override List<VehiculoEntity> Select()
         {
             try
             {
                 var data = Context().Vehiculos
-                    .Select(x => new VehiculoDTO
+                    .Select(x => new VehiculoEntity
                     {
                         Placa = x.Placa,
                         Modelo = x.Modelo,
@@ -45,13 +40,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public List<VehiculoDTO> GetVehiculosByID(string id)
+        public List<VehiculoEntity> GetVehiculosByID(string id)
         {
             try
             {
                 var data = Context().Vehiculos
                  .Where(x => x.Placa == id)
-                 .Select(x => new VehiculoDTO
+                 .Select(x => new VehiculoEntity
                  {
                      Placa = x.Placa,
                      Modelo = x.Modelo,
@@ -79,11 +74,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override VehiculoDTO Select(string Placa)
+        public override VehiculoEntity Select(string Placa)
         {
             var query = Context().Vehiculos
                 .Where(x => x.Placa == Placa)
-                .Select(x => new VehiculoDTO
+                .Select(x => new VehiculoEntity
                 {
                     Placa = x.Placa,
                     Modelo = x.Modelo,
@@ -101,52 +96,21 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(VehiculoDTO vehiculoDTO)
+        public override void Insert(VehiculoEntity vehiculo)
         {
-            VehiculoEntity vehiculo = new VehiculoEntity()
-            {
-                Placa = vehiculoDTO.Placa,
-                Modelo = vehiculoDTO.Modelo,
-                Estado = vehiculoDTO.Estado,
-                Tipo = vehiculoDTO.Tipo,
-                SerialCarroceria = vehiculoDTO.SerialCarroceria,
-                Año = vehiculoDTO.Año,
-                Peso = vehiculoDTO.Peso,
-                NumeroDeEjes = vehiculoDTO.NumeroDeEjes,
-                Color = vehiculoDTO.Color,
-                NumeroDePuestos = vehiculoDTO.NumeroDePuestos,
-                Id_Propietario = vehiculoDTO.Id_Propietario,
-                Id_Marca = vehiculoDTO.Id_Marca
-            };
             Context().Vehiculos.Add(vehiculo);
             Context().SaveChanges();
         }
 
-        public override void Update(VehiculoDTO vehiculoDto)
+        public override void Update(VehiculoEntity vehiculo)
         {
-            var itemToUpdate = new VehiculoEntity()
-            {
-                Placa = vehiculoDto.Placa,
-                Modelo = vehiculoDto.Modelo,
-                Estado = vehiculoDto.Estado,
-                Tipo = vehiculoDto.Tipo,
-                SerialCarroceria = vehiculoDto.SerialCarroceria,
-                Año = vehiculoDto.Año,
-                Peso = vehiculoDto.Peso,
-                NumeroDeEjes = vehiculoDto.NumeroDeEjes,
-                Color = vehiculoDto.Color,
-                NumeroDePuestos = vehiculoDto.NumeroDePuestos,
-                Id_Propietario = vehiculoDto.Id_Propietario,
-                Id_Marca = vehiculoDto.Id_Marca
-            };
-            Context().Vehiculos.Update(itemToUpdate);
+            Context().Vehiculos.Update(vehiculo);
             Context().SaveChanges();
         }
 
-        public override void Delete(VehiculoDTO vehiculoDto)
+        public override void Delete(VehiculoEntity vehiculo)
         {
-            var itemToRemove = Context().Vehiculos.Find(vehiculoDto.Placa);
-            Context().Vehiculos.Remove(itemToRemove);
+            Context().Vehiculos.Remove(vehiculo);
             Context().SaveChanges();
         }
     }

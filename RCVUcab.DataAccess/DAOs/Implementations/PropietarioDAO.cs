@@ -6,19 +6,14 @@ using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-    public class PropietarioDAO : DAO<PropietarioDTO>, IPropietarioDAO
+    public class PropietarioDAO : DAO<PropietarioEntity>, IPropietarioDAO
     {
-        public PropietarioDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<PropietarioDTO> Select()
+        public override List<PropietarioEntity> Select()
         {
             try
             {
                 var data = Context().Propietarios
-                    .Select(x => new PropietarioDTO
+                    .Select(x => new PropietarioEntity
                     {
                         CedulaRif = x.CedulaRif,
                         PrimerNombre = x.PrimerNombre,
@@ -42,13 +37,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
 
 
-        public List<PropietarioDTO> GetPropietarioByID(string id)
+        public List<PropietarioEntity> GetPropietarioByID(string id)
         {
             try
             {
                 var data = Context().Propietarios
                  .Where(x => x.CedulaRif == id)
-                 .Select(x => new PropietarioDTO
+                 .Select(x => new PropietarioEntity
                  {
                      CedulaRif = x.CedulaRif,
                      PrimerNombre = x.PrimerNombre,
@@ -72,11 +67,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override PropietarioDTO Select(string CedulaRif)
+        public override PropietarioEntity Select(string CedulaRif)
         {
             var query = Context().Propietarios
                 .Where(x => x.CedulaRif == CedulaRif)
-                .Select(x => new PropietarioDTO
+                .Select(x => new PropietarioEntity
                 {
                     CedulaRif = x.CedulaRif,
                     PrimerNombre = x.PrimerNombre,
@@ -90,40 +85,21 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public override void Insert(PropietarioDTO propietarioDto)
+        public override void Insert(PropietarioEntity propietario)
         {
-            PropietarioEntity propietario = new PropietarioEntity();
-            propietario.CedulaRif = propietarioDto.CedulaRif;
-            propietario.PrimerNombre = propietarioDto.PrimerNombre;
-            propietario.SegundoNombre = propietarioDto.SegundoNombre;
-            propietario.PrimerApellido = propietarioDto.PrimerApellido;
-            propietario.SegundoApellido = propietarioDto.SegundoApellido;
-            propietario.FechaNacimiento = propietarioDto.FechaNacimiento;
-            propietario.Direccion = propietarioDto.Direccion;
-            propietario.Id_Poliza = propietarioDto.Id_Poliza;
-
             Context().Propietarios.Add(propietario);
             Context().SaveChanges();
         }
 
-        public override void Update(PropietarioDTO propietarioDTO)
+        public override void Update(PropietarioEntity propietario)
         {
-            var itemToUpdate = Context().Propietarios.Find(propietarioDTO.CedulaRif);
-            itemToUpdate.PrimerNombre = propietarioDTO.PrimerNombre;
-            itemToUpdate.SegundoNombre = propietarioDTO.SegundoNombre;
-            itemToUpdate.PrimerApellido = propietarioDTO.PrimerApellido;
-            itemToUpdate.SegundoApellido = propietarioDTO.SegundoApellido;
-            itemToUpdate.Direccion = propietarioDTO.Direccion;
-            itemToUpdate.Id_Poliza = propietarioDTO.Id_Poliza;
-
-            Context().Propietarios.Update(itemToUpdate);
+            Context().Propietarios.Update(propietario);
             Context().SaveChanges();
         }
 
-        public override void Delete(PropietarioDTO propietarioDto)
+        public override void Delete(PropietarioEntity propietario)
         {
-            var itemToRemove = Context().Propietarios.Find(propietarioDto.CedulaRif);
-            Context().Propietarios.Remove(itemToRemove);
+            Context().Propietarios.Remove(propietario);
             Context().SaveChanges();
         }
     }

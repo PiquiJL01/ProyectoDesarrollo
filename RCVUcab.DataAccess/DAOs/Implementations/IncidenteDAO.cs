@@ -6,19 +6,14 @@ using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.DataAccess.DAOs.Implementations
 {
-    public class IncidenteDAO : DAO<IncidenteDTO>, IIncidenteDAO
+    public class IncidenteDAO : DAO<IncidenteEntity>, IIncidenteDAO
     {
-        public IncidenteDAO(DataBaseContext dataBaseContext) : base(dataBaseContext)
-        {
-
-        }
-
-        public override List<IncidenteDTO> Select()
+        public override List<IncidenteEntity> Select()
         {
             try
             {
                 var data = Context().Incidentes
-                    .Select(i => new IncidenteDTO
+                    .Select(i => new IncidenteEntity
                     {
                         ID = i.ID,
                         Ubicacion = i.Ubicacion,
@@ -37,11 +32,11 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             }
         }
 
-        public override IncidenteDTO Select(string id)
+        public override IncidenteEntity Select(string id)
         {
             var query = Context().Incidentes
                 .Where(i => i.ID == id)
-                .Select(i => new IncidenteDTO
+                .Select(i => new IncidenteEntity
                 {
                     ID = i.ID,
                     Ubicacion = i.Ubicacion,
@@ -53,13 +48,13 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             return query.First();
         }
 
-        public List<IncidenteDTO> GetIncidenteByID(string id)
+        public List<IncidenteEntity> GetIncidenteByID(string id)
         {
             try
             {
                 var data = Context().Incidentes
                  .Where(i => i.ID == id)
-                 .Select(i => new IncidenteDTO
+                 .Select(i => new IncidenteEntity
                  {
                      ID = i.ID,
                      Ubicacion = i.Ubicacion,
@@ -80,34 +75,19 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
 
         }
 
-        public override void Insert(IncidenteDTO incidenteDto)
+        public override void Insert(IncidenteEntity incidente)
         {
-            IncidenteEntity incidente = new IncidenteEntity()
-            {
-                ID = incidenteDto.ID,
-                Ubicacion = incidenteDto.Ubicacion,
-                Fecha = incidenteDto.Fecha,
-                Id_Perito = incidenteDto.Id_Perito,
-                Id_Administrador = incidenteDto.Id_Administrador
-            };
             Context().Incidentes.Add(incidente);
             Context().SaveChanges();
         }
 
-        public override void Update(IncidenteDTO incidenteDto)
+        public override void Update(IncidenteEntity incidente)
         {
-            var itemToUpdate = new IncidenteEntity()
-            {
-                Ubicacion = incidenteDto.Ubicacion,
-                Fecha = incidenteDto.Fecha,
-                Id_Perito = incidenteDto.Id_Perito,
-                Id_Administrador = incidenteDto.Id_Administrador
-            };
-            Context().Incidentes.Update(itemToUpdate);
+            Context().Incidentes.Update(incidente);
             Context().SaveChanges();
         }
 
-        public override void Delete(IncidenteDTO incidenteDto)
+        public override void Delete(IncidenteEntity incidenteDto)
         {
             var itemToRemove = Context().Incidentes.Find(incidenteDto.ID);
             Context().Incidentes.Remove(itemToRemove);
@@ -115,28 +95,20 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
         }
 
         //Get Incidentes - PROBADO
-        public List<IncidenteDTO> GetIncidentesByAdministrador(string administrador)
+        public List<IncidenteEntity> GetIncidentesByAdministrador(string administrador)
         {
-            try
-            {
-                var data = _dataBaseContext.Incidentes
-                    .Where(b => b.Id_Administrador == administrador)
-                    .Select(b => new IncidenteDTO
-                    {
-                        Id_Administrador = administrador,
-                        ID = b.ID,
-                        Ubicacion = b.Ubicacion,
-                        Fecha = b.Fecha,
-                        Id_Perito = b.Id_Perito
-                    });
-
-                return data.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Incidentes: "
-                    , ex.Message, ex);
-            }
+            var data = _dataBaseContext.Incidentes
+                .Where(b => b.Id_Administrador == administrador)
+                .Select(b => new IncidenteEntity 
+                { 
+                    Id_Administrador = administrador, 
+                    ID = b.ID, 
+                    Ubicacion = b.Ubicacion, 
+                    Fecha = b.Fecha, 
+                    Id_Perito = b.Id_Perito
+                }); 
+            
+            return data.ToList();
         }
     }
 }
