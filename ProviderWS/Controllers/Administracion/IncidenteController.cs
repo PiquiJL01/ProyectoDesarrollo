@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Administracion
 {
@@ -25,9 +25,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar agregar a la lista de Incidentes: "
+                    , ex.Message, ex);
             }
         }
 

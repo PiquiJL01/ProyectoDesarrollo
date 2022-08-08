@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -28,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Proveedor\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RCVUcab.BussinesLogic.Commands\RCVUcab.BussinesLogic.Commands.csproj" />

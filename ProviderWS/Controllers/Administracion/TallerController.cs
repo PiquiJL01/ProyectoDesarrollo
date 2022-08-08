@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
 
 namespace ProviderWS.Controllers.Administracion
 {
@@ -26,9 +26,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para el: "
+                  + taller, ex.Message, ex);
             }
         }
 
@@ -41,9 +42,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Talleres: "
+                    , ex.Message, ex);
             }
         }
 
@@ -56,9 +58,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Taller para la: "
+                  + marca, ex.Message, ex);
             }
         }
 
@@ -71,9 +74,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar agregar a la lista de Talleres: "
+                    , ex.Message, ex);
             }
 
         }
@@ -88,9 +92,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar modificar el Taller: "
+                  , ex.Message, ex);
             }
         }
 
@@ -103,9 +108,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar eliminar el Taller para el: "
+                  + id, ex.Message, ex);
             }
         }
     }

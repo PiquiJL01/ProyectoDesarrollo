@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.DAOs.Interfaces;
-using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Administracion
 {
@@ -26,9 +25,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Propietarios: "
+                    , ex.Message, ex);
             }
         }
 
@@ -41,9 +41,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Propietario para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -56,9 +57,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar agregar a la lista de Propietarios: "
+                    , ex.Message, ex);
             }
         }
 
@@ -73,7 +75,8 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar el Propietario: "
+                  , ex.Message, ex);
             }
         }
 
@@ -86,9 +89,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw ex;
+                throw new RCVException("Ha ocurrido un error al intentar eliminar el Propietario para el: "
+                  + id, ex.Message, ex);
             }
         }
     }

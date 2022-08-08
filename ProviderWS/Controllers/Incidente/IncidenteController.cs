@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Incidente
 {
@@ -26,9 +26,10 @@ namespace RCVUcab.Controllers.Incidente
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar los incidentes para el administrador: "
+                  + administrador, ex.Message, ex);
             }
         }
 

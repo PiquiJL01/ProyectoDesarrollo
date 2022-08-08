@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.DAOs.Interfaces;
-using RCVUcab.DataAccess.Exceptions;
-
 
 namespace ProviderWS.Controllers.Administracion
 {
@@ -27,9 +25,10 @@ namespace ProviderWS.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Administradores: "
+                    , ex.Message, ex);
             }
         }
     }

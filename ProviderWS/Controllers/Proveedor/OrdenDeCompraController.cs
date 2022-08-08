@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
+using ProviderWS.Exceptions;
 
 
-namespace ProviderWS.Controllers.Proveedor
+namespace ProviderWS.Controllers.OrdenDeCompra
 {
     [ApiController]
-    [Route("Proveedor/[controller]")]
+    [Route("Orden de Compra/[controller]")]
     public class OrdenDeCompraController : Controller
     {
         private readonly ILogger<OrdenDeCompraController> _logger;
@@ -26,9 +26,10 @@ namespace ProviderWS.Controllers.Proveedor
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Ordenes de Compra: "
+                    , ex.Message, ex);
             }
         }
 
@@ -41,9 +42,10 @@ namespace ProviderWS.Controllers.Proveedor
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la Orden de Compra para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -58,7 +60,8 @@ namespace ProviderWS.Controllers.Proveedor
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar la Orden de Compra: "
+                  , ex.Message, ex);
             }
         }
     }

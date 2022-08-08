@@ -25,9 +25,10 @@ namespace ProviderWS.Controllers.Taller
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Cotizaciones: "
+                    , ex.Message, ex);
             }
         }
 
@@ -40,9 +41,10 @@ namespace ProviderWS.Controllers.Taller
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Cotizacion para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -55,9 +57,10 @@ namespace ProviderWS.Controllers.Taller
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar agregar a la lista de Cotizaciones: "
+                    , ex.Message, ex);
             }
         }
 
@@ -73,7 +76,8 @@ namespace ProviderWS.Controllers.Taller
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar la Cotizacion: "
+                  , ex.Message, ex);
             }
         }
     }

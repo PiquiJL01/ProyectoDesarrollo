@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProviderWS.Exceptions;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
 
 namespace RCVUcab.Controllers.Administracion
 {
@@ -25,9 +25,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de los Vehiculos: "
+                    , ex.Message, ex);
             }
         }
 
@@ -40,9 +41,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Vehiculo para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -55,9 +57,10 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar agregar a la lista de los Vehiculos: "
+                    , ex.Message, ex);
             }
         }
 
@@ -73,7 +76,8 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar el Vehiculo: "
+                  , ex.Message, ex);
             }
         }
 
@@ -88,7 +92,8 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar eliminar el Vehiculo para el: "
+                  + id, ex.Message, ex);
             }
         }
     }

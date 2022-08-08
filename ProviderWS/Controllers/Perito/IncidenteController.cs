@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
+using ProviderWS.Exceptions;
 
 namespace RCVUcab.Controllers.Perito
 {
@@ -25,9 +25,10 @@ namespace RCVUcab.Controllers.Perito
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Incidentes: "
+                    , ex.Message, ex);
             }
         }
 
@@ -40,9 +41,10 @@ namespace RCVUcab.Controllers.Perito
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Incidente para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -58,7 +60,8 @@ namespace RCVUcab.Controllers.Perito
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar el Incidente: "
+                  , ex.Message, ex);
             }
         }
     }

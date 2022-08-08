@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RCVUcab.BussinesLogic.Commands;
 using RCVUcab.BussinesLogic.DTO.DTOs;
-using RCVUcab.DataAccess.Exceptions;
+using ProviderWS.Exceptions;
 
-namespace ProviderWS.Controllers.Proveedor
+namespace ProviderWS.Controllers.Cotizacion
 {
     [ApiController]
-    [Route("Proveedor/[controller]")]
+    [Route("Cotizacion/[controller]")]
     public class CotizacionController
     {
         private readonly ILogger<CotizacionController> _logger;
@@ -25,9 +25,10 @@ namespace ProviderWS.Controllers.Proveedor
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Cotizaciones: "
+                    , ex.Message, ex);
             }
         }
 
@@ -40,9 +41,10 @@ namespace ProviderWS.Controllers.Proveedor
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la Cotizacion para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -57,7 +59,8 @@ namespace ProviderWS.Controllers.Proveedor
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar la Cotizacion: "
+                  , ex.Message, ex);
             }
         }
     }

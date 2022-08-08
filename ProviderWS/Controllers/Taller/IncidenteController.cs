@@ -25,9 +25,10 @@ namespace RCVUcab.Controllers.Taller
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar la lista de Incidentes: "
+                    , ex.Message, ex);
             }
         }
 
@@ -40,9 +41,10 @@ namespace RCVUcab.Controllers.Taller
                 command.Execute();
                 return command.GetResult();
             }
-            catch (RCVException ex)
+            catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar consultar el Incidente para el: "
+                  + id, ex.Message, ex);
             }
         }
 
@@ -57,7 +59,8 @@ namespace RCVUcab.Controllers.Taller
             }
             catch (Exception ex)
             {
-                throw;
+                throw new RCVException("Ha ocurrido un error al intentar modificar el Incidente: "
+                  , ex.Message, ex);
             }
         }
     }
