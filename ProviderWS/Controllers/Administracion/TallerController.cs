@@ -52,7 +52,6 @@ namespace ProviderWS.Controllers.Administracion
         {
             try
             {
-                //response.Data = _TallerDao.GetTalleresByBrand(marca);
                 var command = GetCommandFactory.CreateGetTalleresByBrandCommand(marca);
                 command.Execute();
                 return command.GetResult();
@@ -79,110 +78,36 @@ namespace ProviderWS.Controllers.Administracion
 
         }
 
-        /*[HttpGet("{id}")]
-        public ApplicationResponse<List<TallerDTO>> GetTallerById([FromRoute] string id)
-        {
-            var response = new ApplicationResponse<List<TallerDTO>>();
-            try
-            {
-                response.Data = _TallerDao.GetTalleresByID(id);
-            }
-            catch (RCVException ex)
-            {
-                response.Error(ex);
-            }
-
-            return response;
-        }
-
-        [HttpGet("{marca}/TalleresByBrand")]
-        public ApplicationResponse<List<ProveedorMarcaDTO>> GetTallerByBrand([FromRoute] string marca)
-        {
-            var response = new ApplicationResponse<List<ProveedorMarcaDTO>>();
-            try
-            {
-                response.Data = _TallerDao.GetTalleresByBrand(marca);
-            }
-            catch (RCVException ex)
-            {
-                response.Error(ex);
-            }
-
-            return response;
-        }
-
-        [HttpPost]
-        public ApplicationResponse<TallerDTO> PostTaller([FromBody] TallerDTO TallerDto)
-        {
-            var response = new ApplicationResponse<TallerDTO>()
-            {
-                Data = TallerDto
-            };
-
-            try
-            {
-                _TallerDao.Insert(TallerDto);
-            }
-            catch (RCVException ex)
-            {
-                response.Error(ex);
-            }
-
-            return response;
-        }
-
-
         [HttpPut]
-        public ApplicationResponse<TallerDTO> PutTaller([FromBody] TallerDTO TallerDto)
+        public TallerDTO PutTaller([FromBody] TallerDTO tallerDto)
         {
-            var response = new ApplicationResponse<TallerDTO>()
-            {
-                Data = TallerDto
-            };
 
             try
             {
-                var list = _TallerDao.GetTalleresByID(TallerDto.ID);
-
-                if (list.Exists(x => x.ID.Contains(TallerDto.ID)))
-                {
-                    _TallerDao.Update(TallerDto);
-
-                    response.Message = "El taller ha sido modificado exitosamente";
-                }
-                else
-                {
-                    response.Message = "No existe";
-                }
+                var command = PutCommandFactory.CreatePutTallerCommand(tallerDto);
+                command.Execute();
+                return command.GetResult();
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
-                response.Error(ex);
+                throw ex;
             }
-
-            return response;
         }
 
         [HttpDelete("{id}")]
-        public ApplicationResponse<TallerDTO> DeleteTaller([FromRoute] string id)
+        public TallerDTO DeleteTaller([FromRoute] string id)
         {
-            var response = new ApplicationResponse<TallerDTO>();
-
             try
             {
-                response.Data = _TallerDao.Select(id);
-
-                _TallerDao.Delete(response.Data);
-
-                response.Message = "Taller " + id + " ha sido eliminado exitosamente";
+                var command = DeleteByCommandFactory.CreateDeleteTallerByIdCommand(id);
+                command.Execute();
+                return command.GetResult();
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
-                response.Error(ex);
+                throw ex;
             }
-
-            return response;
-        }*/
+        }
     }
 }
 

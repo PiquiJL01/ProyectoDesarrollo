@@ -10,12 +10,10 @@ namespace RCVUcab.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class PropietarioController : Controller
     {
-        private readonly IPropietarioDAO _propietarioDao;
         private readonly ILogger<PropietarioController> _logger;
 
-        public PropietarioController(ILogger<PropietarioController> logger, IPropietarioDAO propietarioDao)
+        public PropietarioController(ILogger<PropietarioController> logger)
         {
-            _propietarioDao = propietarioDao;
             _logger = logger;
         }
 
@@ -88,9 +86,9 @@ namespace RCVUcab.Controllers.Administracion
                 command.Execute();
                 return command.GetResult();
             }
-            catch (Exception ex)
+            catch (RCVException ex)
             {
-                throw;
+                throw ex;
             }
         }
     }

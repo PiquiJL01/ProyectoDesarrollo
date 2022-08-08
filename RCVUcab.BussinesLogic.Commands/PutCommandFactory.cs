@@ -15,6 +15,11 @@ public class PutCommandFactory
         return new PutPolizaCommand(poliza);
     }
 
+    public static PutTallerCommand CreatePutTallerCommand(TallerDTO taller)
+    {
+        return new PutTallerCommand(taller);
+    }
+
     public static PutPropietarioCommand CreatePutPropietarioCommand(PropietarioDTO propietario)
     {
         return new PutPropietarioCommand(propietario);

@@ -35,4 +35,9 @@ public class DeleteCommandFactory
     {
         return new DeleteVehiculoCommand(vehiculo);
     }
+
+    public static DeleteTallerCommand CreateDeleteTallerCommand(TallerDTO taller)
+    {
+        return new DeleteTallerCommand(taller);
+    }
 }

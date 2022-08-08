@@ -10,12 +10,10 @@ namespace RCVUcab.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class PolizaController : Controller
     {
-        private readonly IPolizaDAO _polizaDao;
         private readonly ILogger<PolizaController> _logger;
 
-        public PolizaController(ILogger<PolizaController> logger, IPolizaDAO polizaDao)
+        public PolizaController(ILogger<PolizaController> logger)
         {
-            _polizaDao = polizaDao;
             _logger = logger;
         }
 
@@ -60,7 +58,7 @@ namespace RCVUcab.Controllers.Administracion
             }
             catch (RCVException ex)
             {
-                throw;
+                throw ex;
             }
         }
 

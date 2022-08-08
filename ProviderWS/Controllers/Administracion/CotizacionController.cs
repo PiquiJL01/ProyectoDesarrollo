@@ -11,12 +11,10 @@ namespace RCVUcab.Controllers.Administracion
     [Route("Administracion/[controller]")]
     public class CotizacionController : Controller
     {
-        private readonly ICotizacionDAO _CotizacionDao;
         private readonly ILogger<CotizacionController> _logger;
 
-        public CotizacionController(ILogger<CotizacionController> logger, ICotizacionDAO CotizacionDao)
+        public CotizacionController(ILogger<CotizacionController> logger)
         {
-            _CotizacionDao = CotizacionDao;
             _logger = logger;
         }
 

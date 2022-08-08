@@ -1,6 +1,7 @@
 ﻿using RCVUcab.BussinesLogic.DTO.DTOs;
 using RCVUcab.BussinesLogic.Mappers.Mappers;
 using RCVUcab.DataAccess.DAOFactory;
+using RCVUcab.DataAccess.DAOs.Implementations;
 
 namespace RCVUcab.BussinesLogic.Commands.Commands.Atomics;
 
@@ -15,8 +16,7 @@ public class PostPolizaCommand : Command<PolizaDTO>
 
     public override void Execute()
     {
-        var dao = PolizaDAOFactory.CreatePolizaDao();
-        dao.Insert(PolizaMapper.DtoToEntity(_poliza));
-        SetResult(_poliza);
+        PolizaDAO dao = PolizaDAOFactory.CreatePolizaDao();
+        SetResult(PolizaMapper.EntityToDto(dao.InsertR(PolizaMapper.DtoToEntity(_poliza))));
     }
 }

@@ -17,7 +17,7 @@ namespace RCVUcab.Controllers.Perito
         }
 
 
-        [HttpGet("Perito")]
+        [HttpGet]
         public List<UsuarioDTO> GetPeritos()
         {
             try

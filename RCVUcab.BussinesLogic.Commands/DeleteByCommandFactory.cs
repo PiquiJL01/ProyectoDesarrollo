@@ -33,4 +33,9 @@ public class DeleteByCommandFactory
     {
         return new DeleteVehiculoByIdCommand(id);
     }
+
+    public static DeleteTallerByIdCommand CreateDeleteTallerByIdCommand(string id)
+    {
+        return new DeleteTallerByIdCommand(id);
+    }
 }

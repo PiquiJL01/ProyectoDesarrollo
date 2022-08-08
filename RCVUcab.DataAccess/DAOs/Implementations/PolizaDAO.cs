@@ -74,6 +74,22 @@ namespace RCVUcab.DataAccess.DAOs.Implementations
             Context().SaveChanges();
         }
 
+        public PolizaEntity InsertR(PolizaEntity poliza)
+        {
+            Context().Polizas.Add(poliza);
+            Context().SaveChanges();
+
+            var query = Context().Polizas
+                .Where(p => p.ID == poliza.ID)
+                .Select(p => new PolizaEntity
+                {
+                    ID = p.ID,
+                    Id_Admin = p.Id_Admin,
+                    TipoPoliza = p.TipoPoliza
+                });
+            return query.First();
+        }
+
         public override void Update(PolizaEntity poliza)
         {
             Context().Polizas.Update(poliza);
